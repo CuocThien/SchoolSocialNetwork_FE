@@ -1,0 +1,22 @@
+//abstract
+@import "abstracts/variables";
+@import "abstracts/animations";
+
+//base
+@import 'base/base';
+@import 'base/utilities';
+@import 'base/typography';
+
+
+//components
+@import 'components/form';
+@import 'components/button';
+
+//layout
+
+//pages
+@import "pages/login";
+
+//bootstrap
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";

@@ -1,0 +1,25 @@
+.background-1 {
+  background-image: url('../../img/login-bg2.jpeg');
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.btn-show-pass {
+  width: 36px;
+  height: 36px;
+  padding-top: 6px;
+  right: 1px;
+  top: 1px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: $color-grey-light-2;
+  color: black;
+  cursor: pointer;
+}
+
+.btn-show-pass:active,
+.btn-show-pass::before,
+.btn-show-pass::after {
+  color: black;
+}
