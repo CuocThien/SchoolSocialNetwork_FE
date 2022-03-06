@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TestComponent } from './test/test.component';
 import { GroupComponent } from './group/group.component';
 import { HomeComponent } from './home.component';
 
@@ -10,7 +9,6 @@ const homeRoutes: Routes = [
         children: [
             // { path: '',  },
             // { path: '', redirectTo: '/test', pathMatch: 'full' },
-            { path: 'test', component: TestComponent },
             { path: 'group', component: GroupComponent, pathMatch: 'full' }
         ]
     }
