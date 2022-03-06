@@ -1,0 +1,16 @@
+<app-header class="position-fixed"></app-header>
+<div class="d-flex position-relative">
+
+  <input class="cb-sidebar" checked type="checkbox" name="" id="cb-sidebar">
+  <a class="button-control-sidebar position-absolute" (click)="openOrCloseSidebar()">
+    <label for="cb-sidebar">
+      <fa-icon [icon]="faArrow"></fa-icon>
+    </label>
+  </a>
+  <div class="sidebar-container u-padding-right-2px">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="home-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

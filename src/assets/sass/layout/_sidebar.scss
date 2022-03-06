@@ -1,0 +1,9 @@
+.sidebar {
+  margin-top: 7.5rem;
+  height: calc(100vh - 7.5rem);
+  width: 100%;
+  background-color: $color-primary-2;
+  -webkit-box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
+  -moz-box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
+  box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
+}

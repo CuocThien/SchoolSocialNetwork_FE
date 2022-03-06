@@ -13,9 +13,13 @@
 @import 'components/button';
 
 //layout
+@import 'layout/header';
+@import 'layout/sidebar';
 
 //pages
+@import "pages/home";
 @import "pages/login";
+@import "pages/pageNotFound";
 
 //bootstrap
 @import "~bootstrap/dist/css/bootstrap.css";

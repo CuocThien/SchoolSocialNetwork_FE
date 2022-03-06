@@ -13,16 +13,18 @@ export class LogInService {
         private router: Router,
         // private cookieService: CookieService
     ) {
-
     }
-
     signIn(value: any) {
         const urlSignIn = 'https://schoolsocialnetwork.herokuapp.com/account/signin';
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
         const body = JSON.stringify(value);
-        console.log(body)
+        this.router.navigate(['/'])
+        // console.log(body)
         return this.http.post(urlSignIn, body, { headers })
-            .toPromise()
+            .toPromise().then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err));
 
     }
 }

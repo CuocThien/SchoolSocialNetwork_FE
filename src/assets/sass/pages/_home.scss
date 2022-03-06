@@ -1,0 +1,58 @@
+.home-container {
+  margin-top: 8.5rem;
+  padding-left: 1rem;
+}
+
+
+
+app-header {
+  z-index: 999;
+}
+
+app-sidebar {
+  visibility: hidden;
+  opacity: 0;
+  width: 0;
+  transition: all .2s ease-in;
+}
+
+.home-container {
+  width: 99%;
+}
+
+.sidebar-container {
+  width: 0;
+  transition: all .2s;
+}
+
+.cb-sidebar {
+  display: none;
+
+  &:checked~.sidebar-container {
+    width: 16.67% !important;
+
+  }
+
+  &:checked~.sidebar-container>app-sidebar {
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &:checked~.home-container {
+
+    width: 83.33%;
+  }
+
+  &:checked~.button-control-sidebar {
+    left: 16.6%;
+    top: 50%;
+
+
+    fa-icon {
+      cursor: pointer;
+      color: $color-primary-dark-2;
+      font-size: 2rem;
+    }
+  }
+}

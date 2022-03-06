@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotPasswordComponent } from '../popup/forgot-password/forgot-password.component';
 import { LogInService } from './login.service';
@@ -10,6 +10,8 @@ import { LogInService } from './login.service';
   providers: [LogInService]
 })
 export class LoginComponent implements OnInit {
+  @Output('login') checkLogin = new EventEmitter<boolean>();
+  isLogin = false;
   constructor(
     private modalService: NgbModal,
     private service: LogInService
@@ -36,9 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formSignIn: any) {
-    this.service.signIn(formSignIn.value).then(res => {
-      console.log(res)
-    })
-      .catch(err => console.log(err));
+    this.service.signIn(formSignIn.value);
   }
 }

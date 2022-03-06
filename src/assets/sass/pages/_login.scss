@@ -6,20 +6,24 @@
 }
 
 .btn-show-pass {
-  width: 36px;
-  height: 36px;
-  padding-top: 6px;
-  right: 1px;
-  top: 1px;
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
-  background-color: $color-grey-light-2;
+  width: 3.6rem;
+  height: 3.6rem;
+  padding-top: .6rem;
+  right: .1rem;
+  top: .1rem;
+  border-bottom-right-radius: .3rem;
+  border-top-right-radius: .3rem;
+  background-color: transparent;
   color: black;
   cursor: pointer;
+
+  i {
+    font-size: 2.5rem;
+  }
 }
 
 .btn-show-pass:active,
 .btn-show-pass::before,
 .btn-show-pass::after {
-  color: black;
+  color: $color-primary-dark-2;
 }
