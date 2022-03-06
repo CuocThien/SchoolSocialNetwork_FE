@@ -110,3 +110,31 @@
     font-size: 2rem;
   }
 }
+
+.button-sidebar {
+  font-size: 1.6rem;
+  width: 80%;
+  margin: 1rem calc((100% - 80%)/2);
+  padding: .5rem;
+  border-radius: .5rem;
+  border: solid 2px white;
+  color: white;
+  background: transparent;
+  font-weight: 700;
+  letter-spacing: .1rem;
+  font-family: 'Poppins';
+  transition: all .3s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    color: $color-primary-dark-2;
+    border: solid 2px $color-primary-dark-2;
+    background-color: white;
+  }
+}
+
+.button-bt {
+  height: 4rem;
+  width: 50%;
+  font-size: 1.5rem;
+}

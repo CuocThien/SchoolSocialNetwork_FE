@@ -1,1 +1,100 @@
-<p>group works!</p>
+<!-- Upload -->
+<div class="group-container ">
+  <h2 class="component-title">Groups</h2>
+  <div class="d-flex u-margin-vertical-small">
+    <div class="search-group col-xxl-8 col-xl-8 col-lg-8 col-md-6 col-sm-8 col-8">
+      <form class="search__form position-relative">
+        <input class="search__form--input-search search__form--input-search-sub" type="text" name="search"
+          placeholder="Search your groups">
+        <button class="search__form--button-search position-absolute" type="submit"><i
+            class="bi bi-search"></i></button>
+      </form>
+    </div>
+    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-4 col-4">
+      <button class="btn btn-outline-primary button-bt">
+        + Create your group
+      </button>
+    </div>
+  </div>
+  <div class="d-block d-md-flex groups">
+
+
+    <div class="groups__joined col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12">
+      <div class="groups__joined--container">
+        <h1>Groups you joined</h1>
+        <div class="group d-flex d-md-block d-sm-flex d-lg-flex">
+          <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
+            <img src="../../../assets/img/login-bg.jpeg" alt="">
+          </div>
+          <div class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-10 col-sm-7 col-7">
+            <h3>Xách quần chạy deadline</h3>
+            <h5>150 thành viên</h5>
+            <h5>10 bài viết / ngày</h5>
+          </div>
+        </div>
+
+        <div class="group d-flex d-md-block d-sm-flex d-lg-flex">
+          <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
+            <img src="../../../assets/img/login-bg.jpeg" alt="">
+          </div>
+          <div class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-10 col-sm-7 col-7">
+            <h3>Xách quần chạy deadline</h3>
+            <h5>150 thành viên</h5>
+            <h5>10 bài viết / ngày</h5>
+          </div>
+        </div>
+        <div class="group d-flex d-md-block d-sm-flex d-lg-flex">
+          <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
+            <img src="../../../assets/img/login-bg.jpeg" alt="">
+          </div>
+          <div class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-10 col-sm-7 col-7">
+            <h3>Xách quần chạy deadline</h3>
+            <h5>150 thành viên</h5>
+            <h5>10 bài viết / ngày</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="groups__suggestion col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
+      <div class="groups__suggestion--container">
+        <h1>Suggestions for you</h1>
+        <div class="group d-sm-flex d-flex d-md-block">
+          <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
+            <img src="../../../assets/img/login-bg.jpeg" alt="">
+          </div>
+          <div class="group__info u-padding-left-2rem col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-7 col-7">
+            <h3>Xách quần chạy deadline</h3>
+            <h5>150 thành viên</h5>
+            <h5>10 bài viết / ngày</h5>
+            <button class="btn btn-outline-primary">
+              Join now
+            </button>
+          </div>
+        </div>
+
+        <div class="group d-sm-flex d-flex d-md-block">
+          <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
+            <img src="../../../assets/img/login-bg.jpeg" alt="">
+          </div>
+          <div class="group__info u-padding-left-2rem col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-7 col-7">
+            <h3>Xách quần chạy deadline</h3>
+            <h5>150 thành viên</h5>
+            <h5>10 bài viết / ngày</h5>
+            <button class="btn btn-outline-primary">
+              Join now
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <form id="file-upload-form" class="uploader">
+    <input id="file-upload" type="file" name="fileUpload" accept=".xls,.xlsx" (change)="fileUpload($event)" />
+    <label for="file-upload" id="file-drag">
+    </label>
+  </form>
+</div>

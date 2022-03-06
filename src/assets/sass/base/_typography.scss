@@ -17,7 +17,14 @@
   letter-spacing: .3rem;
   text-align: center;
   vertical-align: middle;
-  // padding-left: 1rem;
-  // top: 50%;
-  // transform: translate(0, -50%);
+}
+
+.component-title {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1d2025;
+  font-family: 'Poppins';
+  border-bottom: 1px solid grey;
+  padding-bottom: .5rem;
 }

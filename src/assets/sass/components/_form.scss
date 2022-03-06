@@ -19,3 +19,34 @@
     }
   }
 }
+
+.search__form {
+  width: 90%;
+  padding-left: 2rem;
+
+  &--input-search {
+    height: 4rem;
+    width: 100%;
+    padding: 0 2.5rem;
+    background-color: #f3f0f0;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+
+    &-sub {
+      background-color: #fff;
+      border: solid .1rem black;
+    }
+  }
+
+  &--button-search {
+    background-color: transparent;
+    border: none;
+    top: 0;
+    right: .6rem;
+
+    i {
+      font-size: 2.8rem;
+    }
+  }
+}

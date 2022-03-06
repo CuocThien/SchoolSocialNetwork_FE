@@ -7,7 +7,7 @@
 }
 
 .page-control {
-  background-color: $color-primary-2;
+  background-image: linear-gradient(to left, #6A29D8, #4080E7);
 
   &__logo {
     display: inline-block;
@@ -18,34 +18,9 @@
     cursor: pointer;
   }
 
-  &__form {
-    width: 90%;
-    padding-left: 2rem;
-
-    &--input-search {
-      height: 4rem;
-      width: 100%;
-      padding: 0 2.5rem;
-      background-color: #f3f0f0;
-      border: none;
-      border-radius: 1rem;
-      font-size: 1.6rem;
-    }
-
-    &--button-search {
-      background-color: transparent;
-      border: none;
-      top: 0;
-      right: .6rem;
-
-      i {
-        font-size: 2.8rem;
-      }
-    }
-  }
-
   &__title {
-    background-color: $color-primary-dark-2;
+    background-image: linear-gradient(to right, #6A29D8, #467ed712);
+    // background-color: white;
     height: 100%;
   }
 }
@@ -109,7 +84,7 @@
 
       &:hover {
         color: #fff;
-        background-image: linear-gradient(to right, #5be0f5, #5d4cf0);
+        background-image: linear-gradient(to left, #6e2fda, #4784e7);
       }
 
       &:last-child:hover {
@@ -126,7 +101,7 @@
       margin-top: .4rem;
       min-width: 20.3rem;
       /* Set width of the dropdown */
-      background-image: linear-gradient(to right, #6EE2F5, #6454F0);
+      background-image: linear-gradient(to left, #6A29D8, #4080E7);
       display: none;
       position: absolute;
       z-index: 999;

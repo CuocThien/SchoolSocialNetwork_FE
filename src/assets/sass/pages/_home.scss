@@ -1,6 +1,6 @@
 .home-container {
-  margin-top: 8.5rem;
-  padding-left: 1rem;
+  margin-top: 7.5rem;
+  background-color: #fff;
 }
 
 
@@ -17,7 +17,8 @@ app-sidebar {
 }
 
 .home-container {
-  width: 99%;
+  width: 100%;
+  transition: all .2s;
 }
 
 .sidebar-container {

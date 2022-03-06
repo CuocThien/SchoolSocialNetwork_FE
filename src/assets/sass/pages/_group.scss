@@ -1,0 +1,54 @@
+.group-container {
+  width: calc(100% - 1vw);
+  height: calc(100%);
+  display: block;
+  background-color: #F0F2F5;
+  //   box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2);
+}
+
+
+.groups {
+  border-top: .1rem solid grey;
+
+  &__joined {
+    padding: 1rem;
+    height: auto;
+
+    &--container {
+      padding: 1rem;
+      box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
+      border-radius: 1rem;
+      background-color: #fff;
+    }
+  }
+
+  &__suggestion {
+    padding: 1rem;
+
+    &--container {
+      padding: 1rem;
+      border-radius: 1rem;
+      background-color: #fff;
+      box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.group {
+
+  &__image {
+    padding: 2rem;
+
+    img {
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+
+  &:hover {
+    background-color: #eee;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
