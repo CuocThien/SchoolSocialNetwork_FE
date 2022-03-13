@@ -14,7 +14,9 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeModule } from './home/home.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { AuthGuardService } from './auth.guard';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -33,10 +35,19 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     NgbModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: "decreasing",
+      positionClass: 'toast-top-right'
+
+    }),
+    BrowserAnimationsModule,
 
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

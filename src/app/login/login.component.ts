@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotPasswordComponent } from '../popup/forgot-password/forgot-password.component';
 import { LogInService } from './login.service';
@@ -14,14 +15,16 @@ export class LoginComponent implements OnInit {
   isLogin = false;
   constructor(
     private modalService: NgbModal,
-    private service: LogInService
+    private service: LogInService,
+    private router: Router
   ) { }
   typeOfInputPass = 'password';
   iconShowPass = 'bi-eye';
   isShowPass = false;
   private modalRef: NgbModalRef | undefined;
   ngOnInit(): void {
-    // this.forgotPass()
+    if (localStorage.getItem('token'))
+      this.router.navigate(['/home'])
   }
 
   forgotPass() {

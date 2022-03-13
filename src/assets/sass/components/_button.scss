@@ -134,7 +134,8 @@
 }
 
 .button-bt {
-  height: 4rem;
+  min-height: 4rem;
+  height: auto;
   width: 50%;
   font-size: 1.5rem;
 }

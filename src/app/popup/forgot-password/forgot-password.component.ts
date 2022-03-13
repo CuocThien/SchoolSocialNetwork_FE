@@ -45,4 +45,8 @@ export class ForgotPasswordComponent implements OnInit {
       }
     }, 1000)
   }
+
+  requestOPT(data: any) {
+
+  }
 }
