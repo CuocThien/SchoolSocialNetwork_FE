@@ -13,17 +13,17 @@ app-sidebar {
   visibility: hidden;
   opacity: 0;
   width: 0;
-  transition: all .2s ease-in;
+  transition: width .2s;
 }
 
 .home-container {
-  width: 100%;
+  width: 98vw;
   transition: all .2s;
 }
 
 .sidebar-container {
   width: 0;
-  transition: all .2s;
+  transition: width .2s;
 }
 
 .cb-sidebar {
