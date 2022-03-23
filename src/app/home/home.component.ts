@@ -12,8 +12,10 @@ export class HomeComponent implements OnInit {
 
   faArrow = faAngleLeft;
   isOpen = true;
+  profile: any;
   ngOnInit(): void {
     this.isOpen = true;
+    this.profile = JSON.parse(localStorage.getItem('profile') || '')
   }
   openOrCloseSidebar() {
     this.isOpen = !this.isOpen;

@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthGuardService } from './auth.guard';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatService } from './home/chat/chat.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
 
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) { }
 
+  @Input() profile: any;
   ngOnInit(): void {
   }
 

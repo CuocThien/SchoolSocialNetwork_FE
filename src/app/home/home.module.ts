@@ -4,6 +4,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { GroupComponent } from './group/group.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { ChatComponent } from './chat/chat.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +13,9 @@ import { ChatComponent } from './chat/chat.component';
   declarations: [GroupComponent, GroupDetailComponent, ChatComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FontAwesomeModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

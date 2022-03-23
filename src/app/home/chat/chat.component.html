@@ -3,142 +3,57 @@
     <h1>Chat</h1>
     <div class="chat-sidebar__control u-margin-bottom-small">
       <form class="search__form u-margin-vertical-auto position-relative">
-        <input class="search__form--input-search" type="text" name="search" placeholder="Nhập gì đó để tìm kiếm...">
+        <input class="search__form--input-search" [(ngModel)]="searchString" (keyup)="searchAccount()" type="text"
+          name="search" placeholder="Nhập gì đó để tìm kiếm...">
       </form>
     </div>
-    <div class="card-user active">
+
+    <div class="card-user" [ngClass]="{'active':i == activeIndex, 'd-none':searchString!=''}"
+      *ngFor="let conversation of listConversation; let i = index;"
+      (click)="joinConversation(conversation._id,conversation.participantId, i)">
       <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
+        <img [src]="conversation.avatar" alt="">
       </div>
       <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
+        <h5>{{conversation.fullname}}</h5>
+        <h6>{{conversation.lastestMessage}}</h6>
       </div>
     </div>
 
-    <div class="card-user">
+    <div class="card-user"
+      [ngClass]="{'active': i == activeSearchIndex, 'd-flex':searchString!='','d-none':searchString==''}"
+      *ngFor="let account of listAccountSearch; let i = index;" (click)="joinConversationWithoutRoom(account._id, i)">
       <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
+        <img [src]="account.avatar" alt="">
       </div>
       <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
+        <h5>{{account.fullname}}</h5>
+        <h6>{{account._id}}</h6>
       </div>
     </div>
 
-    <div class="card-user">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
-      </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
-      </div>
-    </div>
-
-    <div class="card-user">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
-      </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
-      </div>
-    </div>
-
-    <div class="card-user">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
-      </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
-      </div>
-    </div>
-
-    <div class="card-user">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
-      </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
-      </div>
-    </div>
-
-    <div class="card-user">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img src="../../../assets/img/me.jpg" alt="">
-      </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>Nguyễn Cước Thiên</h5>
-        <h6>ê alô nói nghe nè</h6>
-      </div>
-    </div>
   </div>
   <div class="chat-box col-xxl-9 col-xl-9 col-lg-9 col-md-8 col-sm-10 col-10">
     <div class="chat-box__title d-flex">
       <div class="chat-box__title-avatar col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3">
-        <img src="../../../assets/img/me.jpg" alt="">
+        <img [src]="chatTitle?.avatar" alt="">
       </div>
       <div class="chat-box__title-info col-xxl-11 col-xl-11 col-lg-11 col-md-10 col-sm-9 col-9">
-        <h3>Nguyễn Cước Thiên</h3>
+        <h3>{{chatTitle?.fullname}}</h3>
       </div>
     </div>
 
-    <div class="chat-box__content">
-      <div class="chat-box__content-message text-start">
-        <div class="chat-box__content-message__content ">ê alô nghe tin gì chưa bà??</div>
-      </div>
-      <div class="chat-box__content-message  text-end">
-        <div class="chat-box__content-message__content isAuth">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Corporis unde alias, sit id
-          inventore tempore vel obcaecati sint pariatur fuga dicta quod aut esse sed odio perferendis, illo ad.
-          Excepturi!</div>
-      </div>
-      <div class="chat-box__content-message text-start">
-        <div class="chat-box__content-message__content ">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Corporis unde alias, sit id inventore tempore
-          vel obcaecati sint pariatur fuga dicta quod aut esse sed odio perferendis, illo ad. Excepturi!</div>
-      </div>
-      <div class="chat-box__content-message  text-end">
-        <div class="chat-box__content-message__content isAuth">Lorem, ipsum dolor sit amet </div>
+    <div class="chat-box__content" #chatBoxContent>
+      <div class=""
+        [ngClass]="message.isAuth ? 'chat-box__content-message  text-end' : 'chat-box__content-message text-start'"
+        *ngFor="let message of messageList">
+        <div class=""
+          [ngClass]="message.isAuth ? 'chat-box__content-message__content isAuth' : 'chat-box__content-message__content'">
+          {{message.data}}</div>
       </div>
     </div>
-
-    <div class="">
-      <form class="">
-        <input class="" type="text">
-      </form>
-    </div>
-
-  </div>
-</div>
-
-<!-- <div class="container">
-  <h1>Competent programming - Chat App</h1>
-  <app-usernname (userNameEvent)="userNameUpdate($event)" *ngIf="!userName"></app-usernname>
-  <div class="chatbox">
-    <div class="chatbox__user-list">
-      <h2>User list</h2>
-      <div class="chatbox__user--active" *ngFor="let user of userList">
-        <p>{{ user }}</p>
-      </div>
-    </div>
-    <div class="messages_list">
-      <div class="chatbox__messages" *ngFor="let msg of messageList" [ngClass]="{mine: msg.mine}">
-        <div class="user-message">
-          <div class="message-box">
-            <p class="name">{{ msg.userName }}</p>
-            <br />
-            <p class="message">{{ msg.message }}</p>
-          </div>
-        </div>
-      </div>
+    <div class="chat-box__input">
+      <input [(ngModel)]="message" [value]="message" type="text">
+      <fa-icon [icon]="faSend" (click)="sendMessage()"></fa-icon>
     </div>
   </div>
-  <div class="send-message">
-    <input type="text" [(ngModel)]="message">
-    <button (click)="sendMessage()">Send</button>
-  </div>
-</div> -->
