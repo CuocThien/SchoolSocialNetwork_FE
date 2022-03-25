@@ -7,11 +7,12 @@ import { ChatComponent } from './chat/chat.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

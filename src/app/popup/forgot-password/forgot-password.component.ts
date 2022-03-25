@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { LogInService } from 'src/app/services';
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,13 +10,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal, private service: LogInService, private toastr: ToastrService) { }
 
-  timeOut = 120;
+  timeOut = 180;
   isRequested = false;
   timeOutClock = '';
   isResendShow = false;
   intervalId: any;
+  userId = ''
+  OTPCode = ''
   ngOnInit(): void {
   }
   onClose() {
@@ -26,6 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
   resend() {
     this.isResendShow = false;
     this.timeOut = 120;
+    this.requestOPT();
     this.request()
   }
 
@@ -42,11 +47,29 @@ export class ForgotPasswordComponent implements OnInit {
         clearInterval(this.intervalId);
         this.timeOutClock = "EXPIRED";
         this.isResendShow = true;
+        this.OTPCode = ''
       }
     }, 1000)
   }
 
-  requestOPT(data: any) {
-
+  requestOPT() {
+    if (this.userId == '') {
+      this.toastr.error('Please input username to requets OTP')
+      return;
+    }
+    const data = {
+      _id: this.userId
+    }
+    this.service.forgotPassword(data).subscribe(
+      (res: any) => {
+        console.log("💁 ~ file: forgot-password.component.ts ~ line 62 ~ ForgotPasswordComponent ~ requestOPT ~ res", res)
+        this.toastr.success(res.msg);
+        this.OTPCode = res.data.content.substring(0, 6);
+        this.request()
+      },
+      (err: any) => {
+        console.log("💁 ~ file: forgot-password.component.ts ~ line 58 ~ ForgotPasswordComponent ~ requestOPT ~ err", err)
+        this.toastr.error(err.error.msg)
+      })
   }
 }

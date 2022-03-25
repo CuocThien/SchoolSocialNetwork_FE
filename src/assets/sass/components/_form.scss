@@ -3,6 +3,44 @@
   border-radius: .5rem;
   background-color: $color-white;
   box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2);
+  width: 80%;
+
+  &-profile {
+    width: 50%;
+    padding: 1rem 3rem;
+    margin: 3rem auto;
+    border-radius: .5rem;
+    background-color: $color-white;
+    box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2);
+
+    &__avatar {
+      max-width: 150px;
+      max-height: 150px;
+      width: auto;
+      height: auto;
+      margin: auto;
+      border: 5px solid;
+      border-radius: 10px;
+      border-image: linear-gradient(#6454F0, #6EE2F5) 14;
+    }
+
+    input[type="file"] {
+      font-size: 2rem;
+      width: 220px;
+      display: inline-block;
+      border: 3px solid;
+      border-radius: 10px;
+      border-image: linear-gradient(#6454F0, #6EE2F5) 14;
+    }
+
+  }
+
+  &-popup {
+    padding: 3rem;
+    border-radius: .5rem;
+    background-color: $color-white;
+    box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2);
+  }
 
   &-control {
     padding: .6rem 2rem;

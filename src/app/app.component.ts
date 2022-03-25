@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LogInService } from './login/login.service';
 
 @Component({
   selector: 'app-root',

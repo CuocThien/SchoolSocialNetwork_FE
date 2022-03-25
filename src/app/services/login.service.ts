@@ -15,8 +15,7 @@ export class LogInService {
     signIn(value: any) {
         const urlSignIn = `${HOST}/account/signin`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-        const body = JSON.stringify(value);
-        return this.http.post(urlSignIn, body, { headers })
+        return this.http.post(urlSignIn, value, { headers })
             .toPromise().then((res: any) => {
                 localStorage.setItem('profile', JSON.stringify(res.data.profile) || '')
                 localStorage.setItem('role', res.data.role || null)
@@ -28,5 +27,11 @@ export class LogInService {
                 this.toastr.error(err.error.msg)
             });
 
+    }
+    forgotPassword(value: any) {
+        const url = `${HOST}/account/forgotPass`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+        const body = JSON.stringify(value);
+        return this.http.post(url, body, { headers })
     }
 }

@@ -2,13 +2,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotPasswordComponent } from '../popup/forgot-password/forgot-password.component';
-import { LogInService } from './login.service';
+import { LogInService } from '../services/index';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../assets/sass/main.scss'],
-  providers: [LogInService]
+  styleUrls: ['../../assets/sass/main.scss']
 })
 export class LoginComponent implements OnInit {
   @Output('login') checkLogin = new EventEmitter<boolean>();

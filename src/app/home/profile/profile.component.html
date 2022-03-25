@@ -1,0 +1,23 @@
+<div class="profile-container u-center-text">
+  <form class="form-profile u-center-text position-relative" (ngSubmit)="onSubmit(formUpdateProfile)"
+    #formUpdateProfile="ngForm">
+    <h1>Profile</h1>
+    <button class="btn-cancel position-absolute" routerLink="/index"><img
+        src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
+    <hr>
+    <img class="form-profile__avatar u-margin-bottom-small"
+      [src]="imageSrc || 'https://res.cloudinary.com/blogreview/image/upload/v1636626365/review_web/hzshd4vahy6hw6m0a9p5.png'"
+      alt="your image" require name="avatar" /> <br>
+    <input class="u-margin-bottom-small" type='file' (change)="readURL($event);" accept="image/*" />
+    <input class="form-control u-margin-bottom-small" type="text" placeholder="Full Name" ngModel name="fullname"
+      [(ngModel)]="profile.fullname" required>
+    <input class="form-control u-margin-bottom-small" type="text" placeholder="Phone" ngModel name="phone"
+      [(ngModel)]="profile.phone" required disabled>
+    <input class="form-control u-margin-bottom-small" type="date" [(ngModel)]="dob" name="dob" required>
+    <input class="form-control u-margin-bottom-small" type="text" placeholder="Address" [(ngModel)]="profile.address"
+      name="address" required>
+    <input class="form-control u-margin-bottom-small" type="text" [(ngModel)]="profile.email" name="email" required
+      disabled>
+    <button class="btn-update">Update Profile</button>
+  </form>
+</div>

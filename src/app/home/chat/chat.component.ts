@@ -4,7 +4,7 @@ import { EVENT_MESSAGE_CSS } from '../../socket-event/client/message';
 import { EVENT_MESSAGE_SSC } from '../../socket-event/server/message';
 
 import { faPaperPlane, } from '@fortawesome/free-solid-svg-icons';
-import { ChatService } from './chat.service';
+import { ChatService } from '../../services/index';
 import { HOST } from 'src/app/utils/constant';
 
 
@@ -141,7 +141,8 @@ export class ChatComponent implements OnInit {
   }
   getMessage() {
     this.service.getMessage({ conversationId: this.conversationId, page: this.pageMessage }).subscribe((res: any) => {
-      this.messageList = res.data.lstMessage
+      this.messageList = res.data.lstMessage,
+        this.isLoadOldMessage = false;
     })
   }
   getMoreMessage() {
