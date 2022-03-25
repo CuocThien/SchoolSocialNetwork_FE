@@ -6,6 +6,7 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { ChatComponent } from './chat/chat.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HomeRoutingModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    InfiniteScrollModule
   ]
 })
 export class HomeModule { }

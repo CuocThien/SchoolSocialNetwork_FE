@@ -8,21 +8,20 @@
       </form>
     </div>
 
-    <div class="card-user" [ngClass]="{'active':i == activeIndex, 'd-none':searchString!=''}"
-      *ngFor="let conversation of listConversation; let i = index;"
-      (click)="joinConversation(conversation._id,conversation.participantId, i)">
+    <div class="card-user" *ngFor="let conversation of listConversation; let i = index;"
+      [ngClass]="{'active':i == activeIndex, 'd-none':searchString!=''}"
+      (click)="joinConversation(conversation.user, i, false)">
       <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img [src]="conversation.avatar" alt="">
+        <img [src]="conversation?.user.avatar" alt="">
       </div>
       <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>{{conversation.fullname}}</h5>
+        <h5>{{conversation?.user.fullname}}</h5>
         <h6>{{conversation.lastestMessage}}</h6>
       </div>
     </div>
 
-    <div class="card-user"
-      [ngClass]="{'active': i == activeSearchIndex, 'd-flex':searchString!='','d-none':searchString==''}"
-      *ngFor="let account of listAccountSearch; let i = index;" (click)="joinConversationWithoutRoom(account._id, i)">
+    <div class="card-user" [ngClass]="{'d-flex':searchString!='','d-none':searchString==''}"
+      *ngFor="let account of listAccountSearch; let j = index;" (click)="joinConversation(account, j, true)">
       <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
         <img [src]="account.avatar" alt="">
       </div>
@@ -43,7 +42,9 @@
       </div>
     </div>
 
-    <div class="chat-box__content" #chatBoxContent>
+    <div class="chat-box__content" #chatBoxContent infiniteScroll [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
+      (scrolledUp)="onUp($event)">
       <div class=""
         [ngClass]="message.isAuth ? 'chat-box__content-message  text-end' : 'chat-box__content-message text-start'"
         *ngFor="let message of messageList">

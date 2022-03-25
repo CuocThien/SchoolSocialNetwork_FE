@@ -18,6 +18,7 @@ import { AuthGuardService } from './auth.guard';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatService } from './home/chat/chat.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ChatService } from './home/chat/chat.service';
 
     }),
     BrowserAnimationsModule,
+    InfiniteScrollModule
 
   ],
   providers: [AuthGuardService, ChatService],

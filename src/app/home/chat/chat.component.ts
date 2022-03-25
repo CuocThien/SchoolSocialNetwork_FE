@@ -16,13 +16,13 @@ import { HOST } from 'src/app/utils/constant';
 export class ChatComponent implements OnInit {
 
   faSend = faPaperPlane;
-  userName = '';
+  currentUserId = '';
+  partnerUserId = '';
   message = '';
   messageList: any;
   socket: any;
   listConversation: any;
   activeIndex = 0;
-  activeSearchIndex = -1;
   conversationId = '';
   profile: any;
   pageMessage = 0;
@@ -30,6 +30,15 @@ export class ChatComponent implements OnInit {
   searchString = '';
   pageSearchAccount = 0;
   listAccountSearch: any;
+  countSendMessage = 0;
+  isConversationSearch = false;
+
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+
+  isLoadOldMessage = false;
+  flag = false;
   @ViewChild('chatBoxContent') private chatbox!: ElementRef;
 
   constructor(private service: ChatService) {
@@ -39,93 +48,143 @@ export class ChatComponent implements OnInit {
     });
     this.socket.on(EVENT_MESSAGE_SSC.SEND_MESSAGE_SSC, (data: any) => {
       console.log(data)
+      this.isLoadOldMessage = false;
       this.messageList.push({ data: data.data.data, isAuth: false })
+      this.listConversation[this.activeIndex].lastestMessage = data.data.data;
     });
     this.socket.on(EVENT_MESSAGE_SSC.LEAVE_ROOM_SSC, (data: any) => {
       console.log(data)
     });
   }
 
-  joinConversation(room: any, participantId: any, index: number) {
-    this.activeIndex = index
-    if (this.conversationId != room) {
-      this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
-        room: this.conversationId
-      });
-      this.conversationId = room;
-      this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
-        [this.profile._id, participantId]
-      );
-    }
-  }
-
-  joinConversationWithoutRoom(participantId: any, index: number) {
-    this.activeSearchIndex = index
-    if (this.conversationId != '') {
-      this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
-        room: this.conversationId
-      });
-
-    }
-    this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
-      [this.profile._id, participantId]
-    );
-  }
-
-  sendMessage(): void {
-    const msg = {
-      conversationId: this.conversationId,
-      senderId: this.profile._id,
-      data: this.message
-    }
-    this.socket.emit(EVENT_MESSAGE_CSS.SEND_MESSAGE_CSS, msg);
-    this.messageList.push({ data: this.message, isAuth: true });
-    this.message = '';
-  }
 
   ngOnInit(): void {
+    this.profile = JSON.parse(localStorage.getItem('profile') || '')
+    this.currentUserId = this.profile._id;
     this.service.getListConversation().subscribe((res: any) => {
-      this.profile = JSON.parse(localStorage.getItem('profile') || '')
       this.listConversation = res.data.result;
       this.conversationId = this.listConversation[0]._id;
-      this.chatTitle = {
-        avatar: this.listConversation[0].avatar,
-        fullname: this.listConversation[0].fullname
-      }
+      this.partnerUserId = this.listConversation[0].participantId;
+      this._setChatTitle(this.listConversation[0].user)
       this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
-        [this.profile._id, this.listConversation[0].participantId]);
+        [this.currentUserId, this.listConversation[0].participantId]);
       this.getMessage()
     })
     this.scrollToBottom();
 
   }
 
+  ngAfterViewChecked() {
+    if (!this.isLoadOldMessage)
+      this.scrollToBottom();
+  }
+
+  _setChatTitle(data: any) {
+    const { avatar, fullname } = data || {}
+    this.chatTitle = {
+      avatar,
+      fullname
+    }
+  }
+
+  joinConversation(user: any, index: number, isSearch: boolean) {
+    if (!isSearch)
+      this.activeIndex = index;
+
+    if (this.searchString != '') {
+      this.isConversationSearch = true;
+      this.countSendMessage = 0;
+    } else {
+      this.isConversationSearch = false;
+    }
+
+    if (this.partnerUserId != user._id) {
+      this.partnerUserId = user._id;
+      this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
+        [this.currentUserId, user._id]
+      );
+      this._getConversation(this.currentUserId, user._id)
+    }
+
+  }
+
+  getListConversation() {
+    this.service.getListConversation().subscribe((res: any) => {
+      this.listConversation = res.data.result;
+      this.conversationId = this.listConversation[0]._id;
+    })
+  }
+  _getConversation(id1: any, id2: any) {
+    this.service.getConversation({ id1, id2 }).subscribe((res: any) => {
+      const { _id, user } = res.data || {}
+      if (this.conversationId != _id) {
+        this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
+          room: this.conversationId
+        });
+
+      }
+      this.conversationId = _id;
+      this.pageMessage = 0;
+      this.getMessage();
+      this._setChatTitle(user)
+      this.searchString = '';
+
+      if (this.countSendMessage == 0 && this.isConversationSearch && this.flag) {
+        this.listConversation.unshift(res.data);
+        this.activeIndex = 0;
+      } else if (this.countSendMessage == 0 && !this.isConversationSearch && this.flag) {
+        this.getListConversation();
+        this.activeIndex--;
+        this.flag = false;
+      }
+    })
+  }
   getMessage() {
     this.service.getMessage({ conversationId: this.conversationId, page: this.pageMessage }).subscribe((res: any) => {
       this.messageList = res.data.lstMessage
     })
   }
-
-  searchAccount() {
-    const reqData = { keyword: this.searchString, page: this.pageSearchAccount }
-    this.service.searchAccount(reqData).subscribe((res: any) => {
-      this.listAccountSearch = res.data.result;
+  getMoreMessage() {
+    this.pageMessage++;
+    this.service.getMessage({ conversationId: this.conversationId, page: this.pageMessage }).subscribe((res: any) => {
+      const oldMessage = res.data.lstMessage;
+      oldMessage.reverse().map((itm: any) => {
+        this.messageList.unshift(itm);
+      })
     })
+    this.isLoadOldMessage = true;
   }
-
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-    this.scrollToTop();
+  sendMessage(): void {
+    this.countSendMessage++;
+    const msg = {
+      conversationId: this.conversationId,
+      senderId: this.currentUserId,
+      data: this.message
+    }
+    this.socket.emit(EVENT_MESSAGE_CSS.SEND_MESSAGE_CSS, msg);
+    this.messageList.push({ data: this.message, isAuth: true });
+    this.listConversation[this.activeIndex].lastestMessage = this.message;
+    this.isLoadOldMessage = false;
+    this.message = '';
   }
+  searchAccount() {
+    if (this.searchString != '') {
+      this.flag = true;
 
+      const reqData = { keyword: this.searchString, page: this.pageSearchAccount }
+      this.service.searchAccount(reqData).subscribe((res: any) => {
+        this.listAccountSearch = res.data.result;
+      })
+    }
+  }
   scrollToBottom(): void {
     try {
       this.chatbox.nativeElement.scrollTop = this.chatbox.nativeElement.scrollHeight;
     } catch (err) { }
   }
-  scrollToTop(): void {
-    if (this.chatbox.nativeElement.scrollTop == 0) {
-      console.log(1)
-    }
+
+  onUp(ev: any) {
+    this.getMoreMessage();
+    this.isLoadOldMessage = true;
   }
 }

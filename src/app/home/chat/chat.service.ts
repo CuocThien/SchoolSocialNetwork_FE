@@ -19,6 +19,11 @@ export class ChatService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
+    getConversation(data: any) {
+        const url = `${HOST}/conversation/id?id1=${data.id1}&id2=${data.id2}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
     getMessage(data: any) {
         const { page, conversationId } = data;
         let query = ``
