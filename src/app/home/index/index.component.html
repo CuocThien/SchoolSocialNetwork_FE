@@ -1,0 +1,146 @@
+<div class="pt-3 ms-3 me-4 index-container">
+
+  <div class="main-group">
+
+    <h2 class="ps-3">Main notification</h2>
+    <hr>
+
+    <div *ngIf="isAdmin">
+      <h3 class="ps-5">Teacher</h3>
+      <hr>
+    </div>
+    <div class="main-teacher" *ngIf="isAdmin || isDean || isTeacher">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainTeacherPost">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+          <div class="post__auth-avatar ps-3 pe-3">
+            <img [src]="post?.avatar" alt="">
+          </div>
+          <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+            <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+          </div>
+        </div>
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+          <div class="post__auth-info d-sm-block d-md-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+          </div>
+          <div class="post__info-title">
+            <h4>{{post?.title}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <ngb-pagination [collectionSize]="totalMainTeacher" [maxSize]="5" [pageSize]="1" [rotate]="true"
+          (pageChange)="goToPage('mainTeacher',$event)" [(page)]="pageMainTeacher">
+        </ngb-pagination>
+      </div>
+    </div>
+
+    <div *ngIf="isAdmin">
+      <h3 class="ps-5 mt-3">Student</h3>
+      <hr>
+    </div>
+    <div class="main-student" *ngIf="isAdmin || isStudent">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainStudentPost">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+          <div class="post__auth-avatar ps-3 pe-3">
+            <img [src]="post?.avatar" alt="">
+          </div>
+          <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+            <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+          </div>
+        </div>
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+          <div class="post__auth-info d-sm-block d-md-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+          </div>
+          <div class="post__info-title">
+            <h4>{{post?.title}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <ngb-pagination [collectionSize]="totalMainStudent" [maxSize]="5" [pageSize]="1" [rotate]="true"
+          (pageChange)="goToPage('mainStudent',$event)" [(page)]="pageMainStudent">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-group mt-5">
+
+    <h2 class="ps-3">Faculty notification</h2>
+    <hr>
+
+    <div *ngIf="isAdmin || isDean">
+      <h3 class="ps-5">Teacher</h3>
+      <hr>
+    </div>
+    <div class="faculty-teacher" *ngIf="isAdmin || isDean || isTeacher">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyTeacherPost">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+          <div class="post__auth-avatar ps-3 pe-3">
+            <img [src]="post?.avatar" alt="">
+          </div>
+          <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+            <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+          </div>
+        </div>
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+          <div class="post__auth-info d-sm-block d-md-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+          </div>
+          <div class="post__info-title">
+            <h4>{{post?.title}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <ngb-pagination [collectionSize]="totalFacultyTeacher" [maxSize]="5" [pageSize]="1" [rotate]="true"
+          (pageChange)="goToPage('facultyTeacher',$event)" [(page)]="pageFacultyTeacher">
+        </ngb-pagination>
+      </div>
+    </div>
+
+    <div *ngIf="isAdmin || isDean">
+      <h3 class="ps-5 mt-3">Student</h3>
+      <hr>
+    </div>
+    <div class="faculty-student" *ngIf="isAdmin || isDean || isStudent">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyStudentPost">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+          <div class="post__auth-avatar ps-3 pe-3">
+            <img [src]="post?.avatar" alt="">
+          </div>
+          <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+            <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+          </div>
+        </div>
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+          <div class="post__auth-info d-sm-block d-md-none">
+            <span class="post__auth-info__id">{{post?.author}} - </span>
+            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+          </div>
+          <div class="post__info-title">
+            <h4>{{post?.title}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <ngb-pagination [collectionSize]="totalFacultyStudent" [maxSize]="5" [pageSize]="10" [rotate]="true"
+          (pageChange)="goToPage('facultyStudent',$event)" [(page)]="pageFacultyStudent">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

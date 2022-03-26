@@ -2,11 +2,13 @@
   <div class="d-flex page-control">
     <div class="col-xl-8 col-lg-9 col-md-8 col-sm-9 col-9">
       <div class="d-flex justify-content-end h-header">
-        <div class="col-xxl-3 col-xl-3 d-none d-xl-table page-control__title u-margin-auto">
-          <!-- <img class="page-control__logo u-margin-vertical-auto" src="" alt="logo"> -->
-          <h3 class="title d-none d-xl-table-cell">Social Network</h3>
+        <img
+          class="page-control__logo u-margin-vertical-auto d-none d-lg-table-cell d-md-table-cell d-sm-table-cell d-xl-none "
+          [routerLink]="['index']" src="../../assets/img/logo.png" alt="logo">
+        <div class="logo col-xxl-3 col-xl-3 d-none d-xl-table page-control__title u-margin-auto">
+          <h3 class="title d-none d-xl-table-cell" [routerLink]="['index']">Social Network</h3>
         </div>
-        <div class="col-xxl-9 col-xl-9 col-md-7 col-sm-12 col-12 u-margin-auto ">
+        <div class="col-xxl-9 col-xl-9 col-md-7 col-sm-10 col-10 u-margin-auto ">
           <form class="search__form u-margin-vertical-auto position-relative">
             <input class="search__form--input-search" type="text" name="search" placeholder="Nhập gì đó để tìm kiếm...">
             <button class="search__form--button-search position-absolute" type="submit"><i

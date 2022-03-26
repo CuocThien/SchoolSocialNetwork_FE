@@ -9,17 +9,20 @@ import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { IndexComponent } from './index/index.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FontAwesomeModule,
     FormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgbPaginationModule
   ]
 })
 export class HomeModule { }

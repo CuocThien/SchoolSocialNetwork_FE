@@ -8,7 +8,7 @@ import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { ToastrModule } from 'ngx-toastr';
 
 //component
@@ -23,7 +23,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChangePasswordService, ChatService, LogInService, ProfileService, UploadImageService } from './services/index';
+import { ChangePasswordService, ChatService, HomeIndexService, LogInService, ProfileService, UploadImageService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component'
 
 @NgModule({
@@ -54,10 +54,10 @@ import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-p
 
     }),
     BrowserAnimationsModule,
-    InfiniteScrollModule
-
+    InfiniteScrollModule,
+    NgbPaginationModule
   ],
-  providers: [AuthGuardService, ChatService, ChangePasswordService, LogInService, ProfileService, UploadImageService,],
+  providers: [AuthGuardService, ChatService, ChangePasswordService, HomeIndexService, LogInService, ProfileService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

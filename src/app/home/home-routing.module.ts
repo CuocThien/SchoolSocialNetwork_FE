@@ -9,11 +9,14 @@ import { GroupComponent } from './group/group.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { AuthGuardService } from '../auth.guard';
+import { IndexComponent } from './index/index.component';
 
 const homeRoutes: Routes = [
     {
         path: 'home', component: HomeComponent, canActivate: [AuthGuardService],
         children: [
+            { path: '', redirectTo: '/home/index', pathMatch: 'full' },
+            { path: 'index', component: IndexComponent, pathMatch: 'full' },
             { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
             { path: 'change-password', component: ChangePasswordComponent, pathMatch: 'full' },
             { path: 'group', component: GroupComponent, pathMatch: 'full' },
