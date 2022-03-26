@@ -23,11 +23,9 @@
           </div>
           <button class="animated-border-button d-sm-none d-none d-md-block">{{profile?.fullname}}</button>
           <ul class="dropdown">
-            <li><a>Quản lý chung</a></li>
-            <li><a [routerLink]="['profile']">Thông tin cá nhân</a></li>
-            <li><a>Quản lý bài viết</a></li>
-            <li><a>Đổi mật khẩu</a></li>
-            <li><a (click)="logout()">Đăng xuất</a></li>
+            <li><a [routerLink]="['profile']">Profile</a></li>
+            <li><a [routerLink]="['change-password']">Change password</a></li>
+            <li><a (click)="logout()">Log out</a></li>
           </ul>
         </li>
       </ul>

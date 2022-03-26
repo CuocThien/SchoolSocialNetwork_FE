@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { LogInService } from 'src/app/services';
+import { ChangePasswordOtpComponent } from '../change-password-otp/change-password-otp.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,8 +10,11 @@ import { LogInService } from 'src/app/services';
   styleUrls: ['../../../assets/sass/main.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  private modalRef: NgbModalRef | undefined;
 
-  constructor(private activeModal: NgbActiveModal, private service: LogInService, private toastr: ToastrService) { }
+  constructor(private activeModal: NgbActiveModal, private service: LogInService, private toastr: ToastrService,
+    private modalService: NgbModal,
+  ) { }
 
   timeOut = 180;
   isRequested = false;
@@ -19,12 +23,12 @@ export class ForgotPasswordComponent implements OnInit {
   intervalId: any;
   userId = ''
   OTPCode = ''
+  OTP = ''
   ngOnInit(): void {
   }
   onClose() {
     this.activeModal.close();
-    // window.clearInterval(this.intervalId);
-
+    window.clearInterval(this.intervalId);
   }
 
   resend() {
@@ -62,14 +66,27 @@ export class ForgotPasswordComponent implements OnInit {
     }
     this.service.forgotPassword(data).subscribe(
       (res: any) => {
-        console.log("💁 ~ file: forgot-password.component.ts ~ line 62 ~ ForgotPasswordComponent ~ requestOPT ~ res", res)
         this.toastr.success(res.msg);
         this.OTPCode = res.data.content.substring(0, 6);
         this.request()
       },
       (err: any) => {
-        console.log("💁 ~ file: forgot-password.component.ts ~ line 58 ~ ForgotPasswordComponent ~ requestOPT ~ err", err)
         this.toastr.error(err.error.msg)
       })
+  }
+  onConfirm() {
+    if (this.OTP == this.OTPCode && this.OTPCode != '') {
+      this.activeModal.close();
+      window.clearInterval(this.intervalId);
+      this.modalRef = this.modalService.open(ChangePasswordOtpComponent, {
+        backdrop: 'static',
+        centered: true,
+      })
+      this.modalRef.componentInstance.userId = this.userId;
+      this.modalRef.result.then().catch();
+    } else {
+      this.toastr.error('Invalid OTP code')
+
+    }
   }
 }

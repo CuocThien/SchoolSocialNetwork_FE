@@ -58,7 +58,6 @@ export class ProfileComponent implements OnInit {
           this.imageSrc = this.result.url;
         })
         .catch(err => {
-          // console.log(err)
           this.toastr.error(err.error.msg)
         })
     }

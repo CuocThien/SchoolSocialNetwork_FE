@@ -23,7 +23,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChatService, LogInService, ProfileService, UploadImageService } from './services/index'
+import { ChangePasswordService, ChatService, LogInService, ProfileService, UploadImageService } from './services/index';
+import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ChatService, LogInService, ProfileService, UploadImageService } from '.
     PageNotFoundComponent,
     HeaderComponent,
     SidebarComponent,
+    ChangePasswordOtpComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { ChatService, LogInService, ProfileService, UploadImageService } from '.
     InfiniteScrollModule
 
   ],
-  providers: [AuthGuardService, ChatService, LogInService, ProfileService, UploadImageService,],
+  providers: [AuthGuardService, ChatService, ChangePasswordService, LogInService, ProfileService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
