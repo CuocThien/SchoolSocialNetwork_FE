@@ -10,6 +10,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { ToastrModule } from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 //component
 //abcdefghijklmnopqrstuvwxyz
@@ -24,7 +25,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 //service
 import { AuthGuardService } from './auth.guard';
 import { ChangePasswordService, ChatService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService } from './services/index';
-import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component'
+import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
+import { CreatePostComponent } from './popup/create-post/create-post.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-p
     HeaderComponent,
     SidebarComponent,
     ChangePasswordOtpComponent,
+    CreatePostComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-p
     }),
     BrowserAnimationsModule,
     InfiniteScrollModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgSelectModule
   ],
   providers: [AuthGuardService, ChatService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService,],
   bootstrap: [AppComponent]

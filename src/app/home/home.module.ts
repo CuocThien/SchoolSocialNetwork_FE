@@ -12,6 +12,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { IndexComponent } from './index/index.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 
 
@@ -23,7 +25,8 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     FontAwesomeModule,
     FormsModule,
     InfiniteScrollModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgSelectModule
   ]
 })
 export class HomeModule { }

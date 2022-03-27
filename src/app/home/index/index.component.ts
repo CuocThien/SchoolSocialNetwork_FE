@@ -14,7 +14,8 @@ export class IndexComponent implements OnInit {
     private service: HomeIndexService,
     private toastr: ToastrService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   listMainTeacherPost: any;
   listMainStudentPost: any;
@@ -26,7 +27,8 @@ export class IndexComponent implements OnInit {
   isTeacher = false;
   isStudent = false;
 
-  faculty = 'fhq';
+  listFaculty: any;
+  faculty = '';
   role: any;
 
   pageMainStudent = 1;
@@ -43,8 +45,8 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || '';
     if (this.role === 'admin') {
-      this.getListPostMainGroupFacultyForStudent();
-      this.getListPostMainGroupFacultyForTeacher();
+      this._getListFaculty();
+
       this.getListPostMainGroupForStudent();
       this.getListPostMainGroupForTeacher();
       this.isAdmin = true;
@@ -125,5 +127,24 @@ export class IndexComponent implements OnInit {
   }
   goToDetailPost(postId: any) {
     this.router.navigate([`/home/post/${postId}`])
+  }
+  createPost(groupId: any) {
+
+  }
+  _getListFaculty() {
+    this.service.getListFaculty().subscribe(
+      (res: any) => {
+        this.listFaculty = res.data;
+        this.faculty = this.listFaculty[0]._id || '';
+        this.getListPostMainGroupFacultyForStudent();
+        this.getListPostMainGroupFacultyForTeacher();
+      },
+      (err) => {
+        this.toastr.error(err.error.msg)
+      })
+  }
+  filterFaculty() {
+    this.getListPostMainGroupFacultyForStudent();
+    this.getListPostMainGroupFacultyForTeacher();
   }
 }

@@ -163,3 +163,12 @@
   top: 1rem;
   right: 1rem;
 }
+
+.btn-create-group {
+  text-align: -webkit-right;
+  // text-align: right;
+
+  button {
+    font-size: 1.4rem;
+  }
+}
