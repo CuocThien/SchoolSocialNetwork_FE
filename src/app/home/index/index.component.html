@@ -8,7 +8,8 @@
     <div *ngIf="isAdmin">
       <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Teacher</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grgv')">Create post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grgv',true,false)">Create
+          post</button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
@@ -48,7 +49,8 @@
       <hr>
       <h3 class="ps-5 mt-3  d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Student</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grsv')">Create post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grsv',true,true)">Create
+          post</button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
@@ -97,7 +99,8 @@
     <div *ngIf="isAdmin || isDean">
       <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Teacher</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('')">Create post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, false)">Create
+          post</button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
@@ -138,7 +141,8 @@
       <hr>
       <h3 class="ps-5 mt-3 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Student</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('')">Create post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, true)">Create
+          post</button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
 import { HomeIndexService } from 'src/app/services';
 
 @Component({
@@ -13,7 +15,8 @@ export class IndexComponent implements OnInit {
   constructor(
     private service: HomeIndexService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal,
   ) {
   }
 
@@ -41,6 +44,7 @@ export class IndexComponent implements OnInit {
   totalFacultyStudent = 0;
   totalFacultyTeacher = 0;
 
+  private modalRef: NgbModalRef | undefined;
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || '';
@@ -128,8 +132,28 @@ export class IndexComponent implements OnInit {
   goToDetailPost(postId: any) {
     this.router.navigate([`/home/post/${postId}`])
   }
-  createPost(groupId: any) {
-
+  createPost(groupId: any, isMainGroup: any, isStudent: any) {
+    this.modalRef = this.modalService.open(CreatePostComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+    })
+    this.modalRef.componentInstance.groupId = groupId;
+    this.modalRef.componentInstance.isMainGroup = isMainGroup;
+    this.modalRef.componentInstance.isStudent = isStudent;
+    this.modalRef.result.then((res: any) => {
+      if (groupId === 'grsv') {
+        this.getListPostMainGroupForStudent();
+      } else if (groupId === 'grgv') {
+        this.getListPostMainGroupForTeacher();
+      } else {
+        if (isStudent) {
+          this.getListPostMainGroupFacultyForStudent();
+        } else {
+          this.getListPostMainGroupFacultyForTeacher();
+        }
+      }
+    }).catch();
   }
   _getListFaculty() {
     this.service.getListFaculty().subscribe(

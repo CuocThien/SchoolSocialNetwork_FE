@@ -1,5 +1,6 @@
 export * from './change-password.service'
 export * from './chat.service'
+export * from './create-post.service'
 export * from './home-index.service'
 export * from './login.service'
 export * from './post-detail.service'

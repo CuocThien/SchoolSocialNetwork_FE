@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 //component
 //abcdefghijklmnopqrstuvwxyz
@@ -24,9 +25,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChangePasswordService, ChatService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService } from './services/index';
+import { ChangePasswordService, ChatService, CreatePostService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
-import { CreatePostComponent } from './popup/create-post/create-post.component'
+import { CreatePostComponent } from './popup/create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { CreatePostComponent } from './popup/create-post/create-post.component'
     HeaderComponent,
     SidebarComponent,
     ChangePasswordOtpComponent,
-    CreatePostComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +60,10 @@ import { CreatePostComponent } from './popup/create-post/create-post.component'
     BrowserAnimationsModule,
     InfiniteScrollModule,
     NgbPaginationModule,
-    NgSelectModule
+    CKEditorModule,
+    NgSelectModule,
   ],
-  providers: [AuthGuardService, ChatService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService,],
+  providers: [AuthGuardService, ChatService, CreatePostService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

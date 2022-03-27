@@ -13,6 +13,7 @@ import { IndexComponent } from './index/index.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 
 
@@ -26,7 +27,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     InfiniteScrollModule,
     NgbPaginationModule,
-    NgSelectModule
+    NgSelectModule,
+    CKEditorModule,
+
   ]
 })
 export class HomeModule { }
