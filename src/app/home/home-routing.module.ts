@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { AuthGuardService } from '../auth.guard';
 import { IndexComponent } from './index/index.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 
 const homeRoutes: Routes = [
     {
@@ -22,6 +23,8 @@ const homeRoutes: Routes = [
             { path: 'group', component: GroupComponent, pathMatch: 'full' },
             { path: 'group/:id', component: GroupDetailComponent, pathMatch: 'full' },
             { path: 'chat', component: ChatComponent, pathMatch: 'full' },
+            { path: 'post/:id', component: PostDetailComponent, pathMatch: 'full' },
+
 
         ]
     }

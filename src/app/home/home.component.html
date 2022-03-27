@@ -1,7 +1,7 @@
 <app-header class="position-fixed"></app-header>
-<div class="d-flex">
-  <input class="cb-sidebar" checked type="checkbox" name="" id="cb-sidebar">
-  <a class="button-control-sidebar position-fixed" (click)="openOrCloseSidebar()">
+<div class="d-flex" (change)="onResize($event)">
+  <input class="cb-sidebar" [checked]="isOpen" type="checkbox" name="" id="cb-sidebar">
+  <a class="button-control-sidebar position-fixed" (click)="openOrCloseSidebar($event)">
     <label for="cb-sidebar">
       <fa-icon [icon]="faArrow"></fa-icon>
     </label>

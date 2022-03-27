@@ -15,6 +15,7 @@
 .post {
   height: auto;
   border-bottom: 1px solid rgba(grey, .3);
+  cursor: pointer;
 
   &__auth {
     height: fit-content;

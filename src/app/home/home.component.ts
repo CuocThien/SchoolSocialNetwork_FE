@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,12 +13,21 @@ export class HomeComponent implements OnInit {
   faArrow = faAngleLeft;
   isOpen = true;
   profile: any;
+  screenWidth: any;
   ngOnInit(): void {
-    this.isOpen = true;
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
   }
-  openOrCloseSidebar() {
+  openOrCloseSidebar(event: any) {
+    event.preventDefault();
     this.isOpen = !this.isOpen;
     this.faArrow = this.isOpen ? faAngleLeft : faAngleRight;
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 650) {
+      this.isOpen = false
+      this.faArrow = this.isOpen ? faAngleLeft : faAngleRight;
+    }
   }
 }

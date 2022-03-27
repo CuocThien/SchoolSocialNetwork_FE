@@ -10,8 +10,8 @@
       <hr>
     </div>
     <div class="main-teacher" *ngIf="isAdmin || isDean || isTeacher">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainTeacherPost">
-        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainTeacherPost" (click)="goToDetailPost(post?._id)">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
           </div>
@@ -21,7 +21,7 @@
             <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
           </div>
         </div>
-        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
           <div class="post__auth-info d-sm-block d-md-none">
             <span class="post__auth-info__id">{{post?.author}} - </span>
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
@@ -43,8 +43,8 @@
       <hr>
     </div>
     <div class="main-student" *ngIf="isAdmin || isStudent">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainStudentPost">
-        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainStudentPost" (click)="goToDetailPost(post?._id)">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
           </div>
@@ -54,7 +54,7 @@
             <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
           </div>
         </div>
-        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
           <div class="post__auth-info d-sm-block d-md-none">
             <span class="post__auth-info__id">{{post?.author}} - </span>
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
@@ -82,8 +82,9 @@
       <hr>
     </div>
     <div class="faculty-teacher" *ngIf="isAdmin || isDean || isTeacher">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyTeacherPost">
-        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyTeacherPost"
+        (click)="goToDetailPost(post?._id)">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
           </div>
@@ -93,7 +94,7 @@
             <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
           </div>
         </div>
-        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
           <div class="post__auth-info d-sm-block d-md-none">
             <span class="post__auth-info__id">{{post?.author}} - </span>
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
@@ -115,8 +116,9 @@
       <hr>
     </div>
     <div class="faculty-student" *ngIf="isAdmin || isDean || isStudent">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyStudentPost">
-        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-2">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyStudentPost"
+        (click)="goToDetailPost(post?._id)">
+        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
           </div>
@@ -126,7 +128,7 @@
             <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
           </div>
         </div>
-        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10">
+        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
           <div class="post__auth-info d-sm-block d-md-none">
             <span class="post__auth-info__id">{{post?.author}} - </span>
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>

@@ -23,7 +23,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChangePasswordService, ChatService, HomeIndexService, LogInService, ProfileService, UploadImageService } from './services/index';
+import { ChangePasswordService, ChatService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component'
 
 @NgModule({
@@ -57,7 +57,7 @@ import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-p
     InfiniteScrollModule,
     NgbPaginationModule
   ],
-  providers: [AuthGuardService, ChatService, ChangePasswordService, HomeIndexService, LogInService, ProfileService, UploadImageService,],
+  providers: [AuthGuardService, ChatService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

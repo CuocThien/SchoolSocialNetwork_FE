@@ -1,0 +1,57 @@
+.post-detail {
+  margin: 0 auto;
+  width: 80%;
+  height: auto;
+  background-color: #FFF;
+  min-height: 100vh;
+  padding: 1rem 3rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  position: relative;
+
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+  }
+
+  &__author {
+    width: 100%;
+    text-align: right;
+    padding-right: 2rem;
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    color: $color-blue;
+  }
+
+  &__content {
+    width: 100%;
+    font-size: 1.6rem;
+
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+  }
+}
+
+.star-readpost {
+  display: flex;
+  margin-left: 50px;
+}
+
+#content {
+  width: 100%;
+}
+
+.backToTop {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  right: 10%;
+  height: 4.5rem;
+  width: 4.5rem;
+  font-size: 3rem;
+}

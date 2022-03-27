@@ -11,11 +11,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { IndexComponent } from './index/index.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

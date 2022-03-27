@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HomeIndexService } from 'src/app/services';
 
@@ -9,8 +10,11 @@ import { HomeIndexService } from 'src/app/services';
 })
 export class IndexComponent implements OnInit {
 
-  constructor(private service: HomeIndexService,
-    private toastr: ToastrService) { }
+  constructor(
+    private service: HomeIndexService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
 
   listMainTeacherPost: any;
   listMainStudentPost: any;
@@ -118,5 +122,8 @@ export class IndexComponent implements OnInit {
       this.pageFacultyStudent = event;
       this.getListPostMainGroupFacultyForStudent();
     }
+  }
+  goToDetailPost(postId: any) {
+    this.router.navigate([`/home/post/${postId}`])
   }
 }
