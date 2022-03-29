@@ -1,0 +1,29 @@
+<div class="comment-create d-flex" [ngClass]="commentId==isOpenCreateReply ? 'd-flex':'d-none'">
+  <div class="line col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"></div>
+  <div class="ps-3 user-comment-reply col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-flex">
+    <div class="comment-create__avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
+      <img [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
+    </div>
+    <div class="comment-create__box col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 position-relative">
+      <textarea name="" [(ngModel)]="content" placeholder="Reply..." rows="4"></textarea>
+      <button class="btnPostReply" (click)="onReply()">
+        <i class="bi bi-send"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="list-reply d-flex" *ngFor="let reply of listReply; let i=index">
+  <div class="line col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"></div>
+  <div class="ps-3 user-comment-reply col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-flex">
+    <div class="user-comment-reply-avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
+      <img [src]="reply.avatar" alt="">
+    </div>
+    <div class="user-reply-cmt-content col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10">
+      <h6>{{reply.fullname}}</h6>
+      <span>{{reply.content}}</span><br>
+      <a *ngIf="reply.userId==userId" class="updateReply" (click)="editReply(reply, i)">Edit</a>
+      <span *ngIf="reply.userId==userId" aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
+      <a *ngIf="reply.userId==userId||isAdmin" (click)="deleteReply(reply.replyId, i)">Delete</a>
+    </div>
+  </div>
+</div>

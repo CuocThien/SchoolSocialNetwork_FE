@@ -8,8 +8,8 @@
       </div>
       <div class="post-detail__content" [innerHtml]="post?.content"></div>
       <!-- <h5>Đánh giá bài viết</h5>
-      <app-star class="star-readpost" id="{{postData.Id}}" rate="{{post.RatingbyAcc}}"></app-star>
-      <app-comment [countCmt]="post.CommentCount||0" [postId]="postData.Id" [listCmt]="post.Comment||{}"></app-comment> -->
+      <app-star class="star-readpost" id="{{postData.Id}}" rate="{{post.RatingbyAcc}}"></app-star>-->
+      <app-comment [postId]="postId"></app-comment>
     </div>
     <button type="button" class="btn backToTop" (click)="backToTop()">
       <i class="bi bi-chevron-double-up"></i>

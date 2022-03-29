@@ -25,9 +25,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChangePasswordService, ChatService, CreatePostService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService } from './services/index';
+import { ChangePasswordService, ChatService, CommentService, CreatePostService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
 import { CreatePostComponent } from './popup/create-post/create-post.component';
+import { ChangeCommentComponent } from './popup/change-comment/change-comment.component';
+import { DeleteCommentComponent } from './popup/delete-comment/delete-comment.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CreatePostComponent } from './popup/create-post/create-post.component';
     HeaderComponent,
     SidebarComponent,
     ChangePasswordOtpComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    ChangeCommentComponent,
+    DeleteCommentComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,7 @@ import { CreatePostComponent } from './popup/create-post/create-post.component';
     CKEditorModule,
     NgSelectModule,
   ],
-  providers: [AuthGuardService, ChatService, CreatePostService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService,],
+  providers: [AuthGuardService, ChatService, CommentService, CreatePostService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -67,6 +67,6 @@ export class CreatePostComponent implements OnInit {
     }
   }
   onClose() {
-    this.activeModal.close();
+    this.activeModal.dismiss();
   }
 }

@@ -14,12 +14,14 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { CommentComponent } from './comment/comment.component';
+import { ReplyComponent } from './comment/reply/reply.component';
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
