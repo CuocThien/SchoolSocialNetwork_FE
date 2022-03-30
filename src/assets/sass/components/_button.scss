@@ -30,6 +30,38 @@
   }
 }
 
+.button-signup {
+
+  &,
+  &:link,
+  &:visited {
+    display: block;
+    background-color: #7AAADF;
+    border-radius: 1rem;
+    border: none;
+    height: 4rem;
+    width: 50%;
+    color: $color-white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
 .button-text {
 
   &,

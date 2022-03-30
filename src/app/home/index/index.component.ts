@@ -31,7 +31,7 @@ export class IndexComponent implements OnInit {
   isStudent = false;
 
   listFaculty: any;
-  faculty = '';
+  faculty: any;
   role: any;
 
   pageMainStudent = 1;

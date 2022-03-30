@@ -1,0 +1,42 @@
+.signup-container {
+  background-color: $color-white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding-bottom: 2rem;
+  padding: 1rem 3rem;
+}
+
+.single-signup {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 2rem;
+  width: 100%;
+  transition: all .5s;
+}
+
+.multiple-signup {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 2rem;
+  width: 100%;
+  transition: all .5s;
+}
+
+.change-type-signup {
+  &:checked~.single-signup {
+    width: 100%;
+  }
+
+  &:checked~.multiple-signup {
+    width: 0;
+  }
+}
+
+.full-image {
+  border-radius: 0;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
+}

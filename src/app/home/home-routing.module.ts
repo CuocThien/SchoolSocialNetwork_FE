@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuardService } from '../auth.guard';
 import { IndexComponent } from './index/index.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const homeRoutes: Routes = [
     {
@@ -19,6 +20,7 @@ const homeRoutes: Routes = [
             { path: '', redirectTo: '/home/index', pathMatch: 'full' },
             { path: 'index', component: IndexComponent, pathMatch: 'full' },
             { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
+            { path: 'sign-up', component: SignUpComponent, pathMatch: 'full' },
             { path: 'change-password', component: ChangePasswordComponent, pathMatch: 'full' },
             { path: 'group', component: GroupComponent, pathMatch: 'full' },
             { path: 'group/:id', component: GroupDetailComponent, pathMatch: 'full' },
