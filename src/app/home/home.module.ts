@@ -5,7 +5,7 @@ import { GroupComponent } from './group/group.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { ChatComponent } from './chat/chat.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -32,7 +32,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     NgbPaginationModule,
     NgSelectModule,
     CKEditorModule,
-
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

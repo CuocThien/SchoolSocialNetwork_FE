@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { HomeIndexService } from '../../services/index';
+import { HomeIndexService, SignUpService } from '../../services/index';
 import * as XLSX from 'xlsx';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { isEmpty } from 'lodash'
 
 
 @Component({
@@ -16,11 +17,14 @@ export class SignUpComponent implements OnInit {
     private homeService: HomeIndexService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-
+    private service: SignUpService
   ) { }
-  // signUpForm: FormGroup;
+  isSingleSignup = false;
+  contentButton = 'SINGLE SIGNUP'
+  signUpForm!: FormGroup;
   listFaculty: any;
   faculty = null;
+  data = {};
   listRole = [
     { role: 'admin', name: 'Admin' },
     { role: 'dean', name: 'Dean' },
@@ -30,6 +34,7 @@ export class SignUpComponent implements OnInit {
   role = null;
   ngOnInit(): void {
     this._getListFaculty();
+    this.createFormSignUp();
   }
   _getListFaculty() {
     this.homeService.getListFaculty().subscribe(
@@ -47,16 +52,53 @@ export class SignUpComponent implements OnInit {
     fileReader.onload = (event) => {
       let binaryData = event.target?.result;
       let workBook = XLSX.read(binaryData, { type: 'binary' })
-      let data = {}
+      this.data = {}
       workBook.SheetNames.forEach(sheet => {
-        Object.assign(data, XLSX.utils.sheet_to_json(workBook.Sheets[sheet]));
+        Object.assign(this.data, XLSX.utils.sheet_to_json(workBook.Sheets[sheet]));
       })
-      console.log("💁 => SignUpComponent => fileReader", data)
     }
   }
-  onSubmit(value: any) {
-    console.log("💁 => SignUpComponent => value", value.value)
+  onSubmit() {
+    if (this.isSingleSignup) {
+      if (this.signUpForm.invalid) {
+        this.toastr.error('Please fill information!')
+        return;
+      }
+      Object.assign(this.data, { 0: this.signUpForm.value })
+    }
+    if (isEmpty(this.data)) {
+      this.toastr.error('Please choose an excel file!')
+      return;
+    }
+    console.log("💁 => SignUpComponent => this.data", this.data)
 
+    this.service.signup(this.data).subscribe(
+      (res: any) => {
+        this.toastr.success(res.msg);
+        this.signUpForm.reset();
+      },
+      (err: any) => {
+        this.toastr.error(err.error.msg)
+      }
+    )
+    this.data = {}
+  }
+  createFormSignUp() {
+    this.signUpForm = this.formBuilder.group({
+      _id: ['', Validators.required],
+      fullname: ['', Validators.required],
+      dob: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', Validators.required],
+      year: ['', Validators.required],
+      faculty: [null, Validators.required],
+      role: [null, Validators.required],
+    });
+  }
+  changeButton(event: any) {
+    event.preventDefault();
+    this.isSingleSignup = !this.isSingleSignup;
+    this.contentButton = (this.isSingleSignup) ? 'MULTIPLE SIGNUP' : 'SINGLE SINGUP'
   }
 
 }

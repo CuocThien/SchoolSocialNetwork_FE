@@ -6,28 +6,51 @@
 }
 
 .single-signup {
+  min-height: calc(100vh - 7.5rem - 6rem);
+  height: 0;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 2rem;
-  width: 100%;
-  transition: all .5s;
+  width: 0;
+  visibility: hidden;
+  display: none;
+  transition: width .5s;
 }
 
 .multiple-signup {
+  min-height: calc(100vh - 15rem);
+  height: calc(100vh - 15rem);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 2rem;
   width: 100%;
-  transition: all .5s;
+  transition: width .5s;
+  visibility: visible;
+  display: block;
+
 }
 
 .change-type-signup {
-  &:checked~.single-signup {
+  display: none;
+
+  &:checked~.signup-container>.single-signup {
     width: 100%;
+    height: auto;
+    visibility: visible;
+    display: block;
   }
 
-  &:checked~.multiple-signup {
+  &:checked~.signup-container>.multiple-signup {
     width: 0;
+    visibility: hidden;
+    display: none;
+
+  }
+
+  &:checked~.button-signup-group>.switch-button__single-signup {
+    // display: none;
+    background-position: left bottom;
+    color: white;
   }
 }
 

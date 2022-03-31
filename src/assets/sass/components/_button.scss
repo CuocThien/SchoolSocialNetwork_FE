@@ -204,3 +204,42 @@
     font-size: 1.4rem;
   }
 }
+
+.button-signup-group {
+  width: 100%;
+  height: 6rem;
+  padding: 1rem 3rem;
+}
+
+.switch-button {
+  width: 80%;
+  height: 4rem;
+
+  &__single-signup {
+    display: inline-block;
+    margin: auto;
+    height: 3.5rem;
+    border: 2px solid #7AAADF;
+    border-radius: 100px;
+    color: #7AAADF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #7AAADF 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+  }
+
+  &__multiple-signup {
+    margin: auto;
+    height: 3.5rem;
+    border: 2px solid #7AAADF;
+    border-radius: 100px;
+    color: white;
+    background-color: #7AAADF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: none;
+    transition: all .5s;
+  }
+}
