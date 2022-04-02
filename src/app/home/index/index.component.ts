@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
-import { HomeIndexService } from 'src/app/services';
+import { FacultyService, HomeIndexService } from 'src/app/services';
 
 @Component({
   selector: 'app-index',
@@ -14,6 +14,7 @@ export class IndexComponent implements OnInit {
 
   constructor(
     private service: HomeIndexService,
+    private facultyService: FacultyService,
     private toastr: ToastrService,
     private router: Router,
     private modalService: NgbModal,
@@ -44,7 +45,7 @@ export class IndexComponent implements OnInit {
   totalFacultyStudent = 0;
   totalFacultyTeacher = 0;
 
-  private modalRef: NgbModalRef | undefined;
+  private modalRef: NgbModalRef;
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || '';
@@ -156,7 +157,7 @@ export class IndexComponent implements OnInit {
     }).catch();
   }
   _getListFaculty() {
-    this.service.getListFaculty().subscribe(
+    this.facultyService.getListFaculty().subscribe(
       (res: any) => {
         this.listFaculty = res.data;
         this.faculty = this.listFaculty[0]._id || '';

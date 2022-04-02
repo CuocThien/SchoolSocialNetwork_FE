@@ -165,6 +165,25 @@
   }
 }
 
+.button-sidebar-text {
+  font-size: 1.6rem;
+  width: 80%;
+  padding: 0 .5rem;
+  margin: 1rem calc((100% - 80%)/2);
+  border: none;
+  color: white;
+  background: transparent;
+  font-weight: 700;
+  letter-spacing: .1rem;
+  font-family: 'Poppins';
+  transition: all .3s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    color: yellow;
+  }
+}
+
 .button-bt {
   min-height: 4rem;
   height: auto;
@@ -242,4 +261,10 @@
     display: none;
     transition: all .5s;
   }
+}
+
+.btn-edit{
+  font-size: 2rem;
+  background-color: #FFF;
+  cursor: pointer;
 }

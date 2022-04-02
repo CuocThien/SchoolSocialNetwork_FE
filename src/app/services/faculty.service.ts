@@ -5,29 +5,29 @@ import { HOST } from "src/app/utils/constant";
 
 @Injectable()
 
-export class HomeIndexService {
+export class FacultyService {
     constructor(
         private http: HttpClient,
     ) {
     }
-    getListPostMainGroupForTeacher(page: any) {
-        const url = `${HOST}/post/main/grgv?isStudent=false&page=${page}`;
+    getListFaculty() {
+        const url = `${HOST}/group/main/fac`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
-    getListPostMainGroupForStudent(page: any) {
-        const url = `${HOST}/post/main/grsv?page=${page}`;
+    getListAllFaculty() {
+        const url = `${HOST}/group/main/fac?isAll=true`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
-    getListPostMainGroupFacultyForTeacher(data: any, page: any) {
-        const url = `${HOST}/post/main/${data}?isStudent=false&page=${page}`;
+    createNewFaculty(body: any) {
+        const url = `${HOST}/group/main/fac`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
-        return this.http.get(url, { headers })
+        return this.http.post(url, body, { headers })
     }
-    getListPostMainGroupFacultyForStudent(data: any, page: any) {
-        const url = `${HOST}/post/main/${data}?page=${page}`;
+    editFaculty(body: any) {
+        const url = `${HOST}/group/main/fac`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
-        return this.http.get(url, { headers })
+        return this.http.put(url, body, { headers })
     }
 }

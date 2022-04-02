@@ -92,7 +92,7 @@
     <h2 class="ps-3 d-inline-block col-xxl-9 col-xl-9 col-lg-7 col-md-6 col-sm-6 col-6">Faculty notification</h2>
     <ng-select class="d-inline-block col-xxl-3 col-xl-3 col-lg-5 col-md-6 col-sm-6 col-6" [searchable]="false"
       [(ngModel)]="faculty" [clearable]="false" (change)="filterFaculty()" *ngIf="isAdmin">
-      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">{{faculty.name}}</ng-option>
+      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">{{faculty.nameEn}}</ng-option>
     </ng-select>
     <hr>
 

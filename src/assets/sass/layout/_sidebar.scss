@@ -8,3 +8,51 @@
   box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
   transition: all .2s;
 }
+// dropdown manage
+.btn-group-dropdown {
+  height: 5.8rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-manage-dropdown {
+  &:checked~.btn-group-dropdown {
+    height: 50rem;
+  }
+}
+
+// dropdown account
+.btn-account-dropdown {
+  height: 4.4rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-account-dropdown {
+  &:checked~.btn-account-dropdown {
+    height: 13.2rem;
+  }
+}
+
+// faculty
+.btn-faculty-dropdown {
+  height: 4.4rem;
+}
+// category
+.btn-category-dropdown {
+  height: 4.4rem;
+}
+
+
+// report
+.btn-report-dropdown {
+  height: 4.4rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-report-dropdown {
+  &:checked~.btn-report-dropdown {
+    height: 13.2rem;
+  }
+}

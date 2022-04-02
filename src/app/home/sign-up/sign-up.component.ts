@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { HomeIndexService, SignUpService } from '../../services/index';
+import { FacultyService, SignUpService } from '../../services/index';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isEmpty } from 'lodash'
@@ -14,14 +14,14 @@ import { isEmpty } from 'lodash'
 export class SignUpComponent implements OnInit {
 
   constructor(
-    private homeService: HomeIndexService,
+    private facultyService: FacultyService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private service: SignUpService
   ) { }
   isSingleSignup = false;
   contentButton = 'SINGLE SIGNUP'
-  signUpForm!: FormGroup;
+  signUpForm: FormGroup;
   listFaculty: any;
   faculty = null;
   data = {};
@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
     this.createFormSignUp();
   }
   _getListFaculty() {
-    this.homeService.getListFaculty().subscribe(
+    this.facultyService.getListFaculty().subscribe(
       (res: any) => {
         this.listFaculty = res.data;
       },
@@ -70,7 +70,6 @@ export class SignUpComponent implements OnInit {
       this.toastr.error('Please choose an excel file!')
       return;
     }
-    console.log("💁 => SignUpComponent => this.data", this.data)
 
     this.service.signup(this.data).subscribe(
       (res: any) => {

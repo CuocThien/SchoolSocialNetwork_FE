@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -25,11 +25,12 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChangePasswordService, ChatService, CommentService, CreatePostService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService } from './services/index';
+import { ChangePasswordService, ChatService, CommentService, CreatePostService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
 import { CreatePostComponent } from './popup/create-post/create-post.component';
 import { ChangeCommentComponent } from './popup/change-comment/change-comment.component';
 import { DeleteCommentComponent } from './popup/delete-comment/delete-comment.component';
+import { CreateFacultyComponent } from './popup/create-faculty/create-faculty.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DeleteCommentComponent } from './popup/delete-comment/delete-comment.co
     ChangePasswordOtpComponent,
     CreatePostComponent,
     ChangeCommentComponent,
-    DeleteCommentComponent
+    DeleteCommentComponent,
+    CreateFacultyComponent
   ],
   imports: [
     BrowserModule,
@@ -66,8 +68,10 @@ import { DeleteCommentComponent } from './popup/delete-comment/delete-comment.co
     NgbPaginationModule,
     CKEditorModule,
     NgSelectModule,
+    ReactiveFormsModule
+
   ],
-  providers: [AuthGuardService, ChatService, CommentService, CreatePostService, ChangePasswordService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService,],
+  providers: [AuthGuardService, ChatService, CommentService, CreatePostService, ChangePasswordService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

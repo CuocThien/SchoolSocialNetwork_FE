@@ -1,0 +1,32 @@
+<div class="pt-3 ms-3 me-4 faculty-container">
+
+  <div class="d-flex control">
+    <h1 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-8 col-md-8 col-sm-6 col-6">Faculty</h1>
+    <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-sm-6 col-6">
+      <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createFaculty()">
+        Create new faculty
+      </button>
+      <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createFaculty()">
+        <i class="bi bi-plus-square"></i>
+      </button>
+    </div>
+  </div>
+  <table class="table table-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>NameEn</th>
+        <th>NameVi</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let faculty of listFaculty; let i = index">
+        <td>{{faculty._id}}</td>
+        <td>{{faculty.nameEn}}</td>
+        <td>{{faculty.nameVi}}</td>
+        <td class="text-center"><i class="bi bi-pencil-square btn-edit" (click)="editFaculty(faculty,i)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -17,12 +17,13 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { CommentComponent } from './comment/comment.component';
 import { ReplyComponent } from './comment/reply/reply.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { FacultyComponent } from './faculty/faculty.component';
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
