@@ -49,15 +49,16 @@ export class CommentComponent implements OnInit {
       content: this.commentContent,
       postId: this.postId
     }
-    this.service.postComment(validData).subscribe(
-      (res: any) => {
+    this.service.postComment(validData).subscribe({
+      next: ((res: any) => {
         this.listCmt.push(res.data)
         this.toastr.success(res.msg)
         this.commentContent = ''
-      },
-      (err: any) => {
+      }),
+      error: ((err: any) => {
         this.toastr.error(err.error.msg)
       })
+    })
   }
 
   deleteCmt(event: any, index: any) {
@@ -83,16 +84,15 @@ export class CommentComponent implements OnInit {
   }
 
   _getComment() {
-    this.service.getComment(this.postId).subscribe(
-      (res: any) => {
+    this.service.getComment(this.postId).subscribe({
+      next: ((res: any) => {
         this.listCmt = res.data.result || {}
         this.countCmt = res.data.countCmt;
-
-      },
-      (err: any) => {
+      }),
+      error: ((err: any) => {
         this.toastr.error(err.error.msg)
-      }
-    )
+      })
+    })
   }
 
 }

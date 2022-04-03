@@ -35,27 +35,27 @@ export class CreateFacultyComponent implements OnInit {
       return;
     }
     if (!this.isEdit) {
-      this.service.createNewFaculty(this.createFacultyForm.value).subscribe(
-        (res: any) => {
+      this.service.createNewFaculty(this.createFacultyForm.value).subscribe({
+        next: (res: any) => {
           this.toastr.success(res.msg);
           this.createFacultyForm.reset();
           this.activeModal.close(res.data)
         },
-        (err: any) => {
+        error: (err: any) => {
           this.toastr.error(err.error.msg)
         }
-      )
+      })
     } else {
-      this.service.editFaculty(this.createFacultyForm.value).subscribe(
-        (res: any) => {
+      this.service.editFaculty(this.createFacultyForm.value).subscribe({
+        next: (res: any) => {
           this.toastr.success(res.msg);
           this.createFacultyForm.reset();
           this.activeModal.close(res.data)
         },
-        (err: any) => {
+        error: (err: any) => {
           this.toastr.error(err.error.msg)
         }
-      )
+      })
     }
   }
   createFormCreateFaculty() {

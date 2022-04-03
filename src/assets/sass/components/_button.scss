@@ -154,7 +154,7 @@
   background: transparent;
   font-weight: 700;
   letter-spacing: .1rem;
-  font-family: 'Poppins';
+  font-family: 'Be Vietnam Pro', sans-serif;
   transition: all .3s ease-out;
 
   &:hover {
@@ -175,7 +175,7 @@
   background: transparent;
   font-weight: 700;
   letter-spacing: .1rem;
-  font-family: 'Poppins';
+  font-family: 'Be Vietnam Pro', sans-serif;
   transition: all .3s ease-out;
 
   &:hover {
@@ -247,6 +247,7 @@
     background-size: 200% 100%;
     background-position: right bottom;
     transition: all .5s ease-out;
+    text-transform: uppercase;
   }
 
   &__multiple-signup {
@@ -260,6 +261,7 @@
     font-weight: bold;
     display: none;
     transition: all .5s;
+    text-transform: uppercase;
   }
 }
 
@@ -267,4 +269,18 @@
   font-size: 2rem;
   background-color: #FFF;
   cursor: pointer;
+}
+.btn-lang{
+  background-color: transparent;
+  color: #FFF;
+  border: none;
+  &:hover{
+    background-color: transparent;
+  color: #FFF;
+  border: none;
+  }
+  &:active, &::after, &:focus{
+    outline: none;
+    box-shadow: none;
+  }
 }

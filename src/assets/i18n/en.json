@@ -1,0 +1,64 @@
+{
+    "TITLE":{
+        "GROUPS":"Groups",
+        "CHAT":"Chat",
+        "FACULTY":"Faculty"
+    },
+    "HEADER":{
+        "PROFILE": "Profile",
+        "CHANGE_PASSWORD": "Change password",
+        "LOG_OUT":  "Log out",
+        "ENGLISH": "English",
+        "VIETNAMESE": "Vietnamese"
+    },
+    "SIDEBAR":{
+        "HOME": "Home",
+        "FRIENDS": "Friends",
+        "GROUPS": "Groups",
+        "CHAT": "Chat",
+        "MANAGE": "Manage",
+        "ACCOUNT": "Account",
+        "REGISTER": "Register",
+        "USERS": "Users",
+        "FACULTY": "Faculty",
+        "CATEGORY": "Category",
+        "REPORT": "Report",
+        "POSTS": "Posts"
+    },
+    "HOME": {
+        "MAIN_NOTIFICATION": "Main notification",
+        "FACULTY_NOTIFICATION": "Faculty notification",
+        "TEACHER": "Teacher",
+        "STUDENT": "Student"
+
+    },
+    "GROUP":{
+        "GROUPS_JOINED": "Groups you joined",
+        "GROUPS_SUGGEST": "Suggestions for you",
+        "MEMBERS": "members",
+        "POSTS": "posts",
+        "DAY": "day"
+    },
+    "SIGNUP":{
+        "SINGLE_SIGNUP": "Single signup",
+        "MULTIPLE_SIGNUP": "Multiple signup"
+    },
+    "BUTTON": {
+        "CREATE_POST": "Create post",
+        "CREATE_GROUP": "Create your group",
+        "JOIN_NOW": "Join now",
+        "SIGN_UP": "Sign up",
+        "CREATE_FACULTY": "Create new faculty"
+    },
+    "SEARCH":{
+        "SEARCH_INFOR": "Search...",
+        "SEARCH_GROUP": "Search your groups...",
+        "SEARCH_USER": "Search your friends..."
+    },
+    "TABLE":{
+        "NAMEEN": "English name",
+        "NAMEVI": "Vietnamese name",
+        "ACTION": "Action"
+
+    }
+}

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeModule } from './home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
@@ -31,6 +31,8 @@ import { CreatePostComponent } from './popup/create-post/create-post.component';
 import { ChangeCommentComponent } from './popup/change-comment/change-comment.component';
 import { DeleteCommentComponent } from './popup/delete-comment/delete-comment.component';
 import { CreateFacultyComponent } from './popup/create-faculty/create-faculty.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -68,10 +70,20 @@ import { CreateFacultyComponent } from './popup/create-faculty/create-faculty.co
     NgbPaginationModule,
     CKEditorModule,
     NgSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
 
   ],
   providers: [AuthGuardService, ChatService, CommentService, CreatePostService, ChangePasswordService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

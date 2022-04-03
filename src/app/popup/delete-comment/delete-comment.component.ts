@@ -22,25 +22,25 @@ export class DeleteCommentComponent implements OnInit {
 
   onDelete() {
     if (this.isReply) {
-      this.service.deleteReply(this.commentId).subscribe(
-        (res: any) => {
+      this.service.deleteReply(this.commentId).subscribe({
+        next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
         },
-        (err: any) => {
+        error: (err: any) => {
           this.toastr.error(err.error.msg)
         }
-      )
+      })
     } else {
-      this.service.deleteComment(this.commentId).subscribe(
-        (res: any) => {
+      this.service.deleteComment(this.commentId).subscribe({
+        next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
         },
-        (err: any) => {
+        error: (err: any) => {
           this.toastr.error(err.error.msg)
         }
-      )
+      })
     }
   }
 

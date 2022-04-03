@@ -2,14 +2,16 @@
 
   <div class="main-group">
 
-    <h2 class="ps-3">Main notification</h2>
+    <h2 class="ps-3">{{'HOME.MAIN_NOTIFICATION'|translate}}</h2>
     <hr>
 
     <div *ngIf="isAdmin">
-      <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Teacher</h3>
+      <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
+        {{'HOME.TEACHER'|translate}}</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grgv',true,false)">Create
-          post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grgv',true,false)">
+          {{'BUTTON.CREATE_POST'|translate}}
+        </button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
@@ -47,10 +49,12 @@
 
     <div *ngIf="isAdmin">
       <hr>
-      <h3 class="ps-5 mt-3  d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Student</h3>
+      <h3 class="ps-5 mt-3  d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
+        {{'HOME.STUDENT'|translate}}</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grsv',true,true)">Create
-          post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grsv',true,true)">
+          {{'BUTTON.CREATE_POST'|translate}}
+        </button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
@@ -89,18 +93,22 @@
 
   <div class="main-group mt-5">
 
-    <h2 class="ps-3 d-inline-block col-xxl-9 col-xl-9 col-lg-7 col-md-6 col-sm-6 col-6">Faculty notification</h2>
+    <h2 class="ps-3 d-inline-block col-xxl-9 col-xl-9 col-lg-7 col-md-6 col-sm-6 col-6">
+      {{"HOME.FACULTY_NOTIFICATION"|translate}}</h2>
     <ng-select class="d-inline-block col-xxl-3 col-xl-3 col-lg-5 col-md-6 col-sm-6 col-6" [searchable]="false"
       [(ngModel)]="faculty" [clearable]="false" (change)="filterFaculty()" *ngIf="isAdmin">
-      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">{{faculty.nameEn}}</ng-option>
+      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">{{isLangEn?faculty.nameEn:faculty.nameVi}}
+      </ng-option>
     </ng-select>
     <hr>
 
     <div *ngIf="isAdmin || isDean">
-      <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Teacher</h3>
+      <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
+        {{'HOME.TEACHER'|translate}}</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, false)">Create
-          post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, false)">
+          {{'BUTTON.CREATE_POST'|translate}}
+        </button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
@@ -139,10 +147,12 @@
 
     <div *ngIf="isAdmin || isDean">
       <hr>
-      <h3 class="ps-5 mt-3 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">Student</h3>
+      <h3 class="ps-5 mt-3 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
+        {{'HOME.STUDENT'|translate}}</h3>
       <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, true)">Create
-          post</button>
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, true)">
+          {{'BUTTON.CREATE_POST'|translate}}
+        </button>
         <button class="btn btn-outline-primary me-4 d-block d-lg-none">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>

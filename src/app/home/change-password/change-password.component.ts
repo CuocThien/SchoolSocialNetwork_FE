@@ -33,12 +33,15 @@ export class ChangePasswordComponent implements OnInit {
       this.isValidForm = false;
     }
     else {
-      this.service.changePassword(formChangePassword.value).subscribe((res: any) => {
-        this.toastr.success(res.msg);
-        localStorage.clear();
-        this.router.navigate(['/login']);
-      }, (err) => {
-        this.toastr.error(err.error.msg)
+      this.service.changePassword(formChangePassword.value).subscribe({
+        next: ((res: any) => {
+          this.toastr.success(res.msg);
+          localStorage.clear();
+          this.router.navigate(['/login']);
+        }),
+        error: ((err) => {
+          this.toastr.error(err.error.msg)
+        })
       })
       this.isValidConfirmPassword = true;
       this.isValidNewPassword = true;

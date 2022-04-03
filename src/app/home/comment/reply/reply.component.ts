@@ -33,14 +33,14 @@ export class ReplyComponent implements OnInit {
     if (localStorage.getItem('role') === 'admin') {
       this.isAdmin = true;
     }
-    this.service.getReply(this.commentId).subscribe(
-      (res: any) => {
+    this.service.getReply(this.commentId).subscribe({
+      next: ((res: any) => {
         this.listReply = res.data.result || [];
-      },
-      (err: any) => {
+      }),
+      error: ((err: any) => {
         this.toastr.error(err.error.msg)
-      }
-    )
+      })
+    })
 
   }
   onReply() {
@@ -48,17 +48,17 @@ export class ReplyComponent implements OnInit {
       commentId: this.commentId,
       content: this.content
     }
-    this.service.postReply(validData).subscribe(
-      (res: any) => {
+    this.service.postReply(validData).subscribe({
+      next: ((res: any) => {
         this.toastr.success(res.msg);
         this.listReply.push(res.data);
         this.content = ''
         this.isOpenCreateReply = ''
-      },
-      (err: any) => {
+      }),
+      error: ((err: any) => {
         this.toastr.error(err.error.msg)
-      }
-    )
+      })
+    })
   }
 
   ngOnChanges(changes: any) {

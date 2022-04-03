@@ -6,7 +6,8 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Poppins';
+  // font-family: 'Poppins';
+  font-family: 'Be Vietnam Pro', sans-serif;
 
   @media only screen and (max-width: 420px) {
     font-size: 40%;
@@ -24,7 +25,6 @@ html {
 ng-select{
   font-size: 1.5rem;
 }
-
 table{
 font-size: 1.6rem;
 border: solid 2px rgba(grey,.4);

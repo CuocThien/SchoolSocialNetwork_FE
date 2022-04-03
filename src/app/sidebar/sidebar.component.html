@@ -4,23 +4,23 @@
       <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['index']">
         <i class="bi bi-house-door"></i>
       </button>
-      <button class="button-sidebar d-lg-block d-none" [routerLink]="['index']">Home</button>
+      <button class="button-sidebar d-lg-block d-none" [routerLink]="['index']">{{'SIDEBAR.HOME'|translate}}</button>
     </div>
     <div class="btn-group w-100-pc">
       <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none"><i class="bi bi-person"></i></button>
-      <button class="button-sidebar d-lg-block d-none">Friends</button>
+      <button class="button-sidebar d-lg-block d-none">{{'SIDEBAR.FRIENDS'|translate}}</button>
     </div>
     <div class="btn-group w-100-pc">
       <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['group']">
         <i class="bi bi-people"></i>
       </button>
-      <button class="button-sidebar d-lg-block d-none" [routerLink]="['group']">Groups</button>
+      <button class="button-sidebar d-lg-block d-none" [routerLink]="['group']">{{'SIDEBAR.GROUPS'|translate}}</button>
     </div>
     <div class="btn-group w-100-pc">
       <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['chat']">
         <i class="bi bi-chat-dots"></i>
       </button>
-      <button class="button-sidebar d-lg-block d-none" [routerLink]="['chat']">Chat</button>
+      <button class="button-sidebar d-lg-block d-none" [routerLink]="['chat']">{{'SIDEBAR.CHAT'|translate}}</button>
     </div>
     <input class="d-none cb-manage-dropdown" type="checkbox" [checked]="isDropdown">
     <div *ngIf="isAdmin" class="btn-group-dropdown text-start w-100-pc">
@@ -29,7 +29,8 @@
         <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" (click)="dropdown($event)">
           <i class="bi bi-sliders"></i>
         </button>
-        <button class="button-sidebar d-lg-block d-none" (click)="dropdown($event)">Manage</button>
+        <button class="button-sidebar d-lg-block d-none"
+          (click)="dropdown($event)">{{'SIDEBAR.MANAGE'|translate}}</button>
       </div>
       <!-- button account dropdown -->
       <input class="d-none cb-account-dropdown" type="checkbox" [checked]="isAccountDropdown">
@@ -38,24 +39,25 @@
           <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" (click)="accountDropdown($event)">
             <i class="bi bi-people"></i>
           </button>
-          <button class="button-sidebar-text text-start d-lg-block d-none" (click)="accountDropdown($event)">Account
+          <button class="button-sidebar-text text-start d-lg-block d-none"
+            (click)="accountDropdown($event)">{{'SIDEBAR.ACCOUNT'|translate}}
             <i [class]="arrowAccount"></i></button>
         </div>
         <!-- group button -->
         <div class="w-100-pc text-start">
-          <div class="btn-group w-75 ps-3 ">
+          <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['sign-up']">
               <i class="bi bi-plus-square-dotted"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-lg-block d-none"
-              [routerLink]="['sign-up']">Register</button>
+              [routerLink]="['sign-up']">{{'SIDEBAR.REGISTER'|translate}}</button>
           </div>
-          <div class="btn-group w-75 ps-3 ">
+          <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['sign-up']">
               <i class="bi bi-plus-square-dotted"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-lg-block d-none"
-              [routerLink]="['sign-up']">Users</button>
+              [routerLink]="['sign-up']">{{'SIDEBAR.USERS'|translate}}</button>
           </div>
         </div>
       </div>
@@ -66,7 +68,8 @@
           <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['faculty']">
             <i class="bi bi-people"></i>
           </button>
-          <button class="button-sidebar-text text-start d-lg-block d-none" [routerLink]="['faculty']">Faculty</button>
+          <button class="button-sidebar-text text-start d-lg-block d-none"
+            [routerLink]="['faculty']">{{'SIDEBAR.FACULTY'|translate}}</button>
         </div>
       </div>
 
@@ -76,7 +79,7 @@
           <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none">
             <i class="bi bi-people"></i>
           </button>
-          <button class="button-sidebar-text text-start d-lg-block d-none">Category</button>
+          <button class="button-sidebar-text text-start d-lg-block d-none">{{'SIDEBAR.CATEGORY'|translate}}</button>
         </div>
       </div>
 
@@ -87,24 +90,25 @@
           <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" (click)="reportDropdown($event)">
             <i class="bi bi-people"></i>
           </button>
-          <button class="button-sidebar-text text-start d-lg-block d-none" (click)="reportDropdown($event)">Report
+          <button class="button-sidebar-text text-start d-lg-block d-none"
+            (click)="reportDropdown($event)">{{'SIDEBAR.REPORT'|translate}}
             <i [class]="arrowReport"></i></button>
         </div>
         <!-- group button -->
         <div class="w-100-pc text-start">
-          <div class="btn-group w-75 ps-3 ">
+          <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['sign-up']">
               <i class="bi bi-plus-square-dotted"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-lg-block d-none"
-              [routerLink]="['sign-up']">Groups</button>
+              [routerLink]="['sign-up']">{{'SIDEBAR.GROUPS'|translate}}</button>
           </div>
-          <div class="btn-group w-75 ps-3 ">
+          <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['sign-up']">
               <i class="bi bi-plus-square-dotted"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-lg-block d-none"
-              [routerLink]="['sign-up']">Posts</button>
+              [routerLink]="['sign-up']">{{'SIDEBAR.POSTS'|translate}}</button>
           </div>
         </div>
       </div>

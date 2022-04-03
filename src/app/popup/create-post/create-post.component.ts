@@ -41,12 +41,15 @@ export class CreatePostComponent implements OnInit {
     } else if (form.value.content == "") {
       this.toastr.error("Please input content of post")
     } else {
-      this.createPostService.createPost(this.data).subscribe((res: any) => {
-        this.toastr.success(res.msg);
-        this.activeModal.close(res);
-      }, ((err: any) => {
-        this.toastr.error(err.error.msg)
-      }));
+      this.createPostService.createPost(this.data).subscribe({
+        next: (res: any) => {
+          this.toastr.success(res.msg);
+          this.activeModal.close(res);
+        },
+        error: (err: any) => {
+          this.toastr.error(err.error.msg)
+        }
+      });
     }
 
   }

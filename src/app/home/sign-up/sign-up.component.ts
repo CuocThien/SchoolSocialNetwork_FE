@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
     private service: SignUpService
   ) { }
   isSingleSignup = false;
-  contentButton = 'SINGLE SIGNUP'
+  contentButton = 'SIGNUP.SINGLE_SIGNUP'
   signUpForm: FormGroup;
   listFaculty: any;
   faculty = null;
@@ -37,13 +37,14 @@ export class SignUpComponent implements OnInit {
     this.createFormSignUp();
   }
   _getListFaculty() {
-    this.facultyService.getListFaculty().subscribe(
-      (res: any) => {
+    this.facultyService.getListFaculty().subscribe({
+      next: (res: any) => {
         this.listFaculty = res.data;
       },
-      (err) => {
+      error: (err) => {
         this.toastr.error(err.error.msg)
-      })
+      }
+    })
   }
   fileUpload(event: any) {
     const selectedFile = event.target.files[0];
@@ -71,15 +72,15 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this.service.signup(this.data).subscribe(
-      (res: any) => {
+    this.service.signup(this.data).subscribe({
+      next: (res: any) => {
         this.toastr.success(res.msg);
         this.signUpForm.reset();
       },
-      (err: any) => {
+      error: (err: any) => {
         this.toastr.error(err.error.msg)
       }
-    )
+    })
     this.data = {}
   }
   createFormSignUp() {
@@ -97,7 +98,7 @@ export class SignUpComponent implements OnInit {
   changeButton(event: any) {
     event.preventDefault();
     this.isSingleSignup = !this.isSingleSignup;
-    this.contentButton = (this.isSingleSignup) ? 'MULTIPLE SIGNUP' : 'SINGLE SINGUP'
+    this.contentButton = (this.isSingleSignup) ? 'SIGNUP.MULTIPLE_SIGNUP' : 'SIGNUP.SINGLE_SIGNUP'
   }
 
 }

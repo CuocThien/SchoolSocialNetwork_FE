@@ -28,11 +28,14 @@ export class PostDetailComponent implements OnInit {
     window.scrollTo(0, 0)
   }
   _getPostDetail() {
-    this.service.getPostDetail(this.postId).subscribe((res: any) => {
-      this.post = res.data;
-    }, (err: any) => {
-      this.toastr.error(err.error.msg);
-      this.router.navigate(['**'])
+    this.service.getPostDetail(this.postId).subscribe({
+      next: ((res: any) => {
+        this.post = res.data;
+      }),
+      error: ((err: any) => {
+        this.toastr.error(err.error.msg);
+        this.router.navigate(['**'])
+      })
     })
   }
 }

@@ -45,13 +45,16 @@ export class IndexComponent implements OnInit {
   totalFacultyStudent = 0;
   totalFacultyTeacher = 0;
 
+  isLangEn = true;
+
   private modalRef: NgbModalRef;
 
   ngOnInit(): void {
+    this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
+
     this.role = localStorage.getItem('role') || '';
     if (this.role === 'admin') {
       this._getListFaculty();
-
       this.getListPostMainGroupForStudent();
       this.getListPostMainGroupForTeacher();
       this.isAdmin = true;
@@ -70,49 +73,53 @@ export class IndexComponent implements OnInit {
       this.isStudent = true;
     }
   }
-
-
-
+  ngDoCheck() {
+    this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
+  }
   getListPostMainGroupFacultyForStudent() {
-    this.service.getListPostMainGroupFacultyForStudent(this.faculty, this.pageFacultyStudent).subscribe(
-      (res: any) => {
+    this.service.getListPostMainGroupFacultyForStudent(this.faculty, this.pageFacultyStudent).subscribe({
+      next: ((res: any) => {
         this.listFacultyStudentPost = res.data.result;
         this.totalFacultyStudent = Math.ceil(res.data.total / 10);
-      },
-      (err) => {
+      }),
+      error: ((err) => {
         this.toastr.error(err.error.msg)
       })
+    })
   }
 
   getListPostMainGroupFacultyForTeacher() {
-    this.service.getListPostMainGroupFacultyForTeacher(this.faculty, this.pageFacultyTeacher).subscribe(
-      (res: any) => {
+    this.service.getListPostMainGroupFacultyForTeacher(this.faculty, this.pageFacultyTeacher).subscribe({
+      next: ((res: any) => {
         this.listFacultyTeacherPost = res.data.result;
         this.totalFacultyTeacher = Math.ceil(res.data.total / 10);
-      },
-      (err) => {
+      }),
+      error: ((err) => {
         this.toastr.error(err.error.msg)
       })
+    })
   }
   getListPostMainGroupForStudent() {
-    this.service.getListPostMainGroupForStudent(this.pageMainStudent).subscribe(
-      (res: any) => {
+    this.service.getListPostMainGroupForStudent(this.pageMainStudent).subscribe({
+      next: ((res: any) => {
         this.listMainStudentPost = res.data.result;
         this.totalMainStudent = Math.ceil(res.data.total / 10);
-      },
-      (err) => {
+      }),
+      error: ((err) => {
         this.toastr.error(err.error.msg)
       })
+    })
   }
   getListPostMainGroupForTeacher() {
-    this.service.getListPostMainGroupForTeacher(this.pageMainTeacher).subscribe(
-      (res: any) => {
+    this.service.getListPostMainGroupForTeacher(this.pageMainTeacher).subscribe({
+      next: ((res: any) => {
         this.listMainTeacherPost = res.data.result;
         this.totalMainTeacher = Math.ceil(res.data.total / 10);
-      },
-      (err) => {
+      }),
+      error: ((err) => {
         this.toastr.error(err.error.msg)
       })
+    })
   }
 
   goToPage(filter: any, event: any) {
@@ -157,16 +164,17 @@ export class IndexComponent implements OnInit {
     }).catch();
   }
   _getListFaculty() {
-    this.facultyService.getListFaculty().subscribe(
-      (res: any) => {
+    this.facultyService.getListFaculty().subscribe({
+      next: ((res: any) => {
         this.listFaculty = res.data;
         this.faculty = this.listFaculty[0]._id || '';
         this.getListPostMainGroupFacultyForStudent();
         this.getListPostMainGroupFacultyForTeacher();
-      },
-      (err) => {
+      }),
+      error: ((err) => {
         this.toastr.error(err.error.msg)
       })
+    })
   }
   filterFaculty() {
     this.getListPostMainGroupFacultyForStudent();

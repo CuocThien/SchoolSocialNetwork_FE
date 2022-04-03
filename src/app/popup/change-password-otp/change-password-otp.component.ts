@@ -30,13 +30,16 @@ export class ChangePasswordOtpComponent implements OnInit {
     }
     else {
       formChangePassword.value.userId = this.userId;
-      this.service.resetPassword(formChangePassword.value).subscribe((res: any) => {
-        this.toastr.success(res.msg);
-        this.router.navigate(['/login']);
-        this.activeModal.close();
+      this.service.resetPassword(formChangePassword.value).subscribe({
+        next: (res: any) => {
+          this.toastr.success(res.msg);
+          this.router.navigate(['/login']);
+          this.activeModal.close();
 
-      }, (err) => {
-        this.toastr.error(err.error.msg)
+        },
+        error: (err) => {
+          this.toastr.error(err.error.msg)
+        }
       })
       this.isValidConfirmPassword = true;
       this.isValidNewPassword = true;

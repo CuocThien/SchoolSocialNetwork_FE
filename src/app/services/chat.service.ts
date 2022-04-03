@@ -16,12 +16,12 @@ export class ChatService {
     }
     getListConversation() {
         const url = `${HOST}/conversation`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
     getConversation(data: any) {
         const url = `${HOST}/conversation/id?id1=${data.id1}&id2=${data.id2}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
     getMessage(data: any) {
@@ -30,7 +30,7 @@ export class ChatService {
         conversationId ? query += `?conversationId=${conversationId}` : query;
         page ? query += `&page=${page}` : query
         const url = `${HOST}/message${query}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
     searchAccount(data: any) {
@@ -39,7 +39,7 @@ export class ChatService {
         keyword ? query += `?keyword=${keyword}` : query;
         page ? query += `&page=${page}` : query
         const url = `${HOST}/account/search${query}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
 }

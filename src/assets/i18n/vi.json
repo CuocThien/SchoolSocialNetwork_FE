@@ -1,0 +1,63 @@
+{
+    "TITLE":{
+        "GROUPS":"Nhóm",
+        "CHAT":"Trò chuyện",
+        "FACULTY":"Quản lý Khoa"
+    },
+    "HEADER":{
+        "PROFILE": "Thông tin cá nhân",
+        "CHANGE_PASSWORD": "Đổi mật khẩu",
+        "LOG_OUT":  "Đăng xuất",
+        "ENGLISH": "Tiếng Anh",
+        "VIETNAMESE": "Tiếng Việt"
+    },
+    "SIDEBAR":{
+        "HOME": "Trang chủ",
+        "FRIENDS": "Bạn bè",
+        "GROUPS": "Nhóm",
+        "CHAT": "Trò chuyện",
+        "MANAGE": "Quản lý",
+        "ACCOUNT": "Tài khoản",
+        "REGISTER": "Đăng kí",
+        "USERS": "Người dùng",
+        "FACULTY": "Khoa",
+        "CATEGORY": "Danh mục",
+        "REPORT": "Báo cáo",
+        "POSTS": "Bài viết"
+    },
+    "HOME": {
+        "MAIN_NOTIFICATION": "Thông báo của Trường",
+        "FACULTY_NOTIFICATION": "Thông báo của Khoa",
+        "TEACHER": "Giảng viên",
+        "STUDENT": "Sinh viên"
+
+    },
+    "GROUP":{
+        "GROUPS_JOINED": "Nhóm đã tham gia",
+        "GROUPS_SUGGEST": "Dành cho bạn",
+        "MEMBERS": "thành viên",
+        "POSTS": "bài viết",
+        "DAY": "ngày"
+    },
+    "SIGNUP":{
+        "SINGLE_SIGNUP": "Tạo tài khoản",
+        "MULTIPLE_SIGNUP": "Tạo tài khoản hàng loạt"
+    },
+    "BUTTON": {
+        "CREATE_POST": "Tạo bài viết",
+        "CREATE_GROUP": "Tạo nhóm",
+        "JOIN_NOW": "Tham gia ngay",
+        "SIGN_UP": "Đăng ký",
+        "CREATE_FACULTY": "Tạo khoa mới"
+    },
+    "SEARCH":{
+        "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
+        "SEARCH_GROUP": "Tìm nhóm của bạn...",
+        "SEARCH_USER": "Tìm bạn bè..."
+    },
+    "TABLE":{
+        "NAMEEN": "Tên tiếng Anh",
+        "NAMEVI": "Tên tiếng Việt",
+        "ACTION": "Hành động"
+    }
+}

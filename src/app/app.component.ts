@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SchoolSocialNetwork';
-
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    localStorage.setItem('lang', 'en')
+  }
 
 }
 

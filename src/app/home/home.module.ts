@@ -18,6 +18,9 @@ import { CommentComponent } from './comment/comment.component';
 import { ReplyComponent } from './comment/reply/reply.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FacultyComponent } from './faculty/faculty.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -33,9 +36,19 @@ import { FacultyComponent } from './faculty/faculty.component';
     NgbPaginationModule,
     NgSelectModule,
     CKEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ]
 })
 export class HomeModule { }
 
 
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

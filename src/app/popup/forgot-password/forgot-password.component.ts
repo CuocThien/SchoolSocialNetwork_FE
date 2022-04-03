@@ -64,15 +64,16 @@ export class ForgotPasswordComponent implements OnInit {
     const data = {
       _id: this.userId
     }
-    this.service.forgotPassword(data).subscribe(
-      (res: any) => {
+    this.service.forgotPassword(data).subscribe({
+      next: (res: any) => {
         this.toastr.success(res.msg);
         this.OTPCode = res.data.content.substring(0, 6);
         this.request()
       },
-      (err: any) => {
+      error: (err: any) => {
         this.toastr.error(err.error.msg)
-      })
+      }
+    })
   }
   onConfirm() {
     if (this.OTP == this.OTPCode && this.OTPCode != '') {

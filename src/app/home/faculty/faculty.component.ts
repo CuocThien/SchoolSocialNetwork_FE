@@ -24,15 +24,14 @@ export class FacultyComponent implements OnInit {
     this._getListFaculty();
   }
   private _getListFaculty() {
-    this.service.getListAllFaculty().subscribe(
-      (res: any) => {
+    this.service.getListAllFaculty().subscribe({
+      next: ((res: any) => {
         this.listFaculty = res.data;
-        console.log("💁 => FacultyComponent => this.listFacluty", this.listFaculty)
-      },
-      (err: any) => {
+      }),
+      error: ((err: any) => {
         this.toastr.error(err.error.msg)
-      }
-    )
+      })
+    })
   }
   createFaculty() {
     this.modalRef = this.modalService.open(CreateFacultyComponent, {

@@ -31,29 +31,29 @@ export class ChangeCommentComponent implements OnInit {
         replyId: this.commentId,
         content: this.content
       }
-      this.service.updateReply(validData).subscribe(
-        (res: any) => {
+      this.service.updateReply(validData).subscribe({
+        next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res.data);
         },
-        (err: any) => {
+        error: (err: any) => {
           this.toastr.error(err.error.msg)
         }
-      )
+      })
     } else {
       const validData = {
         commentId: this.commentId,
         content: this.content
       }
-      this.service.updateComment(validData).subscribe(
-        (res: any) => {
+      this.service.updateComment(validData).subscribe({
+        next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res.data);
         },
-        (err: any) => {
+        error: (err: any) => {
           this.toastr.error(err.error.msg)
         }
-      )
+      })
     }
   }
 

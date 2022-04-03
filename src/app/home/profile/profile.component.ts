@@ -30,20 +30,24 @@ export class ProfileComponent implements OnInit {
   onSubmit(formUpdateProfile: any) {
     this.data = formUpdateProfile.value;
     this.data["avatar"] = this.imageSrc;
-    this.service.updateUser(this.data).subscribe(
-      (res: any) => {
+    this.service.updateUser(this.data).subscribe({
+      next: (res: any) => {
         this.toastr.success(res.msg);
-        this.service.getProfile().subscribe((res: any) => {
-          localStorage.setItem('profile', JSON.stringify(res.data))
-          this.profile = JSON.parse(localStorage.getItem('profile') || '')
-          this.dob = moment(this.profile.dob).format('YYYY-MM-DD')
-          this.imageSrc = this.profile.avatar
-        }, (err) => { console.log(err) })
+        this.service.getProfile().subscribe({
+          next: (res: any) => {
+            localStorage.setItem('profile', JSON.stringify(res.data))
+            this.profile = JSON.parse(localStorage.getItem('profile') || '')
+            this.dob = moment(this.profile.dob).format('YYYY-MM-DD')
+            this.imageSrc = this.profile.avatar
+          },
+          error: (err) => { console.log(err) }
+        })
 
       },
-      (err: any) => {
+      error: (err: any) => {
         this.toastr.error(err.error.msg)
-      });
+      }
+    });
   }
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
