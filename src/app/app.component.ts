@@ -8,10 +8,5 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'SchoolSocialNetwork';
-  constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('en');
-    localStorage.setItem('lang', 'en')
-  }
-
 }
 

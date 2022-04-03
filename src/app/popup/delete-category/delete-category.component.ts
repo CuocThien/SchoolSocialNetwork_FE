@@ -1,32 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { CommentService } from '../../services/index';
+import { CategoryService } from '../../services/index';
 
 @Component({
-  selector: 'app-delete-comment',
-  templateUrl: './delete-comment.component.html',
+  selector: 'app-delete-category',
+  templateUrl: './delete-category.component.html',
   styleUrls: ['../../../assets/sass/main.scss']
 })
-export class DeleteCommentComponent implements OnInit {
+export class DeleteCategoryComponent implements OnInit {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private service: CommentService,
+    private service: CategoryService,
     private toastr: ToastrService
   ) { }
-  isReply = false;
-  commentId = '';
-  title = 'POPUP.DELETE_COMMENT'
+  category: any;
+  type = '';
+  isDelete = true;
+  title = 'POPUP.DELETE_CATEGORY'
   ngOnInit(): void {
-    if (this.isReply) {
-      this.title = 'POPUP.DELETE_REPLY'
+    if (!this.isDelete) {
+      this.title = 'POPUP.RESTORE_CATEGORY'
     }
   }
 
-  onDelete() {
-    if (this.isReply) {
-      this.service.deleteReply(this.commentId).subscribe({
+  onSubmit() {
+    if (this.isDelete) {
+      const data = { ...this.category, isDelete: true, type: this.type }
+      this.service.editCategory(data).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
@@ -36,7 +38,8 @@ export class DeleteCommentComponent implements OnInit {
         }
       })
     } else {
-      this.service.deleteComment(this.commentId).subscribe({
+      const data = { ...this.category, isDelete: false, type: this.type }
+      this.service.editCategory(data).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
@@ -51,5 +54,4 @@ export class DeleteCommentComponent implements OnInit {
   onCancel() {
     this.activeModal.dismiss();
   }
-
 }

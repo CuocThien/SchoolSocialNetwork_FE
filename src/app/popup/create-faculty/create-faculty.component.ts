@@ -20,9 +20,11 @@ export class CreateFacultyComponent implements OnInit {
   faculty: any;
   isEdit = false;
   createFacultyForm: FormGroup;
+  title = 'POPUP.CREATE_FACULTY'
   ngOnInit(): void {
     if (this.faculty) {
       this.isEdit = true;
+      this.title = 'POPUP.UPDATE_FACULTY'
     }
     this.createFormCreateFaculty();
   }

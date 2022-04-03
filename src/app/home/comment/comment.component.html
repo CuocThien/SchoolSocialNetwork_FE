@@ -1,5 +1,5 @@
 <hr>
-<p class="fs-4">{{countCmt}} bình luận</p>
+<p class="fs-4">{{countCmt}} {{'COMMENT.COMMENT'|translate}}</p>
 <hr>
 <div class="comment">
   <div class="comment-create d-flex">
@@ -23,11 +23,13 @@
         <div class="user-comment-content col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10">
           <h6>{{comment.fullname}}</h6>
           <span>{{comment.content}}</span><br>
-          <a (click)="turnOnReply(comment.commentId)">Reply</a>
+          <a (click)="turnOnReply(comment.commentId)">{{'COMMENT.REPLY'|translate}}</a>
           <span *ngIf="comment.userId==userId" aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-          <a *ngIf="comment.userId==userId" class="updateCmt" (click)="editComment(comment, i)">Edit</a>
+          <a *ngIf="comment.userId==userId" class="updateCmt"
+            (click)="editComment(comment, i)">{{'COMMENT.EDIT'|translate}}</a>
           <span *ngIf="comment.userId==userId||isAdmin" aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-          <a *ngIf="comment.userId==userId||isAdmin" (click)="deleteCmt(comment.commentId, i)">Delete</a>
+          <a *ngIf="comment.userId==userId||isAdmin"
+            (click)="deleteCmt(comment.commentId, i)">{{'COMMENT.DELETE'|translate}}</a>
         </div>
       </div>
       <div class="reply">

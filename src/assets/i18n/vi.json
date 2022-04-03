@@ -2,7 +2,9 @@
     "TITLE":{
         "GROUPS":"Nhóm",
         "CHAT":"Trò chuyện",
-        "FACULTY":"Quản lý Khoa"
+        "FACULTY":"Quản lý Khoa",
+        "CATEGORY":"Danh mục",
+        "DELETED": "Đã xoá"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -43,12 +45,22 @@
         "SINGLE_SIGNUP": "Tạo tài khoản",
         "MULTIPLE_SIGNUP": "Tạo tài khoản hàng loạt"
     },
+    "COMMENT":{
+        "COMMENT":"bình luận",
+        "REPLY": "Trả lời",
+        "EDIT": "Chỉnh sửa",
+        "DELETE": "Xoá"
+    },
     "BUTTON": {
         "CREATE_POST": "Tạo bài viết",
         "CREATE_GROUP": "Tạo nhóm",
         "JOIN_NOW": "Tham gia ngay",
         "SIGN_UP": "Đăng ký",
-        "CREATE_FACULTY": "Tạo khoa mới"
+        "CREATE_FACULTY": "Tạo khoa mới",
+        "CREATE_CATEGORY": "Tạo danh mục mới",
+        "SUBMIT": "Xác nhận",
+        "CANCEL": "Huỷ bỏ",
+        "EDIT": "Chỉnh sửa"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
@@ -59,5 +71,17 @@
         "NAMEEN": "Tên tiếng Anh",
         "NAMEVI": "Tên tiếng Việt",
         "ACTION": "Hành động"
+    },
+    "POPUP":{
+        "CREATE_FACULTY":"Thêm khoa mới",
+        "UPDATE_FACULTY": "Chỉnh sửa khoa",
+        "CREATE_CATEGORY": "Thêm danh mục",
+        "UPDATE_CATEGORY": "Chỉnh sửa danh mục",
+        "DELETE_CATEGORY": "Xoá danh mục",
+        "RESTORE_CATEGORY": "Khôi phục danh mục",
+        "EDIT_COMMENT": "Chỉnh sửa bình luận",
+        "DELETE_COMMENT": "Xoá bình luận",
+        "EDIT_REPLY": "Chỉnh sửa câu trả lời",
+        "DELETE_REPLY": "Xoá câu trả lời"
     }
 }

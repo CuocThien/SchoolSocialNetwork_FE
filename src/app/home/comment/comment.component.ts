@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ChangeCommentComponent } from 'src/app/popup/change-comment/change-comment.component';
@@ -25,7 +24,6 @@ export class CommentComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private router: Router,
     private service: CommentService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -69,7 +67,7 @@ export class CommentComponent implements OnInit {
     this.modalRef.componentInstance.commentId = event;
     this.modalRef.result.then(() => {
       this.listCmt.splice(index, 1)
-    });
+    }).catch(() => { });
   }
 
   editComment(event: any, index: any) {
@@ -80,13 +78,13 @@ export class CommentComponent implements OnInit {
     this.modalRef.componentInstance.comment = event;
     this.modalRef.result.then((res: any) => {
       this.listCmt[index] = res;
-    }).catch();
+    }).catch(() => { });
   }
 
   _getComment() {
     this.service.getComment(this.postId).subscribe({
       next: ((res: any) => {
-        this.listCmt = res.data.result || {}
+        this.listCmt = res.data.result || [];
         this.countCmt = res.data.countCmt;
       }),
       error: ((err: any) => {

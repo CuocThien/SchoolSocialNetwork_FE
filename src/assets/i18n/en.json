@@ -2,7 +2,9 @@
     "TITLE":{
         "GROUPS":"Groups",
         "CHAT":"Chat",
-        "FACULTY":"Faculty"
+        "FACULTY":"Faculty",
+        "CATEGORY":"Category",
+        "DELETED": "Deleted"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -43,12 +45,22 @@
         "SINGLE_SIGNUP": "Single signup",
         "MULTIPLE_SIGNUP": "Multiple signup"
     },
+    "COMMENT":{
+        "COMMENT":"comments",
+        "REPLY": "Reply",
+        "EDIT": "Edit",
+        "DELETE": "Delete"
+    },
     "BUTTON": {
         "CREATE_POST": "Create post",
         "CREATE_GROUP": "Create your group",
         "JOIN_NOW": "Join now",
         "SIGN_UP": "Sign up",
-        "CREATE_FACULTY": "Create new faculty"
+        "CREATE_FACULTY": "Create new faculty",
+        "CREATE_CATEGORY": "Create new category",
+        "SUBMIT": "Submit",
+        "CANCEL": "Cancel",
+        "EDIT": "Edit"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
@@ -60,5 +72,17 @@
         "NAMEVI": "Vietnamese name",
         "ACTION": "Action"
 
+    },
+    "POPUP":{
+        "CREATE_FACULTY":"Create faculty",
+        "UPDATE_FACULTY": "Update faculty",
+        "CREATE_CATEGORY": "Create category",
+        "UPDATE_CATEGORY": "Update category",
+        "DELETE_CATEGORY": "Delete category",
+        "RESTORE_CATEGORY": "Restore category",
+        "EDIT_COMMENT": "Edit comment",
+        "DELETE_COMMENT": "Delete comment",
+        "EDIT_REPLY": "Edit reply",
+        "DELETE_REPLY": "Delete reply"
     }
 }

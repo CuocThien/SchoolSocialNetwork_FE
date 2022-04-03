@@ -76,10 +76,11 @@
       <!-- button category -->
       <div class="btn-category-dropdown text-start">
         <div class="btn-group w-100-pc">
-          <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none">
+          <button class="button-sidebar d-block d-md-block d-sm-block d-lg-none" [routerLink]="['category']">
             <i class="bi bi-people"></i>
           </button>
-          <button class="button-sidebar-text text-start d-lg-block d-none">{{'SIDEBAR.CATEGORY'|translate}}</button>
+          <button class="button-sidebar-text text-start d-lg-block d-none"
+            [routerLink]="['category']">{{'SIDEBAR.CATEGORY'|translate}}</button>
         </div>
       </div>
 

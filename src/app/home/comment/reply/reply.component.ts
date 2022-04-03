@@ -75,7 +75,7 @@ export class ReplyComponent implements OnInit {
     this.modalRef.result.then(
       (res: any) => {
         this.listReply[index] = res;
-      }).catch()
+      }).catch(() => { })
   }
   deleteReply(event: any, index: any) {
     this.modalRef = this.modalService.open(DeleteCommentComponent, {
@@ -86,6 +86,6 @@ export class ReplyComponent implements OnInit {
     this.modalRef.componentInstance.isReply = true;
     this.modalRef.result.then(() => {
       this.listReply.splice(index, 1)
-    });
+    }).catch(() => { });
   }
 }

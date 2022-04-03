@@ -21,9 +21,10 @@
     <div class="user-reply-cmt-content col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10">
       <h6>{{reply.fullname}}</h6>
       <span>{{reply.content}}</span><br>
-      <a *ngIf="reply.userId==userId" class="updateReply" (click)="editReply(reply, i)">Edit</a>
+      <a *ngIf="reply.userId==userId" class="updateReply" (click)="editReply(reply, i)">{{'COMMENT.EDIT'|translate}}</a>
       <span *ngIf="reply.userId==userId" aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-      <a *ngIf="reply.userId==userId||isAdmin" (click)="deleteReply(reply.replyId, i)">Delete</a>
+      <a *ngIf="reply.userId==userId||isAdmin"
+        (click)="deleteReply(reply.replyId, i)">{{'COMMENT.DELETE'|translate}}</a>
     </div>
   </div>
 </div>

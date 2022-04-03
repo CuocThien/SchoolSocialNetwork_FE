@@ -265,9 +265,9 @@
   }
 }
 
-.btn-edit{
+.btn-edit, .btn-delete, .btn-restore{
   font-size: 2rem;
-  background-color: #FFF;
+  background-color: transparent;
   cursor: pointer;
 }
 .btn-lang{

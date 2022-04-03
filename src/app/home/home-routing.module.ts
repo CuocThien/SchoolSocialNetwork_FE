@@ -7,12 +7,13 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { HomeComponent } from './home.component';
 import { GroupComponent } from './group/group.component';
 import { ProfileComponent } from './profile/profile.component';
-
-import { AuthGuardService } from '../auth.guard';
 import { IndexComponent } from './index/index.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FacultyComponent } from './faculty/faculty.component';
+import { CategoryComponent } from './category/category.component';
+
+import { AuthGuardService } from '../auth.guard';
 
 const homeRoutes: Routes = [
     {
@@ -23,6 +24,7 @@ const homeRoutes: Routes = [
             { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
             { path: 'sign-up', component: SignUpComponent, pathMatch: 'full' },
             { path: 'faculty', component: FacultyComponent, pathMatch: 'full' },
+            { path: 'category', component: CategoryComponent, pathMatch: 'full' },
             { path: 'change-password', component: ChangePasswordComponent, pathMatch: 'full' },
             { path: 'group', component: GroupComponent, pathMatch: 'full' },
             { path: 'group/:id', component: GroupDetailComponent, pathMatch: 'full' },

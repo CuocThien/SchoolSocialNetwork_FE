@@ -25,7 +25,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { ChangePasswordService, ChatService, CommentService, CreatePostService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService } from './services/index';
+import { CategoryService, ChangePasswordService, ChatService, CommentService, CreatePostService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
 import { CreatePostComponent } from './popup/create-post/create-post.component';
 import { ChangeCommentComponent } from './popup/change-comment/change-comment.component';
@@ -33,6 +33,8 @@ import { DeleteCommentComponent } from './popup/delete-comment/delete-comment.co
 import { CreateFacultyComponent } from './popup/create-faculty/create-faculty.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CreateCategoryComponent } from './popup/create-category/create-category.component';
+import { DeleteCategoryComponent } from './popup/delete-category/delete-category.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     CreatePostComponent,
     ChangeCommentComponent,
     DeleteCommentComponent,
-    CreateFacultyComponent
+    CreateFacultyComponent,
+    CreateCategoryComponent,
+    DeleteCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     })
 
   ],
-  providers: [AuthGuardService, ChatService, CommentService, CreatePostService, ChangePasswordService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService,],
+  providers: [AuthGuardService, CategoryService, ChatService, CommentService, CreatePostService, ChangePasswordService, FacultyService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,10 +17,18 @@ export class HeaderComponent implements OnInit {
   profile: any;
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
+    const language = localStorage.getItem('lang') || 'en';
+    if (language === 'en') {
+      this.lang = 'HEADER.ENGLISH';
+      localStorage.setItem('lang', 'en');
+    } else {
+      this.lang = 'HEADER.VIETNAMESE';
+      localStorage.setItem('lang', 'vi')
+    }
+    this.translate.use(language)
   }
   ngAfterViewChecked() {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
-
   }
 
   logout() {

@@ -15,7 +15,6 @@ export class FacultyComponent implements OnInit {
     private service: FacultyService,
     private toastr: ToastrService,
     private modalService: NgbModal,
-
   ) { }
   private modalRef: NgbModalRef;
 

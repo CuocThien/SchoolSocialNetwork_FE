@@ -1,9 +1,8 @@
 <div class="form-popup">
   <h3 class="u-center-text">{{title|translate}}</h3>
   <hr>
-  <textarea class="mt-3" name="" [(ngModel)]="content" placeholder="Comment..." rows="4"></textarea>
   <div class="button-control-group text-end mt-3">
     <button class="btn btn-outline-secondary fs-3 w-25 me-3" (click)="onCancel()">{{'BUTTON.CANCEL'|translate}}</button>
-    <button class="btn btn-outline-primary fs-3 w-25" (click)="onEdit()">{{'BUTTON.EDIT'|translate}}</button>
+    <button class="btn btn-outline-primary fs-3 w-25" (click)="onSubmit()">{{'BUTTON.SUBMIT'|translate}}</button>
   </div>
 </div>

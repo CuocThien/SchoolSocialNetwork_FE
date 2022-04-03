@@ -19,10 +19,14 @@ export class ChangeCommentComponent implements OnInit {
   isReply = false;
   commentId = '';
   content = '';
+  title = 'POPUP.EDIT_COMMENT';
 
   ngOnInit(): void {
     this.commentId = (this.isReply) ? this.comment.replyId : this.comment.commentId;
     this.content = this.comment.content;
+    if (this.isReply) {
+      this.title = 'POPUP.EDIT_REPLY';
+    }
   }
 
   onEdit() {
