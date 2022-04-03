@@ -33,7 +33,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.router.navigate(['/'])
+    const lang = localStorage.getItem('lang');
     localStorage.clear();
+    localStorage.setItem('lang', lang);
   }
   selectLang(value: any) {
     if (value === 'en') {
