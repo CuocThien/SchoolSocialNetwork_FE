@@ -4,7 +4,7 @@ import { FacultyService, SignUpService } from '../../services/index';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isEmpty } from 'lodash'
-
+import FileSaver from 'file-saver'
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,8 @@ import { isEmpty } from 'lodash'
   styleUrls: ['../../../assets/sass/main.scss']
 })
 export class SignUpComponent implements OnInit {
-
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  EXCEL_EXTENSION = '.xlsx';
   constructor(
     private facultyService: FacultyService,
     private toastr: ToastrService,
@@ -71,11 +72,11 @@ export class SignUpComponent implements OnInit {
       this.toastr.error('Please choose an excel file!')
       return;
     }
-
     this.service.signup(this.data).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.signUpForm.reset();
+        this.exportAsExcelFile(Object.values(res.data.accountData), 'account_signup')
       },
       error: (err: any) => {
         this.toastr.error(err.error.msg)
@@ -100,5 +101,14 @@ export class SignUpComponent implements OnInit {
     this.isSingleSignup = !this.isSingleSignup;
     this.contentButton = (this.isSingleSignup) ? 'SIGNUP.MULTIPLE_SIGNUP' : 'SIGNUP.SINGLE_SIGNUP'
   }
-
+  public exportAsExcelFile(json: any[], excelFileName: string): Promise<Object> {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    return (this.saveAsExcelFile(excelBuffer, excelFileName));
+  }
+  private saveAsExcelFile(buffer: any, fileName: string): Promise<Object> {
+    const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+    return FileSaver.saveAs(data, fileName + this.EXCEL_EXTENSION);
+  }
 }
