@@ -17,7 +17,8 @@
 
 .cb-manage-dropdown {
   &:checked~.btn-group-dropdown {
-    height: 50rem;
+    height: 60rem;
+    overflow: hidden;
   }
 }
 
@@ -30,7 +31,7 @@
 
 .cb-account-dropdown {
   &:checked~.btn-account-dropdown {
-    height: 13.2rem;
+    height: 14rem;
   }
 }
 
@@ -53,6 +54,6 @@
 
 .cb-report-dropdown {
   &:checked~.btn-report-dropdown {
-    height: 13.2rem;
+    height: 14rem;
   }
 }

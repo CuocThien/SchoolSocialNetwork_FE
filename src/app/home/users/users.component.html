@@ -1,0 +1,64 @@
+<div class="pt-3 ms-3 me-4 faculty-container">
+
+  <div class="d-flex control">
+    <h1 class="ps-5 d-inline-block col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4">{{'TITLE.USERS'|translate}}
+    </h1>
+    <div class="d-flex col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
+      <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-11 col-sm-11 col-11 u-margin-auto ">
+        <form class="search__form u-margin-vertical-auto position-relative">
+          <input class="search__form--input-search" type="text" name="search"
+            placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}" (keyup.enter)="searchUser()" [(ngModel)]="keyword">
+          <button class="search__form--button-search position-absolute" type="submit"><i class="bi bi-search"
+              (click)="searchUser()"></i></button>
+        </form>
+      </div>
+      <div class="btn-create-group d-inline-block col-xxl-3 col-xl-3 col-lg-3 col-md-1 col-sm-1 col-1">
+        <button class="btn btn-outline-primary me-4 d-none d-lg-block">
+          {{'BUTTON.ADD_USER'|translate}}
+        </button>
+        <button class="btn btn-outline-primary me-4 d-block d-lg-none">
+          <i class="bi bi-plus-square"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="w-100-pc d-flex flex-row-reverse">
+    <ng-select
+      class="u-margin-vertical-auto d-inline-block text-start mb-4 col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6"
+      [searchable]="false" [clearable]="false" [(ngModel)]="groupId" (change)="filterCategory()">
+      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
+        {{isLangEn ? faculty.nameEn : faculty.nameVi}}
+      </ng-option>
+    </ng-select>
+    <div
+      class="form-check form-switch  ms-3 u-margin-vertical-auto col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4">
+      <input class="form-check-input fs-2 u-margin-auto" type="checkbox" role="switch" id="student"
+        (click)="filterStudent()">
+      <label class="form-check-label fs-4 ms-3" for="student">{{'TITLE.STUDENT'|translate}}</label>
+    </div>
+  </div>
+  <table class="table table-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>{{'TABLE.FULLNAME'|translate}}</th>
+        <th>{{'TABLE.DOB'|translate}}</th>
+        <th>{{'TABLE.PHONE'|translate}}</th>
+        <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of listUsers; let i = index">
+        <td>{{user.userId}}</td>
+        <td>{{user.fullname}}</td>
+        <td>{{user.dob|date:'dd-MM-YYY'}}</td>
+        <td>{{user.phone}}</td>
+        <td class="text-center">
+          <i class="bi bi-pencil-square btn-edit" *ngIf="isAdmin"></i>
+          <i class="bi bi-trash btn-delete ms-3" (click)="deleteUser(user, i)" *ngIf="isAdmin"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

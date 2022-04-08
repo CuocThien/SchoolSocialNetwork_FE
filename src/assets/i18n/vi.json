@@ -4,7 +4,9 @@
         "CHAT":"Trò chuyện",
         "FACULTY":"Quản lý Khoa",
         "CATEGORY":"Danh mục",
-        "DELETED": "Đã xoá"
+        "DELETED": "Đã xoá",
+        "USERS": "Người dùng",
+        "STUDENT": "Student"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -32,7 +34,6 @@
         "FACULTY_NOTIFICATION": "Thông báo của Khoa",
         "TEACHER": "Giảng viên",
         "STUDENT": "Sinh viên"
-
     },
     "GROUP":{
         "GROUPS_JOINED": "Nhóm đã tham gia",
@@ -58,6 +59,7 @@
         "SIGN_UP": "Đăng ký",
         "CREATE_FACULTY": "Tạo khoa mới",
         "CREATE_CATEGORY": "Tạo danh mục mới",
+        "ADD_USER": "Thêm người dùng",
         "SUBMIT": "Xác nhận",
         "CANCEL": "Huỷ bỏ",
         "EDIT": "Chỉnh sửa"
@@ -70,7 +72,10 @@
     "TABLE":{
         "NAMEEN": "Tên tiếng Anh",
         "NAMEVI": "Tên tiếng Việt",
-        "ACTION": "Hành động"
+        "ACTION": "Hành động",
+        "FULLNAME": "Họ và tên",
+        "DOB": "Ngày sinh",
+        "PHONE": "Số điện thoại"
     },
     "POPUP":{
         "CREATE_FACULTY":"Thêm khoa mới",
@@ -82,6 +87,7 @@
         "EDIT_COMMENT": "Chỉnh sửa bình luận",
         "DELETE_COMMENT": "Xoá bình luận",
         "EDIT_REPLY": "Chỉnh sửa câu trả lời",
-        "DELETE_REPLY": "Xoá câu trả lời"
+        "DELETE_REPLY": "Xoá câu trả lời",
+        "DELETE_USER": "Xoá người dùng khỏi nhóm"
     }
 }

@@ -14,6 +14,7 @@ import { FacultyComponent } from './faculty/faculty.component';
 import { CategoryComponent } from './category/category.component';
 
 import { AuthGuardService } from '../auth.guard';
+import { UsersComponent } from './users/users.component';
 
 const homeRoutes: Routes = [
     {
@@ -29,6 +30,7 @@ const homeRoutes: Routes = [
             { path: 'group', component: GroupComponent, pathMatch: 'full' },
             { path: 'group/:id', component: GroupDetailComponent, pathMatch: 'full' },
             { path: 'chat', component: ChatComponent, pathMatch: 'full' },
+            { path: 'users', component: UsersComponent, pathMatch: 'full' },
             { path: 'post/:id', component: PostDetailComponent, pathMatch: 'full' },
 
 

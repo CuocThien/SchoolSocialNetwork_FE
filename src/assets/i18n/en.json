@@ -4,7 +4,9 @@
         "CHAT":"Chat",
         "FACULTY":"Faculty",
         "CATEGORY":"Category",
-        "DELETED": "Deleted"
+        "DELETED": "Deleted",
+        "USERS": "Users",
+        "STUDENT": "Student"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -32,7 +34,6 @@
         "FACULTY_NOTIFICATION": "Faculty notification",
         "TEACHER": "Teacher",
         "STUDENT": "Student"
-
     },
     "GROUP":{
         "GROUPS_JOINED": "Groups you joined",
@@ -58,6 +59,7 @@
         "SIGN_UP": "Sign up",
         "CREATE_FACULTY": "Create new faculty",
         "CREATE_CATEGORY": "Create new category",
+        "ADD_USER": "Add user",
         "SUBMIT": "Submit",
         "CANCEL": "Cancel",
         "EDIT": "Edit"
@@ -70,8 +72,10 @@
     "TABLE":{
         "NAMEEN": "English name",
         "NAMEVI": "Vietnamese name",
-        "ACTION": "Action"
-
+        "ACTION": "Action",
+        "FULLNAME": "Full name",
+        "DOB": "DoB",
+        "PHONE": "Phone"
     },
     "POPUP":{
         "CREATE_FACULTY":"Create faculty",
@@ -83,6 +87,7 @@
         "EDIT_COMMENT": "Edit comment",
         "DELETE_COMMENT": "Delete comment",
         "EDIT_REPLY": "Edit reply",
-        "DELETE_REPLY": "Delete reply"
+        "DELETE_REPLY": "Delete reply",
+        "DELETE_USER": "Delete user"
     }
 }

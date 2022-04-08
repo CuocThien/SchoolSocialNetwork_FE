@@ -22,12 +22,13 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { CategoryComponent } from './category/category.component';
+import { UsersComponent } from './users/users.component';
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
