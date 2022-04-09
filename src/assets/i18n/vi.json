@@ -88,6 +88,7 @@
         "DELETE_COMMENT": "Xoá bình luận",
         "EDIT_REPLY": "Chỉnh sửa câu trả lời",
         "DELETE_REPLY": "Xoá câu trả lời",
-        "DELETE_USER": "Xoá người dùng khỏi nhóm"
+        "DELETE_USER": "Xoá người dùng khỏi nhóm",
+        "CREATE_GROUP":"Tạo nhóm"
     }
 }

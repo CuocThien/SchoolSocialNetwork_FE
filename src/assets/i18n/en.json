@@ -88,6 +88,7 @@
         "DELETE_COMMENT": "Delete comment",
         "EDIT_REPLY": "Edit reply",
         "DELETE_REPLY": "Delete reply",
-        "DELETE_USER": "Delete user"
+        "DELETE_USER": "Delete user",
+        "CREATE_GROUP":"Create your group"
     }
 }

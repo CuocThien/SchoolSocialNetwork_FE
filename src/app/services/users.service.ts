@@ -28,9 +28,14 @@ export class UsersService {
         return this.http.put(url, body, { headers })
     }
     searchUser(data: any) {
-        const { keyword, groupId, page = 1 } = data || {};
-        const url = `${HOST}/group/main/search/user?${keyword ? `keyword=${keyword}&` : ''}${groupId ? `groupId=${groupId}&` : ''}${page ? `page=${page}` : ''}
-            `;
+        const { keyword, groupId, isStudent = false, page = 1 } = data || {};
+        let queryString = '';
+        queryString += keyword ? `keyword=${keyword}&` : ''
+        queryString += groupId ? `groupId=${groupId}&` : ''
+        queryString += `isStudent=${isStudent}&`
+        queryString += `page=${page}`
+        const url = `${HOST}/group/main/search/user?${queryString}`;
+        console.log("💁 => UsersService => url", url)
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as XLSX from 'xlsx';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { CreateGroupComponent } from 'src/app/popup/create-group/create-group.component';
 
 @Component({
   selector: 'app-group',
@@ -8,23 +9,25 @@ import * as XLSX from 'xlsx';
 })
 export class GroupComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalService: NgbModal,
+
+  ) { }
+  private modalRef: NgbModalRef;
 
   ngOnInit(): void {
   }
 
-  fileUpload(event: any) {
-    const selectedFile = event.target.files[0];
-    const fileReader = new FileReader();
-    fileReader.readAsBinaryString(selectedFile);
-    fileReader.onload = (event) => {
-      let binaryData = event.target?.result;
-      let workBook = XLSX.read(binaryData, { type: 'binary' })
-      let data = {}
-      workBook.SheetNames.forEach(sheet => {
-        Object.assign(data, XLSX.utils.sheet_to_json(workBook.Sheets[sheet]));
-      })
-    }
-  }
+  createGroup() {
+    this.modalRef = this.modalService.open(CreateGroupComponent, {
+      backdrop: 'static',
+      size: 'md',
+      centered: true,
+    });
+    this.modalRef.result.then((res: any) => {
+    }).catch((err: any) => {
+      // console.log("💁 => CategoryComponent => err", err)
 
+    });
+  }
 }

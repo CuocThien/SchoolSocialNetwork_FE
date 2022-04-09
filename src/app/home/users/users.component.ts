@@ -48,7 +48,8 @@ export class UsersComponent implements OnInit {
     const reqData = {
       keyword: this.keyword,
       groupId: this.groupId,
-      page: this.page
+      page: this.page,
+      isStudent: this.isStudent
     }
     if (this.keyword) {
       this._searchUser(reqData)

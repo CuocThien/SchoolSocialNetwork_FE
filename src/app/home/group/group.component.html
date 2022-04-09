@@ -11,7 +11,7 @@
       </form>
     </div>
     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-4 col-4">
-      <button class="btn btn-outline-primary button-bt">
+      <button class="btn btn-outline-primary button-bt" (click)="createGroup()">
         {{'BUTTON.CREATE_GROUP'|translate}}
       </button>
     </div>
@@ -93,10 +93,4 @@
       </div>
     </div>
   </div>
-
-  <form id="file-upload-form" class="uploader">
-    <input id="file-upload" type="file" name="fileUpload" accept=".xls,.xlsx" (change)="fileUpload($event)" />
-    <label for="file-upload" id="file-drag">
-    </label>
-  </form>
 </div>

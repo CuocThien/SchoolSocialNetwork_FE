@@ -1,0 +1,18 @@
+<div class="form-popup form-create-post position-relative">
+  <div class="mt-5 mb-5">
+
+    <button class="btn-cancel position-absolute" (click)="onClose()"><img
+        src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
+    <h2 class="mb-4">{{'POPUP.CREATE_GROUP'|translate}}</h2>
+    <form (ngSubmit)="onSubmit();" [formGroup]="createGroupForm">
+      <span class="fs-4"><strong>{{'TITLE.CATEGORY'|translate}}</strong></span>
+      <ng-select class="mt-3 mb-3" [searchable]="false" [clearable]="false" formControlName="cateId">
+        <ng-option *ngFor="let category of (listCategory | async)" [value]="category._id">
+          {{isLangEn?category.nameEn:category.nameVi}}
+        </ng-option>
+      </ng-select>
+      <input class="signup-form__control mb-5" type="text" placeholder="Name..." formControlName="name">
+      <button class="btn btn-primary" type="submit">{{'BUTTON.SUBMIT'|translate}}</button>
+    </form>
+  </div>
+</div>
