@@ -11,8 +11,12 @@ export class UsersService {
     ) {
     }
     getListUser(data: any) {
-        const { type = 'main', groupId, isStudent = false } = data
-        const url = `${HOST}/group/user/${type}/${groupId}${isStudent ? '?isStudent=true' : '?isStudent=false'}`;
+        const { type = 'main', groupId, isStudent = false, isAdmin = false, page = 1 } = data || {}
+        let where = ''
+        where += `isStudent=${isStudent}&`
+        where += `isAdmin=${isAdmin}&`
+        where += `page=${page}`
+        const url = `${HOST}/group/user/${type}/${groupId}?${where}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
@@ -28,14 +32,13 @@ export class UsersService {
         return this.http.put(url, body, { headers })
     }
     searchUser(data: any) {
-        const { keyword, groupId, isStudent = false, page = 1 } = data || {};
+        const { type = 'main', keyword, groupId, isStudent = false, page = 1 } = data || {};
         let queryString = '';
         queryString += keyword ? `keyword=${keyword}&` : ''
         queryString += groupId ? `groupId=${groupId}&` : ''
         queryString += `isStudent=${isStudent}&`
         queryString += `page=${page}`
-        const url = `${HOST}/group/main/search/user?${queryString}`;
-        console.log("💁 => UsersService => url", url)
+        const url = `${HOST}/group/${type}/search/user?${queryString}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }

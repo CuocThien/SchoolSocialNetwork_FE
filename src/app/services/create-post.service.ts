@@ -15,4 +15,9 @@ export class CreatePostService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.post(url, value, { headers })
     }
+    updatePost(value: any) {
+        const url = `${HOST}/post/sub`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.put(url, value, { headers })
+    }
 }

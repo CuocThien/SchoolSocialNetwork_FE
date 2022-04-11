@@ -9,7 +9,8 @@ export class CommentService {
     ) {
     }
     getComment(value: any) {
-        const url = `${HOST}/comment/${value}`;
+        const { postId, page = 1 } = value || {}
+        const url = `${HOST}/comment/${postId}?page=${page}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
@@ -29,7 +30,8 @@ export class CommentService {
         return this.http.delete(url, { headers })
     }
     getReply(value: any) {
-        const url = `${HOST}/comment/reply/${value}`;
+        const { commentId, page = 1 } = value || {}
+        const url = `${HOST}/comment/reply/${commentId}?page=${page}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }

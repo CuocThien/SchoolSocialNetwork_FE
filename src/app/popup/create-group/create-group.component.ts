@@ -41,14 +41,12 @@ export class CreateGroupComponent implements OnInit {
       this.toastr.error('Please fill information!')
       return;
     }
-    console.log("💁 => CreateGroupComponent => this.createGroupForm.value", this.createGroupForm.value)
     this.service.createNewGroup(this.createGroupForm.value).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.activeModal.close(res.data);
       },
       error: (err: any) => {
-        console.log("💁 => CreateGroupComponent => err", err)
         this.toastr.error(err.error.msg);
       }
     })

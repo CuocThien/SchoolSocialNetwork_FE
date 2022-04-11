@@ -1,0 +1,111 @@
+.group-detail-container{
+    width: 100%;
+    height: 100%;
+    background-color: #F0F2F5;
+    text-align: center;
+}
+
+.gr-intro{
+    width: 100%;
+    background-color: $color-white;
+    &__img{
+        max-height: 320px;
+        position: relative;
+        img{
+            border-radius: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            max-width: 80%;
+            max-height: inherit;
+            height: auto;
+            width: 80%;
+        }
+        button{
+            position: absolute;
+            bottom: 20px;
+            right: 12%;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            padding: 5px 15px;
+            border: none;
+        }
+    }
+    &__info{
+        display: inline-block;
+        width: 80%;
+        text-align: start;
+        h4{
+            color: #65676B;
+        }
+    }
+}
+.menu-control-group-detail{
+    list-style: none;
+    padding: 0;
+    width: 80%;
+    display: inline-block;
+    font-size: 1.4rem;
+    text-align: start;
+    margin-top: 15px;
+    margin-bottom: 0;
+    li{
+        border-bottom: 2px solid transparent;
+        font-weight: bold;
+        color: #65676B;
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 15px;
+        transition: all .3s;
+    }
+}
+.li-active{
+    color: $color-blue-link!important;
+    border-bottom: 2px solid $color-blue-link!important;
+}
+.gr-de, .gr-mem{
+    width: 80%;
+    display: inline-block;
+}
+.card-content{
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+  box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
+  &__btn-input{
+      width: 95%;
+      margin: auto;
+      height: 100%;
+      font-size: 1.5rem;
+      border-radius: 500px;
+      cursor: pointer;
+      border: none;
+      padding: 0 15px;
+      background-color: #F0F2F5;
+  }
+  &__post-title{
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0;
+    padding-left: 15px;
+
+  }
+  &__post-content{
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0;
+    padding: 10px 0;
+  }
+}
+.change-name-group{
+    border: none;
+    padding: 0;
+    height: 35px;
+    border-bottom: 1px solid #65676B;
+    font-size: 2.5rem;
+    &:focus{
+        outline: none;
+    }
+}

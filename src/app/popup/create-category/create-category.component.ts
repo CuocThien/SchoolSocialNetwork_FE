@@ -50,7 +50,6 @@ export class CreateCategoryComponent implements OnInit {
           this.toastr.error(err.error.msg)
         }
       })
-      console.log("💁 => CreateCategoryComponent => data", data)
     } else {
       const data = { ...this.createCategoryForm.value, _id: this.category?._id, type: this.type }
       this.service.editCategory(data).subscribe({
@@ -63,7 +62,6 @@ export class CreateCategoryComponent implements OnInit {
           this.toastr.error(err.error.msg)
         }
       })
-      console.log("💁 => CreateCategoryComponent => data", data)
     }
   }
   createFormCreateCategory() {

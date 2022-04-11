@@ -161,7 +161,7 @@ export class IndexComponent implements OnInit {
           this.getListPostMainGroupFacultyForTeacher();
         }
       }
-    }).catch();
+    }).catch(() => { });
   }
   _getListFaculty() {
     this.facultyService.getListFaculty().subscribe({

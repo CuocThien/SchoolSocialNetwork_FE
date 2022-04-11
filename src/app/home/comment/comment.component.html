@@ -2,15 +2,13 @@
 <p class="fs-4">{{countCmt}} {{'COMMENT.COMMENT'|translate}}</p>
 <hr>
 <div class="comment">
-  <div class="comment-create d-flex">
-    <div class="comment-create__avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-      <img [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
+
+  <div class="d-flex fs-5">
+    <div *ngIf="isLoadCmt&&countCmt!=0" class="btn-load-reply" (click)="_getComment()">
+      <i class="bi bi-arrow-return-right me-3"></i>Xem bình luận
     </div>
-    <div class="comment-create__box col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 position-relative">
-      <textarea name="" [(ngModel)]="commentContent" placeholder="Comment..." rows="4"></textarea>
-      <button class="btnPostCmt" (click)="postComment()">
-        <i class="bi bi-send"></i>
-      </button>
+    <div *ngIf="!isLoadCmt&&page!=maxPage" class="btn-load-reply" (click)="goToPage()">
+      Xem thêm bình luận
     </div>
   </div>
   <div class="list-comment">
@@ -33,7 +31,21 @@
         </div>
       </div>
       <div class="reply">
-        <app-reply [isOpenCreateReply]="replyCmtId" [commentId]="comment?.commentId"> </app-reply>
+        <app-reply [isOpenCreateReply]="replyCmtId" [isLoadReply]="comment?.countReply"
+          [commentId]="comment?.commentId"> </app-reply>
       </div>
     </div>
+
   </div>
+  <div class="comment-create mt-3 d-flex">
+    <div class="comment-create__avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
+      <img [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
+    </div>
+    <div class="comment-create__box col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 position-relative">
+      <textarea name="" [(ngModel)]="commentContent" placeholder="Comment..." rows="4"></textarea>
+      <button class="btnPostCmt" (click)="postComment()">
+        <i class="bi bi-send"></i>
+      </button>
+    </div>
+  </div>
+</div>

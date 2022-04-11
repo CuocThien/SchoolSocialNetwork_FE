@@ -132,6 +132,7 @@
 }
 
 .button-control-sidebar {
+  z-index: 999;
   left: 0;
   top: 50%;
   transition: all .3s;
@@ -287,4 +288,32 @@
 .button-sidebar-text-icon{
   border: 2px white solid; 
   border-radius: 5px;
+}
+.btn-report{
+  background-color: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: black;
+  font-weight: bold;
+  &__check{
+    font-size: 2.3rem;
+    color: green;
+  }
+}
+.btn-load-reply{
+  cursor: pointer;
+  font-weight: bold;
+  
+}
+.btn-load-more{
+  height: 3.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border: 1px solid #EBEBEB;
+  width: 250px;
+  border-radius: 500px;
+  margin-bottom: 50px;
+  background-color: #FFF;
+  color: #000;
+  box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
 }

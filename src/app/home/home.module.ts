@@ -23,6 +23,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { CategoryComponent } from './category/category.component';
 import { UsersComponent } from './users/users.component';
+import { ImageCropperModule } from "ngx-image-cropper";
+
 
 
 
@@ -45,7 +47,8 @@ import { UsersComponent } from './users/users.component';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    ImageCropperModule
   ]
 })
 export class HomeModule { }

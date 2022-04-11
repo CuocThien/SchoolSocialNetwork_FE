@@ -1,0 +1,20 @@
+<div class="form-popup form-create-post text-center">
+  <div class="col-12">
+    <h6>Image Preview</h6>
+    <img class="full-image" [src]="imgUrl" />
+  </div>
+  <div class="col-md-12 mt-5">
+    <input type="file" (change)="onFileChange($event)" />
+  </div>
+  <div class="col-12 mt-5">
+    <image-cropper [imageChangedEvent]="imgChangeEvt" [cropperStaticHeight]="320" [cropperStaticWidth]="900"
+      format="png" (imageCropped)="cropImg($event)">
+    </image-cropper>
+  </div>
+
+  <hr>
+  <div class="button-control-group text-end mt-3 mb-5">
+    <button class="btn btn-outline-primary fs-3 w-25" (click)="onUpload()">{{'BUTTON.UPLOAD'|translate}}</button>
+    <button class="btn btn-outline-secondary fs-3 w-25 me-3" (click)="onCancel()">{{'BUTTON.CANCEL'|translate}}</button>
+  </div>
+</div>

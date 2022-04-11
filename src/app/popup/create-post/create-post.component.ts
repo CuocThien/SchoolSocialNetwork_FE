@@ -16,9 +16,12 @@ export class CreatePostComponent implements OnInit {
     private activeModal: NgbActiveModal
   ) { }
   ckeConfig: any;
+  content: any;
   groupId = '';
   isMainGroup = false;
+  isUpdate = false;
   isStudent = false;
+  postId: any;
   ngOnInit(): void {
     this.ckeConfig = {
       extraPlugins: ['uploadimage'],
@@ -27,7 +30,6 @@ export class CreatePostComponent implements OnInit {
       width: '100%',
       height: '500px',
     };
-
   }
   data: any;
   onSubmit(form: any) {
@@ -36,11 +38,24 @@ export class CreatePostComponent implements OnInit {
     this.data.isMainGroup = this.isMainGroup;
     if (this.isMainGroup)
       this.data.isStudent = this.isStudent;
-    if (form.value.title == "") {
+    if (form.value.title == "" && this.isMainGroup) {
       this.toastr.error("Please input the title of post")
     } else if (form.value.content == "") {
       this.toastr.error("Please input content of post")
     } else {
+      if (this.isUpdate) {
+        this.data._id = this.postId;
+        this.createPostService.updatePost(this.data).subscribe({
+          next: (res: any) => {
+            this.toastr.success(res.msg);
+            this.activeModal.close(res);
+          },
+          error: (err: any) => {
+            this.toastr.error(err.error.msg)
+          }
+        });
+        return;
+      }
       this.createPostService.createPost(this.data).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);

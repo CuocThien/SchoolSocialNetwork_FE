@@ -22,10 +22,13 @@ export class ReplyComponent implements OnInit {
   content = '';
   userId = '';
   isAdmin = false;
+  @Input() isLoadReply: number;
+  maxPage = 1;
+  page = 1;
   @Input() isOpenCreateReply = '';
   @Input() commentId = '';
-  listReply: any;
-  private modalRef: NgbModalRef | undefined;
+  listReply = [];
+  private modalRef: NgbModalRef;
 
   ngOnInit(): void {
     this.myAvatar = JSON.parse(localStorage.getItem('profile') || '').avatar;
@@ -33,15 +36,6 @@ export class ReplyComponent implements OnInit {
     if (localStorage.getItem('role') === 'admin') {
       this.isAdmin = true;
     }
-    this.service.getReply(this.commentId).subscribe({
-      next: ((res: any) => {
-        this.listReply = res.data.result || [];
-      }),
-      error: ((err: any) => {
-        this.toastr.error(err.error.msg)
-      })
-    })
-
   }
   onReply() {
     const validData = {
@@ -60,11 +54,9 @@ export class ReplyComponent implements OnInit {
       })
     })
   }
-
   ngOnChanges(changes: any) {
     this.isOpenCreateReply = changes.isOpenCreateReply.currentValue
   }
-
   editReply(event: any, index: any) {
     this.modalRef = this.modalService.open(ChangeCommentComponent, {
       backdrop: 'static',
@@ -87,5 +79,21 @@ export class ReplyComponent implements OnInit {
     this.modalRef.result.then(() => {
       this.listReply.splice(index, 1)
     }).catch(() => { });
+  }
+  _getReply() {
+    this.isLoadReply = 0;
+    this.service.getReply({ commentId: this.commentId, page: this.page }).subscribe({
+      next: ((res: any) => {
+        const data = res.data.result || [];
+        this.listReply = this.listReply.length < 3 ? data : [...data, ...this.listReply];
+        this.maxPage = res.data.countReply ? Math.ceil(res.data.countReply / 3) : 1;
+      }),
+      error: ((err: any) => {
+      })
+    })
+  }
+  goToPage() {
+    this.page++;
+    this._getReply()
   }
 }

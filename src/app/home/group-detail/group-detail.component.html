@@ -1,1 +1,116 @@
-<p>group-detail works!</p>
+<div class="group-detail-container">
+  <div class="gr-intro text-center">
+    <div class="gr-intro__img">
+      <img [src]="image" alt="">
+      <button (click)="updateImage(groupDetail?.group?.image)">Chỉnh sửa</button>
+    </div>
+    <div class="gr-intro__info mt-3">
+      <div class="d-flex">
+        <div class="d-flex col-10">
+          <input *ngIf="isRename" class="change-name-group col-6" type="text" [(ngModel)]="groupName">
+          <button *ngIf="isRename" class="btn-report btn-report__check col-1" (click)="rename()"><i
+              class="bi bi-check-lg"></i></button>
+          <h1 *ngIf="!isRename" class="d-inline-block">{{groupName}}</h1>
+        </div>
+        <button [ngClass]="{'opacity-0 invisible':isRename}" class="btn-report col-1 text-end pe-3"
+          (click)="onRename()"><i class="bi bi-pencil"></i></button>
+        <button class="btn-report col-1 text-start ps-3" (click)="report('group', groupId)"><i
+            class="bi bi-flag"></i></button>
+      </div>
+      <h4>{{groupDetail?.numPost}} bài viết - {{groupDetail?.numMember}} thành viên</h4>
+    </div>
+    <ul class="menu-control-group-detail">
+      <li class="col-2 text-center" [ngClass]="{'li-active': isPostActive}" (click)="onPost()">Bài viết</li>
+      <li class="col-2 text-center" [ngClass]="{'li-active': !isPostActive}" (click)="onMember()">Thành viên</li>
+    </ul>
+  </div>
+  <div *ngIf="isPostActive" class="gr-de">
+    <div class="gr-de__create-post-container text-start d-flex">
+      <div class="card-content d-flex">
+        <img class="u-margin-auto col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2" [src]="myAvatar" alt="">
+        <div class="col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-inline-block h-100-pc text-center">
+          <input class="card-content__btn-input " type="text" placeholder="Create post..." (click)="createPost()">
+        </div>
+      </div>
+    </div>
+    <div class="gr-de__list-post text-center">
+      <div class="card-content mb-5" *ngFor="let post of listPost; let i = index">
+        <div class="card-content__post-title d-flex">
+          <img class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2" [src]="post.avatar" alt="">
+          <div class="ps-3 col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-8 col-8 d-inline-block h-100-pc text-start">
+            <h4>{{post.fullname}} đã tạo một bài viết</h4>
+            <h6>{{post.createdDate | date:'HH:mm dd/MM/YYYY'}}</h6>
+          </div>
+          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
+            <button [ngClass]="isAdmin || post.author == userId?'opacity-100 visible':'opacity-0 invisible'"
+              class="btn-report col-4" (click)="deletePost(post._id, i)">
+              <i class="bi bi-trash3"></i></button>
+            <button [ngClass]="post.author == userId?'opacity-100 visible':'opacity-0 invisible'"
+              class="btn-report col-4" (click)="updatePost(post, i)">
+              <i class="bi bi-pencil-square"></i></button>
+            <button class="btn-report col-4" (click)="report('post', post._id)">
+              <i class="bi bi-flag"></i></button>
+          </div>
+        </div>
+        <hr class="mt-3 mb-2">
+        <div class="card-content__post-content text-start">
+          <div [innerHtml]="post?.content"></div>
+        </div>
+        <app-comment class="text-start" [countCmt]="post?.countCmt" [postId]="post._id"></app-comment>
+      </div>
+      <button *ngIf="page!=maxPage" class="btn-load-more" (click)="goToPage()">LOAD MORE</button>
+    </div>
+  </div>
+  <div *ngIf="!isPostActive" class="gr-mem">
+    <div class="card-content">
+      <form class="search__form w-100-pc text-center position-relative" (ngSubmit)="search()">
+        <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
+          name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
+        <button class="search__form--button-search position-absolute" type="submit"><i
+            class="bi bi-search"></i></button>
+      </form>
+      <div *ngIf="!isSearch" class="admin-tab text-start">
+        <hr>
+        <h4>Quản trị viên - {{totalAdmin}}</h4>
+        <div class="card-user d-flex  mt-2 mb-2" *ngFor="let admin of listAdmin;let i = index">
+          <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
+            <img [src]="admin.avatar" alt="">
+          </div>
+          <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 text-start">
+            <h4>{{admin.fullname}}</h4>
+            <h5>{{admin.address}}</h5>
+          </div>
+          <div *ngIf="isAdmin" class="btn-group col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+            <button class="btn btn-outline-danger w-50 fs-5 d-inline-block" (click)="removeAdmin(admin,i)">
+              <i class="bi bi-person-x"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="member-tab text-start">
+        <hr>
+        <h4>Thành viên - {{totalMember}}</h4>
+        <div class="card-user d-flex mt-2 mb-2" *ngFor="let member of listMember; let i = index">
+          <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
+            <img [src]="member.avatar" alt="">
+          </div>
+          <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-8 col-8 text-start">
+            <h4>{{member.fullname}}</h4>
+            <h5>{{member.address}}</h5>
+          </div>
+          <div *ngIf="isAdmin" class="btn-group col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+            <button class="btn btn-outline-danger w-50 fs-5 d-inline-block" (click)="removeUser(member.userId,i)">
+              <i class="bi bi-person-dash"></i>
+            </button>
+            <button class="btn btn-outline-success w-50 fs-5 d-inline-block" (click)="addAdmin(member,i)">
+              <i class="bi bi-person-check"></i>
+            </button>
+          </div>
+        </div>
+
+
+        <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">Hiển thị thêm</h5>
+      </div>
+    </div>
+  </div>
+</div>

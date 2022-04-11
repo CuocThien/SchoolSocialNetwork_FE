@@ -12,6 +12,7 @@ import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap'
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { ImageCropperModule } from "ngx-image-cropper";
 
 //component
 //abcdefghijklmnopqrstuvwxyz
@@ -37,6 +38,9 @@ import { CreateCategoryComponent } from './popup/create-category/create-category
 import { DeleteCategoryComponent } from './popup/delete-category/delete-category.component';
 import { DeleteUserComponent } from './popup/delete-user/delete-user.component';
 import { CreateGroupComponent } from './popup/create-group/create-group.component';
+import { CropImageGroupComponent } from './popup/crop-image-group/crop-image-group.component';
+import { ReportComponent } from './popup/report/report.component';
+import { AddUserGroupComponent } from './popup/add-user-group/add-user-group.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { CreateGroupComponent } from './popup/create-group/create-group.componen
     CreateCategoryComponent,
     DeleteCategoryComponent,
     DeleteUserComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    CropImageGroupComponent,
+    ReportComponent,
+    AddUserGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -85,8 +92,8 @@ import { CreateGroupComponent } from './popup/create-group/create-group.componen
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
-
+    }),
+    ImageCropperModule
   ],
   providers: [
     AuthGuardService,

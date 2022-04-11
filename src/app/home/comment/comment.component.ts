@@ -12,19 +12,24 @@ import { CommentService } from '../../services/index';
 })
 export class CommentComponent implements OnInit {
 
-  @Input() postId!: any;
-  listCmt: any;
-  countCmt: any;
+  @Input() postId: any;
+  @Input() countCmt: number;
+  listCmt = [];
   commentContent = '';
   userId = '';
   isAdmin = false;
   myAvatar: any;
   replyCmtId = '';
-  private modalRef: NgbModalRef | undefined;
+  isLoadCmt = true;
+  maxPage = 1;
+  page = 1;
+  private modalRef: NgbModalRef;
 
   constructor(
     private modalService: NgbModal,
-    private service: CommentService, private toastr: ToastrService) { }
+    private service: CommentService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('profile') || '')._id;
@@ -32,12 +37,10 @@ export class CommentComponent implements OnInit {
     if (localStorage.getItem('role') === 'admin') {
       this.isAdmin = true;
     }
-    this._getComment();
   }
   turnOnReply(event: any) {
     this.replyCmtId = event;
   }
-  resPostCmt: any;
   postComment() {
     if (this.commentContent == '') {
       this.toastr.error('Please input comment!!!')
@@ -51,7 +54,9 @@ export class CommentComponent implements OnInit {
       next: ((res: any) => {
         this.listCmt.push(res.data)
         this.toastr.success(res.msg)
-        this.commentContent = ''
+        this.commentContent = '';
+        this.countCmt++;
+        this.isLoadCmt = false;
       }),
       error: ((err: any) => {
         this.toastr.error(err.error.msg)
@@ -66,7 +71,8 @@ export class CommentComponent implements OnInit {
     })
     this.modalRef.componentInstance.commentId = event;
     this.modalRef.result.then(() => {
-      this.listCmt.splice(index, 1)
+      this.listCmt.splice(index, 1);
+      this.countCmt--;
     }).catch(() => { });
   }
 
@@ -82,15 +88,21 @@ export class CommentComponent implements OnInit {
   }
 
   _getComment() {
-    this.service.getComment(this.postId).subscribe({
+    this.isLoadCmt = false;
+    this.service.getComment({ postId: this.postId, page: this.page }).subscribe({
       next: ((res: any) => {
-        this.listCmt = res.data.result || [];
-        this.countCmt = res.data.countCmt;
+        const data = res.data.result || [];
+        this.listCmt = this.listCmt.length < 5 ? data : [...data, ...this.listCmt];
+        this.maxPage = this.countCmt ? Math.ceil(this.countCmt / 5) : 1;
       }),
       error: ((err: any) => {
         this.toastr.error(err.error.msg)
       })
     })
   }
-
+  goToPage() {
+    this.isLoadCmt = false;
+    this.page++;
+    this._getComment()
+  }
 }
