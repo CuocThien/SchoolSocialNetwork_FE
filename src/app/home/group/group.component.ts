@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { CreateGroupComponent } from 'src/app/popup/create-group/create-group.component';
 import { GroupService } from 'src/app/services';
 
@@ -14,9 +15,13 @@ export class GroupComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private service: GroupService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) { }
   private modalRef: NgbModalRef;
+  searchString = '';
+  isSearch = false;
+  userId: any;
   page = 1;
   maxPage = 1;
   listGroup = [];
@@ -26,6 +31,7 @@ export class GroupComponent implements OnInit {
   ngOnInit(): void {
     this._getListGroup();
     this._getListGroupRelative();
+    this.userId = JSON.parse(localStorage.getItem('profile'))._id || ''
   }
 
   private _getListGroup() {
@@ -49,6 +55,10 @@ export class GroupComponent implements OnInit {
   }
   goToPage() {
     this.page++;
+    if (this.isSearch) {
+      this._search();
+      return;
+    }
     this._getListGroup();
   }
   goToPageRelative() {
@@ -66,5 +76,47 @@ export class GroupComponent implements OnInit {
       // console.log("💁 => CategoryComponent => err", err)
 
     });
+  }
+  joinNow(group: any, index: any) {
+    this.service.addUser({
+      groupId: group._id,
+      userId: this.userId
+    }).subscribe({
+      next: (res: any) => {
+        this.toastr.success(res.msg);
+        group.groupId = group._id;
+        this.listGroupRelative.splice(index, 1);
+        this.listGroup.push(group);
+      },
+      error: (err: any) => {
+        this.toastr.error(err.error.msg);
+      }
+    })
+  }
+  private _search() {
+    this.service.searchGroup({
+      keyword: this.searchString,
+      page: this.page
+    }).subscribe({
+      next: (res: any) => {
+        this.listGroup = [...this.listGroup, ...res.data.result];
+        this.maxPage = Math.ceil(res.data.total / 10);
+      },
+      error: () => {
+
+      }
+    })
+  }
+  searchGroup() {
+    this.listGroup = []
+    if (!this.searchString) {
+      this.isSearch = false;
+      this._getListGroup();
+      return;
+    }
+    this.isSearch = true;
+    this.page = 1;
+    this.listGroup
+    this._search();
   }
 }

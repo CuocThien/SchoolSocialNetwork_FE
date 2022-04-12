@@ -3,15 +3,15 @@
   <h2 class="component-title">{{'TITLE.GROUPS'|translate}}</h2>
   <div class="d-flex u-margin-vertical-small">
     <div class="search-group col-xxl-8 col-xl-8 col-lg-8 col-md-6 col-sm-8 col-8">
-      <form class="search__form position-relative">
-        <input class="search__form--input-search search__form--input-search-sub" type="text" name="search"
-          placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
+      <form class="search__form position-relative" (ngSubmit)="searchGroup()">
+        <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
+          name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
         <button class="search__form--button-search position-absolute" type="submit"><i
             class="bi bi-search"></i></button>
       </form>
     </div>
     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-4 col-4">
-      <button class="btn btn-outline-primary button-bt" (click)="createGroup()">
+      <button class="btn btn-outline-primary button-bt ms-3" (click)="createGroup()">
         {{'BUTTON.CREATE_GROUP'|translate}}
       </button>
     </div>
@@ -29,8 +29,8 @@
           </div>
           <div class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-10 col-sm-7 col-7">
             <h3>{{group.nameEn}}</h3>
-            <h5>150 {{'GROUP.MEMBERS'|translate}}</h5>
-            <h5>10 {{'GROUP.POSTS'|translate}} / {{'GROUP.DAY'|translate}}</h5>
+            <h5>{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5>
+            <h5>{{group.numPost}} {{'GROUP.POSTS'|translate}}</h5>
           </div>
         </div>
         <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">Hiển thị thêm</h5>
@@ -41,15 +41,15 @@
     <div class="groups__suggestion col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
       <div class="groups__suggestion--container">
         <h1>{{'GROUP.GROUPS_SUGGEST'|translate}}</h1>
-        <div class="group d-sm-flex d-flex d-md-block" *ngFor="let groupR of listGroupRelative">
+        <div class="group d-sm-flex d-flex d-md-block" *ngFor="let groupR of listGroupRelative; let i = index">
           <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
             <img [src]="groupR.image" alt="">
           </div>
           <div class="group__info u-padding-left-2rem col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-7 col-7">
             <h3>{{groupR.nameEn}}</h3>
-            <h5>150 {{'GROUP.MEMBERS'|translate}}</h5>
-            <h5>10 {{'GROUP.POSTS'|translate}} / {{'GROUP.DAY'|translate}}</h5>
-            <button class="btn btn-outline-primary">
+            <h5>{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5>
+            <h5>{{groupR.numPost}} {{'GROUP.POSTS'|translate}}</h5>
+            <button class="btn btn-outline-primary" (click)="joinNow(groupR, i)">
               {{'BUTTON.JOIN_NOW'|translate}}
             </button>
           </div>

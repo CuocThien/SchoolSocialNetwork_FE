@@ -2,7 +2,10 @@
   <div class="gr-intro text-center">
     <div class="gr-intro__img">
       <img [src]="image" alt="">
-      <button (click)="updateImage(groupDetail?.group?.image)">Chỉnh sửa</button>
+      <div class="btn-group">
+        <button (click)="updateImage(groupDetail?.group?.image)">Chỉnh sửa</button>
+        <button (click)="removeUser(userId,1);outGroup()"><i class="bi bi-box-arrow-left"></i></button>
+      </div>
     </div>
     <div class="gr-intro__info mt-3">
       <div class="d-flex">
@@ -63,12 +66,17 @@
   </div>
   <div *ngIf="!isPostActive" class="gr-mem">
     <div class="card-content">
-      <form class="search__form w-100-pc text-center position-relative" (ngSubmit)="search()">
-        <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
-          name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
-        <button class="search__form--button-search position-absolute" type="submit"><i
-            class="bi bi-search"></i></button>
-      </form>
+      <div class="control d-flex">
+        <form class="search__form text-center position-relative col-9" (ngSubmit)="search()">
+          <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString"
+            type="text" name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
+          <button class="search__form--button-search position-absolute" type="submit"><i
+              class="bi bi-search"></i></button>
+        </form>
+        <div class="col-3">
+          <button class="btn btn-outline-primary h-100-pc fs-5" (click)="addUser()">Thêm thành viên</button>
+        </div>
+      </div>
       <div *ngIf="!isSearch" class="admin-tab text-start">
         <hr>
         <h4>Quản trị viên - {{totalAdmin}}</h4>

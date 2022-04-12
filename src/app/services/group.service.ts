@@ -11,6 +11,11 @@ export class GroupService {
     private http: HttpClient,
   ) { }
 
+  addUser(body: any) {
+    const url = `${HOST}/group/user`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.post(url, body, { headers })
+  }
   changeAdmin(body: any) {
     const url = `${HOST}/group/user/admin`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
@@ -30,6 +35,12 @@ export class GroupService {
     const url = `${HOST}/group/sub/report`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.post(url, body, { headers })
+  }
+  searchGroup(data: any) {
+    const { page = 1, keyword = '' } = data || {};
+    const url = `${HOST}/group/sub/search?page=${page}&keyword=${keyword}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
   }
   getListGroupByUserId(data: any) {
     const { page = 1 } = data || {};

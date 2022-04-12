@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AddUserGroupComponent } from 'src/app/popup/add-user-group/add-user-group.component';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
 import { CropImageGroupComponent } from 'src/app/popup/crop-image-group/crop-image-group.component';
 import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
@@ -19,7 +20,8 @@ export class GroupDetailComponent implements OnInit {
     private service: GroupService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ) { }
   fullname: any;
   image: any;
@@ -42,6 +44,7 @@ export class GroupDetailComponent implements OnInit {
   searchString: string;
   isAdmin = false;
   userId: any;
+  isOutGroup = false;
   private modalRef: NgbModalRef;
 
   ngOnInit(): void {
@@ -218,9 +221,19 @@ export class GroupDetailComponent implements OnInit {
     })
     this.modalRef.componentInstance.data = reqData;
     this.modalRef.result.then((res: any) => {
+      if (this.isOutGroup) {
+        this.backToGroup();
+        return;
+      }
       this.totalMember--;
       this.listMember.splice(index, 1)
     }).catch(() => { });
+  }
+  backToGroup() {
+    this.router.navigate(['/home/group'])
+  }
+  outGroup() {
+    this.isOutGroup = true;
   }
   addAdmin(user: any, index: any) {
     const reqData = {
@@ -290,5 +303,19 @@ export class GroupDetailComponent implements OnInit {
       data.countCmt = 0;
       this.listPost[index] = data;
     }).catch(() => { });
+  }
+  addUser() {
+    this.modalRef = this.modalService.open(AddUserGroupComponent, {
+      size: 'md',
+      centered: true,
+    })
+    this.modalRef.componentInstance.groupId = this.groupId
+    this.modalRef.result.then(() => {
+      this.listMember = [];
+      this._getListMember();
+    }).catch(() => {
+      this.listMember = [];
+      this._getListMember();
+    });
   }
 }
