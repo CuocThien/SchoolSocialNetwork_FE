@@ -5,10 +5,10 @@
 
   <div class="d-flex fs-5">
     <div *ngIf="isLoadCmt&&countCmt!=0" class="btn-load-reply" (click)="_getComment()">
-      <i class="bi bi-arrow-return-right me-3"></i>Xem bình luận
+      <i class="bi bi-arrow-return-right me-3"></i>{{'COMMENT.LOAD_COMMENT'| translate}}
     </div>
     <div *ngIf="!isLoadCmt&&page!=maxPage" class="btn-load-reply" (click)="goToPage()">
-      Xem thêm bình luận
+      {{'COMMENT.LOAD_MORE_COMMENT'|translate}}
     </div>
   </div>
   <div class="list-comment">

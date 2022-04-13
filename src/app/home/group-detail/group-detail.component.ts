@@ -220,6 +220,8 @@ export class GroupDetailComponent implements OnInit {
       size: 'md'
     })
     this.modalRef.componentInstance.data = reqData;
+    if (this.isOutGroup)
+      this.modalRef.componentInstance.isOutGroup = true;
     this.modalRef.result.then((res: any) => {
       if (this.isOutGroup) {
         this.backToGroup();

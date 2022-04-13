@@ -22,7 +22,10 @@ export class CreatePostComponent implements OnInit {
   isUpdate = false;
   isStudent = false;
   postId: any;
+  title = 'BUTTON.CREATE_POST'
   ngOnInit(): void {
+    if (this.isUpdate)
+      this.title = 'BUTTON.UPDATE_POST'
     this.ckeConfig = {
       extraPlugins: ['uploadimage'],
       filebrowserImageUploadUrl:

@@ -19,8 +19,13 @@ export class DeleteUserComponent implements OnInit {
   isReply = false;
   data: any;
   isPost = false;
+  isOutGroup = false;
   title = 'POPUP.DELETE_USER'
   ngOnInit(): void {
+    if (this.isPost)
+      this.title = 'POPUP.DELETE_POST'
+    if (this.isOutGroup)
+      this.title = 'POPUP.OUT_GROUP'
   }
   onDelete() {
     if (this.isPost) {

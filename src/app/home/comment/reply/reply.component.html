@@ -1,10 +1,10 @@
 <div class="d-flex fs-5">
   <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"></div>
   <div *ngIf="isLoadReply!=0" class="btn-load-reply" (click)="_getReply()">
-    <i class="bi bi-arrow-return-right me-3"></i>Xem phản hồi
+    <i class="bi bi-arrow-return-right me-3"></i>{{'COMMENT.LOAD_REPLY'|translate}}
   </div>
   <div *ngIf="isLoadReply==0&&page!=maxPage" class="btn-load-reply" (click)="goToPage()">
-    Xem thêm phản hồi
+    {{'COMMENT.LOAD_MORE_REPLY'|translate}}
   </div>
 </div>
 <div class="list-reply d-flex" *ngFor="let reply of listReply; let i=index">

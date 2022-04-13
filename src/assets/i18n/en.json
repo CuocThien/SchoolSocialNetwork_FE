@@ -40,7 +40,13 @@
         "GROUPS_SUGGEST": "Suggestions for you",
         "MEMBERS": "members",
         "POSTS": "posts",
-        "DAY": "day"
+        "MEMBERS2": "Members",
+        "POSTS2": "Posts",
+        "DAY": "day",
+        "UPDATE": "Update",
+        "CREATED_POST": "created a new post",
+        "ADD_MEMBER": "Add member",
+        "ADMIN": "Admin"
     },
     "SIGNUP":{
         "SINGLE_SIGNUP": "Single signup",
@@ -50,10 +56,15 @@
         "COMMENT":"comments",
         "REPLY": "Reply",
         "EDIT": "Edit",
-        "DELETE": "Delete"
+        "DELETE": "Delete",
+        "LOAD_COMMENT": "Load comments",
+        "LOAD_MORE_COMMENT": "Load more comments",
+        "LOAD_REPLY": "Load replies",
+        "LOAD_MORE_REPLY": "Load more replies"
     },
     "BUTTON": {
         "CREATE_POST": "Create post",
+        "UPDATE_POST": "Update post",
         "CREATE_GROUP": "Create your group",
         "JOIN_NOW": "Join now",
         "SIGN_UP": "Sign up",
@@ -62,12 +73,14 @@
         "ADD_USER": "Add user",
         "SUBMIT": "Submit",
         "CANCEL": "Cancel",
-        "EDIT": "Edit"
+        "EDIT": "Edit",
+        "LOAD_MORE": "Load more"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
         "SEARCH_GROUP": "Search your groups...",
-        "SEARCH_USER": "Search your friends..."
+        "SEARCH_USER": "Search your friends...",
+        "SEARCH_MEMBER": "Search members..."
     },
     "TABLE":{
         "NAMEEN": "English name",
@@ -89,6 +102,8 @@
         "EDIT_REPLY": "Edit reply",
         "DELETE_REPLY": "Delete reply",
         "DELETE_USER": "Delete user",
-        "CREATE_GROUP":"Create your group"
+        "CREATE_GROUP":"Create your group",
+        "DELETE_POST": "Delete post",
+        "OUT_GROUP": "Out group"
     }
 }

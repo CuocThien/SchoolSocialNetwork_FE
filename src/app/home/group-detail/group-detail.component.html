@@ -3,8 +3,8 @@
     <div class="gr-intro__img">
       <img [src]="image" alt="">
       <div class="btn-group">
-        <button (click)="updateImage(groupDetail?.group?.image)">Chỉnh sửa</button>
-        <button (click)="removeUser(userId,1);outGroup()"><i class="bi bi-box-arrow-left"></i></button>
+        <button (click)="updateImage(groupDetail?.group?.image)">{{'GROUP.UPDATE'|translate}}</button>
+        <button (click)="outGroup();removeUser(userId,1);"><i class="bi bi-box-arrow-left"></i></button>
       </div>
     </div>
     <div class="gr-intro__info mt-3">
@@ -20,11 +20,14 @@
         <button class="btn-report col-1 text-start ps-3" (click)="report('group', groupId)"><i
             class="bi bi-flag"></i></button>
       </div>
-      <h4>{{groupDetail?.numPost}} bài viết - {{groupDetail?.numMember}} thành viên</h4>
+      <h4>{{groupDetail?.numPost}} {{'GROUP.POSTS'|translate}} - {{groupDetail?.numMember}}
+        {{'GROUP.MEMBERS'|translate}}</h4>
     </div>
     <ul class="menu-control-group-detail">
-      <li class="col-2 text-center" [ngClass]="{'li-active': isPostActive}" (click)="onPost()">Bài viết</li>
-      <li class="col-2 text-center" [ngClass]="{'li-active': !isPostActive}" (click)="onMember()">Thành viên</li>
+      <li class="col-2 text-center" [ngClass]="{'li-active': isPostActive}" (click)="onPost()">
+        {{'GROUP.POSTS2'|translate}}</li>
+      <li class="col-2 text-center" [ngClass]="{'li-active': !isPostActive}" (click)="onMember()">
+        {{'GROUP.MEMBERS2'|translate}}</li>
     </ul>
   </div>
   <div *ngIf="isPostActive" class="gr-de">
@@ -32,7 +35,8 @@
       <div class="card-content d-flex">
         <img class="u-margin-auto col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2" [src]="myAvatar" alt="">
         <div class="col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-inline-block h-100-pc text-center">
-          <input class="card-content__btn-input " type="text" placeholder="Create post..." (click)="createPost()">
+          <input class="card-content__btn-input " type="text" placeholder="{{'BUTTON.CREATE_POST'|translate}}"
+            (click)="createPost()">
         </div>
       </div>
     </div>
@@ -41,7 +45,7 @@
         <div class="card-content__post-title d-flex">
           <img class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2" [src]="post.avatar" alt="">
           <div class="ps-3 col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-8 col-8 d-inline-block h-100-pc text-start">
-            <h4>{{post.fullname}} đã tạo một bài viết</h4>
+            <h4>{{post.fullname}} {{'GROUP.CREATED_POST'|translate}}</h4>
             <h6>{{post.createdDate | date:'HH:mm dd/MM/YYYY'}}</h6>
           </div>
           <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
@@ -61,7 +65,7 @@
         </div>
         <app-comment class="text-start" [countCmt]="post?.countCmt" [postId]="post._id"></app-comment>
       </div>
-      <button *ngIf="page!=maxPage" class="btn-load-more" (click)="goToPage()">LOAD MORE</button>
+      <button *ngIf="page!=maxPage" class="btn-load-more" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}</button>
     </div>
   </div>
   <div *ngIf="!isPostActive" class="gr-mem">
@@ -69,17 +73,18 @@
       <div class="control d-flex">
         <form class="search__form text-center position-relative col-9" (ngSubmit)="search()">
           <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString"
-            type="text" name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
+            type="text" name="search" placeholder="{{'SEARCH.SEARCH_MEMBER'|translate}}">
           <button class="search__form--button-search position-absolute" type="submit"><i
               class="bi bi-search"></i></button>
         </form>
         <div class="col-3">
-          <button class="btn btn-outline-primary h-100-pc fs-5" (click)="addUser()">Thêm thành viên</button>
+          <button class="btn btn-outline-primary h-100-pc fs-5"
+            (click)="addUser()">{{'GROUP.ADD_MEMBER'|translate}}</button>
         </div>
       </div>
       <div *ngIf="!isSearch" class="admin-tab text-start">
         <hr>
-        <h4>Quản trị viên - {{totalAdmin}}</h4>
+        <h4>{{'GROUP.ADMIN'|translate}} - {{totalAdmin}}</h4>
         <div class="card-user d-flex  mt-2 mb-2" *ngFor="let admin of listAdmin;let i = index">
           <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
             <img [src]="admin.avatar" alt="">
@@ -97,7 +102,7 @@
       </div>
       <div class="member-tab text-start">
         <hr>
-        <h4>Thành viên - {{totalMember}}</h4>
+        <h4>{{'GROUP.MEMBERS2'| translate}} - {{totalMember}}</h4>
         <div class="card-user d-flex mt-2 mb-2" *ngFor="let member of listMember; let i = index">
           <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
             <img [src]="member.avatar" alt="">
@@ -117,7 +122,8 @@
         </div>
 
 
-        <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">Hiển thị thêm</h5>
+        <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">{{'BUTTON.LOAD_MORE'|translate}}
+        </h5>
       </div>
     </div>
   </div>

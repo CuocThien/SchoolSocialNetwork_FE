@@ -40,7 +40,13 @@
         "GROUPS_SUGGEST": "Dành cho bạn",
         "MEMBERS": "thành viên",
         "POSTS": "bài viết",
-        "DAY": "ngày"
+        "MEMBERS2": "Thành viên",
+        "POSTS2": "Bài viết",
+        "DAY": "ngày",
+        "UPDATE": "Chỉnh sửa",
+        "CREATED_POST": "đã tạo một bài viết mới",
+        "ADD_MEMBER": "Thêm thành viên",
+        "ADMIN": "Quản trị viên"
     },
     "SIGNUP":{
         "SINGLE_SIGNUP": "Tạo tài khoản",
@@ -50,10 +56,15 @@
         "COMMENT":"bình luận",
         "REPLY": "Trả lời",
         "EDIT": "Chỉnh sửa",
-        "DELETE": "Xoá"
+        "DELETE": "Xoá",
+        "LOAD_COMMENT": "Xem bình luận",
+        "LOAD_MORE_COMMENT": "Xem thêm bình luận",
+        "LOAD_REPLY": "Xem phản hồi",
+        "LOAD_MORE_REPLY": "Xem thêm phản hồi"
     },
     "BUTTON": {
         "CREATE_POST": "Tạo bài viết",
+        "UPDATE_POST": "Chỉnh sửa bài viết",
         "CREATE_GROUP": "Tạo nhóm",
         "JOIN_NOW": "Tham gia ngay",
         "SIGN_UP": "Đăng ký",
@@ -62,12 +73,14 @@
         "ADD_USER": "Thêm người dùng",
         "SUBMIT": "Xác nhận",
         "CANCEL": "Huỷ bỏ",
-        "EDIT": "Chỉnh sửa"
+        "EDIT": "Chỉnh sửa",
+        "LOAD_MORE": "Xem thêm"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
         "SEARCH_GROUP": "Tìm nhóm của bạn...",
-        "SEARCH_USER": "Tìm bạn bè..."
+        "SEARCH_USER": "Tìm bạn bè...",
+        "SEARCH_MEMBER": "Tìm kiếm thành viên..."
     },
     "TABLE":{
         "NAMEEN": "Tên tiếng Anh",
@@ -89,6 +102,8 @@
         "EDIT_REPLY": "Chỉnh sửa câu trả lời",
         "DELETE_REPLY": "Xoá câu trả lời",
         "DELETE_USER": "Xoá người dùng khỏi nhóm",
-        "CREATE_GROUP":"Tạo nhóm"
+        "CREATE_GROUP":"Tạo nhóm",
+        "DELETE_POST": "Xoá bài viết",
+        "OUT_GROUP": "Rời khỏi nhóm"
     }
 }

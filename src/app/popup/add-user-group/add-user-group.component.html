@@ -2,13 +2,13 @@
   <div class="card-content">
     <form class="search__form text-center position-relative col-12" (ngSubmit)="search()">
       <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
-        name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
+        name="search" placeholder="{{'SEARCH.SEARCH_USER'|translate}}">
       <button class="search__form--button-search position-absolute" type="submit"><i class="bi bi-search"></i></button>
     </form>
   </div>
   <div class="member-tab text-start">
     <hr>
-    <h4>Thành viên - {{totalMember}}</h4>
+    <h4>{{'GROUP.MEMBERS2'|translate}} - {{totalMember}}</h4>
     <div class="card-user d-flex mt-2 mb-2" *ngFor="let member of listMember">
       <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
         <img [src]="member.avatar" alt="">
@@ -25,6 +25,6 @@
     </div>
 
 
-    <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">Hiển thị thêm</h5>
+    <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">{{'BUTTON.LOAD_MORE'|translate}}</h5>
   </div>
 </div>

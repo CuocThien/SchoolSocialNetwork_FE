@@ -1262,14 +1262,14 @@
 
 "@ngx-translate/core@^14.0.0":
   version "14.0.0"
-  resolved "https://registry.yarnpkg.com/@ngx-translate/core/-/core-14.0.0.tgz#af421d0e1a28376843f0fed375cd2fae7630a5ff"
+  resolved "https://registry.npmjs.org/@ngx-translate/core/-/core-14.0.0.tgz"
   integrity sha512-UevdwNCXMRCdJv//0kC8h2eSfmi02r29xeE8E9gJ1Al4D4jEJ7eiLPdjslTMc21oJNGguqqWeEVjf64SFtvw2w==
   dependencies:
     tslib "^2.3.0"
 
 "@ngx-translate/http-loader@^7.0.0":
   version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@ngx-translate/http-loader/-/http-loader-7.0.0.tgz#905f38d8d13342621516635bf480ff9a4f73e9fc"
+  resolved "https://registry.npmjs.org/@ngx-translate/http-loader/-/http-loader-7.0.0.tgz"
   integrity sha512-j+NpXXlcGVdyUNyY/qsJrqqeAdJdizCd+GKh3usXExSqy1aE9866jlAIL+xrfDU4w+LiMoma5pgE4emvFebZmA==
   dependencies:
     tslib "^2.3.0"
@@ -3469,7 +3469,7 @@ figures@^3.0.0:
 
 file-saver@^2.0.5:
   version "2.0.5"
-  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  resolved "https://registry.npmjs.org/file-saver/-/file-saver-2.0.5.tgz"
   integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
 
 file-uri-to-path@1.0.0:
@@ -3929,6 +3929,11 @@ humanize-ms@^1.2.1:
   integrity sha1-xG4xWaKT9riW2ikxbYtv6Lt5u+0=
   dependencies:
     ms "^2.0.0"
+
+husky@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.npmjs.org/husky/-/husky-7.0.4.tgz"
+  integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4:
   version "0.4.24"
@@ -5071,7 +5076,7 @@ neo-async@^2.6.2:
 
 ngx-image-cropper@^6.1.0:
   version "6.1.0"
-  resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-6.1.0.tgz#2d22c9ac6b5394f1c5fa6502c53d9254e982b5cd"
+  resolved "https://registry.npmjs.org/ngx-image-cropper/-/ngx-image-cropper-6.1.0.tgz"
   integrity sha512-eumBdYVTzujkF9Z4tRCSlJy2FM/hjUZSJwyup8rXG7ntbRdaHT46WaxiiwJblL6xuu5BfRu1V+K0+YzOXaUuew==
   dependencies:
     tslib "^2.3.0"
@@ -6639,7 +6644,7 @@ rxjs@^7.2.0:
 
 rxjs@^7.5.5:
   version "7.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.5.tgz#2ebad89af0f560f460ad5cc4213219e1f7dd4e9f"
+  resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.5.5.tgz"
   integrity sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==
   dependencies:
     tslib "^2.1.0"

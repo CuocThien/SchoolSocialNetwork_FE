@@ -33,7 +33,8 @@
             <h5>{{group.numPost}} {{'GROUP.POSTS'|translate}}</h5>
           </div>
         </div>
-        <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">Hiển thị thêm</h5>
+        <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}
+        </h5>
 
       </div>
     </div>
@@ -54,8 +55,9 @@
             </button>
           </div>
         </div>
-        <h5 *ngIf="pageRelative!=maxPageRelative" class="button-text text-start" (click)="goToPageRelative()">Hiển thị
-          thêm</h5>
+        <h5 *ngIf="pageRelative!=maxPageRelative" class="button-text text-start" (click)="goToPageRelative()">
+          {{'BUTTON.LOAD_MORE'|translate}}
+        </h5>
       </div>
     </div>
   </div>
