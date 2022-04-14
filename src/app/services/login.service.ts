@@ -12,10 +12,10 @@ export class LogInService {
         private router: Router,
     ) {
     }
-    signIn(value: any) {
+    signIn(body: any) {
         const urlSignIn = `${HOST}/account/signin`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang') })
-        return this.http.post(urlSignIn, value, { headers })
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+        return this.http.post(urlSignIn, body, { headers })
             .subscribe({
                 next: (res: any) => {
                     localStorage.setItem('profile', JSON.stringify(res.data.profile) || '')
