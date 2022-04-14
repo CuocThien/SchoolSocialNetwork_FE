@@ -24,13 +24,15 @@ import { HttpClient } from '@angular/common/http';
 import { CategoryComponent } from './category/category.component';
 import { UsersComponent } from './users/users.component';
 import { ImageCropperModule } from "ngx-image-cropper";
+import { ReportGroupComponent } from './report-group/report-group.component';
+import { ReportPostComponent } from './report-post/report-post.component';
 
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

@@ -36,6 +36,18 @@ export class GroupService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.post(url, body, { headers })
   }
+  getListReportGroup(data: any) {
+    const { page = 1 } = data || {};
+    const url = `${HOST}/group/sub/report?page=${page}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
+  }
+  getListReportPost(data: any) {
+    const { page = 1 } = data || {};
+    const url = `${HOST}/post/sub/report/all?page=${page}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
+  }
   searchGroup(data: any) {
     const { page = 1, keyword = '' } = data || {};
     const url = `${HOST}/group/sub/search?page=${page}&keyword=${keyword}`;

@@ -6,7 +6,9 @@
         "CATEGORY":"Danh mục",
         "DELETED": "Đã xoá",
         "USERS": "Người dùng",
-        "STUDENT": "Student"
+        "STUDENT": "Student",
+        "REPORT_GROUP": "Quản lý báo cáo của nhóm",
+        "REPORT_POST": "Quản lý báo cáo của bài viết"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -88,7 +90,10 @@
         "ACTION": "Hành động",
         "FULLNAME": "Họ và tên",
         "DOB": "Ngày sinh",
-        "PHONE": "Số điện thoại"
+        "PHONE": "Số điện thoại",
+        "COUNT_POST": "Số lượng bài viết",
+        "COUNT_COMMENT": "Số lượng bình luận",
+        "CONTENT": "Nội dung"
     },
     "POPUP":{
         "CREATE_FACULTY":"Thêm khoa mới",

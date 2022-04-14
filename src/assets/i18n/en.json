@@ -6,7 +6,9 @@
         "CATEGORY":"Category",
         "DELETED": "Deleted",
         "USERS": "Users",
-        "STUDENT": "Student"
+        "STUDENT": "Student",
+        "REPORT_GROUP": "Report group",
+        "REPORT_POST": "Report post"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -88,7 +90,10 @@
         "ACTION": "Action",
         "FULLNAME": "Full name",
         "DOB": "DoB",
-        "PHONE": "Phone"
+        "PHONE": "Phone",
+        "COUNT_POST": "Count posts",
+        "COUNT_COMMENT": "Count comments",
+        "CONTENT": "Content"
     },
     "POPUP":{
         "CREATE_FACULTY":"Create faculty",

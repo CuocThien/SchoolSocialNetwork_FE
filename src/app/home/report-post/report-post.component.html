@@ -1,0 +1,46 @@
+<div class="pt-3 ms-3 me-4 faculty-container">
+
+  <div class="d-flex control">
+    <h1 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-8 col-md-8 col-sm-6 col-6">
+      {{'TITLE.REPORT_POST'|translate}}
+    </h1>
+    <!-- <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-sm-6 col-6">
+          <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createFaculty()">
+            {{'BUTTON.CREATE_FACULTY'|translate}}
+          </button>
+          <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createFaculty()">
+            <i class="bi bi-plus-square"></i>
+          </button>
+        </div> -->
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-nowrap dt-responsive nowrap no-footer dtr-inline">
+      <thead>
+        <tr class="text-center text-overflow font-size-15">
+          <th class="text-start" scope="col">Id</th>
+          <th scope="col">{{'TABLE.CONTENT'|translate}}</th>
+          <th class="ps-3 pe-3" scope="col">{{'TABLE.COUNT_COMMENT'|translate}}</th>
+          <th class="ps-3 pe-3" scope="col" *ngFor="let report of listTypeReport">
+            {{isLangEn ? report.nameEn : report.nameVi}}</th>
+          <th scope="col" class="text-center">{{'TABLE.ACTION'|translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of listReportPost; let i = index">
+          <td>{{post.postId}}</td>
+          <td>
+            <div [innerHtml]="post.content|slice:0:100"></div>
+          </td>
+          <td class="text-center">{{post.countComment}}</td>
+          <td class="text-center" *ngFor="let rp of post.report">{{rp.count}}</td>
+          <td class="text-center"><i class="bi bi-pencil-square btn-edit"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <ngb-pagination [collectionSize]="maxPage" [maxSize]="5" [pageSize]="1" [rotate]="true"
+      (pageChange)="goToPage($event)" [(page)]="page">
+    </ngb-pagination>
+  </div>
+</div>

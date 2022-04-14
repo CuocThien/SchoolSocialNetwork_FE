@@ -15,6 +15,8 @@ import { CategoryComponent } from './category/category.component';
 
 import { AuthGuardService } from '../auth.guard';
 import { UsersComponent } from './users/users.component';
+import { ReportGroupComponent } from './report-group/report-group.component';
+import { ReportPostComponent } from './report-post/report-post.component';
 
 const homeRoutes: Routes = [
     {
@@ -32,6 +34,8 @@ const homeRoutes: Routes = [
             { path: 'chat', component: ChatComponent, pathMatch: 'full' },
             { path: 'users', component: UsersComponent, pathMatch: 'full' },
             { path: 'post/:id', component: PostDetailComponent, pathMatch: 'full' },
+            { path: 'report/group', component: ReportGroupComponent, pathMatch: 'full' },
+            { path: 'report/post', component: ReportPostComponent, pathMatch: 'full' },
 
 
         ]
