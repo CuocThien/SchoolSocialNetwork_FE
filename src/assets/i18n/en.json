@@ -85,6 +85,7 @@
         "SEARCH_MEMBER": "Search members..."
     },
     "TABLE":{
+        "NAME": "Name",
         "NAMEEN": "English name",
         "NAMEVI": "Vietnamese name",
         "ACTION": "Action",

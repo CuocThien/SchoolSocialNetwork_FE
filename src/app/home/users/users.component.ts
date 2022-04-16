@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AddUserGroupComponent } from 'src/app/popup/add-user-group/add-user-group.component';
 import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
 import { FacultyService, UsersService } from '../../services/index';
 
@@ -134,5 +135,18 @@ export class UsersComponent implements OnInit {
       return;
     }
     this._getListUser({ groupId: this.groupId, isStudent: this.isStudent, page: this.page });
+  }
+  addUser() {
+    this.modalRef = this.modalService.open(AddUserGroupComponent, {
+      size: 'md',
+      centered: true,
+    });
+    this.modalRef.componentInstance.isMain = true;
+    this.modalRef.componentInstance.groupId = this.groupId;
+    this.modalRef.componentInstance.isStudent = this.isStudent;
+    this.modalRef.result.then((res: any) => {
+    }).catch((err: any) => {
+      // console.log("💁 => FacultyComponent => err", err)
+    });
   }
 }

@@ -34,10 +34,13 @@ export class ChatService {
         return this.http.get(url, { headers })
     }
     searchAccount(data: any) {
-        const { page, keyword } = data;
+        const { page, keyword, isStudent } = data || {};
         let query = ``
         keyword ? query += `?keyword=${keyword}` : query;
-        page ? query += `&page=${page}` : query
+        page ? query += `&page=${page}` : query;
+        if (isStudent != undefined)
+            query += `&isStudent=${isStudent}`
+        console.log("🐼 => ChatService => query", query)
         const url = `${HOST}/account/search${query}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })

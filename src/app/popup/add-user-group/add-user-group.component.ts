@@ -19,16 +19,26 @@ export class AddUserGroupComponent implements OnInit {
   listMember = [];
   pageUser = 1;
   maxPageUser = 1;
+  type = '';
+  isMain = false;
   groupId: any;
   searchString: string;
+  roleId = 1;
+  isStudent: boolean;
 
   ngOnInit(): void {
+    if (this.isMain) {
+      this.type = 'main'
+    }
   }
   private _getListMember() {
-    this.service.searchAccount({
+    const reqData = {
       keyword: this.searchString,
       page: this.pageUser
-    }).subscribe({
+    }
+    if (this.isMain)
+      Object.assign(reqData, { isStudent: this.isStudent })
+    this.service.searchAccount(reqData).subscribe({
       next: (res: any) => {
         this.listMember = [...this.listMember, ...res.data.result];
         this.maxPageUser = Math.ceil(res.data.total / 10);
@@ -48,7 +58,8 @@ export class AddUserGroupComponent implements OnInit {
   addUser(user: any) {
     this.groupService.addUser({
       groupId: this.groupId,
-      userId: user._id
+      userId: user._id,
+      type: this.type
     }).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);

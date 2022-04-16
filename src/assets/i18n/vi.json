@@ -85,6 +85,7 @@
         "SEARCH_MEMBER": "Tìm kiếm thành viên..."
     },
     "TABLE":{
+        "NAME": "Tên",
         "NAMEEN": "Tên tiếng Anh",
         "NAMEVI": "Tên tiếng Việt",
         "ACTION": "Hành động",

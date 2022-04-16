@@ -27,14 +27,16 @@ export class ReportGroupComponent implements OnInit {
   private _getListReportGroup() {
     this.service.getListReportGroup({ page: this.page }).subscribe({
       next: (res: any) => {
-        this.listReportGroup = res.data;
+        this.listReportGroup = res.data.result;
+        this.maxPage = Math.ceil(res.data.total / 10)
         if (!this.listTypeReport)
           this.listTypeReport = this.listReportGroup[0].report;
       }
     })
   }
-  goToPage($event) {
-
+  goToPage(event: any) {
+    this.page = event;
+    this._getListReportGroup();
   }
 
 }

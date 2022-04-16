@@ -17,8 +17,7 @@
     <table class="table table-striped table-bordered table-nowrap dt-responsive nowrap no-footer dtr-inline">
       <thead>
         <tr class="text-center text-overflow font-size-15">
-          <th scope="col">{{'TABLE.NAMEEN'|translate}}</th>
-          <th scope="col">{{'TABLE.NAMEVI'|translate}}</th>
+          <th scope="col">{{'TABLE.NAME'|translate}}</th>
           <th class="ps-3 pe-3" scope="col">{{'TABLE.COUNT_POST'|translate}}</th>
           <th class="ps-3 pe-3" scope="col" *ngFor="let report of listTypeReport">
             {{isLangEn ? report.nameEn : report.nameVi}}</th>
@@ -26,12 +25,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let group of listReportGroup; let i = index">
+        <tr *ngFor="let group of listReportGroup;">
           <td>{{group.nameEn}}</td>
-          <td>{{group.nameVi}}</td>
           <td class="text-center">{{group.countPost}}</td>
           <td class="text-center" *ngFor="let rp of group.report">{{rp.count}}</td>
-          <td class="text-center"><i class="bi bi-pencil-square btn-edit"></i></td>
+          <td class="text-center"><i class="bi bi-trash btn-edit"></i></td>
         </tr>
       </tbody>
     </table>

@@ -32,7 +32,7 @@ export class LogInService {
     }
     forgotPassword(value: any) {
         const url = `${HOST}/account/forgotPass`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang') })
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
         const body = JSON.stringify(value);
         return this.http.post(url, body, { headers })
     }

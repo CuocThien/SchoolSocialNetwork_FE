@@ -43,8 +43,12 @@ export class GroupService {
     return this.http.get(url, { headers })
   }
   getListReportPost(data: any) {
-    const { page = 1 } = data || {};
-    const url = `${HOST}/post/sub/report/all?page=${page}`;
+    const { page = 1, groupId } = data || {};
+    let query = '';
+    query += `page=${page}`
+    if (groupId != undefined)
+      query += `&groupId=${groupId}`
+    const url = `${HOST}/post/sub/report/all?${query}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.get(url, { headers })
   }
@@ -75,6 +79,11 @@ export class GroupService {
   getListPost(data: any) {
     const { groupId, page = 1 } = data || {}
     const url = `${HOST}/post/sub/${groupId}?page=${page}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
+  }
+  getListGroup() {
+    const url = `${HOST}/group/sub/all`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.get(url, { headers })
   }
