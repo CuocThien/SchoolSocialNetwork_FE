@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 import { CategoryService, GroupService, PostDetailService } from 'src/app/services';
@@ -16,7 +17,8 @@ export class ReportComponent implements OnInit {
     private groupService: GroupService,
     private postService: PostDetailService,
     private activeModal: NgbActiveModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   listReport: any;
   isLangEn = true;
@@ -34,6 +36,7 @@ export class ReportComponent implements OnInit {
     if (this.reportId == '') {
       this.toastr.error('Please choose category of report')
     }
+    this.spinner.show();
     if (this.type == 'group') {
       this.groupService.report({
         groupId: this.id,
@@ -41,9 +44,11 @@ export class ReportComponent implements OnInit {
       }).subscribe({
         next: (res: any) => {
           this.activeModal.close(res);
+          this.spinner.hide();
         },
         error: (err: any) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       })
       return;
@@ -54,9 +59,11 @@ export class ReportComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.activeModal.close(res);
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }

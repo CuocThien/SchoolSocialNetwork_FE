@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { TransferFacultyComponent } from 'src/app/popup/transfer-faculty/transfer-faculty.component';
 import { FacultyService, UsersService } from '../../services/index';
@@ -16,6 +17,7 @@ export class UsersComponent implements OnInit {
     private facultyService: FacultyService,
     private toastr: ToastrService,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService
 
   ) { }
   private modalRef: NgbModalRef;
@@ -78,26 +80,33 @@ export class UsersComponent implements OnInit {
   }
 
   private _searchUser(data: any) {
+    this.spinner.show();
     this.service.searchUser(data).subscribe({
       next: (res: any) => {
         this.listUsers = res.data.result;
-        this.maxPage = Math.ceil(res.data.total / 10)
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }
   private _getListUser(data: any) {
+    this.spinner.show();
     this.service.getListUser(data).subscribe({
       next: (res: any) => {
         this.listUsers = res.data.result;
-        this.maxPage = Math.ceil(res.data.total / 10)
-      }
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
 
   private _listFaculty() {
+    this.spinner.show();
     this.facultyService.getListAllFaculty().subscribe({
       next: (res: any) => {
         this.listAllFaculty = this.listFaculty = res.data.result.map((itm: any) => {
@@ -112,10 +121,13 @@ export class UsersComponent implements OnInit {
         )
         this.groupId = this.listFaculty[0]._id || {};
         this._getListUser({ groupId: this.groupId, isStudent: this.isStudent });
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   private _facultyByDean() {
+    this.spinner.show();
     this.facultyService.getFacultyByDean().subscribe({
       next: (res: any) => {
         this.listFaculty = res.data.result.map((itm: any) => {
@@ -126,7 +138,9 @@ export class UsersComponent implements OnInit {
         });
         this.groupId = this.listFaculty[0]._id || {};
         this._getListUser({ groupId: this.groupId, isStudent: this.isStudent });
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   goToPage(event: any) {

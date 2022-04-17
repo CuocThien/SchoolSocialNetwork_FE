@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ChangePasswordService } from '../../services/index';
 
@@ -10,7 +11,12 @@ import { ChangePasswordService } from '../../services/index';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  constructor(private toastr: ToastrService, private service: ChangePasswordService, private router: Router) { }
+  constructor(
+    private toastr: ToastrService,
+    private service: ChangePasswordService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) { }
 
   isValidNewPassword = true;
   isValidConfirmPassword = true;
@@ -33,14 +39,17 @@ export class ChangePasswordComponent implements OnInit {
       this.isValidForm = false;
     }
     else {
+      this.spinner.show()
       this.service.changePassword(formChangePassword.value).subscribe({
         next: ((res: any) => {
           this.toastr.success(res.msg);
           localStorage.clear();
           this.router.navigate(['/login']);
+          this.spinner.hide();
         }),
         error: ((err) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         })
       })
       this.isValidConfirmPassword = true;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CreateGroupComponent } from 'src/app/popup/create-group/create-group.component';
 import { GroupService } from 'src/app/services';
@@ -17,6 +18,7 @@ export class GroupComponent implements OnInit {
     private service: GroupService,
     private router: Router,
     private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   private modalRef: NgbModalRef;
   searchString = '';
@@ -35,19 +37,25 @@ export class GroupComponent implements OnInit {
   }
 
   private _getListGroup() {
+    this.spinner.show();
     this.service.getListGroupByUserId({ page: this.page }).subscribe({
       next: (res: any) => {
         this.listGroup = [...this.listGroup, ...res.data.result];
-        this.maxPage = Math.ceil(res.data.total / 10);
-      }
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   private _getListGroupRelative() {
+    this.spinner.show();
     this.service.getListGroupRelative({ page: this.page }).subscribe({
       next: (res: any) => {
         this.listGroupRelative = [...this.listGroupRelative, ...res.data.result];
-        this.maxPageRelative = Math.ceil(res.data.total / 10);
-      }
+        this.maxPageRelative = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   redirectGroupDetail(groupId: any) {
@@ -78,6 +86,7 @@ export class GroupComponent implements OnInit {
     });
   }
   joinNow(group: any, index: any) {
+    this.spinner.show();
     this.service.addUser({
       groupId: group._id,
       userId: this.userId
@@ -87,23 +96,27 @@ export class GroupComponent implements OnInit {
         group.groupId = group._id;
         this.listGroupRelative.splice(index, 1);
         this.listGroup.push(group);
+        this.spinner.hide();
       },
       error: (err: any) => {
         this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }
   private _search() {
+    this.spinner.show();
     this.service.searchGroup({
       keyword: this.searchString,
       page: this.page
     }).subscribe({
       next: (res: any) => {
+        this.spinner.hide();
         this.listGroup = [...this.listGroup, ...res.data.result];
-        this.maxPage = Math.ceil(res.data.total / 10);
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
       },
       error: () => {
-
+        this.spinner.hide();
       }
     })
   }

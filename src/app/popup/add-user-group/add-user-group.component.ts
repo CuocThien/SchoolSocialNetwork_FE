@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ChatService, GroupService } from 'src/app/services';
 
@@ -12,7 +13,8 @@ export class AddUserGroupComponent implements OnInit {
   constructor(
     private service: ChatService,
     private groupService: GroupService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
 
   ) { }
   totalMember: number;
@@ -32,6 +34,7 @@ export class AddUserGroupComponent implements OnInit {
     }
   }
   private _getListMember() {
+    this.spinner.show();
     const reqData = {
       keyword: this.searchString,
       page: this.pageUser
@@ -41,9 +44,11 @@ export class AddUserGroupComponent implements OnInit {
     this.service.searchAccount(reqData).subscribe({
       next: (res: any) => {
         this.listMember = [...this.listMember, ...res.data.result];
-        this.maxPageUser = Math.ceil(res.data.total / 10);
+        this.maxPageUser = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.totalMember = res.data.total;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   goToPageUser() {
@@ -56,6 +61,7 @@ export class AddUserGroupComponent implements OnInit {
     this._getListMember();
   }
   addUser(user: any) {
+    this.spinner.show();
     this.groupService.addUser({
       groupId: this.groupId,
       userId: user._id,
@@ -63,9 +69,11 @@ export class AddUserGroupComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }

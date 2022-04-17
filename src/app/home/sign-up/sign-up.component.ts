@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isEmpty } from 'lodash'
 import FileSaver from 'file-saver'
 import { LIST_ROLE } from 'src/app/utils/constant';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +20,8 @@ export class SignUpComponent implements OnInit {
     private facultyService: FacultyService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private service: SignUpService
+    private service: SignUpService,
+    private spinner: NgxSpinnerService
   ) { }
   isSingleSignup = false;
   contentButton = 'SIGNUP.SINGLE_SIGNUP'
@@ -75,14 +77,17 @@ export class SignUpComponent implements OnInit {
       this.toastr.error('Please choose an excel file!')
       return;
     }
+    this.spinner.show();
     this.service.signup(this.data).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.signUpForm.reset();
-        this.exportAsExcelFile(Object.values(res.data.accountData), 'account_signup')
+        this.exportAsExcelFile(Object.values(res.data.accountData), 'account_signup');
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
     this.data = {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from '../../services/index';
 
@@ -13,7 +14,8 @@ export class DeleteCategoryComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private service: CategoryService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   category: any;
   type = '';
@@ -26,15 +28,18 @@ export class DeleteCategoryComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
     if (this.isDelete) {
       const data = { ...this.category, isDelete: true, type: this.type }
       this.service.editCategory(data).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
+          this.spinner.hide();
         },
         error: (err: any) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       })
     } else {
@@ -43,9 +48,11 @@ export class DeleteCategoryComponent implements OnInit {
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
+          this.spinner.hide();
         },
         error: (err: any) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       })
     }

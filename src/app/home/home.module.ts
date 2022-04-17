@@ -27,6 +27,7 @@ import { ImageCropperModule } from "ngx-image-cropper";
 import { ReportGroupComponent } from './report-group/report-group.component';
 import { ReportPostComponent } from './report-post/report-post.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -35,6 +36,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     HomeRoutingModule,
     FontAwesomeModule,

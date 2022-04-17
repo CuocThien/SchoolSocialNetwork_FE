@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 import { CategoryService, GroupService } from '../../services/index';
@@ -17,7 +18,8 @@ export class CreateGroupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private categoryService: CategoryService,
-    private service: GroupService
+    private service: GroupService,
+    private spinner: NgxSpinnerService
   ) { }
   createGroupForm: FormGroup;
   listCategory: any;
@@ -41,13 +43,16 @@ export class CreateGroupComponent implements OnInit {
       this.toastr.error('Please fill information!')
       return;
     }
+    this.spinner.show();
     this.service.createNewGroup(this.createGroupForm.value).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.activeModal.close(res.data);
+        this.spinner.hide();
       },
       error: (err: any) => {
         this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
 

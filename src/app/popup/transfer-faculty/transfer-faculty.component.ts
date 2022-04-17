@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FacultyService } from 'src/app/services';
 
@@ -13,8 +14,8 @@ export class TransferFacultyComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private service: FacultyService,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   userId: any;
   facultyFrom: any;
@@ -31,6 +32,7 @@ export class TransferFacultyComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
     const reqData = {
       userId: this.userId,
       facultyFrom: this.facultyFrom._id,
@@ -40,9 +42,11 @@ export class TransferFacultyComponent implements OnInit {
       next: (res: any) => {
         this.activeModal.close(res)
         this.toastr.success(res.msg);
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }

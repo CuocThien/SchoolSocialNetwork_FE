@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CreatePostService } from '../../services/index';
 
@@ -13,7 +14,8 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private createPostService: CreatePostService,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private spinner: NgxSpinnerService
   ) { }
   ckeConfig: any;
   content: any;
@@ -46,15 +48,18 @@ export class CreatePostComponent implements OnInit {
     } else if (form.value.content == "") {
       this.toastr.error("Please input content of post")
     } else {
+      this.spinner.show();
       if (this.isUpdate) {
         this.data._id = this.postId;
         this.createPostService.updatePost(this.data).subscribe({
           next: (res: any) => {
             this.toastr.success(res.msg);
             this.activeModal.close(res);
+            this.spinner.hide();
           },
           error: (err: any) => {
-            this.toastr.error(err.error.msg)
+            this.toastr.error(err.error.msg);
+            this.spinner.hide();
           }
         });
         return;
@@ -63,9 +68,11 @@ export class CreatePostComponent implements OnInit {
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
+          this.spinner.hide();
         },
         error: (err: any) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       });
     }

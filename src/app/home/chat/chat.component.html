@@ -1,4 +1,6 @@
 <div class="chat-container d-flex">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
   <div class="chat-sidebar col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-2 col-2">
     <h1>{{'TITLE.CHAT'|translate}}</h1>
     <div class="chat-sidebar__control u-margin-bottom-small">
@@ -12,10 +14,10 @@
       [ngClass]="{'active':i == activeIndex, 'd-none':searchString!=''}"
       (click)="joinConversation(conversation.user, i, false)">
       <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img [src]="conversation?.user.avatar" alt="">
+        <img [src]="conversation?.user?.avatar" alt="">
       </div>
       <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>{{conversation?.user.fullname}}</h5>
+        <h5>{{conversation?.user?.fullname}}</h5>
         <h6>{{conversation.lastestMessage}}</h6>
       </div>
     </div>
@@ -54,7 +56,7 @@
       </div>
     </div>
     <div class="chat-box__input">
-      <input [(ngModel)]="message" [value]="message" type="text">
+      <input [(ngModel)]="message" [value]="message" type="text" (keyup.enter)="sendMessage()">
       <fa-icon [icon]="faSend" (click)="sendMessage()"></fa-icon>
     </div>
   </div>

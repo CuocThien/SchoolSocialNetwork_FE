@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CreateCategoryComponent } from 'src/app/popup/create-category/create-category.component';
 import { DeleteCategoryComponent } from 'src/app/popup/delete-category/delete-category.component';
@@ -16,6 +17,7 @@ export class CategoryComponent implements OnInit {
     private service: CategoryService,
     private toastr: ToastrService,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService
   ) { }
   private modalRef: NgbModalRef;
 
@@ -93,9 +95,11 @@ export class CategoryComponent implements OnInit {
     });
   }
   private _getListCategory() {
+    this.spinner.show();
     this.service.getListCategory({ type: this.category, isDelete: this.isDelete }).subscribe(
       (res: any) => {
         this.listCategory = res.data || [];
+        this.spinner.hide();
       }
     )
   }

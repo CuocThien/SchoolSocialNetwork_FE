@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
-    if (this.screenWidth < 650) {
+    if (this.screenWidth < 680) {
       this.isOpen = false
       this.faArrow = this.isOpen ? faAngleLeft : faAngleRight;
     }

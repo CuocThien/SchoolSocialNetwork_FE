@@ -77,7 +77,8 @@
         "SUBMIT": "Submit",
         "CANCEL": "Cancel",
         "EDIT": "Edit",
-        "LOAD_MORE": "Load more"
+        "LOAD_MORE": "Load more",
+        "UPLOAD": "Upload"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
@@ -114,6 +115,7 @@
         "OUT_GROUP": "Out group",
         "FROM_FACULTY": "From faculty",
         "TO_FACULTY": "To faculty",
-        "DEAN": "Dean"
+        "DEAN": "Dean",
+        "IMAGE_PREVIEW": "Image preview"
     }
 }

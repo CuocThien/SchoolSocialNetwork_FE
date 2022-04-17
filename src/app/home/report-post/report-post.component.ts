@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
 import { GroupService } from 'src/app/services';
 
@@ -13,6 +14,7 @@ export class ReportPostComponent implements OnInit {
   constructor(
     private service: GroupService,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService
   ) { }
   private modalRef: NgbModalRef;
   page = 1;
@@ -32,14 +34,17 @@ export class ReportPostComponent implements OnInit {
     this.isLangEn = localStorage.getItem('lang') === 'en'
   }
   private _getListReportPost() {
+    this.spinner.show();
     const reqData = this.groupId ? { page: this.page, groupId: this.groupId } : { page: this.page };
     this.service.getListReportPost(reqData).subscribe({
       next: (res: any) => {
         this.listReportPost = res.data.result || [];
-        this.maxPage = Math.ceil(res.data.total / 10)
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         if (!this.listTypeReport)
           this.listTypeReport = this.listReportPost[0].report;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   private _getListGroup() {

@@ -1,5 +1,7 @@
 <div class="form-popup">
-  <h3 class="u-center-text">REPORT</h3>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
+  <h3 class="u-center-text">{{'SIDEBAR.REPORT'|translate}}</h3>
   <hr>
   <ng-select class="mt-3 mb-3" [searchable]="false" [clearable]="false" [(ngModel)]="reportId">
     <ng-option *ngFor="let report of (listReport | async)" [value]="report._id">

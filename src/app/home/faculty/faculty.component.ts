@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ChangeAdminComponent } from 'src/app/popup/change-admin/change-admin.component';
 import { CreateFacultyComponent } from 'src/app/popup/create-faculty/create-faculty.component';
@@ -16,6 +17,7 @@ export class FacultyComponent implements OnInit {
     private service: FacultyService,
     private toastr: ToastrService,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService
   ) { }
   private modalRef: NgbModalRef;
 
@@ -26,14 +28,15 @@ export class FacultyComponent implements OnInit {
     this._getListFaculty();
   }
   private _getListFaculty() {
+    this.spinner.show();
     this.service.getListFaculty({ page: this.page }).subscribe({
       next: ((res: any) => {
-        console.log("🐼 => FacultyComponent => res", res)
         this.listFaculty = res.data.result;
-        this.maxPage = Math.ceil((res.data.total - 2) / 10)
+        this.maxPage = (res.data.total - 2) ? Math.ceil((res.data.total - 2) / 10) : 1;
+        this.spinner.hide();
       }),
       error: ((err: any) => {
-        this.toastr.error(err.error.msg)
+        this.spinner.hide();
       })
     })
   }

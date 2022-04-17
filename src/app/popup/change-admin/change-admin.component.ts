@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { GroupService, UsersService } from 'src/app/services';
 
@@ -14,8 +15,8 @@ export class ChangeAdminComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private service: UsersService,
     private groupService: GroupService,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   dean: any;
   oldDean: any;
@@ -70,6 +71,7 @@ export class ChangeAdminComponent implements OnInit {
     this._search();
   }
   private _search() {
+    this.spinner.show()
     this.service.searchUser({
       type: 'main',
       groupId: this.faculty._id,
@@ -78,8 +80,10 @@ export class ChangeAdminComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.listUsers = [...this.listUsers, ...res.data.result];
-        this.maxPage = this.totalMember = Math.ceil(res.data.total / 10);
-      }
+        this.maxPage = this.totalMember = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   onCancel() {
@@ -100,12 +104,15 @@ export class ChangeAdminComponent implements OnInit {
   }
 
   private _getListUser() {
+    this.spinner.show();
     this.service.getListUser({ groupId: this.faculty._id, isStudent: false, page: this.page }).subscribe({
       next: (res: any) => {
         this.listUsers = [...this.listUsers, ...res.data.result];
-        this.maxPage = Math.ceil(res.data.total / 10)
-        this.totalMember = res.data.total
-      }
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.totalMember = res.data.total;
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
 }

@@ -71,7 +71,7 @@ export class IndexComponent implements OnInit {
     this.service.getListPostMainGroupFacultyForStudent(this.faculty, this.pageFacultyStudent).subscribe({
       next: ((res: any) => {
         this.listFacultyStudentPost = res.data.result;
-        this.totalFacultyStudent = Math.ceil(res.data.total / 10);
+        this.totalFacultyStudent = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       }),
       error: ((err) => {
@@ -85,7 +85,7 @@ export class IndexComponent implements OnInit {
     this.service.getListPostMainGroupFacultyForTeacher(this.faculty, this.pageFacultyTeacher).subscribe({
       next: ((res: any) => {
         this.listFacultyTeacherPost = res.data.result;
-        this.totalFacultyTeacher = Math.ceil(res.data.total / 10);
+        this.totalFacultyTeacher = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide()
       }),
       error: ((err) => {
@@ -98,7 +98,7 @@ export class IndexComponent implements OnInit {
     this.service.getListPostMainGroupForStudent(this.pageMainStudent).subscribe({
       next: ((res: any) => {
         this.listMainStudentPost = res.data.result;
-        this.totalMainStudent = Math.ceil(res.data.total / 10);
+        this.totalMainStudent = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       }),
       error: ((err) => {
@@ -111,7 +111,7 @@ export class IndexComponent implements OnInit {
     this.service.getListPostMainGroupForTeacher(this.pageMainTeacher).subscribe({
       next: ((res: any) => {
         this.listMainTeacherPost = res.data.result;
-        this.totalMainTeacher = Math.ceil(res.data.total / 10);
+        this.totalMainTeacher = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       }),
       error: ((err) => {

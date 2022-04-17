@@ -10,8 +10,6 @@ import { HOST } from "src/app/utils/constant";
 export class ChatService {
     constructor(
         private http: HttpClient,
-        private toastr: ToastrService,
-        private router: Router,
     ) {
     }
     getListConversation() {

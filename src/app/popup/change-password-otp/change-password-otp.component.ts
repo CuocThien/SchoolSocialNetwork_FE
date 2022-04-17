@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ChangePasswordService } from '../../services/index';
 
@@ -14,8 +15,13 @@ export class ChangePasswordOtpComponent implements OnInit {
   userId: any;
   isValidNewPassword = true;
   isValidConfirmPassword = true;
-  constructor(private toastr: ToastrService, private service: ChangePasswordService, private router: Router,
-    private activeModal: NgbActiveModal) { }
+  constructor(
+    private toastr: ToastrService,
+    private service: ChangePasswordService,
+    private router: Router,
+    private activeModal: NgbActiveModal,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -29,16 +35,18 @@ export class ChangePasswordOtpComponent implements OnInit {
       this.isValidConfirmPassword = false;
     }
     else {
+      this.spinner.show();
       formChangePassword.value.userId = this.userId;
       this.service.resetPassword(formChangePassword.value).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.router.navigate(['/login']);
           this.activeModal.close();
-
+          this.spinner.hide();
         },
         error: (err) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       })
       this.isValidConfirmPassword = true;

@@ -1,16 +1,15 @@
-    <!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-      <p style="color: white"> Loading... </p>
-    </ngx-spinner> -->
-    <div class="post-detail">
-      <h2 class="post-detail__title">{{post?.title}}</h2>
-      <div class="post-detail__author">
-        <span>{{post?.author}} - {{post?.createdDate|date:'HH:mm dd/MM/yyyy'}}</span>
-      </div>
-      <div class="post-detail__content" [innerHtml]="post?.content"></div>
-      <!-- <h5>Đánh giá bài viết</h5>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+</ngx-spinner>
+<div class="post-detail">
+  <h2 class="post-detail__title">{{post?.title}}</h2>
+  <div class="post-detail__author">
+    <span>{{post?.author}} - {{post?.createdDate|date:'HH:mm dd/MM/yyyy'}}</span>
+  </div>
+  <div class="post-detail__content" [innerHtml]="post?.content"></div>
+  <!-- <h5>Đánh giá bài viết</h5>
       <app-star class="star-readpost" id="{{postData.Id}}" rate="{{post.RatingbyAcc}}"></app-star>-->
-      <app-comment [postId]="postId"></app-comment>
-    </div>
-    <button type="button" class="btn backToTop" (click)="backToTop()">
-      <i class="bi bi-chevron-double-up"></i>
-    </button>
+  <app-comment [countCmt]="post?.countCmt" [postId]="postId"></app-comment>
+</div>
+<button type="button" class="btn backToTop" (click)="backToTop()">
+  <i class="bi bi-chevron-double-up"></i>
+</button>

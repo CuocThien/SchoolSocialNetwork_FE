@@ -1,6 +1,8 @@
 <div class="form-popup form-create-post text-center">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
   <div class="col-12">
-    <h6>Image Preview</h6>
+    <h3>{{'POPUP.IMAGE_PREVIEW'|translate}}</h3>
     <img class="full-image" [src]="imgUrl" />
   </div>
   <div class="col-md-12 mt-5">

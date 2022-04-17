@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCroppedEvent } from "ngx-image-cropper";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { UploadImageService } from 'src/app/services';
 
@@ -14,7 +15,8 @@ export class CropImageGroupComponent implements OnInit {
   constructor(
     private service: UploadImageService,
     private activeModal: NgbActiveModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
   imgChangeEvt: any = "";
   cropImgPreview: any = "";
@@ -32,17 +34,20 @@ export class CropImageGroupComponent implements OnInit {
   }
 
   onUpload() {
+    this.spinner.show();
     const data = new FormData();
     data.append('file', this.fileImg);
     data.append('upload_preset', 'angular_cloudinary');
     data.append('cloud_name', 'blogreview')
     this.service.updateImage(data)
       .then((res: any) => {
+        this.spinner.hide();
         this.imgUrl = res.url;
         this.activeModal.close(res);
       })
       .catch((err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       })
   }
   onCancel() {

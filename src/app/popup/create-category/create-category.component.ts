@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from '../../services/index';
 
@@ -15,7 +16,8 @@ export class CreateCategoryComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private service: CategoryService
+    private service: CategoryService,
+    private spinner: NgxSpinnerService
   ) { }
   category: any;
   isEdit = false;
@@ -38,16 +40,19 @@ export class CreateCategoryComponent implements OnInit {
       this.toastr.error('Please fill information!')
       return;
     }
+    this.spinner.show();
     if (!this.isEdit) {
       const data = { ...this.createCategoryForm.value, type: this.type }
       this.service.createNewCategory(data).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.createCategoryForm.reset();
-          this.activeModal.close(res.data)
+          this.activeModal.close(res.data);
+          this.spinner.hide();
         },
         error: (err: any) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       })
     } else {
@@ -56,10 +61,12 @@ export class CreateCategoryComponent implements OnInit {
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.createCategoryForm.reset();
-          this.activeModal.close(res.data)
+          this.activeModal.close(res.data);
+          this.spinner.hide();
         },
         error: (err: any) => {
-          this.toastr.error(err.error.msg)
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
         }
       })
     }

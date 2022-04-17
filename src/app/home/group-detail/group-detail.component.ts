@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AddUserGroupComponent } from 'src/app/popup/add-user-group/add-user-group.component';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
@@ -21,7 +22,8 @@ export class GroupDetailComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
   fullname: any;
   image: any;
@@ -59,12 +61,15 @@ export class GroupDetailComponent implements OnInit {
     this._getListMember();
   }
   private _groupDetail() {
+    this.spinner.show();
     this.service.getGroupDetail(this.groupId).subscribe({
       next: (res: any) => {
         this.groupDetail = res.data;
         this.image = this.groupDetail.group.image;
         this.groupName = this.groupDetail.group.nameEn;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   private _checkAdmin() {
@@ -76,15 +81,19 @@ export class GroupDetailComponent implements OnInit {
   }
 
   private _getListPost() {
+    this.spinner.show();
     this.service.getListPost({ groupId: this.groupId, page: this.page }).subscribe({
       next: (res: any) => {
         this.listPost = [...this.listPost, ...res.data.result];
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
 
   private _getListAdmin() {
+    this.spinner.show();
     this.userService.getListUser({
       type: 'sub',
       groupId: this.groupId,
@@ -93,10 +102,13 @@ export class GroupDetailComponent implements OnInit {
       next: (res: any) => {
         this.listAdmin = res.data.result;
         this.totalAdmin = res.data.total;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   private _getListMember() {
+    this.spinner.show();
     this.userService.getListUser({
       type: 'sub',
       groupId: this.groupId,
@@ -105,9 +117,11 @@ export class GroupDetailComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.listMember = [...this.listMember, ...res.data.result];
-        this.maxPageUser = Math.ceil(res.data.total / 10);
+        this.maxPageUser = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.totalMember = res.data.total;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   goToPageUser() {
@@ -142,6 +156,7 @@ export class GroupDetailComponent implements OnInit {
     }).catch(() => { });
   }
   private _updateGroup() {
+    this.spinner.show();
     this.service.updateGroup({
       _id: this.groupId,
       image: this.image,
@@ -150,9 +165,11 @@ export class GroupDetailComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg)
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }
@@ -206,7 +223,7 @@ export class GroupDetailComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.listMember = res.data.result;
-        this.maxPageUser = Math.ceil(res.data.total / 10);
+        this.maxPageUser = res.data.total ? Math.ceil(res.data.total / 10) : 1;
       }
     })
   }
@@ -244,6 +261,7 @@ export class GroupDetailComponent implements OnInit {
       userId: user.userId,
       isRemove: false
     }
+    this.spinner.show();
     this.service.changeAdmin(reqData).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
@@ -251,9 +269,11 @@ export class GroupDetailComponent implements OnInit {
         this.totalAdmin++;
         this.listMember.splice(index, 1);
         this.totalMember--;
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }
@@ -263,6 +283,7 @@ export class GroupDetailComponent implements OnInit {
       userId: admin.userId,
       isRemove: true
     }
+    this.spinner.show();
     this.service.changeAdmin(reqData).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
@@ -270,9 +291,11 @@ export class GroupDetailComponent implements OnInit {
         this.totalAdmin--;
         this.listAdmin.splice(index, 1);
         this.totalMember++;
+        this.spinner.hide();
       },
       error: (err: any) => {
-        this.toastr.error(err.error.msg)
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
       }
     })
   }

@@ -77,7 +77,8 @@
         "SUBMIT": "Xác nhận",
         "CANCEL": "Huỷ bỏ",
         "EDIT": "Chỉnh sửa",
-        "LOAD_MORE": "Xem thêm"
+        "LOAD_MORE": "Xem thêm",
+        "UPLOAD": "Tải ảnh lên"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
@@ -114,6 +115,7 @@
         "OUT_GROUP": "Rời khỏi nhóm",
         "FROM_FACULTY": "Từ khoa",
         "TO_FACULTY": "Đến khoa",
-        "DEAN": "Trưởng khoa"
+        "DEAN": "Trưởng khoa",
+        "IMAGE_PREVIEW": "Xem trước ảnh"
     }
 }

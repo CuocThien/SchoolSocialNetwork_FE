@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { GroupService } from 'src/app/services';
 
 @Component({
@@ -9,7 +10,8 @@ import { GroupService } from 'src/app/services';
 export class ReportGroupComponent implements OnInit {
 
   constructor(
-    private service: GroupService
+    private service: GroupService,
+    private spinner: NgxSpinnerService
   ) { }
   page = 1;
   maxPage = 1;
@@ -25,13 +27,16 @@ export class ReportGroupComponent implements OnInit {
   }
 
   private _getListReportGroup() {
+    this.spinner.show();
     this.service.getListReportGroup({ page: this.page }).subscribe({
       next: (res: any) => {
         this.listReportGroup = res.data.result;
-        this.maxPage = Math.ceil(res.data.total / 10)
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         if (!this.listTypeReport)
           this.listTypeReport = this.listReportGroup[0].report;
-      }
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
     })
   }
   goToPage(event: any) {

@@ -6,6 +6,7 @@ import { EVENT_MESSAGE_SSC } from '../../socket-event/server/message';
 import { faPaperPlane, } from '@fortawesome/free-solid-svg-icons';
 import { ChatService } from '../../services/index';
 import { HOST } from 'src/app/utils/constant';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -41,7 +42,10 @@ export class ChatComponent implements OnInit {
   flag = false;
   @ViewChild('chatBoxContent') private chatbox!: ElementRef;
 
-  constructor(private service: ChatService) {
+  constructor(
+    private service: ChatService,
+    private spinner: NgxSpinnerService
+  ) {
     this.socket = io.io(`${HOST}`);
     this.socket.on(EVENT_MESSAGE_SSC.JOIN_ROOM_SSC, (data: any) => {
       console.log(data)
@@ -72,6 +76,12 @@ export class ChatComponent implements OnInit {
     })
     this.scrollToBottom();
 
+  }
+
+  ngOnDestroy() {
+    this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
+      room: this.conversationId
+    });
   }
 
   ngAfterViewChecked() {
@@ -109,19 +119,23 @@ export class ChatComponent implements OnInit {
   }
 
   getListConversation() {
+    this.spinner.show();
     this.service.getListConversation().subscribe((res: any) => {
       this.listConversation = res.data.result;
       this.conversationId = this.listConversation[0]._id;
+      this.spinner.hide();
     })
   }
   _getConversation(id1: any, id2: any) {
+    this.spinner.show();
+    // console.log("🐼 => ChatComponent => { id1, id2 }", { id1, id2 })
     this.service.getConversation({ id1, id2 }).subscribe((res: any) => {
+      // console.log("🐼 => ChatComponent => res", res)
       const { _id, user } = res.data || {}
       if (this.conversationId != _id) {
         this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
           room: this.conversationId
         });
-
       }
       this.conversationId = _id;
       this.pageMessage = 0;
@@ -137,25 +151,34 @@ export class ChatComponent implements OnInit {
         this.activeIndex--;
         this.flag = false;
       }
+      this.spinner.hide();
     })
   }
   getMessage() {
-    this.service.getMessage({ conversationId: this.conversationId, page: this.pageMessage }).subscribe((res: any) => {
-      this.messageList = res.data.lstMessage,
-        this.isLoadOldMessage = false;
+    this.spinner.show();
+    const reqData = { conversationId: this.conversationId, page: this.pageMessage }
+    this.service.getMessage(reqData).subscribe((res: any) => {
+      this.messageList = res.data.lstMessage;
+      this.isLoadOldMessage = false;
+      this.spinner.hide();
     })
   }
   getMoreMessage() {
+    this.spinner.show();
     this.pageMessage++;
-    this.service.getMessage({ conversationId: this.conversationId, page: this.pageMessage }).subscribe((res: any) => {
-      const oldMessage = res.data.lstMessage;
-      oldMessage.reverse().map((itm: any) => {
-        this.messageList.unshift(itm);
-      })
-    })
+    this.service.getMessage({ conversationId: this.conversationId, page: this.pageMessage })
+      .subscribe(
+        (res: any) => {
+          const oldMessage = res.data.lstMessage;
+          oldMessage.reverse().map((itm: any) => {
+            this.messageList.unshift(itm);
+          })
+          this.spinner.hide();
+        })
     this.isLoadOldMessage = true;
   }
   sendMessage(): void {
+    if (this.message == '') return;
     this.countSendMessage++;
     const msg = {
       conversationId: this.conversationId,
@@ -170,11 +193,12 @@ export class ChatComponent implements OnInit {
   }
   searchAccount() {
     if (this.searchString != '') {
+      this.spinner.show();
       this.flag = true;
-
       const reqData = { keyword: this.searchString, page: this.pageSearchAccount }
       this.service.searchAccount(reqData).subscribe((res: any) => {
         this.listAccountSearch = res.data.result;
+        this.spinner.hide();
       })
     }
   }
