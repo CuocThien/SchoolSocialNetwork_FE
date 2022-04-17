@@ -41,6 +41,8 @@ import { CreateGroupComponent } from './popup/create-group/create-group.componen
 import { CropImageGroupComponent } from './popup/crop-image-group/crop-image-group.component';
 import { ReportComponent } from './popup/report/report.component';
 import { AddUserGroupComponent } from './popup/add-user-group/add-user-group.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { TransferFacultyComponent } from './popup/transfer-faculty/transfer-faculty.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { AddUserGroupComponent } from './popup/add-user-group/add-user-group.com
     CreateGroupComponent,
     CropImageGroupComponent,
     ReportComponent,
-    AddUserGroupComponent
+    AddUserGroupComponent,
+    TransferFacultyComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,8 @@ import { AddUserGroupComponent } from './popup/add-user-group/add-user-group.com
         deps: [HttpClient]
       }
     }),
-    ImageCropperModule
+    ImageCropperModule,
+    NgxSpinnerModule
   ],
   providers: [
     AuthGuardService,

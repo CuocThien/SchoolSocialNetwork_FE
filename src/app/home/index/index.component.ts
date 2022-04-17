@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
 import { FacultyService, HomeIndexService } from 'src/app/services';
@@ -18,6 +19,7 @@ export class IndexComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
   ) {
   }
 
@@ -51,7 +53,6 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
-
     this.role = localStorage.getItem('role') || '';
     if (this.role === 'admin') {
       this._getListFaculty();
@@ -59,6 +60,7 @@ export class IndexComponent implements OnInit {
       this.getListPostMainGroupForTeacher();
       this.isAdmin = true;
     } else if (this.role === 'dean') {
+      this._getListFacultyDean()
       this.getListPostMainGroupFacultyForStudent();
       this.getListPostMainGroupFacultyForTeacher();
       this.getListPostMainGroupForTeacher();
@@ -77,47 +79,55 @@ export class IndexComponent implements OnInit {
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
   }
   getListPostMainGroupFacultyForStudent() {
+    this.spinner.show();
     this.service.getListPostMainGroupFacultyForStudent(this.faculty, this.pageFacultyStudent).subscribe({
       next: ((res: any) => {
         this.listFacultyStudentPost = res.data.result;
         this.totalFacultyStudent = Math.ceil(res.data.total / 10);
+        this.spinner.hide();
       }),
       error: ((err) => {
-        this.toastr.error(err.error.msg)
+        this.spinner.hide();
       })
     })
   }
 
   getListPostMainGroupFacultyForTeacher() {
+    this.spinner.show();
     this.service.getListPostMainGroupFacultyForTeacher(this.faculty, this.pageFacultyTeacher).subscribe({
       next: ((res: any) => {
         this.listFacultyTeacherPost = res.data.result;
         this.totalFacultyTeacher = Math.ceil(res.data.total / 10);
+        this.spinner.hide()
       }),
       error: ((err) => {
-        this.toastr.error(err.error.msg)
+        this.spinner.hide();
       })
     })
   }
   getListPostMainGroupForStudent() {
+    this.spinner.show()
     this.service.getListPostMainGroupForStudent(this.pageMainStudent).subscribe({
       next: ((res: any) => {
         this.listMainStudentPost = res.data.result;
         this.totalMainStudent = Math.ceil(res.data.total / 10);
+        this.spinner.hide();
       }),
       error: ((err) => {
-        this.toastr.error(err.error.msg)
+        this.spinner.hide();
       })
     })
   }
   getListPostMainGroupForTeacher() {
+    this.spinner.show();
     this.service.getListPostMainGroupForTeacher(this.pageMainTeacher).subscribe({
       next: ((res: any) => {
         this.listMainTeacherPost = res.data.result;
         this.totalMainTeacher = Math.ceil(res.data.total / 10);
+        this.spinner.hide();
       }),
       error: ((err) => {
-        this.toastr.error(err.error.msg)
+        this.spinner.hide();
       })
     })
   }
@@ -163,10 +173,24 @@ export class IndexComponent implements OnInit {
       }
     }).catch(() => { });
   }
-  _getListFaculty() {
-    this.facultyService.getListFaculty().subscribe({
+  _getListFacultyDean() {
+    this.facultyService.getFacultyByDean().subscribe({
       next: ((res: any) => {
-        this.listFaculty = res.data;
+        console.log("🐼 => IndexComponent => res", res)
+        this.listFaculty = res.data.result;
+        this.faculty = this.listFaculty[0]._id || '';
+        this.getListPostMainGroupFacultyForStudent();
+        this.getListPostMainGroupFacultyForTeacher();
+      }),
+      error: ((err) => {
+        this.toastr.error(err.error.msg)
+      })
+    })
+  }
+  _getListFaculty() {
+    this.facultyService.getListAllFaculty().subscribe({
+      next: ((res: any) => {
+        this.listFaculty = res.data.result;
         this.faculty = this.listFaculty[0]._id || '';
         this.getListPostMainGroupFacultyForStudent();
         this.getListPostMainGroupFacultyForTeacher();

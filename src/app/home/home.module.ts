@@ -26,6 +26,7 @@ import { UsersComponent } from './users/users.component';
 import { ImageCropperModule } from "ngx-image-cropper";
 import { ReportGroupComponent } from './report-group/report-group.component';
 import { ReportPostComponent } from './report-post/report-post.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -50,7 +51,8 @@ import { ReportPostComponent } from './report-post/report-post.component';
         deps: [HttpClient]
       }
     }),
-    ImageCropperModule
+    ImageCropperModule,
+    NgxSpinnerModule
   ]
 })
 export class HomeModule { }

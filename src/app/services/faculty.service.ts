@@ -10,8 +10,9 @@ export class FacultyService {
         private http: HttpClient,
     ) {
     }
-    getListFaculty() {
-        const url = `${HOST}/group/main/fac`;
+    getListFaculty(data: any) {
+        const { page = 1 } = data || {}
+        const url = `${HOST}/group/main/fac?page=${page}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
@@ -20,8 +21,18 @@ export class FacultyService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
+    getFacultyByDean() {
+        const url = `${HOST}/group/user/fac`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
     createNewFaculty(body: any) {
         const url = `${HOST}/group/main/fac`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.post(url, body, { headers })
+    }
+    transferFaculty(body: any) {
+        const url = `${HOST}/group/user/tranfer`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.post(url, body, { headers })
     }

@@ -18,6 +18,7 @@
         <th>Id</th>
         <th>{{'TABLE.NAMEEN'|translate}}</th>
         <th>{{'TABLE.NAMEVI'|translate}}</th>
+        <th>{{'TABLE.NAME'|translate}}</th>
         <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
       </tr>
     </thead>
@@ -26,6 +27,7 @@
         <td>{{faculty._id}}</td>
         <td>{{faculty.nameEn}}</td>
         <td>{{faculty.nameVi}}</td>
+        <td>{{faculty.profile.fullname}}</td>
         <td class="text-center"><i class="bi bi-pencil-square btn-edit" (click)="editFaculty(faculty,i)"></i></td>
       </tr>
     </tbody>

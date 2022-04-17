@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { AddUserGroupComponent } from 'src/app/popup/add-user-group/add-user-group.component';
-import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
+import { TransferFacultyComponent } from 'src/app/popup/transfer-faculty/transfer-faculty.component';
 import { FacultyService, UsersService } from '../../services/index';
 
 @Component({
@@ -24,7 +23,9 @@ export class UsersComponent implements OnInit {
   group: any;
   listUsers: any;
   listFaculty: any;
+  listAllFaculty: any;
   isAdmin = false;
+  isDean = false;
   isLangEn = false;
   isStudent = false;
   keyword = '';
@@ -32,15 +33,25 @@ export class UsersComponent implements OnInit {
   maxPage = 1;
   isSearch = false;
   ngOnInit(): void {
-    this._listFaculty();
-    this.isAdmin = (localStorage.getItem('role') === 'admin')
     this.isLangEn = (localStorage.getItem('lang') === 'en');
+    const role = localStorage.getItem('role')
+    this.isAdmin = role === 'admin'
+    this.isDean = role === 'dean'
+    this._listFaculty();
+    if (this.isDean) {
+      this._facultyByDean();
+    }
+  }
+  ngAfterViewInit() {
+    if (this.isDean) {
+      this._facultyByDean();
+    }
   }
 
   ngDoCheck() {
     this.isLangEn = (localStorage.getItem('lang') === 'en');
   }
-  filterCategory() {
+  filterFaculty() {
     this.page = 1;
     this._getListUser({ groupId: this.groupId, isStudent: this.isStudent });
   }
@@ -64,24 +75,6 @@ export class UsersComponent implements OnInit {
       this.isSearch = false;
       this._getListUser({ groupId: this.groupId, isStudent: this.isStudent, page: this.page });
     }
-  }
-  deleteUser(user: any, index: any) {
-    const reqData = {
-      userId: user.userId,
-      groupId: this.groupId,
-      type: 'main'
-    }
-    this.modalRef = this.modalService.open(DeleteUserComponent, {
-      backdrop: 'static',
-      size: 'md',
-      centered: true,
-    });
-    this.modalRef.componentInstance.data = reqData;
-    this.modalRef.result.then((res: any) => {
-      this.listUsers.splice(index, 1)
-    }).catch((err: any) => {
-      // console.log("💁 => FacultyComponent => err", err)
-    });
   }
 
   private _searchUser(data: any) {
@@ -107,7 +100,7 @@ export class UsersComponent implements OnInit {
   private _listFaculty() {
     this.facultyService.getListAllFaculty().subscribe({
       next: (res: any) => {
-        this.listFaculty = res.data.map((itm: any) => {
+        this.listAllFaculty = this.listFaculty = res.data.result.map((itm: any) => {
           const { _id, nameEn, nameVi } = itm || {}
           return {
             _id, nameEn, nameVi
@@ -117,6 +110,20 @@ export class UsersComponent implements OnInit {
           { _id: 'grgv', nameEn: 'Group for Teacher', nameVi: 'Nhóm dành cho giảng viên' },
           { _id: 'grsv', nameEn: 'Group for Student', nameVi: 'Nhóm dành cho sinh viên' }
         )
+        this.groupId = this.listFaculty[0]._id || {};
+        this._getListUser({ groupId: this.groupId, isStudent: this.isStudent });
+      }
+    })
+  }
+  private _facultyByDean() {
+    this.facultyService.getFacultyByDean().subscribe({
+      next: (res: any) => {
+        this.listFaculty = res.data.result.map((itm: any) => {
+          const { _id, nameEn, nameVi } = itm || {}
+          return {
+            _id, nameEn, nameVi
+          }
+        });
         this.groupId = this.listFaculty[0]._id || {};
         this._getListUser({ groupId: this.groupId, isStudent: this.isStudent });
       }
@@ -136,17 +143,18 @@ export class UsersComponent implements OnInit {
     }
     this._getListUser({ groupId: this.groupId, isStudent: this.isStudent, page: this.page });
   }
-  addUser() {
-    this.modalRef = this.modalService.open(AddUserGroupComponent, {
+  transferFaculty(user: any, index: any) {
+    this.group = this.listFaculty.filter(itm => itm._id == this.groupId)[0] || {}
+    this.modalRef = this.modalService.open(TransferFacultyComponent, {
+      backdrop: 'static',
       size: 'md',
       centered: true,
-    });
-    this.modalRef.componentInstance.isMain = true;
-    this.modalRef.componentInstance.groupId = this.groupId;
-    this.modalRef.componentInstance.isStudent = this.isStudent;
+    })
+    this.modalRef.componentInstance.userId = user.userId;
+    this.modalRef.componentInstance.facultyFrom = this.group;
+    this.modalRef.componentInstance.listFaculty = this.listAllFaculty;
     this.modalRef.result.then((res: any) => {
-    }).catch((err: any) => {
-      // console.log("💁 => FacultyComponent => err", err)
-    });
+      this.listUsers.splice(index, 1);
+    }).catch((err: any) => { })
   }
 }

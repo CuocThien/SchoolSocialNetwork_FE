@@ -9,14 +9,18 @@ export class SidebarComponent implements OnInit {
 
   constructor() { }
   isAdmin = false;
+  isDean = false;
   isDropdown = false;
   isAccountDropdown = false;
   isReportDropdown = false;
   arrowReport = 'bi bi-chevron-down';
   arrowAccount = 'bi bi-chevron-down'
   ngOnInit(): void {
-    if (localStorage.getItem('role') === 'admin')
+    const role = localStorage.getItem('role')
+    if (role === 'admin')
       this.isAdmin = true;
+    if (role === 'dean')
+      this.isDean = true;
   }
   dropdown(event: any) {
     event.preventDefault();

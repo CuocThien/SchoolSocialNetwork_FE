@@ -13,12 +13,6 @@
         </form>
       </div>
       <div class="btn-create-group d-inline-block col-xxl-3 col-xl-3 col-lg-3 col-md-1 col-sm-1 col-1">
-        <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="addUser()">
-          {{'BUTTON.ADD_USER'|translate}}
-        </button>
-        <button class="btn btn-outline-primary me-4 d-block d-lg-none">
-          <i class="bi bi-plus-square"></i>
-        </button>
       </div>
     </div>
 
@@ -26,7 +20,7 @@
   <div class="w-100-pc d-flex flex-row-reverse">
     <ng-select
       class="u-margin-vertical-auto d-inline-block text-start mb-4 col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6"
-      [searchable]="false" [clearable]="false" [(ngModel)]="groupId" (change)="filterCategory()">
+      [searchable]="false" [clearable]="false" [(ngModel)]="groupId" (change)="filterFaculty()">
       <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
         {{isLangEn ? faculty.nameEn : faculty.nameVi}}
       </ng-option>
@@ -55,8 +49,8 @@
         <td>{{user.dob|date:'dd-MM-YYY'}}</td>
         <td>{{user.phone}}</td>
         <td class="text-center">
-          <i class="bi bi-pencil-square btn-edit" *ngIf="isAdmin"></i>
-          <i class="bi bi-trash btn-delete ms-3" (click)="deleteUser(user, i)" *ngIf="isAdmin"></i>
+          <i class="bi bi-arrow-left-right btn-delete ms-3" (click)="transferFaculty(user, i)"
+            *ngIf="isAdmin||isDean"></i>
         </td>
       </tr>
     </tbody>

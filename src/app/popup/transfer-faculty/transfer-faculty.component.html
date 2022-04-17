@@ -1,0 +1,20 @@
+<div class="form-popup">
+  <h3 class="u-center-text">{{'TITLE.TRANSFER_FACULTY'|translate}}</h3>
+  <hr>
+  <input class="d-none" type="text" autofocus>
+  <h5>{{'POPUP.FROM_FACULTY'|translate}}</h5>
+  <input class="form-control-bs w-100-pc mt-3 mb-3" type="text"
+    [value]="isLangEn ? facultyFrom.nameEn: facultyFrom.nameVi" readonly>
+  <h5 class="mb-3">{{'POPUP.TO_FACULTY'|translate}}</h5>
+  <ng-select autof class="u-margin-vertical-auto w-100-pc d-inline-block text-start mb-4" [searchable]="false"
+    [clearable]="false" [(ngModel)]="groupId">
+    <ng-option class="ps-5" *ngFor="let faculty of listFaculty" [value]="faculty._id">
+      {{isLangEn ? faculty.nameEn : faculty.nameVi}}
+    </ng-option>
+  </ng-select>
+  <hr>
+  <div class="button-control-group text-end mt-3">
+    <button class="btn btn-outline-secondary fs-3 w-25 me-3" (click)="onCancel()">{{'BUTTON.CANCEL'|translate}}</button>
+    <button class="btn btn-outline-primary fs-3 w-25" (click)="onSubmit()">{{'BUTTON.SUBMIT'|translate}}</button>
+  </div>
+</div>

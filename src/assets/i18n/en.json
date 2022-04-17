@@ -8,7 +8,8 @@
         "USERS": "Users",
         "STUDENT": "Student",
         "REPORT_GROUP": "Report group",
-        "REPORT_POST": "Report post"
+        "REPORT_POST": "Report post",
+        "TRANSFER_FACULTY": "Transfer faculty"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -110,6 +111,8 @@
         "DELETE_USER": "Delete user",
         "CREATE_GROUP":"Create your group",
         "DELETE_POST": "Delete post",
-        "OUT_GROUP": "Out group"
+        "OUT_GROUP": "Out group",
+        "FROM_FACULTY": "From faculty",
+        "TO_FACULTY": "To faculty"
     }
 }

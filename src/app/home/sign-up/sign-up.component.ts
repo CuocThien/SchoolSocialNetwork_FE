@@ -38,7 +38,7 @@ export class SignUpComponent implements OnInit {
     this.createFormSignUp();
   }
   _getListFaculty() {
-    this.facultyService.getListFaculty().subscribe({
+    this.facultyService.getListAllFaculty().subscribe({
       next: (res: any) => {
         this.listFaculty = res.data;
       },

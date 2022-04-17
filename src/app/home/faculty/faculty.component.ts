@@ -19,13 +19,17 @@ export class FacultyComponent implements OnInit {
   private modalRef: NgbModalRef;
 
   listFaculty: any;
+  page = 1;
+  maxPage = 1;
   ngOnInit(): void {
     this._getListFaculty();
   }
   private _getListFaculty() {
-    this.service.getListAllFaculty().subscribe({
+    this.service.getListFaculty({ page: this.page }).subscribe({
       next: ((res: any) => {
-        this.listFaculty = res.data;
+        console.log("🐼 => FacultyComponent => res", res)
+        this.listFaculty = res.data.result;
+        this.maxPage = Math.ceil((res.data.total - 2) / 10)
       }),
       error: ((err: any) => {
         this.toastr.error(err.error.msg)

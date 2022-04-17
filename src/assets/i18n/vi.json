@@ -8,7 +8,8 @@
         "USERS": "Người dùng",
         "STUDENT": "Student",
         "REPORT_GROUP": "Quản lý báo cáo của nhóm",
-        "REPORT_POST": "Quản lý báo cáo của bài viết"
+        "REPORT_POST": "Quản lý báo cáo của bài viết",
+        "TRANSFER_FACULTY": "Chuyển khoa"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -110,6 +111,8 @@
         "DELETE_USER": "Xoá người dùng khỏi nhóm",
         "CREATE_GROUP":"Tạo nhóm",
         "DELETE_POST": "Xoá bài viết",
-        "OUT_GROUP": "Rời khỏi nhóm"
+        "OUT_GROUP": "Rời khỏi nhóm",
+        "FROM_FACULTY": "Từ khoa",
+        "TO_FACULTY": "Đến khoa"
     }
 }
