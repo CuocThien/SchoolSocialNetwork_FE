@@ -59,21 +59,9 @@ export class IndexComponent implements OnInit {
       this.getListPostMainGroupForStudent();
       this.getListPostMainGroupForTeacher();
       this.isAdmin = true;
-    } else if (this.role === 'dean') {
-      this._getListFacultyDean()
-      this.getListPostMainGroupFacultyForStudent();
-      this.getListPostMainGroupFacultyForTeacher();
-      this.getListPostMainGroupForTeacher();
-      this.isDean = true;
-    } else if (this.role === 'teacher') {
-      this.getListPostMainGroupFacultyForTeacher();
-      this.getListPostMainGroupForTeacher();
-      this.isTeacher = true;
-    } else {
-      this.getListPostMainGroupFacultyForStudent();
-      this.getListPostMainGroupForStudent();
-      this.isStudent = true;
+      return;
     }
+    this._getListFacultyDean();
   }
   ngDoCheck() {
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
@@ -176,11 +164,22 @@ export class IndexComponent implements OnInit {
   _getListFacultyDean() {
     this.facultyService.getFacultyByDean().subscribe({
       next: ((res: any) => {
-        console.log("🐼 => IndexComponent => res", res)
         this.listFaculty = res.data.result;
         this.faculty = this.listFaculty[0]._id || '';
-        this.getListPostMainGroupFacultyForStudent();
-        this.getListPostMainGroupFacultyForTeacher();
+        if (this.role === 'dean') {
+          this.getListPostMainGroupFacultyForStudent();
+          this.getListPostMainGroupFacultyForTeacher();
+          this.getListPostMainGroupForTeacher();
+          this.isDean = true;
+        } else if (this.role === 'teacher') {
+          this.getListPostMainGroupFacultyForTeacher();
+          this.getListPostMainGroupForTeacher();
+          this.isTeacher = true;
+        } else {
+          this.getListPostMainGroupFacultyForStudent();
+          this.getListPostMainGroupForStudent();
+          this.isStudent = true;
+        }
       }),
       error: ((err) => {
         this.toastr.error(err.error.msg)

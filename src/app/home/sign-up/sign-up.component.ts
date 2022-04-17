@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isEmpty } from 'lodash'
 import FileSaver from 'file-saver'
+import { LIST_ROLE } from 'src/app/utils/constant';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,21 +27,23 @@ export class SignUpComponent implements OnInit {
   listFaculty: any;
   faculty = null;
   data = {};
-  listRole = [
-    { role: 'admin', name: 'Admin' },
-    { role: 'dean', name: 'Dean' },
-    { role: 'teacher', name: 'Teacher' },
-    { role: 'student', name: 'Student' },
-  ];
+  isLangEn = false
+
+  listRole = LIST_ROLE;
   role = null;
   ngOnInit(): void {
+    this.isLangEn = localStorage.getItem('lang') === 'en'
     this._getListFaculty();
     this.createFormSignUp();
+  }
+  ngDoCheck() {
+    this.isLangEn = localStorage.getItem('lang') === 'en'
   }
   _getListFaculty() {
     this.facultyService.getListAllFaculty().subscribe({
       next: (res: any) => {
-        this.listFaculty = res.data;
+        this.listFaculty = res.data.result;
+        console.log("🐼 => SignUpComponent => this.listFaculty", this.listFaculty)
       },
       error: (err) => {
         this.toastr.error(err.error.msg)
