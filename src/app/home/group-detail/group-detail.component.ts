@@ -194,6 +194,7 @@ export class GroupDetailComponent implements OnInit {
     this.isSearch = true;
     if (this.searchString == '') {
       this.isSearch = false;
+      this.listMember = []
       this._getListMember();
       return;
     }

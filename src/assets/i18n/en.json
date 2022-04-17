@@ -113,6 +113,7 @@
         "DELETE_POST": "Delete post",
         "OUT_GROUP": "Out group",
         "FROM_FACULTY": "From faculty",
-        "TO_FACULTY": "To faculty"
+        "TO_FACULTY": "To faculty",
+        "DEAN": "Dean"
     }
 }

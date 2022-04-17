@@ -28,7 +28,10 @@
         <td>{{faculty.nameEn}}</td>
         <td>{{faculty.nameVi}}</td>
         <td>{{faculty.profile.fullname}}</td>
-        <td class="text-center"><i class="bi bi-pencil-square btn-edit" (click)="editFaculty(faculty,i)"></i></td>
+        <td class="text-center">
+          <i class="bi bi-pencil-square btn-edit me-3" (click)="editFaculty(faculty,i)"></i>
+          <i class="bi bi-arrow-left-right btn-delete" (click)="tranferDean(faculty,i)"></i>
+        </td>
       </tr>
     </tbody>
   </table>

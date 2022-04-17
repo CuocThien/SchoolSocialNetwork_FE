@@ -6,7 +6,7 @@
     </h1>
     <ng-select
       class="u-margin-vertical-auto d-inline-block text-start mb-4 col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"
-      [searchable]="false" [clearable]="false" [(ngModel)]="groupId" (change)="filterGroup()">
+      [searchable]="true" [clearable]="false" [(ngModel)]="groupId" (change)="filterGroup()">
       <ng-option *ngFor="let group of listGroup" [value]="group._id">
         {{group.nameVi}}
       </ng-option>

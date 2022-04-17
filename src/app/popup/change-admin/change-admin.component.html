@@ -1,0 +1,44 @@
+<div class="form-popup">
+  <h3 class="u-center-text">{{'TITLE.TRANSFER_FACULTY'|translate}}</h3>
+  <hr>
+  <input class="d-none" type="text" autofocus>
+  <h5>{{'SIDEBAR.FACULTY'|translate}}</h5>
+  <input class="form-control-bs w-100-pc mt-3 mb-3" type="text" [value]="isLangEn ? faculty.nameEn: faculty.nameVi"
+    readonly>
+  <h5>{{'POPUP.DEAN'|translate}}</h5>
+  <input class="form-control-bs w-100-pc mt-3 mb-3" type="text" [value]="dean.fullname" readonly>
+
+  <div class="member-tab text-start">
+    <hr>
+    <form class="search__form text-center position-relative w-100-pc" (ngSubmit)="search()">
+      <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
+        name="search" placeholder="{{'SEARCH.SEARCH_MEMBER'|translate}}">
+      <button class="search__form--button-search position-absolute" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+    <hr>
+    <h4>{{'HOME.TEACHER'|translate}} - {{totalMember}}</h4>
+    <div class="card-user d-flex mt-2 mb-2" *ngFor="let user of listUsers; let i = index">
+      <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+        <img [src]="user.avatar" alt="">
+      </div>
+      <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 text-start">
+        <h4>{{user.fullname}}</h4>
+        <h5>{{user.address}}</h5>
+      </div>
+      <div class="btn-group col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+        <button class="btn btn-outline-primary w-50 fs-5 d-inline-block" (click)="changeAdmin(user,i)">
+          <i class="bi bi-person-plus"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <h5 class="btn-text" *ngIf="page!=maxPage" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}
+    </h5>
+  </div>
+  <hr>
+  <div class="button-control-group text-end mt-3">
+    <button class="btn btn-outline-secondary fs-3 w-25 me-3" (click)="onCancel()">{{'BUTTON.CANCEL'|translate}}</button>
+    <button class="btn btn-outline-primary fs-3 w-25" (click)="onSubmit()">{{'BUTTON.SUBMIT'|translate}}</button>
+  </div>
+</div>

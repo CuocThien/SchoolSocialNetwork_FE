@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { ChangeAdminComponent } from 'src/app/popup/change-admin/change-admin.component';
 import { CreateFacultyComponent } from 'src/app/popup/create-faculty/create-faculty.component';
 import { FacultyService } from '../../services/index';
 
@@ -57,6 +58,20 @@ export class FacultyComponent implements OnInit {
     this.modalRef.componentInstance.faculty = faculty
     this.modalRef.result.then((res: any) => {
       this.listFaculty[index] = res;
+    }).catch((err: any) => {
+      // console.log("💁 => FacultyComponent => err", err)
+
+    });
+  }
+  tranferDean(faculty: any, index: any) {
+    this.modalRef = this.modalService.open(ChangeAdminComponent, {
+      backdrop: 'static',
+      size: 'md',
+      centered: true,
+    });
+    this.modalRef.componentInstance.faculty = faculty
+    this.modalRef.result.then((res: any) => {
+      this.listFaculty[index].profile = res.data;
     }).catch((err: any) => {
       // console.log("💁 => FacultyComponent => err", err)
 

@@ -113,6 +113,7 @@
         "DELETE_POST": "Xoá bài viết",
         "OUT_GROUP": "Rời khỏi nhóm",
         "FROM_FACULTY": "Từ khoa",
-        "TO_FACULTY": "Đến khoa"
+        "TO_FACULTY": "Đến khoa",
+        "DEAN": "Trưởng khoa"
     }
 }

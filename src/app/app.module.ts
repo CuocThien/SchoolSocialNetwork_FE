@@ -43,6 +43,7 @@ import { ReportComponent } from './popup/report/report.component';
 import { AddUserGroupComponent } from './popup/add-user-group/add-user-group.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransferFacultyComponent } from './popup/transfer-faculty/transfer-faculty.component';
+import { ChangeAdminComponent } from './popup/change-admin/change-admin.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { TransferFacultyComponent } from './popup/transfer-faculty/transfer-facu
     CropImageGroupComponent,
     ReportComponent,
     AddUserGroupComponent,
-    TransferFacultyComponent
+    TransferFacultyComponent,
+    ChangeAdminComponent
   ],
   imports: [
     BrowserModule,
