@@ -17,6 +17,7 @@ import { AuthGuardService } from '../auth.guard';
 import { UsersComponent } from './users/users.component';
 import { ReportGroupComponent } from './report-group/report-group.component';
 import { ReportPostComponent } from './report-post/report-post.component';
+import { AccountComponent } from './account/account.component';
 
 const homeRoutes: Routes = [
     {
@@ -36,6 +37,7 @@ const homeRoutes: Routes = [
             { path: 'post/:id', component: PostDetailComponent, pathMatch: 'full' },
             { path: 'report/group', component: ReportGroupComponent, pathMatch: 'full' },
             { path: 'report/post', component: ReportPostComponent, pathMatch: 'full' },
+            { path: 'account', component: AccountComponent, pathMatch: 'full' },
 
 
         ]

@@ -30,7 +30,8 @@
         "FACULTY": "Faculty",
         "CATEGORY": "Category",
         "REPORT": "Report",
-        "POSTS": "Posts"
+        "POSTS": "Posts",
+        "INFORMATION":"Information"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Main notification",
@@ -116,6 +117,8 @@
         "FROM_FACULTY": "From faculty",
         "TO_FACULTY": "To faculty",
         "DEAN": "Dean",
-        "IMAGE_PREVIEW": "Image preview"
+        "IMAGE_PREVIEW": "Image preview",
+        "DELETE_ACCOUNT": "Delete account",
+        "RECOVERY_ACCOUNT": "Recovery account"
     }
 }

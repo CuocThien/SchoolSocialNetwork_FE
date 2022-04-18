@@ -26,7 +26,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { CategoryService, ChangePasswordService, ChatService, CommentService, CreatePostService, FacultyService, GroupService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService, UsersService } from './services/index';
+import { AccountService, CategoryService, ChangePasswordService, ChatService, CommentService, CreatePostService, FacultyService, GroupService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService, UsersService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
 import { CreatePostComponent } from './popup/create-post/create-post.component';
 import { ChangeCommentComponent } from './popup/change-comment/change-comment.component';
@@ -116,7 +116,8 @@ import { ChangeAdminComponent } from './popup/change-admin/change-admin.componen
     ProfileService,
     SignUpService,
     UploadImageService,
-    UsersService
+    UsersService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,4 @@
+export * from './account.service'
 export * from './category.service'
 export * from './change-password.service'
 export * from './chat.service'

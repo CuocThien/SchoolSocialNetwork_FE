@@ -6,7 +6,7 @@
         "CATEGORY":"Danh mục",
         "DELETED": "Đã xoá",
         "USERS": "Người dùng",
-        "STUDENT": "Student",
+        "STUDENT": "Sinh viên",
         "REPORT_GROUP": "Quản lý báo cáo của nhóm",
         "REPORT_POST": "Quản lý báo cáo của bài viết",
         "TRANSFER_FACULTY": "Chuyển khoa"
@@ -30,7 +30,8 @@
         "FACULTY": "Khoa",
         "CATEGORY": "Danh mục",
         "REPORT": "Báo cáo",
-        "POSTS": "Bài viết"
+        "POSTS": "Bài viết",
+        "INFORMATION":"Thông tin"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Thông báo của Trường",
@@ -116,6 +117,8 @@
         "FROM_FACULTY": "Từ khoa",
         "TO_FACULTY": "Đến khoa",
         "DEAN": "Trưởng khoa",
-        "IMAGE_PREVIEW": "Xem trước ảnh"
+        "IMAGE_PREVIEW": "Xem trước ảnh",
+        "DELETE_ACCOUNT": "Xoá tài khoản",
+        "RECOVERY_ACCOUNT": "Khôi phục tài khoản"
     }
 }
