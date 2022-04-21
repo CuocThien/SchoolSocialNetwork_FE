@@ -30,4 +30,19 @@ export class HomeIndexService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
+    getNotification(page: any) {
+        const url = `${HOST}/notification?page=${page}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
+    readNotification(notifyId: any) {
+        const url = `${HOST}/notification?notifyId=${notifyId}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.put(url, { headers })
+    }
+    readPost(notifyId: any) {
+        const url = `${HOST}/post?notifyId=${notifyId}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.put(url, { headers })
+    }
 }

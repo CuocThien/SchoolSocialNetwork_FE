@@ -33,7 +33,6 @@ export class PostDetailComponent implements OnInit {
     this.spinner.show();
     this.service.getPostDetail(this.postId).subscribe({
       next: ((res: any) => {
-        console.log("🐼 => PostDetailComponent => res", res)
         this.post = res.data;
         this.spinner.hide();
       }),

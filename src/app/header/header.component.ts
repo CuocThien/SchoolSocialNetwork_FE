@@ -1,20 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { HomeIndexService } from '../services/index';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['../../assets/sass/main.scss']
+  styleUrls: ['../../assets/sass/main.scss'],
+  providers: [HomeIndexService]
 })
 export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private service: HomeIndexService
   ) { }
   lang = 'HEADER.ENGLISH'
   profile: any;
+  page = 1;
+  listNotification = [];
+  isEndListNotification = false;
+  isLangEn = false;
+
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
     const language = localStorage.getItem('lang') || 'en';
@@ -25,7 +37,12 @@ export class HeaderComponent implements OnInit {
       this.lang = 'HEADER.VIETNAMESE';
       localStorage.setItem('lang', 'vi')
     }
-    this.translate.use(language)
+    this.translate.use(language);
+    this.isLangEn = localStorage.getItem('lang') === 'en'
+    this._getNotification();
+  }
+  ngDoCheck() {
+    this.isLangEn = localStorage.getItem('lang') === 'en'
   }
   ngAfterViewChecked() {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
@@ -47,4 +64,27 @@ export class HeaderComponent implements OnInit {
     }
     this.translate.use(value)
   }
+  private _getNotification() {
+    this.service.getNotification(this.page).subscribe({
+      next: (res: any) => {
+        if (!res.data.length) {
+          this.isEndListNotification = true;
+          return;
+        }
+        this.listNotification.push(...res.data)
+      },
+      error: (err: any) => console.log(err)
+    })
+  }
+  onEnd(event: any) {
+    this.page++;
+    if (this.isEndListNotification) return;
+    this._getNotification();
+  }
+  readNotification(notifyId: any, index: any) {
+    this.service.readNotification(notifyId).subscribe((res: any) => {
+      this.listNotification[index].isRead = true;
+    })
+  }
+
 }

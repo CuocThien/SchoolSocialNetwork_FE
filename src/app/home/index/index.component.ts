@@ -203,4 +203,9 @@ export class IndexComponent implements OnInit {
     this.getListPostMainGroupFacultyForStudent();
     this.getListPostMainGroupFacultyForTeacher();
   }
+  readPost(notifyId: any) {
+    if (!this.isAdmin && !this.isDean) {
+      this.service.readPost(notifyId).subscribe()
+    }
+  }
 }

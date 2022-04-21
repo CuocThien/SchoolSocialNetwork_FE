@@ -50,47 +50,26 @@
           </label>
           <span class="position-absolute have-notification" style="height: 2rem;"></span>
           <!-- <a class="btn-notification"></a> -->
-          <ul class="notification-dropdown">
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
+          <ul class="notification-dropdown" #chatBoxContent infiniteScroll [infiniteScrollDistance]="scrollDistance"
+            [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
+            (scrolled)="onEnd($event)">
+            <li *ngFor="let notification of listNotification; let i = index" style="cursor: pointer;"
+              (click)="readNotification(notification.notifyId, i)">
+              <div class="col-2 avatar">
+                <img [src]="notification.avatar" alt="">
+              </div>
+              <div class="col-10 ps-3 content" [ngClass]="!notification.isRead ? 'color-black' : 'color-grey'"
+                [innerText]="isLangEn ? notification.contentEn : notification.contentVi">
+              </div>
             </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
-            <li>
-              <strong>Nguyễn Cước Thiên</strong>
-              <span>đã gữi cho bạn lời mời kết bạn</span>
-            </li>
+            <!-- <li>
+              <div style="height: 60px;width: 100%;">
+                <img class="full-image" style="height: 60px; width: 100%;" src="../../assets/img/id-loading-5.gif"
+                  alt="">
+              </div>
+
+            </li> -->
+
           </ul>
         </li>
       </ul>

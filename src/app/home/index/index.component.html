@@ -19,7 +19,8 @@
       <hr>
     </div>
     <div class="main-teacher" *ngIf="isAdmin || isDean || isTeacher">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainTeacherPost" (click)="goToDetailPost(post?._id)">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainTeacherPost"
+        (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
         <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
@@ -36,7 +37,7 @@
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
           </div>
           <div class="post__info-title">
-            <h4>{{post?.title}}</h4>
+            <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
           </div>
         </div>
       </div>
@@ -62,7 +63,8 @@
       <hr>
     </div>
     <div class="main-student" *ngIf="isAdmin || isStudent">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainStudentPost" (click)="goToDetailPost(post?._id)">
+      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainStudentPost"
+        (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
         <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
@@ -79,7 +81,7 @@
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
           </div>
           <div class="post__info-title">
-            <h4>{{post?.title}}</h4>
+            <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
           </div>
         </div>
       </div>
@@ -117,7 +119,7 @@
     </div>
     <div class="faculty-teacher" *ngIf="isAdmin || isDean || isTeacher">
       <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyTeacherPost"
-        (click)="goToDetailPost(post?._id)">
+        (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
         <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
@@ -134,7 +136,7 @@
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
           </div>
           <div class="post__info-title">
-            <h4>{{post?.title}}</h4>
+            <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
           </div>
         </div>
       </div>
@@ -161,7 +163,7 @@
     </div>
     <div class="faculty-student" *ngIf="isAdmin || isDean || isStudent">
       <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyStudentPost"
-        (click)="goToDetailPost(post?._id)">
+        (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
         <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
           <div class="post__auth-avatar ps-3 pe-3">
             <img [src]="post?.avatar" alt="">
@@ -178,7 +180,7 @@
             <span class="post__auth-info__fullname">{{post?.fullname}}</span>
           </div>
           <div class="post__info-title">
-            <h4>{{post?.title}}</h4>
+            <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
           </div>
         </div>
       </div>
