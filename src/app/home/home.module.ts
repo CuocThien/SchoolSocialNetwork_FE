@@ -29,13 +29,14 @@ import { ReportPostComponent } from './report-post/report-post.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
+import { NewFeedComponent } from './new-feed/new-feed.component';
 
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,

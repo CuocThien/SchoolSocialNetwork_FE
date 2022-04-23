@@ -45,7 +45,6 @@ export class SignUpComponent implements OnInit {
     this.facultyService.getListAllFaculty().subscribe({
       next: (res: any) => {
         this.listFaculty = res.data.result;
-        console.log("🐼 => SignUpComponent => this.listFaculty", this.listFaculty)
       },
       error: (err) => {
         this.toastr.error(err.error.msg)
@@ -82,7 +81,7 @@ export class SignUpComponent implements OnInit {
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.signUpForm.reset();
-        this.exportAsExcelFile(Object.values(res.data.accountData), 'account_signup');
+        this.exportAsExcelFile(Object.values(res.data.accountData), Object.values(res.data.logs), 'account_signup');
         this.spinner.hide();
       },
       error: (err: any) => {
@@ -109,9 +108,10 @@ export class SignUpComponent implements OnInit {
     this.isSingleSignup = !this.isSingleSignup;
     this.contentButton = (this.isSingleSignup) ? 'SIGNUP.MULTIPLE_SIGNUP' : 'SIGNUP.SINGLE_SIGNUP'
   }
-  public exportAsExcelFile(json: any[], excelFileName: string): Promise<Object> {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  public exportAsExcelFile(data: any[], logs: any[], excelFileName: string): Promise<Object> {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    const worksheet2: XLSX.WorkSheet = XLSX.utils.json_to_sheet(logs);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet, 'logs': worksheet2 }, SheetNames: ['data', 'logs'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     return (this.saveAsExcelFile(excelBuffer, excelFileName));
   }

@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   throttle = 300;
   scrollDistance = 1;
   scrollUpDistance = 2;
+  isCheck = false;
 
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
@@ -83,8 +84,13 @@ export class HeaderComponent implements OnInit {
   }
   readNotification(notifyId: any, index: any) {
     this.service.readNotification(notifyId).subscribe((res: any) => {
+      console.log("🐼 => HeaderComponent => res", res)
+      this.router.navigate([`/home/post/${res.data.postId}`])
       this.listNotification[index].isRead = true;
     })
   }
-
+  openNoti(event: any) {
+    event.preventDefault();
+    this.isCheck = !this.isCheck;
+  }
 }

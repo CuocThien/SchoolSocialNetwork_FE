@@ -3,6 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService, PostDetailService, UsersService } from '../../services/index';
+import * as XLSX from 'xlsx';
+import { map } from 'lodash';
 
 @Component({
   selector: 'app-delete-user',
@@ -21,9 +23,11 @@ export class DeleteUserComponent implements OnInit {
   ) { }
   isReply = false;
   data: any;
+  dataMultiDel = {};
   isPost = false;
   isOutGroup = false;
   isAccount = false;
+  isMulti = false;
   isRecoveryAccount = false;
   title = 'POPUP.DELETE_USER'
   ngOnInit(): void {
@@ -54,6 +58,19 @@ export class DeleteUserComponent implements OnInit {
       return;
     }
     if (this.isAccount) {
+      if (this.isMulti) {
+        const userIds = map(this.dataMultiDel, '_id');
+        this.accountService.deleteMultiAccount({
+          userIds,
+        }).subscribe({
+          next: (res: any) => {
+            this.toastr.success(res.msg);
+            this.activeModal.close(res);
+          },
+          error: (err: any) => this.toastr.error(err.error.msg)
+        })
+        return;
+      }
       this.accountService.deleteAccount([{ _id: this.data._id }]).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
@@ -96,5 +113,18 @@ export class DeleteUserComponent implements OnInit {
 
   onCancel() {
     this.activeModal.dismiss();
+  }
+  fileUpload(event: any) {
+    const selectedFile = event.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsBinaryString(selectedFile);
+    fileReader.onload = (event) => {
+      let binaryData = event.target?.result;
+      let workBook = XLSX.read(binaryData, { type: 'binary' })
+      this.dataMultiDel = {}
+      workBook.SheetNames.forEach(sheet => {
+        Object.assign(this.dataMultiDel, XLSX.utils.sheet_to_json(workBook.Sheets[sheet]));
+      })
+    }
   }
 }

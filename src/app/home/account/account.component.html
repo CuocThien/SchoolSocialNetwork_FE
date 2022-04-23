@@ -2,11 +2,11 @@
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
   <div class="d-flex control">
-    <h1 class="ps-5 d-inline-block col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4">
+    <h1 class="ps-5 d-inline-block col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
       {{'SIDEBAR.INFORMATION'|translate}}
     </h1>
-    <div class="d-flex col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
-      <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-11 col-sm-11 col-11 u-margin-auto ">
+    <div class="d-flex col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-sm-9 col-19">
+      <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-10 col-sm-10 col-10 u-margin-auto ">
         <form class="search__form u-margin-vertical-auto position-relative">
           <input class="search__form--input-search" type="text" name="search"
             placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}" (keyup.enter)="searchUser()" [(ngModel)]="keyword">
@@ -14,7 +14,13 @@
               (click)="searchUser()"></i></button>
         </form>
       </div>
-      <div class="btn-create-group d-inline-block col-xxl-3 col-xl-3 col-lg-3 col-md-1 col-sm-1 col-1">
+      <div
+        class="btn-create-group ps-3 pe-3 d-inline-block u-margin-auto col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-2 col-2">
+        <button class="btn btn-outline-danger d-block d-lg-block d-sm-block d-xl-none"
+          (click)="deleteMultipleAccount()"><i class="bi bi-trash3 fs-3"></i></button>
+        <button class="btn btn-outline-danger d-xl-block fs-3 d-none text-center w-100-pc"
+          (click)="deleteMultipleAccount()">
+          <i class="bi bi-trash3 fs-3 ps-3 pe-3"></i>{{'POPUP.DELETE_ACCOUNT'|translate}}</button>
       </div>
     </div>
   </div>

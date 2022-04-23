@@ -26,6 +26,11 @@ export class AccountService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.request('delete', url, { body, headers })
     }
+    deleteMultiAccount(body: any) {
+        const url = `${HOST}/group/listuser`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.request('delete', url, { body, headers })
+    }
     recoveryAccount(body: any) {
         const url = `${HOST}/account/recovery`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })

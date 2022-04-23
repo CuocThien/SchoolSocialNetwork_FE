@@ -31,7 +31,8 @@
         "CATEGORY": "Danh mục",
         "REPORT": "Báo cáo",
         "POSTS": "Bài viết",
-        "INFORMATION":"Thông tin"
+        "INFORMATION":"Thông tin",
+        "NEW_FEED": "Bảng tin"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Thông báo của Trường",

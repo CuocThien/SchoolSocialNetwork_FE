@@ -30,6 +30,11 @@ export class HomeIndexService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
+    getListPostOnNewFeed(page: any) {
+        const url = `${HOST}/post/user/all?page=${page}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
     getNotification(page: any) {
         const url = `${HOST}/notification?page=${page}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
@@ -37,12 +42,18 @@ export class HomeIndexService {
     }
     readNotification(notifyId: any) {
         const url = `${HOST}/notification?notifyId=${notifyId}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
-        return this.http.put(url, { headers })
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`
+        })
+        return this.http.request('put', url, { headers })
     }
     readPost(notifyId: any) {
         const url = `${HOST}/post?notifyId=${notifyId}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept-Language': localStorage.getItem('lang'),
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        })
         return this.http.put(url, { headers })
     }
 }

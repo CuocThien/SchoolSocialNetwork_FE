@@ -31,7 +31,8 @@
         "CATEGORY": "Category",
         "REPORT": "Report",
         "POSTS": "Posts",
-        "INFORMATION":"Information"
+        "INFORMATION":"Information",
+        "NEW_FEED": "New feed"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Main notification",

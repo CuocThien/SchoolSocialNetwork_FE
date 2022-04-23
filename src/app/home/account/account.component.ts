@@ -48,6 +48,20 @@ export class AccountComponent implements OnInit {
   filterRole() {
     this._getListAccount();
   }
+  deleteMultipleAccount() {
+    this.modalRef = this.modalService.open(DeleteUserComponent, {
+      backdrop: 'static',
+      centered: true,
+      size: 'md'
+    })
+    this.modalRef.componentInstance.isAccount = true;
+    this.modalRef.componentInstance.isMulti = true;
+    this.modalRef.result.then((res: any) => {
+      this._getListAccount();
+    }).catch(() => {
+
+    });
+  }
   deleteAccount(user: any) {
     this.modalRef = this.modalService.open(DeleteUserComponent, {
       backdrop: 'static',
