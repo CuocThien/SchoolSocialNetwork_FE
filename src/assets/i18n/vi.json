@@ -9,7 +9,9 @@
         "STUDENT": "Sinh viên",
         "REPORT_GROUP": "Quản lý báo cáo của nhóm",
         "REPORT_POST": "Quản lý báo cáo của bài viết",
-        "TRANSFER_FACULTY": "Chuyển khoa"
+        "TRANSFER_FACULTY": "Chuyển khoa",
+        "NOTIFICATION": "Thông báo",
+        "READ_ALL": "Đánh dấu tất cả là đã đọc"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",

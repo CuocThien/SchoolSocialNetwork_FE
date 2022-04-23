@@ -26,11 +26,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let group of listReportGroup;">
+        <tr *ngFor="let group of listReportGroup;let i = index">
           <td>{{group.nameEn}}</td>
           <td class="text-center">{{group.countPost}}</td>
           <td class="text-center" *ngFor="let rp of group.report">{{rp.count}}</td>
-          <td class="text-center"><i class="bi bi-trash btn-edit"></i></td>
+          <td class="text-center"><i class="bi bi-trash btn-edit" (click)="onDelete(group, i)"></i></td>
         </tr>
       </tbody>
     </table>

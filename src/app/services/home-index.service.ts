@@ -47,6 +47,13 @@ export class HomeIndexService {
         })
         return this.http.request('put', url, { headers })
     }
+    readAllNotification() {
+        const url = `${HOST}/notification/all`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`
+        })
+        return this.http.request('get', url, { headers })
+    }
     readPost(notifyId: any) {
         const url = `${HOST}/post?notifyId=${notifyId}`;
         const headers = new HttpHeaders({

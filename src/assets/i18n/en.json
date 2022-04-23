@@ -9,7 +9,9 @@
         "STUDENT": "Student",
         "REPORT_GROUP": "Report group",
         "REPORT_POST": "Report post",
-        "TRANSFER_FACULTY": "Transfer faculty"
+        "TRANSFER_FACULTY": "Transfer faculty",
+        "NOTIFICATION": "Notification",
+        "READ_ALL": "Mark all as read"
     },
     "HEADER":{
         "PROFILE": "Profile",

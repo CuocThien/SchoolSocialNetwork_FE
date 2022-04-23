@@ -17,11 +17,18 @@ export class ProfileComponent implements OnInit {
   data: any;
   result: any;
   profile: any;
+  OTPCode = '';
+  OTPConfirm = '';
+  isRequested = false;
+  isAble = false;
+  isVisible = true;
+  intervalId: any;
+  timeOut = 120;
   constructor(
     private service: ProfileService,
     private uploadImageService: UploadImageService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +49,6 @@ export class ProfileComponent implements OnInit {
         this.service.getProfile().subscribe({
           next: (res: any) => {
             localStorage.setItem('profile', JSON.stringify(res.data));
-            console.log(localStorage.getItem('profile'))
             this.profile = JSON.parse(localStorage.getItem('profile') || '');
             this.dob = moment(this.profile.dob).format('YYYY-MM-DD');
             this.imageSrc = this.profile.avatar;
@@ -78,4 +84,39 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  requestOTP() {
+    const _id = JSON.parse(localStorage.getItem('profile'))._id;
+    const data = { _id };
+    this.service.verifyPhone(data).subscribe({
+      next: (res: any) => {
+        this.toastr.success(res.msg);
+        this.OTPCode = res.data.content.substring(0, 6);
+        this.isRequested = true;
+      },
+      error: (err: any) => {
+        this.toastr.error(err.error.msg)
+      }
+    })
+    this.intervalId = setInterval(() => {
+      --this.timeOut;
+      if (this.timeOut < 0) {
+        clearInterval(this.intervalId);
+        this.OTPCode = ''
+        this.isRequested = false;
+        this.isAble = false;
+        this.timeOut = 120;
+      }
+    }, 1000)
+  }
+
+  submitOTP() {
+    if (this.OTPConfirm == this.OTPCode && this.OTPCode != '') {
+      window.clearInterval(this.intervalId);
+      this.isAble = true;
+      this.isRequested = false;
+      this.isVisible = false;
+    } else {
+      this.toastr.error('Invalid OTP code')
+    }
+  }
 }

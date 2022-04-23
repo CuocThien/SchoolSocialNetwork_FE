@@ -49,7 +49,6 @@ export class FacultyComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listFaculty.push(res)
     }).catch((err: any) => {
-      // console.log("💁 => FacultyComponent => err", err)
     });
   }
   editFaculty(faculty: any, index: any) {
@@ -62,7 +61,6 @@ export class FacultyComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listFaculty[index] = res;
     }).catch((err: any) => {
-      // console.log("💁 => FacultyComponent => err", err)
 
     });
   }
@@ -76,7 +74,6 @@ export class FacultyComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listFaculty[index].profile = res.data;
     }).catch((err: any) => {
-      // console.log("💁 => FacultyComponent => err", err)
 
     });
   }

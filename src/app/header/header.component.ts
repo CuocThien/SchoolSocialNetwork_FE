@@ -84,7 +84,6 @@ export class HeaderComponent implements OnInit {
   }
   readNotification(notifyId: any, index: any) {
     this.service.readNotification(notifyId).subscribe((res: any) => {
-      console.log("🐼 => HeaderComponent => res", res)
       this.router.navigate([`/home/post/${res.data.postId}`])
       this.listNotification[index].isRead = true;
     })
@@ -92,5 +91,16 @@ export class HeaderComponent implements OnInit {
   openNoti(event: any) {
     event.preventDefault();
     this.isCheck = !this.isCheck;
+  }
+  readAllNotification() {
+    this.service.readAllNotification().subscribe(() => {
+      this.listNotification = this.listNotification.map(itm => {
+        return {
+          ...itm,
+          isRead: true
+        }
+      })
+    })
+    this.isCheck = true;
   }
 }

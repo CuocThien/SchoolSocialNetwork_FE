@@ -22,4 +22,9 @@ export class ProfileService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.put(url, data, { headers })
     }
+    verifyPhone(data: any) {
+        const url = `${HOST}/account/verifyPhone`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.post(url, data, { headers })
+    }
 }

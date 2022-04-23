@@ -81,7 +81,6 @@ export class GroupComponent implements OnInit {
     });
     this.modalRef.result.then((res: any) => {
     }).catch((err: any) => {
-      // console.log("💁 => CategoryComponent => err", err)
 
     });
   }

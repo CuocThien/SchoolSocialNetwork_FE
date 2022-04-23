@@ -71,7 +71,6 @@ export class ReportPostComponent implements OnInit {
     }).catch(() => { });
   }
   filterGroup() {
-    console.log(this.groupId)
     this._getListReportPost();
   }
 }

@@ -128,9 +128,7 @@ export class ChatComponent implements OnInit {
   }
   _getConversation(id1: any, id2: any) {
     this.spinner.show();
-    // console.log("🐼 => ChatComponent => { id1, id2 }", { id1, id2 })
     this.service.getConversation({ id1, id2 }).subscribe((res: any) => {
-      // console.log("🐼 => ChatComponent => res", res)
       const { _id, user } = res.data || {}
       if (this.conversationId != _id) {
         this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {

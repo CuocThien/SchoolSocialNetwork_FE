@@ -44,7 +44,6 @@ export class CategoryComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listCategory.push(res)
     }).catch((err: any) => {
-      // console.log("💁 => CategoryComponent => err", err)
     });
   }
   editCategory(category: any, index: any) {
@@ -58,7 +57,6 @@ export class CategoryComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listCategory[index] = res;
     }).catch((err: any) => {
-      // console.log("💁 => CategoryComponent => err", err)
 
     });
   }
@@ -74,7 +72,6 @@ export class CategoryComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listCategory.splice(index, 1);
     }).catch((err: any) => {
-      // console.log("💁 => CategoryComponent => err", err)
 
     });
   }
@@ -90,7 +87,6 @@ export class CategoryComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listCategory.splice(index, 1);
     }).catch((err: any) => {
-      // console.log("💁 => CategoryComponent => err", err)
 
     });
   }

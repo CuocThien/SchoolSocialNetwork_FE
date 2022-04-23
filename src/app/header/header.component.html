@@ -44,7 +44,7 @@
         </li>
       </ul>
       <ul class="u-margin-vertical-auto sub-dropdown">
-        <li class="position-relative" (click)="openNoti($event)">
+        <li class="position-relative">
           <input class="cb-notification" type="checkbox" [checked]="isCheck" name="" id="btn_notification">
           <label for="btn_notification" class="btn-notification"><i class="bi bi-bell-fill"></i>
           </label>
@@ -53,8 +53,14 @@
           <ul class="notification-dropdown" #chatBoxContent infiniteScroll [infiniteScrollDistance]="scrollDistance"
             [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
             (scrolled)="onEnd($event)">
+            <li class="d-flex">
+              <h3 class="col-5 d-inline-block">{{'TITLE.NOTIFICATION'|translate}}</h3>
+              <h4 class="col-7 d-inline-block u-margin-auto text-end" style="cursor: pointer;"
+                (click)="readAllNotification()">
+                {{'TITLE.READ_ALL'|translate}}</h4>
+            </li>
             <li *ngFor="let notification of listNotification; let i = index" style="cursor: pointer;"
-              (click)="readNotification(notification.notifyId, i)">
+              (click)="readNotification(notification.notifyId, i);openNoti($event)">
               <div class="col-2 avatar">
                 <img [src]="notification.avatar" alt="">
               </div>

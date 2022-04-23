@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { AccountService, PostDetailService, UsersService } from '../../services/index';
+import { AccountService, GroupService, PostDetailService, UsersService } from '../../services/index';
 import * as XLSX from 'xlsx';
 import { map } from 'lodash';
 
@@ -19,7 +19,8 @@ export class DeleteUserComponent implements OnInit {
     private postService: PostDetailService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private groupService: GroupService
   ) { }
   isReply = false;
   data: any;
@@ -29,6 +30,7 @@ export class DeleteUserComponent implements OnInit {
   isAccount = false;
   isMulti = false;
   isRecoveryAccount = false;
+  isGroup = false;
   title = 'POPUP.DELETE_USER'
   ngOnInit(): void {
     if (this.isPost)
@@ -39,10 +41,26 @@ export class DeleteUserComponent implements OnInit {
       this.title = 'POPUP.DELETE_ACCOUNT'
     if (this.isRecoveryAccount)
       this.title = 'POPUP.RECOVERY_ACCOUNT'
+    if (this.isGroup)
+      this.title = 'POPUP.DELETE_GROUP'
   }
   onDelete() {
     this.spinner.show();;
     this.spinner.hide();
+    if (this.isGroup) {
+      this.groupService.deleteGroup(this.data).subscribe({
+        next: (res: any) => {
+          this.toastr.success(res.msg);
+          this.activeModal.close(res);
+          this.spinner.hide();
+        },
+        error: (err: any) => {
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
+        }
+      })
+      return;
+    }
     if (this.isPost) {
       this.postService.deletePost(this.data.postId).subscribe({
         next: (res: any) => {

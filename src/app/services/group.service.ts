@@ -31,6 +31,11 @@ export class GroupService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.put(url, body, { headers })
   }
+  deleteGroup(groupId: any) {
+    const url = `${HOST}/group?groupId=${groupId}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.delete(url, { headers })
+  }
   report(body: any) {
     const url = `${HOST}/group/sub/report`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
