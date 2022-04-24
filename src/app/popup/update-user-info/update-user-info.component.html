@@ -1,0 +1,21 @@
+<div class="form-popup">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
+  <h3 class="u-center-text">{{'POPUP.UPDATE_USER_INFO'|translate}}</h3>
+  <hr>
+  <form class="mt-4" [formGroup]="userInfoForm">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" readonly type="text" placeholder="Id..." formControlName="_id">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" [autofocus]="true" type="text" placeholder="Full name..."
+      formControlName="fullname">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" type="date" placeholder="Birthday..." formControlName="dob">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" type="text" placeholder="Address..." formControlName="address">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" type="text" placeholder="Phone..." formControlName="phone">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" readonly type="number" placeholder="Year..."
+      formControlName="year">
+  </form>
+  <hr>
+  <div class="button-control-group text-end mt-3">
+    <button class="btn btn-outline-secondary fs-3 w-25 me-3" (click)="onCancel()">{{'BUTTON.CANCEL'|translate}}</button>
+    <button class="btn btn-outline-primary fs-3 w-25" (click)="onSubmit()">{{'BUTTON.SUBMIT'|translate}}</button>
+  </div>
+</div>

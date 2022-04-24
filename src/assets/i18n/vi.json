@@ -122,6 +122,7 @@
         "DEAN": "Trưởng khoa",
         "IMAGE_PREVIEW": "Xem trước ảnh",
         "DELETE_ACCOUNT": "Xoá tài khoản",
-        "RECOVERY_ACCOUNT": "Khôi phục tài khoản"
+        "RECOVERY_ACCOUNT": "Khôi phục tài khoản",
+        "UPDATE_USER_INFO": "Chỉnh sửa thông tin"
     }
 }

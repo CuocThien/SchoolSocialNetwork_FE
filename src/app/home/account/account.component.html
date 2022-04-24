@@ -65,6 +65,7 @@
           <td class="text-center">{{user.dob|date:'dd-MM-YYY'}}</td>
           <td class="text-center">{{user.phone}}</td>
           <td class="text-center">
+            <i *ngIf="!isDeleted" class="bi bi-pencil-square btn-delete me-3" (click)="updateAccount(user)"></i>
             <i *ngIf="!isDeleted" class="bi bi-trash3 btn-delete" (click)="deleteAccount(user)"></i>
             <i *ngIf="isDeleted" class="bi bi-bootstrap-reboot btn-delete" (click)="recoveryAccount(user)"></i>
           </td>

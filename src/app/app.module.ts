@@ -44,6 +44,7 @@ import { AddUserGroupComponent } from './popup/add-user-group/add-user-group.com
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransferFacultyComponent } from './popup/transfer-faculty/transfer-faculty.component';
 import { ChangeAdminComponent } from './popup/change-admin/change-admin.component';
+import { UpdateUserInfoComponent } from './popup/update-user-info/update-user-info.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ChangeAdminComponent } from './popup/change-admin/change-admin.componen
     ReportComponent,
     AddUserGroupComponent,
     TransferFacultyComponent,
-    ChangeAdminComponent
+    ChangeAdminComponent,
+    UpdateUserInfoComponent
   ],
   imports: [
     BrowserModule,

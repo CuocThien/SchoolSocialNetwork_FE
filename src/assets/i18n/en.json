@@ -122,6 +122,7 @@
         "DEAN": "Dean",
         "IMAGE_PREVIEW": "Image preview",
         "DELETE_ACCOUNT": "Delete account",
-        "RECOVERY_ACCOUNT": "Recovery account"
+        "RECOVERY_ACCOUNT": "Recovery account",
+        "UPDATE_USER_INFO": "Update user information"
     }
 }

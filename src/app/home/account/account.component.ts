@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
+import { UpdateUserInfoComponent } from 'src/app/popup/update-user-info/update-user-info.component';
 import { AccountService, FacultyService, UsersService } from 'src/app/services/index';
 import { LIST_ROLE } from 'src/app/utils/constant';
 
@@ -76,6 +77,20 @@ export class AccountComponent implements OnInit {
 
     });
   }
+  updateAccount(user: any) {
+    this.modalRef = this.modalService.open(UpdateUserInfoComponent, {
+      backdrop: 'static',
+      centered: true,
+      size: 'md'
+    })
+    this.modalRef.componentInstance.data = user;
+    this.modalRef.componentInstance.isAccount = true;
+    this.modalRef.result.then((res: any) => {
+      this._getListAccount();
+    }).catch(() => {
+
+    });
+  }
   recoveryAccount(user: any) {
     this.modalRef = this.modalService.open(DeleteUserComponent, {
       backdrop: 'static',
@@ -83,7 +98,6 @@ export class AccountComponent implements OnInit {
       size: 'md'
     })
     this.modalRef.componentInstance.data = user;
-    this.modalRef.componentInstance.isRecoveryAccount = true;
     this.modalRef.result.then((res: any) => {
       this._getListAccount();
     }).catch(() => {
