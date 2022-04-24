@@ -30,13 +30,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
 import { NewFeedComponent } from './new-feed/new-feed.component';
+import { SearchUserComponent } from './search-user/search-user.component';
 
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent],
+  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent, SearchUserComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,

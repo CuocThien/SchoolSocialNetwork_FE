@@ -11,7 +11,8 @@
         "REPORT_POST": "Report post",
         "TRANSFER_FACULTY": "Transfer faculty",
         "NOTIFICATION": "Notification",
-        "READ_ALL": "Mark all as read"
+        "READ_ALL": "Mark all as read",
+        "SEARCH_USER": "Search user"
     },
     "HEADER":{
         "PROFILE": "Profile",

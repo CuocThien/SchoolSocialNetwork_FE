@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   listNotification = [];
   isEndListNotification = false;
   isLangEn = false;
+  searchString = ''
 
   throttle = 300;
   scrollDistance = 1;
@@ -102,5 +103,10 @@ export class HeaderComponent implements OnInit {
       })
     })
     this.isCheck = true;
+  }
+  onSubmit() {
+    if (this.searchString != '') {
+      this.router.navigate(['/home/search-user'], { queryParams: { q: this.searchString } })
+    }
   }
 }

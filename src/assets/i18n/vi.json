@@ -11,7 +11,8 @@
         "REPORT_POST": "Quản lý báo cáo của bài viết",
         "TRANSFER_FACULTY": "Chuyển khoa",
         "NOTIFICATION": "Thông báo",
-        "READ_ALL": "Đánh dấu tất cả là đã đọc"
+        "READ_ALL": "Đánh dấu tất cả là đã đọc",
+        "SEARCH_USER": "Tìm kiếm người dùng"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",

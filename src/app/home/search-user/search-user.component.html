@@ -1,0 +1,25 @@
+<!-- Upload -->
+<div class="group-container h-100-sub">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
+  <h2 class="component-title">{{'TITLE.SEARCH_USER'|translate}}</h2>
+  <div class="card-content w-100-pc">
+    <div class="card-user-info d-inline-flex col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2 mb-2"
+      *ngFor="let account of listAccount">
+      <div class="card-user-info__avatar col-3">
+        <img [src]="account?.avatar" alt="">
+      </div>
+      <div class="card-user-info__info col-9 text-start position-relative">
+        <h4>{{account?.fullname}}</h4>
+        <h5>{{account?.address}} </h5>
+        <h5>{{account?.phone}}</h5>
+        <h5>{{account?.email}}</h5>
+        <h5>{{isLangEn ? account.facultyNameEn : account.facultyNameVi}}</h5>
+        <button *ngIf="account._id != userId" class="btn btn-outline-primary fs-2 position-absolute"
+          style="top: 0;right: 5px;" (click)="goToChat(account)">
+          <i class="bi bi-chat-dots"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>

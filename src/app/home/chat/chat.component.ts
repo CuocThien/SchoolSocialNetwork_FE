@@ -33,6 +33,7 @@ export class ChatComponent implements OnInit {
   listAccountSearch: any;
   countSendMessage = 0;
   isConversationSearch = false;
+  isRedirectFromSearch = false;
 
   throttle = 300;
   scrollDistance = 1;
@@ -63,15 +64,25 @@ export class ChatComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const conversationFromSearch = JSON.parse(localStorage.getItem('conversation'))
+    this.isRedirectFromSearch = !!conversationFromSearch;
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
     this.currentUserId = this.profile._id;
     this.service.getListConversation().subscribe((res: any) => {
       this.listConversation = res.data.result;
-      this.conversationId = this.listConversation[0]._id;
-      this.partnerUserId = this.listConversation[0].participantId;
-      this._setChatTitle(this.listConversation[0].user)
+      if (!this.isRedirectFromSearch) {
+        this.conversationId = this.listConversation[0]._id;
+        this.partnerUserId = this.listConversation[0].participantId;
+        this._setChatTitle(this.listConversation[0].user)
+      } else {
+        this.conversationId = conversationFromSearch._id;
+        this.partnerUserId = conversationFromSearch.participantId;
+        this._setChatTitle(conversationFromSearch.user)
+        this.listConversation = this.listConversation.filter((itm: any) => itm._id != conversationFromSearch._id)
+        this.listConversation.unshift(conversationFromSearch);
+      }
       this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
-        [this.currentUserId, this.listConversation[0].participantId]);
+        [this.currentUserId, this.partnerUserId]);
       this.getMessage()
     })
     this.scrollToBottom();
@@ -82,6 +93,7 @@ export class ChatComponent implements OnInit {
     this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
       room: this.conversationId
     });
+    localStorage.removeItem('conversation')
   }
 
   ngAfterViewChecked() {
@@ -142,6 +154,7 @@ export class ChatComponent implements OnInit {
       this.searchString = '';
 
       if (this.countSendMessage == 0 && this.isConversationSearch && this.flag) {
+        this.listConversation = this.listConversation.filter((itm: any) => itm._id != res.data._id)
         this.listConversation.unshift(res.data);
         this.activeIndex = 0;
       } else if (this.countSendMessage == 0 && !this.isConversationSearch && this.flag) {

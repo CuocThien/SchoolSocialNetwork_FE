@@ -19,6 +19,7 @@ import { ReportGroupComponent } from './report-group/report-group.component';
 import { ReportPostComponent } from './report-post/report-post.component';
 import { AccountComponent } from './account/account.component';
 import { NewFeedComponent } from './new-feed/new-feed.component';
+import { SearchUserComponent } from './search-user/search-user.component';
 
 const homeRoutes: Routes = [
     {
@@ -40,6 +41,7 @@ const homeRoutes: Routes = [
             { path: 'report/post', component: ReportPostComponent, pathMatch: 'full' },
             { path: 'account', component: AccountComponent, pathMatch: 'full' },
             { path: 'new-feed', component: NewFeedComponent, pathMatch: 'full' },
+            { path: 'search-user', component: SearchUserComponent, pathMatch: 'full' },
 
 
         ]
