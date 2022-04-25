@@ -32,6 +32,9 @@
           <td class="text-center" *ngFor="let rp of group.report">{{rp.count}}</td>
           <td class="text-center"><i class="bi bi-trash btn-edit" (click)="onDelete(group, i)"></i></td>
         </tr>
+        <tr *ngIf="!listReportGroup?.length" class="text-center">
+          <td colspan="4" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

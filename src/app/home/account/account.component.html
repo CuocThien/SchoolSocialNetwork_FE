@@ -70,6 +70,9 @@
             <i *ngIf="isDeleted" class="bi bi-bootstrap-reboot btn-delete" (click)="recoveryAccount(user)"></i>
           </td>
         </tr>
+        <tr *ngIf="!listUsers?.length" class="text-center">
+          <td colspan="5" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

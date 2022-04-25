@@ -326,7 +326,7 @@ export class GroupDetailComponent implements OnInit {
       const data = res.data;
       data.avatar = this.myAvatar;
       data.fullname = this.fullname;
-      data.countCmt = 0;
+      data.countCmt = post.countCmt;
       this.listPost[index] = data;
     }).catch(() => { });
   }

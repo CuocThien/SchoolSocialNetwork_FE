@@ -46,6 +46,9 @@
             (click)="restoreCategory(category,i)"></i>
         </td>
       </tr>
+      <tr *ngIf="!listCategory?.length" class="text-center">
+        <td colspan="4" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
+      </tr>
     </tbody>
   </table>
 </div>

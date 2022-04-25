@@ -53,6 +53,9 @@
             *ngIf="isAdmin||isDean"></i>
         </td>
       </tr>
+      <tr *ngIf="!listUsers?.length" class="text-center">
+        <td colspan="5" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
+      </tr>
     </tbody>
   </table>
   <div class="pagination">

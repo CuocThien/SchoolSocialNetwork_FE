@@ -41,6 +41,9 @@
           </div>
         </div>
       </div>
+      <h2 *ngIf="!listMainTeacherPost?.length" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
       <div class="pagination">
         <ngb-pagination [collectionSize]="totalMainTeacher" [maxSize]="5" [pageSize]="1" [rotate]="true"
           (pageChange)="goToPage('mainTeacher',$event)" [(page)]="pageMainTeacher">
@@ -85,6 +88,9 @@
           </div>
         </div>
       </div>
+      <h2 *ngIf="!listMainStudentPost?.length" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
       <div class="pagination">
         <ngb-pagination [collectionSize]="totalMainStudent" [maxSize]="5" [pageSize]="1" [rotate]="true"
           (pageChange)="goToPage('mainStudent',$event)" [(page)]="pageMainStudent">
@@ -140,6 +146,9 @@
           </div>
         </div>
       </div>
+      <h2 *ngIf="!listFacultyTeacherPost?.length" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
       <div class="pagination">
         <ngb-pagination [collectionSize]="totalFacultyTeacher" [maxSize]="5" [pageSize]="1" [rotate]="true"
           (pageChange)="goToPage('facultyTeacher',$event)" [(page)]="pageFacultyTeacher">
@@ -184,6 +193,9 @@
           </div>
         </div>
       </div>
+      <h2 *ngIf="!listFacultyStudentPost?.length" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
       <div class="pagination">
         <ngb-pagination [collectionSize]="totalFacultyStudent" [maxSize]="5" [pageSize]="10" [rotate]="true"
           (pageChange)="goToPage('facultyStudent',$event)" [(page)]="pageFacultyStudent">

@@ -67,6 +67,9 @@
         </div>
         <app-comment class="text-start" [countCmt]="post?.countCmt" [postId]="post._id"></app-comment>
       </div>
+      <h2 *ngIf="!listPost?.length" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
       <button *ngIf="page!=maxPage" class="btn-load-more" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}</button>
     </div>
   </div>
@@ -101,6 +104,9 @@
             </button>
           </div>
         </div>
+        <h2 *ngIf="!listAdmin?.length" class="text-center">
+          {{'TITLE.NO_DATA'|translate}}
+        </h2>
       </div>
       <div class="member-tab text-start">
         <hr>
@@ -122,6 +128,9 @@
             </button>
           </div>
         </div>
+        <h2 *ngIf="!listMember?.length" class="text-center">
+          {{'TITLE.NO_DATA'|translate}}
+        </h2>
         <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">{{'BUTTON.LOAD_MORE'|translate}}
         </h5>
       </div>

@@ -70,20 +70,22 @@ export class ChatComponent implements OnInit {
     this.currentUserId = this.profile._id;
     this.service.getListConversation().subscribe((res: any) => {
       this.listConversation = res.data.result;
-      if (!this.isRedirectFromSearch) {
-        this.conversationId = this.listConversation[0]._id;
-        this.partnerUserId = this.listConversation[0].participantId;
-        this._setChatTitle(this.listConversation[0].user)
-      } else {
-        this.conversationId = conversationFromSearch._id;
-        this.partnerUserId = conversationFromSearch.participantId;
-        this._setChatTitle(conversationFromSearch.user)
-        this.listConversation = this.listConversation.filter((itm: any) => itm._id != conversationFromSearch._id)
-        this.listConversation.unshift(conversationFromSearch);
+      if (this.listConversation.length) {
+        if (!this.isRedirectFromSearch) {
+          this.conversationId = this.listConversation[0]._id;
+          this.partnerUserId = this.listConversation[0].participantId;
+          this._setChatTitle(this.listConversation[0].user)
+        } else {
+          this.conversationId = conversationFromSearch._id;
+          this.partnerUserId = conversationFromSearch.participantId;
+          this._setChatTitle(conversationFromSearch.user)
+          this.listConversation = this.listConversation.filter((itm: any) => itm._id != conversationFromSearch._id)
+          this.listConversation.unshift(conversationFromSearch);
+        }
+        this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
+          [this.currentUserId, this.partnerUserId]);
+        this.getMessage()
       }
-      this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
-        [this.currentUserId, this.partnerUserId]);
-      this.getMessage()
     })
     this.scrollToBottom();
 

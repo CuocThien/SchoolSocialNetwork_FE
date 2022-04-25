@@ -35,6 +35,9 @@
         </div>
         <app-comment class="text-start" [countCmt]="post?.countCmt" [postId]="post._id"></app-comment>
       </div>
+      <h2 *ngIf="!listPost?.length" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
       <button *ngIf="page!=maxPage" class="btn-load-more" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}</button>
     </div>
   </div>

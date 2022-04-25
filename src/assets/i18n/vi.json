@@ -12,7 +12,8 @@
         "TRANSFER_FACULTY": "Chuyển khoa",
         "NOTIFICATION": "Thông báo",
         "READ_ALL": "Đánh dấu tất cả là đã đọc",
-        "SEARCH_USER": "Tìm kiếm người dùng"
+        "SEARCH_USER": "Tìm kiếm người dùng",
+        "NO_DATA": "Không có dữ liệu"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",

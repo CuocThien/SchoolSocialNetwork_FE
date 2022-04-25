@@ -12,7 +12,8 @@
         "TRANSFER_FACULTY": "Transfer faculty",
         "NOTIFICATION": "Notification",
         "READ_ALL": "Mark all as read",
-        "SEARCH_USER": "Search user"
+        "SEARCH_USER": "Search user",
+        "NO_DATA": "No data available"
     },
     "HEADER":{
         "PROFILE": "Profile",

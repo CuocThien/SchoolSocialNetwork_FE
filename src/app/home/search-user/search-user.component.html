@@ -21,5 +21,6 @@
         </button>
       </div>
     </div>
-
+    <h2 *ngIf="!listAccount?.length" class="text-center">{{'TITLE.NO_DATA'|translate}}
+    </h2>
   </div>

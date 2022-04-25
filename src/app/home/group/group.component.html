@@ -35,6 +35,9 @@
             <h5>{{group.numPost}} {{'GROUP.POSTS'|translate}}</h5>
           </div>
         </div>
+        <h2 *ngIf="!listGroup?.length" class="text-center">
+          {{'TITLE.NO_DATA'|translate}}
+        </h2>
         <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}
         </h5>
 
@@ -57,6 +60,9 @@
             </button>
           </div>
         </div>
+        <h2 *ngIf="!listGroupRelative?.length" class="text-center">
+          {{'TITLE.NO_DATA'|translate}}
+        </h2>
         <h5 *ngIf="pageRelative!=maxPageRelative" class="button-text text-start" (click)="goToPageRelative()">
           {{'BUTTON.LOAD_MORE'|translate}}
         </h5>
