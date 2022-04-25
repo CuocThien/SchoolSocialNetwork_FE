@@ -6,7 +6,9 @@
       <img [src]="image" alt="">
       <div class="btn-group">
         <button *ngIf="isAdmin" (click)="updateImage(groupDetail?.group?.image)">{{'GROUP.UPDATE'|translate}}</button>
-        <button (click)="outGroup();removeUser(userId,1);"><i class="bi bi-box-arrow-left"></i></button>
+        <button *ngIf="isJoinedGroup" (click)="outGroup();removeUser(userId,1);"><i
+            class="bi bi-box-arrow-left"></i></button>
+        <button *ngIf="!isJoinedGroup" (click)="joinGroup();"><i class="bi bi-box-arrow-in-right"></i></button>
       </div>
     </div>
     <div class="gr-intro__info mt-3">

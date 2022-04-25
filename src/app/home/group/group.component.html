@@ -47,7 +47,8 @@
     <div class="groups__suggestion col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
       <div class="groups__suggestion--container">
         <h1>{{'GROUP.GROUPS_SUGGEST'|translate}}</h1>
-        <div class="group d-sm-flex d-flex d-md-block" *ngFor="let groupR of listGroupRelative; let i = index">
+        <div class="group d-sm-flex d-flex d-md-block" *ngFor="let groupR of listGroupRelative; let i = index"
+          (click)="redirectGroupDetail(groupR._id)">
           <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
             <img [src]="groupR.image" alt="">
           </div>

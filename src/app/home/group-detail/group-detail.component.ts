@@ -47,6 +47,7 @@ export class GroupDetailComponent implements OnInit {
   isAdmin = false;
   userId: any;
   isOutGroup = false;
+  isJoinedGroup = false;
   private modalRef: NgbModalRef;
 
   ngOnInit(): void {
@@ -84,7 +85,7 @@ export class GroupDetailComponent implements OnInit {
     this.spinner.show();
     this.service.getListPost({ groupId: this.groupId, page: this.page }).subscribe({
       next: (res: any) => {
-        this.listPost = [...this.listPost, ...res.data.result];
+        this.listPost = [...this.listPost, ...res.data?.result];
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       },
@@ -100,7 +101,10 @@ export class GroupDetailComponent implements OnInit {
       isAdmin: true
     }).subscribe({
       next: (res: any) => {
-        this.listAdmin = res.data.result;
+        this.listAdmin = res.data?.result;
+        this.listAdmin.map(itm => {
+          if (itm.userId == this.userId) this.isJoinedGroup = true;
+        })
         this.totalAdmin = res.data.total;
         this.spinner.hide();
       },
@@ -116,7 +120,10 @@ export class GroupDetailComponent implements OnInit {
       page: this.page
     }).subscribe({
       next: (res: any) => {
-        this.listMember = [...this.listMember, ...res.data.result];
+        this.listMember = [...this.listMember, ...res.data?.result];
+        this.listMember.map(itm => {
+          if (itm.userId == this.userId) this.isJoinedGroup = true;
+        })
         this.maxPageUser = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.totalMember = res.data.total;
         this.spinner.hide();
@@ -343,5 +350,24 @@ export class GroupDetailComponent implements OnInit {
       this.listMember = [];
       this._getListMember();
     });
+  }
+  joinGroup() {
+    this.spinner.show();
+    this.service.addUser({
+      groupId: this.groupId,
+      userId: this.userId
+    }).subscribe({
+      next: (res: any) => {
+        this.toastr.success(res.msg);
+        this.spinner.hide();
+        this.isJoinedGroup = true;
+        this._groupDetail();
+        this._getListMember();
+      },
+      error: (err: any) => {
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
+      }
+    })
   }
 }

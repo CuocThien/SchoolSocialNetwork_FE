@@ -40,7 +40,9 @@ export class GroupComponent implements OnInit {
     this.spinner.show();
     this.service.getListGroupByUserId({ page: this.page }).subscribe({
       next: (res: any) => {
-        this.listGroup = [...this.listGroup, ...res.data.result];
+        if (res.data?.result) {
+          this.listGroup = [...this.listGroup, ...res.data?.result];
+        }
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       },
@@ -51,7 +53,9 @@ export class GroupComponent implements OnInit {
     this.spinner.show();
     this.service.getListGroupRelative({ page: this.page }).subscribe({
       next: (res: any) => {
-        this.listGroupRelative = [...this.listGroupRelative, ...res.data.result];
+        if (res.data?.result) {
+          this.listGroupRelative = [...this.listGroupRelative, ...res.data?.result];
+        }
         this.maxPageRelative = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       },
