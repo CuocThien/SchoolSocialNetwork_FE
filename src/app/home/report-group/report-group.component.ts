@@ -36,7 +36,7 @@ export class ReportGroupComponent implements OnInit {
       next: (res: any) => {
         this.listReportGroup = res.data.result;
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
-        if (!this.listTypeReport)
+        if (!this.listTypeReport && this.listReportGroup.length)
           this.listTypeReport = this.listReportGroup[0].report;
         this.spinner.hide();
       },

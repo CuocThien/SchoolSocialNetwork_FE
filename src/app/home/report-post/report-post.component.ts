@@ -40,7 +40,7 @@ export class ReportPostComponent implements OnInit {
       next: (res: any) => {
         this.listReportPost = res.data.result || [];
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
-        if (!this.listTypeReport)
+        if (!this.listTypeReport && this.listReportPost.length)
           this.listTypeReport = this.listReportPost[0].report;
         this.spinner.hide();
       },
