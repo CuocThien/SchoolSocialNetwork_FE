@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     //CONNECT SOCKET NOTIFICATION
     this.socket = io.io(`${HOST}`);
     this.socket.on(EVENT_NOTIFICATION_SSC.JOIN_ROOM_SSC, (data: any) => {
-      console.log(data)
+      //console.log(data)
     });
     this.socket.on(EVENT_NOTIFICATION_SSC.SEND_NOTIFICATION_SSC, (payload: any) => {
       const { data } = payload || {};
@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
       this._getNotification();
     });
     this.socket.on(EVENT_NOTIFICATION_SSC.LEAVE_ROOM_SSC, (data: any) => {
-      console.log(data)
+      //console.log(data)
     });
   }
   socket: any;
@@ -118,7 +118,7 @@ export class HeaderComponent implements OnInit {
         }
         this.listNotification.push(...res.data)
       },
-      error: (err: any) => console.log(err)
+      error: (err: any) => { }//console.log(err)
     })
   }
   onEnd(event: any) {

@@ -49,16 +49,29 @@ export class ChatComponent implements OnInit {
   ) {
     this.socket = io.io(`${HOST}`);
     this.socket.on(EVENT_MESSAGE_SSC.JOIN_ROOM_SSC, (data: any) => {
-      console.log(data)
+      //console.log(data)
     });
     this.socket.on(EVENT_MESSAGE_SSC.SEND_MESSAGE_SSC, (data: any) => {
-      console.log(data)
+      //console.log(data)
       this.isLoadOldMessage = false;
       this.messageList.push({ data: data.data.data, isAuth: false })
       this.listConversation[this.activeIndex].lastestMessage = data.data.data;
     });
     this.socket.on(EVENT_MESSAGE_SSC.LEAVE_ROOM_SSC, (data: any) => {
-      console.log(data)
+      //console.log(data)
+    });
+    this.socket.on(EVENT_MESSAGE_SSC.JOIN_ROOM_OFFLINE_SSC, (data: any) => {
+      //console.log(data)
+    });
+    this.socket.on(EVENT_MESSAGE_SSC.LEAVE_ROOM_OFFLINE_SSC, (data: any) => {
+      //console.log(data)
+    });
+    this.socket.on(EVENT_MESSAGE_SSC.SEND_MESSAGE_OFFLINE_SSC, (payload: any) => {
+      //console.log(payload)
+      const { data } = payload || {}
+      if (data.conversationId != this.conversationId) {
+        this.getListConversationFromEventOffline()
+      }
     });
   }
 
@@ -68,6 +81,9 @@ export class ChatComponent implements OnInit {
     this.isRedirectFromSearch = !!conversationFromSearch;
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
     this.currentUserId = this.profile._id;
+    this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_OFFLINE_CSS, {
+      room: `Channel_offline_${this.currentUserId}`
+    })
     this.service.getListConversation().subscribe((res: any) => {
       this.listConversation = res.data.result;
       if (this.listConversation.length) {
@@ -95,6 +111,9 @@ export class ChatComponent implements OnInit {
     this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_CSS, {
       room: this.conversationId
     });
+    this.socket.emit(EVENT_MESSAGE_CSS.LEAVE_ROOM_OFFLINE_CSS, {
+      room: `Channel_offline_${this.currentUserId}`
+    })
     localStorage.removeItem('conversation')
   }
 
@@ -138,6 +157,17 @@ export class ChatComponent implements OnInit {
       this.listConversation = res.data.result;
       this.conversationId = this.listConversation[0]._id;
       this.spinner.hide();
+    })
+  }
+  getListConversationFromEventOffline() {
+    this.service.getListConversation().subscribe((res: any) => {
+      this.listConversation = res.data.result;
+      Object.values(this.listConversation).forEach((itm: any, i) => {
+        if (itm._id == this.conversationId) {
+          this.activeIndex = i;
+          return;
+        }
+      })
     })
   }
   _getConversation(id1: any, id2: any) {

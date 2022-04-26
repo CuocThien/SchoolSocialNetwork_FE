@@ -27,7 +27,6 @@ export class UpdateUserInfoComponent implements OnInit {
   ngOnInit(): void {
     this.isLangEn = localStorage.getItem('lang') === 'en';
     this.createFormSignUp();
-    console.log(this.data)
   }
   ngDoCheck() {
     this.isLangEn = localStorage.getItem('lang') === 'en'
