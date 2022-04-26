@@ -69,7 +69,7 @@ import { UpdateUserInfoComponent } from './popup/update-user-info/update-user-in
     AddUserGroupComponent,
     TransferFacultyComponent,
     ChangeAdminComponent,
-    UpdateUserInfoComponent
+    UpdateUserInfoComponent,
   ],
   imports: [
     BrowserModule,

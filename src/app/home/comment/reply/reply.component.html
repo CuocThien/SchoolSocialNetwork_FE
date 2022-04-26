@@ -11,7 +11,7 @@
   <div class="line col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"></div>
   <div class="ps-3 user-comment-reply col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-flex">
     <div class="user-comment-reply-avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-      <img [src]="reply.avatar" alt="">
+      <img class="image-avatar" [src]="reply.avatar" alt="">
     </div>
     <div class="user-reply-cmt-content col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10">
       <h6>{{reply.fullname}}</h6>
@@ -27,7 +27,8 @@
   <div class="line col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"></div>
   <div class="ps-3 user-comment-reply col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-flex">
     <div class="comment-create__avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-      <img [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
+      <img class="image-avatar"
+        [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
     </div>
     <div class="comment-create__box col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 position-relative">
       <textarea name="" [(ngModel)]="content" placeholder="Reply..." rows="4"></textarea>

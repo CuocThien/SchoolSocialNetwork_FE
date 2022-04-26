@@ -8,7 +8,7 @@
           <div (click)="goToGroup(post)" class="position-relative col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"
             style="height: 60px; cursor: pointer;">
             <img class="image-group-nf position-absolute" style="top: 0; left: 0;" [src]="post.group.image" alt="">
-            <img class="position-absolute" style="bottom: -5px; right: 6px;" [src]="post.avatar" alt="">
+            <img class="position-absolute image-avatar" style="bottom: -5px; right: 6px;" [src]="post.avatar" alt="">
           </div>
           <div class="ps-3 col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-8 col-8 d-inline-block h-100-pc text-start">
             <h3 (click)="goToGroup(post)" style="cursor: pointer; display: inline-block;">{{post.group.nameEn}}</h3>
@@ -31,7 +31,7 @@
         </div>
         <hr class="mt-3 mb-2">
         <div class="card-content__post-content text-start">
-          <div [innerHtml]="post?.content"></div>
+          <div [innerHtml]="post?.content|safeHtml"></div>
         </div>
         <app-comment class="text-start" [countCmt]="post?.countCmt" [postId]="post._id"></app-comment>
       </div>

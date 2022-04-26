@@ -5,7 +5,7 @@
   <div class="post-detail__author">
     <span>{{post?.author}} - {{post?.createdDate|date:'HH:mm dd/MM/yyyy'}}</span>
   </div>
-  <div class="post-detail__content" [innerHtml]="post?.content"></div>
+  <div class="post-detail__content" [innerHtml]="post?.content | safeHtml"></div>
   <!-- <h5>Đánh giá bài viết</h5>
       <app-star class="star-readpost" id="{{postData.Id}}" rate="{{post.RatingbyAcc}}"></app-star>-->
   <app-comment [countCmt]="post?.countCmt" [postId]="postId"></app-comment>

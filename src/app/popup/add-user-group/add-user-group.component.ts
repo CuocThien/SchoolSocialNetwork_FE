@@ -58,6 +58,7 @@ export class AddUserGroupComponent implements OnInit {
   search() {
     if (!this.searchString) return;
     this.pageUser = 1;
+    this.listMember = []
     this._getListMember();
   }
   addUser(user: any) {

@@ -14,8 +14,8 @@
     <div class="user-comment" *ngFor="let comment of listCmt; let i = index">
       <div class=" d-flex">
         <div class="user-comment-avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-          <img [src]="comment.avatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'"
-            alt="">
+          <img class="image-avatar"
+            [src]="comment.avatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
         </div>
         <div class="user-comment-content col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10">
           <h6>{{comment.fullname}}</h6>
@@ -38,7 +38,8 @@
   </div>
   <div class="comment-create mt-3 d-flex">
     <div class="comment-create__avatar text-end pe-3 col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-      <img [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
+      <img class="image-avatar"
+        [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
     </div>
     <div class="comment-create__box col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 position-relative">
       <textarea name="" [(ngModel)]="commentContent" placeholder="Comment..." rows="4"></textarea>

@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit {
         progressAnimation: "decreasing",
         messageClass: 'card-user-toastr'
       });
+      this.isRefresh = true;
       this._getNotification();
     });
     this.socket.on(EVENT_NOTIFICATION_SSC.LEAVE_ROOM_SSC, (data: any) => {
@@ -63,6 +64,7 @@ export class HeaderComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 2;
   isCheck = false;
+  isRefresh = false;
 
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
@@ -116,6 +118,9 @@ export class HeaderComponent implements OnInit {
           this.isEndListNotification = true;
           return;
         }
+        if (this.isRefresh) {
+          this.listNotification = []
+        }
         this.listNotification.push(...res.data)
       },
       error: (err: any) => { }//console.log(err)
@@ -124,6 +129,7 @@ export class HeaderComponent implements OnInit {
   onEnd(event: any) {
     this.page++;
     if (this.isEndListNotification) return;
+    this.isRefresh = false;
     this._getNotification();
   }
   readNotification(notifyId: any, index: any) {

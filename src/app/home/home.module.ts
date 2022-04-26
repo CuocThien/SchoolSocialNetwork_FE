@@ -31,13 +31,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
 import { NewFeedComponent } from './new-feed/new-feed.component';
 import { SearchUserComponent } from './search-user/search-user.component';
+import { SafeHtmlPipe } from '../safe-html.pipe';
 
 
 
 
 
 @NgModule({
-  declarations: [GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent, SearchUserComponent],
+  declarations: [
+    SafeHtmlPipe,
+    GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent, SearchUserComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,
