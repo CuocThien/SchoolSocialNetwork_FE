@@ -47,7 +47,9 @@ export class FacultyComponent implements OnInit {
       centered: true,
     });
     this.modalRef.result.then((res: any) => {
-      this.listFaculty.push(res)
+      let data = res;
+      res.profile = {}
+      this.listFaculty.push(data)
     }).catch((err: any) => {
     });
   }
