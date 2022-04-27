@@ -85,6 +85,8 @@ export class GroupComponent implements OnInit {
     });
     this.modalRef.result.then((res: any) => {
       this.isSearch = false;
+      this.listGroup = [];
+      this.listGroupRelative = [];
       this._getListGroup();
       this._getListGroupRelative();
     }).catch((err: any) => {
