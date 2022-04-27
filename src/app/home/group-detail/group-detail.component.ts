@@ -150,13 +150,13 @@ export class GroupDetailComponent implements OnInit {
       this.listPost.unshift(data);
     }).catch(() => { });
   }
-  updateImage(imgUrl: any) {
+  updateImage() {
     this.modalRef = this.modalService.open(CropImageGroupComponent, {
       backdrop: 'static',
       centered: true,
       size: 'xl'
     })
-    this.modalRef.componentInstance.imgUrl = imgUrl;
+    this.modalRef.componentInstance.imgUrl = this.image;
     this.modalRef.result.then((res: any) => {
       this.image = res.url;
       this._updateGroup();

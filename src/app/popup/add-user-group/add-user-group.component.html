@@ -14,7 +14,7 @@
     <h4>{{'GROUP.MEMBERS2'|translate}} - {{totalMember}}</h4>
     <div class="card-user d-flex mt-2 mb-2" *ngFor="let member of listMember">
       <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-        <img [src]="member.avatar" alt="">
+        <img class="image-avatar" [src]="member.avatar" alt="">
       </div>
       <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 text-start">
         <h4>{{member.fullname}}</h4>

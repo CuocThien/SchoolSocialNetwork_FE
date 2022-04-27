@@ -21,6 +21,11 @@
         </button>
       </div>
     </div>
+    <div class="pagination">
+      <ngb-pagination [collectionSize]="maxPage" [maxSize]="5" [pageSize]="1" [rotate]="true"
+        (pageChange)="goToPage($event)" [(page)]="page">
+      </ngb-pagination>
+    </div>
     <h2 *ngIf="!listAccount?.length" class="text-center">{{'TITLE.NO_DATA'|translate}}
     </h2>
   </div>
