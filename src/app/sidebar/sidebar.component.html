@@ -104,7 +104,7 @@
 
       <!-- button report dropdown -->
       <input class="d-none cb-report-dropdown" type="checkbox" [checked]="isReportDropdown">
-      <div *ngIf="isAdmin" class="btn-report-dropdown text-start">
+      <div *ngIf="isAdmin || isAdminSubGr" class="btn-report-dropdown text-start">
         <div class="btn-group w-100-pc">
           <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
             (click)="reportDropdown($event)">
@@ -116,7 +116,7 @@
         </div>
         <!-- group button -->
         <div class="w-100-pc text-start">
-          <div class="btn-group w-100-pc ps-3 ">
+          <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
               [routerLink]="['report/group']">
               <i class="bi bi-person-circle"></i>

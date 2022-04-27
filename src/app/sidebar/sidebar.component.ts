@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GroupService } from '../services';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,15 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private groupService: GroupService
+  ) { }
   isAdmin = false;
   isDean = false;
+  isAdminSubGr = false;
   isDropdown = false;
   isAccountDropdown = false;
   isReportDropdown = false;
   arrowReport = 'bi bi-chevron-down';
   arrowAccount = 'bi bi-chevron-down'
   ngOnInit(): void {
+    this.groupService.checkExistedAdminSubGr().subscribe({
+      next: (res: any) => {
+        this.isAdminSubGr = res.data || false;
+        localStorage.setItem('adminSubGr', this.isAdminSubGr.toString())
+      }
+    })
     const role = localStorage.getItem('role')
     if (role === 'admin')
       this.isAdmin = true;

@@ -98,4 +98,14 @@ export class GroupService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.get(url, { headers })
   }
+  checkExistedAdminSubGr() {
+    const url = `${HOST}/account/admin`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
+  }
+  getListGroupForAdminSubGroup() {
+    const url = `${HOST}/group/admin/manager`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
+  }
 }

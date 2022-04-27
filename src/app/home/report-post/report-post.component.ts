@@ -24,11 +24,19 @@ export class ReportPostComponent implements OnInit {
   listGroup: any;
   isLangEn = false;
   groupId = '';
+  isAdminSubGr = false;
+  isAdmin = false;
 
   ngOnInit(): void {
-    this._getListReportPost();
-    this._getListGroup();
-    this.isLangEn = localStorage.getItem('lang') === 'en'
+    this.isLangEn = localStorage.getItem('lang') === 'en';
+    this.isAdminSubGr = localStorage.getItem('isAdminSubGr') === 'true';
+    this.isAdmin = localStorage.getItem('role') === 'admin';
+    if (this.isAdmin) {
+      this._getListReportPost();
+      this._getListGroup();
+      return;
+    }
+    this._getListGroupForAdminSubGroup();
   }
   ngDoCheck() {
     this.isLangEn = localStorage.getItem('lang') === 'en'
@@ -51,6 +59,15 @@ export class ReportPostComponent implements OnInit {
     this.service.getListGroup().subscribe({
       next: (res: any) => {
         this.listGroup = res.data.result;
+      }
+    })
+  }
+  private _getListGroupForAdminSubGroup() {
+    this.service.getListGroupForAdminSubGroup().subscribe({
+      next: (res: any) => {
+        this.listGroup = res.data.result;
+        this.groupId = this.listGroup[0]._id;
+        this._getListReportPost();
       }
     })
   }
