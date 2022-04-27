@@ -1,5 +1,4 @@
 .home-container {
-  margin-top: 7.5rem;
   background-color: #fff;
 }
 
@@ -16,8 +15,13 @@ app-sidebar {
   transition: width .2s;
 }
 
-.home-container {
-  width: 98vw;
+.home-container{
+  width: 99vw;
+  transition: all .2s;
+}
+
+app-header {
+  width: 100vw;
   transition: all .2s;
 }
 
@@ -41,7 +45,9 @@ app-sidebar {
   }
 
   &:checked~.home-container {
-
+    width: 83.33%;
+  }
+  &:checked~.home-container >app-header{
     width: 83.33%;
   }
 

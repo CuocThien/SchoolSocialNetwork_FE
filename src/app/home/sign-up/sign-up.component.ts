@@ -100,7 +100,7 @@ export class SignUpComponent implements OnInit {
       phone: ['', Validators.required],
       year: ['', Validators.required],
       faculty: [null, Validators.required],
-      role: [null, Validators.required],
+      roleId: [null, Validators.required],
     });
   }
   changeButton(event: any) {

@@ -7,6 +7,8 @@ import { HOST } from '../utils/constant';
 import { EVENT_NOTIFICATION_SSC } from '../socket-event/server/notification';
 import { EVENT_NOTIFICATION_CSS } from '../socket-event/client/notification';
 import { ToastrService } from 'ngx-toastr';
+import { EVENT_MESSAGE_SSC } from '../socket-event/server/message';
+import { EVENT_MESSAGE_CSS } from '../socket-event/client/message';
 
 @Component({
   selector: 'app-header',
@@ -46,6 +48,9 @@ export class HeaderComponent implements OnInit {
       this.isRefresh = true;
       this._getNotification();
     });
+    this.socket.on(EVENT_MESSAGE_SSC.SEND_MESSAGE_OFFLINE_SSC, (payload: any) => {
+      this.isRecievedMessage = true;
+    })
     this.socket.on(EVENT_NOTIFICATION_SSC.LEAVE_ROOM_SSC, (data: any) => {
       //console.log(data)
     });
@@ -58,7 +63,8 @@ export class HeaderComponent implements OnInit {
   listNotification = [];
   isEndListNotification = false;
   isLangEn = false;
-  searchString = ''
+  searchString = '';
+  isRecievedMessage = false;
 
   throttle = 300;
   scrollDistance = 1;
@@ -69,7 +75,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
     this.socket.emit(EVENT_NOTIFICATION_CSS.JOIN_ROOM_CSS, { _id: this.profile._id })
-
+    this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_OFFLINE_CSS, {
+      room: `Channel_offline_${this.profile._id}`
+    })
     const language = localStorage.getItem('lang') || 'en';
     if (language === 'en') {
       this.lang = 'HEADER.ENGLISH';

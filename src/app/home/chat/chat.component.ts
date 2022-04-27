@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit {
   message = '';
   messageList: any;
   socket: any;
-  listConversation: any;
+  listConversation = [];
   activeIndex = 0;
   conversationId = '';
   profile: any;
@@ -34,6 +34,7 @@ export class ChatComponent implements OnInit {
   countSendMessage = 0;
   isConversationSearch = false;
   isRedirectFromSearch = false;
+  conversationFromSearch: any;
 
   throttle = 300;
   scrollDistance = 1;
@@ -77,8 +78,8 @@ export class ChatComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const conversationFromSearch = JSON.parse(localStorage.getItem('conversation'))
-    this.isRedirectFromSearch = !!conversationFromSearch;
+    this.conversationFromSearch = JSON.parse(localStorage.getItem('conversation'))
+    this.isRedirectFromSearch = !!this.conversationFromSearch;
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
     this.currentUserId = this.profile._id;
     this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_OFFLINE_CSS, {
@@ -92,18 +93,29 @@ export class ChatComponent implements OnInit {
           this.partnerUserId = this.listConversation[0].participantId;
           this._setChatTitle(this.listConversation[0].user)
         } else {
-          this.conversationId = conversationFromSearch._id;
-          this.partnerUserId = conversationFromSearch.participantId;
-          this._setChatTitle(conversationFromSearch.user)
-          this.listConversation = this.listConversation.filter((itm: any) => itm._id != conversationFromSearch._id)
-          this.listConversation.unshift(conversationFromSearch);
+          this.conversationId = this.conversationFromSearch._id;
+          this.partnerUserId = this.conversationFromSearch.participantId;
+          this._setChatTitle(this.conversationFromSearch.user)
+          this.listConversation = this.listConversation.filter((itm: any) => itm._id != this.conversationFromSearch._id)
+          this.listConversation.unshift(this.conversationFromSearch);
         }
+        this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
+          [this.currentUserId, this.partnerUserId]);
+        this.getMessage()
+        return;
+      }
+      if (this.isRedirectFromSearch) {
+        this.listConversation.unshift(this.conversationFromSearch);
+        this.conversationId = this.conversationFromSearch._id;
+        this.partnerUserId = this.conversationFromSearch.participantId;
+        this._setChatTitle(this.conversationFromSearch.user);
         this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
           [this.currentUserId, this.partnerUserId]);
         this.getMessage()
       }
     })
-    this.scrollToBottom();
+    if (this.listConversation)
+      this.scrollToBottom();
 
   }
 

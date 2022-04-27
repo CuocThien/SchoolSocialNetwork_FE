@@ -1,24 +1,16 @@
 <div class="container-fluid header h-header">
   <div class="d-flex page-control">
-    <div class="col-xl-8 col-lg-9 col-md-8 col-sm-9 col-9">
-      <div class="d-flex justify-content-end h-header">
-        <img
-          class="page-control__logo u-margin-vertical-auto d-none d-lg-table-cell d-md-table-cell d-sm-table-cell d-xl-none "
-          [routerLink]="['index']" src="../../assets/img/logo.png" alt="logo">
-        <div class="logo col-xxl-3 col-xl-3 d-none d-xl-table page-control__title u-margin-auto">
-          <h3 class="title d-none d-xl-table-cell" [routerLink]="['index']">Social Network</h3>
-        </div>
-        <div class="col-xxl-9 col-xl-9 col-md-7 col-sm-10 col-10 u-margin-auto ">
-          <form class="search__form u-margin-vertical-auto position-relative" (ngSubmit)="onSubmit()">
-            <input class="search__form--input-search" type="text" name="search" [(ngModel)]="searchString"
-              placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}">
-            <button class="search__form--button-search position-absolute" type="submit"><i
-                class="bi bi-search"></i></button>
-          </form>
-        </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-5 col-5">
+      <div class="d-flex justify-content-start h-header">
+        <form class="search__form u-margin-vertical-auto w-100-pc position-relative" (ngSubmit)="onSubmit()">
+          <input class="search__form--input-search" type="text" name="search" [(ngModel)]="searchString"
+            placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}">
+          <button class="search__form--button-search position-absolute" type="submit"><i
+              class="bi bi-search"></i></button>
+        </form>
       </div>
     </div>
-    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-3 col-3 h-header d-flex justify-content-end">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-7 col-7 h-header d-flex justify-content-end">
       <div class="dropdown u-margin-vertical-auto ">
         <a class="btn btn-lang fs-5 mt-3 dropdown-toggle" href="#" role="button" id="dropdownLanguages"
           data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,12 +35,18 @@
           </ul>
         </li>
       </ul>
+      <div class="position-relative dropdown u-margin-vertical-auto">
+        <i class="bi bi-chat-dots ps-4 pe-3 fs-1" style="cursor: pointer;" [routerLink]="['chat']"></i>
+        <span *ngIf="isRecievedMessage" class="position-absolute have-notification"
+          style="top: 1px; right: 6px; height: 1.5rem; width: 1.5rem;"></span>
+      </div>
       <ul class="u-margin-vertical-auto sub-dropdown">
-        <li class="position-relative">
+        <li class="position-relative me-5">
           <input class="cb-notification" type="checkbox" [checked]="isCheck" name="" id="btn_notification">
           <label for="btn_notification" class="btn-notification"><i class="bi bi-bell-fill"></i>
           </label>
-          <span class="position-absolute have-notification" style="height: 2rem;"></span>
+          <span *ngIf="listNotification[0]?.countRead"
+            class="position-absolute have-notification">{{listNotification[0]?.countRead}}</span>
           <!-- <a class="btn-notification"></a> -->
           <ul class="notification-dropdown" #chatBoxContent infiniteScroll [infiniteScrollDistance]="scrollDistance"
             [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"

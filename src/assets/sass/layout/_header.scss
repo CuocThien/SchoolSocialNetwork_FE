@@ -1,14 +1,24 @@
 .header {
-  width: 99vw;
   padding: 0;
   -webkit-box-shadow: 0 .3rem .8rem rgba(57, 63, 72, 0.5);
   -moz-box-shadow: 0 .3rem .8rem rgba(57, 63, 72, 0.5);
   box-shadow: 0 .3rem .8rem rgba(57, 63, 72, 0.5);
 }
-
+.have-notification{
+  height: 2rem;
+  top: 3px;
+  right: 4px;
+  color: #FFF;
+  background-color: red;
+  border-radius: 50%;
+  width: 2rem;
+  text-align: center;
+  padding-top: 3px;
+  cursor: pointer;
+}
 .page-control {
-  background-image: linear-gradient(to left, #6A29D8, #4080E7);
-
+  // background-image: linear-gradient(to left, #6A29D8, #4080E7);
+  background-color: white;
   &__logo {
     position: fixed;
     top: 0;
@@ -134,7 +144,7 @@
   li {
     display: inline-block;
     position: relative;
-    width: fit-content;
+    width: 4rem;
     text-align: left;
 
     a {
