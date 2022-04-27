@@ -31,10 +31,22 @@ export class AccountComponent implements OnInit {
   isDeleted = false;
   isSearch = false;
   listRole = LIST_ROLE.filter(itm => itm.roleId != 1);
+
+  isAdmin = false;
+  isDean = false;
   private modalRef: NgbModalRef;
   ngOnInit(): void {
-    this._listFaculty();
     this.isLangEn = localStorage.getItem('lang') === 'en'
+    const role = localStorage.getItem('role');
+    this.isAdmin = role === 'admin';
+    this.isDean = role === 'dean';
+    if (this.isAdmin) {
+      this._listFaculty();
+      return;
+    }
+    if (this.isDean) {
+      this._facultyByDean();
+    }
   }
   ngDoCheck() {
     this.isLangEn = localStorage.getItem('lang') === 'en'
@@ -173,6 +185,23 @@ export class AccountComponent implements OnInit {
       next: (res: any) => {
         this.listUsers = res.data.profile;
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.spinner.hide();
+      },
+      error: () => this.spinner.hide()
+    })
+  }
+  private _facultyByDean() {
+    this.spinner.show();
+    this.facultyService.getFacultyByDean().subscribe({
+      next: (res: any) => {
+        this.listFaculty = res.data.result.map((itm: any) => {
+          const { _id, nameEn, nameVi } = itm || {}
+          return {
+            _id, nameEn, nameVi
+          }
+        });
+        this.groupId = this.listFaculty[0]._id || {};
+        this._getListAccount();
         this.spinner.hide();
       },
       error: () => this.spinner.hide()

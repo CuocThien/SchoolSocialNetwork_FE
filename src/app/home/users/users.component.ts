@@ -39,16 +39,19 @@ export class UsersComponent implements OnInit {
     const role = localStorage.getItem('role')
     this.isAdmin = role === 'admin'
     this.isDean = role === 'dean'
-    this._listFaculty();
+    if (this.isAdmin) {
+      this._listFaculty();
+      return;
+    }
     if (this.isDean) {
       this._facultyByDean();
     }
   }
-  ngAfterViewInit() {
-    if (this.isDean) {
-      this._facultyByDean();
-    }
-  }
+  // ngAfterViewInit() {
+  //   if (this.isDean) {
+  //     this._facultyByDean();
+  //   }
+  // }
 
   ngDoCheck() {
     this.isLangEn = (localStorage.getItem('lang') === 'en');
