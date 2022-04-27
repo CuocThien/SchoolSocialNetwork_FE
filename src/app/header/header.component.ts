@@ -156,7 +156,8 @@ export class HeaderComponent implements OnInit {
       this.listNotification = this.listNotification.map(itm => {
         return {
           ...itm,
-          isRead: true
+          isRead: true,
+          countRead: 0
         }
       })
     })

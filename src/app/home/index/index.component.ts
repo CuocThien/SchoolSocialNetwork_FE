@@ -72,6 +72,14 @@ export class IndexComponent implements OnInit {
       next: ((res: any) => {
         this.listFacultyStudentPost = res.data.result;
         this.totalFacultyStudent = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        if (this.isAdmin) {
+          this.listFacultyStudentPost.map((itm: any) => {
+            return {
+              ...itm,
+              isRead: false
+            }
+          })
+        }
         this.spinner.hide();
       }),
       error: ((err) => {
@@ -86,6 +94,14 @@ export class IndexComponent implements OnInit {
       next: ((res: any) => {
         this.listFacultyTeacherPost = res.data.result;
         this.totalFacultyTeacher = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        if (this.isAdmin) {
+          this.listFacultyTeacherPost.map((itm: any) => {
+            return {
+              ...itm,
+              isRead: false
+            }
+          })
+        }
         this.spinner.hide()
       }),
       error: ((err) => {
@@ -99,6 +115,14 @@ export class IndexComponent implements OnInit {
       next: ((res: any) => {
         this.listMainStudentPost = res.data.result;
         this.totalMainStudent = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        if (this.isAdmin) {
+          this.listMainStudentPost.map((itm: any) => {
+            return {
+              ...itm,
+              isRead: false
+            }
+          })
+        }
         this.spinner.hide();
       }),
       error: ((err) => {
@@ -112,6 +136,14 @@ export class IndexComponent implements OnInit {
       next: ((res: any) => {
         this.listMainTeacherPost = res.data.result;
         this.totalMainTeacher = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        if (this.isAdmin) {
+          this.listMainTeacherPost.map((itm: any) => {
+            return {
+              ...itm,
+              isRead: false
+            }
+          })
+        }
         this.spinner.hide();
       }),
       error: ((err) => {

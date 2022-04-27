@@ -270,11 +270,13 @@
 }
 .btn-lang{
   background-color: transparent;
-  color: #000;
+  color: #263059;
+  font-weight: bold;
+  font-size: 1.3rem;
   border: none;
   &:hover{
     background-color: transparent;
-  color: #FFF;
+  color: #263059;
   border: none;
   }
   &:active, &::after, &:focus{

@@ -56,7 +56,7 @@ export class GroupComponent implements OnInit {
         if (res.data?.result) {
           this.listGroupRelative = [...this.listGroupRelative, ...res.data?.result];
         }
-        this.maxPageRelative = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.maxPageRelative = res.data.total ? Math.ceil(res.data.total / 3) : 1;
         this.spinner.hide();
       },
       error: () => this.spinner.hide()
