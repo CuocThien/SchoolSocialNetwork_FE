@@ -79,8 +79,9 @@ export class ChangeAdminComponent implements OnInit {
       page: this.page
     }).subscribe({
       next: (res: any) => {
-        this.listUsers = [...this.listUsers, ...res.data.result];
-        this.maxPage = this.totalMember = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.listUsers = res.data?.result;
+        this.totalMember = res.data.total || 0
+        this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.spinner.hide();
       },
       error: () => this.spinner.hide()

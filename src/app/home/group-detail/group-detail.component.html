@@ -24,7 +24,7 @@
         <button class="btn-report col-1 text-start ps-3" (click)="report('group', groupId)"><i
             class="bi bi-flag"></i></button>
       </div>
-      <h4>{{groupDetail?.numPost}} {{'GROUP.POSTS'|translate}} - {{groupDetail?.numMember}}
+      <h4>{{groupDetail?.numPost}} {{'GROUP.POSTS'|translate}} - {{(totalMember + totalAdmin)||0}}
         {{'GROUP.MEMBERS'|translate}}</h4>
     </div>
     <ul class="menu-control-group-detail">

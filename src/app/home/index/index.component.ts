@@ -32,6 +32,7 @@ export class IndexComponent implements OnInit {
   isDean = false;
   isTeacher = false;
   isStudent = false;
+  isAlumni = false;
 
   listFaculty: any;
   faculty: any;
@@ -53,6 +54,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
+    this.isAlumni = localStorage.getItem('isAlumni') === 'true'
     this.role = localStorage.getItem('role') || '';
     if (this.role === 'admin') {
       this._getListFaculty();

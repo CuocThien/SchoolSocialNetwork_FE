@@ -36,7 +36,8 @@
         </li>
       </ul>
       <div class="position-relative dropdown u-margin-vertical-auto">
-        <i class="bi bi-chat-dots ps-4 pe-3 fs-1" style="cursor: pointer;" [routerLink]="['chat']"></i>
+        <i (click)="readChat()" class="bi bi-chat-dots ps-4 pe-3 fs-1" style="cursor: pointer;"
+          [routerLink]="['chat']"></i>
         <span *ngIf="isRecievedMessage" class="position-absolute have-notification"
           style="top: 1px; right: 6px; height: 1.5rem; width: 1.5rem;"></span>
       </div>

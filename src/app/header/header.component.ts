@@ -168,4 +168,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/home/search-user'], { queryParams: { q: this.searchString } })
     }
   }
+  readChat() {
+    this.isRecievedMessage = false;
+  }
 }

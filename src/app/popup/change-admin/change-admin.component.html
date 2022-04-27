@@ -21,7 +21,7 @@
     <h4>{{'HOME.TEACHER'|translate}} - {{totalMember}}</h4>
     <div class="card-user d-flex mt-2 mb-2" *ngFor="let user of listUsers; let i = index">
       <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-        <img [src]="user.avatar" alt="">
+        <img class="image-avatar" [src]="user.avatar" alt="">
       </div>
       <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 text-start">
         <h4>{{user.fullname}}</h4>

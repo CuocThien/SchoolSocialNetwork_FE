@@ -26,7 +26,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let post of listReportPost; let i = index">
-          <td>
+          <td style="cursor: pointer;" [routerLink]="['/home/post/',post.postId]">
             <div [innerHtml]="post.content|slice:0:100"></div>
           </td>
           <td class="text-center">{{post.countComment}}</td>

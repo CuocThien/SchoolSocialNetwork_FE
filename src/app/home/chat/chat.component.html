@@ -18,7 +18,7 @@
       </div>
       <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
         <h5>{{conversation?.user?.fullname}}</h5>
-        <h6>{{conversation.lastestMessage}}</h6>
+        <h6>{{conversation.lastestMessage|slice:0:30}}{{conversation.lastestMessage.length>30?'...':''}}</h6>
       </div>
     </div>
 

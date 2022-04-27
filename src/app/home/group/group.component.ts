@@ -104,6 +104,7 @@ export class GroupComponent implements OnInit {
         group.groupId = group._id;
         this.listGroupRelative.splice(index, 1);
         this.listGroup.push(group);
+        this.goToGroup(group._id)
         this.spinner.hide();
       },
       error: (err: any) => {
@@ -127,6 +128,9 @@ export class GroupComponent implements OnInit {
         this.spinner.hide();
       }
     })
+  }
+  goToGroup(groupId: any) {
+    this.router.navigate([`home/group/${groupId}`])
   }
   searchGroup() {
     this.listGroup = []
