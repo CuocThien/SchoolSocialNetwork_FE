@@ -1,10 +1,12 @@
 <!-- Upload -->
-<div class="group-container ">
+<div class="group-container" #allGroup infiniteScroll [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
+  (scrolled)="onEnd($event)">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <h2 class="component-title">{{'TITLE.GROUPS'|translate}}</h2>
-  <div class="d-flex u-margin-vertical-small">
-    <div class="search-group col-xxl-8 col-xl-8 col-lg-8 col-md-6 col-sm-8 col-8">
+  <div class="d-flex mt-4 h-auto">
+    <input class="change-type-signup" [checked]="isAllGroup" type="checkbox" name="" id="cb-sidebar">
+    <div class="search-group col-xxl-6 col-xl-6 col-lg-6 col-md-5 col-sm-5 col-5">
       <form class="search__form position-relative" (ngSubmit)="searchGroup()">
         <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
           name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
@@ -12,15 +14,20 @@
             class="bi bi-search"></i></button>
       </form>
     </div>
-    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-4 col-4">
-      <button class="btn btn-outline-primary button-bt ms-3" (click)="createGroup()">
+    <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3 ps-3 pe-3">
+      <button class="switch-button switch-button__single-signup w-100-pc " (click)="createGroup()">
         {{'BUTTON.CREATE_GROUP'|translate}}
       </button>
     </div>
+    <div class="button-signup-group m-0 p-0 col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+      <button class="switch-button w-100-pc switch-button__single-signup"
+        (click)="changeButton($event)">{{contentButton|translate}}</button>
+    </div>
   </div>
-  <div class="d-block d-md-flex groups">
 
-
+  <!-- <button class="button-text text-start ms-5 d-inline w-auto" (click)="switchToAll(false)">Nhóm của bạn</button>
+  <button class="button-text text-start ms-5 d-inline w-auto" (click)="switchToAll(true)">Xem tất cả</button> -->
+  <div *ngIf="!isAllGroup" class="d-block d-md-flex groups">
     <div class="groups__joined col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12">
       <div class="groups__joined--container">
         <h1>{{'GROUP.GROUPS_JOINED'|translate}}</h1>
@@ -29,10 +36,15 @@
           <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
             <img [src]="group.image" alt="">
           </div>
-          <div class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-10 col-sm-7 col-7">
+          <div
+            class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
             <h3>{{group.nameEn}}</h3>
-            <h5>{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5>
-            <h5>{{group.numPost}} {{'GROUP.POSTS'|translate}}</h5>
+            <h5 class="d-inline-block">{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
+            </h5> -
+            <h5 class="d-inline-block">{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
+            <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}</h5>
+            <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, necessitatibus! Inventore corrupti mollitia
+              ab harum iure</h5>
           </div>
         </div>
         <h2 *ngIf="!listGroup?.length" class="text-center">
@@ -51,10 +63,12 @@
           <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
             <img [src]="groupR.image" alt="">
           </div>
-          <div class="group__info u-padding-left-2rem col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-7 col-7">
+          <div
+            class="group__info u-padding-left-2rem col-xxl-10 col-xl-10 col-lg-10 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
             <h3>{{groupR.nameEn}}</h3>
-            <h5>{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5>
-            <h5>{{groupR.numPost}} {{'GROUP.POSTS'|translate}}</h5>
+            <h5 class="d-inline-block">{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
+            <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{groupR.createdDate | date:'MM, YYYY'}}</h5>
+            <h5>{{groupR.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}</h5>
             <button class="btn btn-outline-primary" (click)="joinNow(groupR, i)">
               {{'BUTTON.JOIN_NOW'|translate}}
             </button>
@@ -69,4 +83,34 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="isAllGroup" class="d-block groups p-2">
+    <div class="groups__joined--container">
+      <h1>{{'GROUP.ALL_GROUP'|translate}}</h1>
+      <div class="text-center justify-content-around">
+        <div class=" d-md-inline-flex d-lg-inline-flex p-2 col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12"
+          style="vertical-align: top;" *ngFor="let group of listAllGroup">
+          <div class="group group__border d-flex d-md-block m-1 d-sm-flex d-lg-inline-flex w-100-pc"
+            (click)="redirectGroupDetail(group.groupId)">
+            <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
+              <img [src]="group.image" alt="">
+            </div>
+            <div
+              class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
+              <h3>{{group.nameEn}}</h3>
+              <h5 class="d-inline-block">{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
+              <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}</h5>
+              <h5>{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 *ngIf="!listGroup?.length && !isAllGroup" class="text-center">
+        {{'TITLE.NO_DATA'|translate}}
+      </h2>
+      <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}
+      </h5>
+    </div>
+  </div>
+
 </div>

@@ -1,6 +1,7 @@
 .group-container {
   width: calc(100% - 1vw);
-  height: calc(100%);
+  height: calc(100vh - 7.5rem);
+  overflow: scroll;
   display: block;
   background-color: #F0F2F5;
   //   box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2);
@@ -35,9 +36,9 @@
 }
 
 .group {
-
   &__image {
     padding: 2rem;
+    height: 11rem;
 
     img {
       max-height: 100%;
@@ -48,9 +49,14 @@
     }
   }
 
+  &__border{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 10px;
+    margin-top: 1rem;
+  }
+
   &:hover {
     background-color: #eee;
-    border-radius: 10px;
     cursor: pointer;
   }
 }

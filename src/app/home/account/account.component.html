@@ -62,7 +62,7 @@
         <tr *ngFor="let user of listUsers; let i = index">
           <td class="text-center">{{user._id}}</td>
           <td class="text-center">{{user.fullname}}</td>
-          <td class="text-center">{{user.dob|date:'dd-MM-YYY'}}</td>
+          <td class="text-center">{{user.dob|date:'dd-MM-yyyy'}}</td>
           <td class="text-center">{{user.phone}}</td>
           <td class="text-center">
             <i *ngIf="!isDeleted" class="bi bi-pencil-square btn-delete me-3" (click)="updateAccount(user)"></i>

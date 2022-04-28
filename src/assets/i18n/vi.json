@@ -52,10 +52,13 @@
         "MEMBERS2": "Thành viên",
         "POSTS2": "Bài viết",
         "DAY": "ngày",
+        "WEEK": "tuần",
         "UPDATE": "Chỉnh sửa",
         "CREATED_POST": "đã tạo một bài viết mới",
         "ADD_MEMBER": "Thêm thành viên",
-        "ADMIN": "Quản trị viên"
+        "ADMIN": "Quản trị viên",
+        "SINCE": "Từ",
+        "ALL_GROUP": "Tất cả nhóm"
     },
     "SIGNUP":{
         "SINGLE_SIGNUP": "Tạo tài khoản",

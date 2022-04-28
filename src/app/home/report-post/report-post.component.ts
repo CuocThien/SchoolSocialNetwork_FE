@@ -56,7 +56,7 @@ export class ReportPostComponent implements OnInit {
     })
   }
   private _getListGroup() {
-    this.service.getListGroup().subscribe({
+    this.service.getListGroup({}).subscribe({
       next: (res: any) => {
         this.listGroup = res.data.result;
       }

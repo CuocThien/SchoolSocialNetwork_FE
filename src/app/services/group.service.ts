@@ -87,8 +87,9 @@ export class GroupService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.get(url, { headers })
   }
-  getListGroup() {
-    const url = `${HOST}/group/sub/all`;
+  getListGroup(data: any) {
+    const { page } = data || {}
+    const url = `${HOST}/group/sub/all${page ? `?page=${page}` : ''}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.get(url, { headers })
   }

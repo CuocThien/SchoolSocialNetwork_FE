@@ -20,6 +20,13 @@ export class GroupComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) { }
+
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+  isCheck = false;
+  isRefresh = false;
+
   private modalRef: NgbModalRef;
   searchString = '';
   isSearch = false;
@@ -30,10 +37,17 @@ export class GroupComponent implements OnInit {
   pageRelative = 1;
   maxPageRelative = 1;
   listGroupRelative = [];
+  listAllGroup = []
+  pageAllGroup = 1;
+  maxPageAllGroup = 1;
+
+  isAllGroup = false;
+  contentButton = 'Nhóm của bạn'
   ngOnInit(): void {
     this._getListGroup();
     this._getListGroupRelative();
-    this.userId = JSON.parse(localStorage.getItem('profile'))._id || ''
+    this.userId = JSON.parse(localStorage.getItem('profile'))._id || '';
+
   }
 
   private _getListGroup() {
@@ -143,5 +157,43 @@ export class GroupComponent implements OnInit {
     this.page = 1;
     this.listGroup
     this._search();
+  }
+
+  private _getListAllGroup() {
+    this.spinner.show();
+    this.service.getListGroup({ page: this.pageAllGroup }).subscribe({
+      next: (res: any) => {
+        if (this.pageAllGroup == 1) {
+          this.listAllGroup = [];
+        }
+        this.listAllGroup = [...this.listAllGroup, ...res.data.result];
+        this.maxPageAllGroup = res.data.total ? res.data.total : 1;
+        this.spinner.hide();
+      }
+    })
+  }
+  onEnd(event: any) {
+    if (!this.isAllGroup) return;
+    this.pageAllGroup++;
+    if (this.pageAllGroup === this.maxPageAllGroup) return;
+    this.isRefresh = false;
+    this._getListAllGroup();
+  }
+
+  switchToAll(check: any) {
+    this.isAllGroup = check;
+    if (this.isAllGroup) {
+      if (!this.listAllGroup.length)
+        this._getListAllGroup();
+    }
+  }
+  changeButton(event: any) {
+    event.preventDefault();
+    this.isAllGroup = !this.isAllGroup;
+    if (this.isAllGroup) {
+      if (!this.listAllGroup.length)
+        this._getListAllGroup();
+    }
+    this.contentButton = (this.isAllGroup) ? 'Xem tất cả' : 'Nhóm của bạn'
   }
 }
