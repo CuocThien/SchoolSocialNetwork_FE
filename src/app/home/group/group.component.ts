@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faBookOpenReader, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -20,6 +21,9 @@ export class GroupComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) { }
+  faBook = faBookOpenReader;
+  faEye = faEye;
+
 
   throttle = 300;
   scrollDistance = 1;

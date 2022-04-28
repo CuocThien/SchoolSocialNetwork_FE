@@ -39,18 +39,22 @@
           <div
             class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
             <h3>{{group.nameEn}}</h3>
+            <i class="bi bi-eye fs-4 me-3"></i>
             <h5 class="d-inline-block">{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
             </h5> -
             <h5 class="d-inline-block">{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
             <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}</h5>
-            <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, necessitatibus! Inventore corrupti mollitia
-              ab harum iure</h5>
+            <i class=""></i>
+            <br>
+            <fa-icon *ngIf="group.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
+            <h5 *ngIf="group.desciption" class="d-inline">{{group.description}}</h5>
           </div>
         </div>
         <h2 *ngIf="!listGroup?.length" class="text-center">
           {{'TITLE.NO_DATA'|translate}}
         </h2>
-        <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}
+        <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">
+          {{'BUTTON.LOAD_MORE'|translate}}
         </h5>
 
       </div>
@@ -64,11 +68,17 @@
             <img [src]="groupR.image" alt="">
           </div>
           <div
-            class="group__info u-padding-left-2rem col-xxl-10 col-xl-10 col-lg-10 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
+            class="group__info u-padding-left-2rem col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
             <h3>{{groupR.nameEn}}</h3>
+            <i class="bi bi-eye fs-4 me-3"></i>
+            <h5 class="d-inline-block">{{groupR.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
+            </h5> -
             <h5 class="d-inline-block">{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
             <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{groupR.createdDate | date:'MM, YYYY'}}</h5>
-            <h5>{{groupR.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}</h5>
+            <i class=""></i>
+            <br>
+            <fa-icon *ngIf="groupR.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
+            <h5 *ngIf="groupR.desciption" class="d-inline">{{groupR.description}}</h5>
             <button class="btn btn-outline-primary" (click)="joinNow(groupR, i)">
               {{'BUTTON.JOIN_NOW'|translate}}
             </button>
@@ -96,11 +106,16 @@
               <img [src]="group.image" alt="">
             </div>
             <div
-              class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
+              class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-sm-start text-md-center text-lg-start">
               <h3>{{group.nameEn}}</h3>
-              <h5 class="d-inline-block">{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
+              <i class="bi bi-eye fs-4 me-3"></i>
+              <h5 class="d-inline-block">{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
+              </h5> -
               <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}</h5>
-              <h5>{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}</h5>
+              <i class=""></i>
+              <br>
+              <fa-icon *ngIf="group.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
+              <h5 *ngIf="group.desciption" class="d-inline">{{group.description}}</h5>
             </div>
           </div>
         </div>

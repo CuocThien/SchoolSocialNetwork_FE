@@ -13,7 +13,8 @@
         "NOTIFICATION": "Notification",
         "READ_ALL": "Mark all as read",
         "SEARCH_USER": "Search user",
-        "NO_DATA": "No data available"
+        "NO_DATA": "No data available",
+        "ABOUT": "About this group"
     },
     "HEADER":{
         "PROFILE": "Profile",

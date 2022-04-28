@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faAngleLeft, faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',

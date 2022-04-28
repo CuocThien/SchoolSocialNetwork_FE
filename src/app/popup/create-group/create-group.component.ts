@@ -61,6 +61,7 @@ export class CreateGroupComponent implements OnInit {
     this.createGroupForm = this.formBuilder.group({
       cateId: ['', Validators.required],
       name: ['', Validators.required],
+      description: [''],
       image: ['']
     });
   }

@@ -29,6 +29,7 @@ export class GroupDetailComponent implements OnInit {
   image: any;
   groupDetail: any;
   groupName: any;
+  description: any;
   listPost = [];
   listAdmin = [];
   totalAdmin: number;
@@ -42,6 +43,7 @@ export class GroupDetailComponent implements OnInit {
   maxPageUser = 1;
   myAvatar: any;
   isRename = false;
+  isUpdateDescription = false;
   isSearch = false;
   searchString: string;
   isAdmin = false;
@@ -68,6 +70,7 @@ export class GroupDetailComponent implements OnInit {
         this.groupDetail = res.data;
         this.image = this.groupDetail.group.image;
         this.groupName = this.groupDetail.group.nameEn;
+        this.description = this.groupDetail.group.description;
         this.spinner.hide();
       },
       error: () => this.spinner.hide()
@@ -168,7 +171,8 @@ export class GroupDetailComponent implements OnInit {
       _id: this.groupId,
       image: this.image,
       nameEn: this.groupName,
-      nameVi: this.groupName
+      nameVi: this.groupName,
+      description: this.description
     }).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg)
@@ -186,6 +190,13 @@ export class GroupDetailComponent implements OnInit {
   }
   onRename() {
     this.isRename = true;
+  }
+  updateDescription() {
+    this.isUpdateDescription = false;
+    this._updateGroup();
+  }
+  onDescription() {
+    this.isUpdateDescription = true;
   }
   report(type: any, id: any) {
     this.modalRef = this.modalService.open(ReportComponent, {
