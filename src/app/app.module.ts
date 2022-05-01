@@ -45,6 +45,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransferFacultyComponent } from './popup/transfer-faculty/transfer-faculty.component';
 import { ChangeAdminComponent } from './popup/change-admin/change-admin.component';
 import { UpdateUserInfoComponent } from './popup/update-user-info/update-user-info.component';
+import { SurveyComponent } from './popup/survey/survey.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { UpdateUserInfoComponent } from './popup/update-user-info/update-user-in
     TransferFacultyComponent,
     ChangeAdminComponent,
     UpdateUserInfoComponent,
+    SurveyComponent,
   ],
   imports: [
     BrowserModule,

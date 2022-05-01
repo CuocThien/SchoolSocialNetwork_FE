@@ -88,7 +88,9 @@
         "CANCEL": "Cancel",
         "EDIT": "Edit",
         "LOAD_MORE": "Load more",
-        "UPLOAD": "Upload"
+        "UPLOAD": "Upload",
+        "CHOOSE_ALL": "Choose all",
+        "REMOVE_ALL": "Remove all"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
@@ -129,6 +131,9 @@
         "IMAGE_PREVIEW": "Image preview",
         "DELETE_ACCOUNT": "Delete account",
         "RECOVERY_ACCOUNT": "Recovery account",
-        "UPDATE_USER_INFO": "Update user information"
+        "UPDATE_USER_INFO": "Update user information",
+        "SURVEY": "Survey",
+        "CHOOSE_AOC": "Choose your Area of Concern",
+        "AOC": "Area of Concern"
     }
 }

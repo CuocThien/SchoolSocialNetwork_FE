@@ -22,6 +22,7 @@ export class LogInService {
                     localStorage.setItem('role', res.data.role || null)
                     localStorage.setItem('token', res.data.token || null)
                     localStorage.setItem('isAlumni', res.data.isAlumni.toString() || null)
+                    localStorage.setItem('isSurvey', res.data.isSurvey.toString() || null)
                     this.router.navigate(['/home'])
                     this.toastr.success(res.msg)
                 },

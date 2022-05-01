@@ -7,6 +7,18 @@
   box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
   transition: all .2s;
 }
+
+.button-container{
+ height: calc(100vh - 7.5rem);
+ overflow: scroll;
+ -ms-overflow-style: none;
+      /* for Internet Explorer, Edge */
+      scrollbar-width: none;
+ &::-webkit-scrollbar {
+  display: none;
+}
+}
+
 // dropdown manage
 .btn-group-dropdown {
   height: 5.8rem;

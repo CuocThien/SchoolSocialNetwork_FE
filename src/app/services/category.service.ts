@@ -30,4 +30,9 @@ export class CategoryService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.put(url, body, { headers })
     }
+    addAOC(body: any) {
+        const url = `${HOST}/account/aoc`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.post(url, body, { headers })
+    }
 }

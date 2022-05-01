@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
+import { SurveyComponent } from 'src/app/popup/survey/survey.component';
 import { FacultyService, HomeIndexService } from 'src/app/services';
 
 @Component({
@@ -53,6 +54,9 @@ export class IndexComponent implements OnInit {
   private modalRef: NgbModalRef;
 
   ngOnInit(): void {
+    if (localStorage.getItem('isSurvey') === 'false') {
+      this._survey();
+    }
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
     this.isAlumni = localStorage.getItem('isAlumni') === 'true'
     this.role = localStorage.getItem('role') || '';
@@ -65,6 +69,17 @@ export class IndexComponent implements OnInit {
     }
     this._getListFacultyDean();
   }
+
+  private _survey() {
+    this.modalRef = this.modalService.open(SurveyComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+    })
+    this.modalRef.result.then(() => {
+    }).catch(() => { });
+  }
+
   ngDoCheck() {
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
   }
@@ -75,7 +90,7 @@ export class IndexComponent implements OnInit {
         this.listFacultyStudentPost = res.data.result;
         this.totalFacultyStudent = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         if (this.isAdmin) {
-          this.listFacultyStudentPost.map((itm: any) => {
+          this.listFacultyStudentPost = this.listFacultyStudentPost.map((itm: any) => {
             return {
               ...itm,
               isRead: false
@@ -97,7 +112,7 @@ export class IndexComponent implements OnInit {
         this.listFacultyTeacherPost = res.data.result;
         this.totalFacultyTeacher = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         if (this.isAdmin) {
-          this.listFacultyTeacherPost.map((itm: any) => {
+          this.listFacultyTeacherPost = this.listFacultyTeacherPost.map((itm: any) => {
             return {
               ...itm,
               isRead: false
@@ -118,7 +133,7 @@ export class IndexComponent implements OnInit {
         this.listMainStudentPost = res.data.result;
         this.totalMainStudent = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         if (this.isAdmin) {
-          this.listMainStudentPost.map((itm: any) => {
+          this.listMainStudentPost = this.listMainStudentPost.map((itm: any) => {
             return {
               ...itm,
               isRead: false
@@ -139,7 +154,7 @@ export class IndexComponent implements OnInit {
         this.listMainTeacherPost = res.data.result;
         this.totalMainTeacher = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         if (this.isAdmin) {
-          this.listMainTeacherPost.map((itm: any) => {
+          this.listMainTeacherPost = this.listMainTeacherPost.map((itm: any) => {
             return {
               ...itm,
               isRead: false
