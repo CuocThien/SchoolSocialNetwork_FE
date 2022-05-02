@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { faAngleRight, faAngleLeft, faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,25 @@ import { faAngleRight, faAngleLeft, faBookOpenReader } from '@fortawesome/free-s
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   faArrow = faAngleLeft;
   isOpen = true;
   profile: any;
   screenWidth: any;
+  isLangEn = false;
+
+  listRouteNav = [];
+  listStrNav = [];
   ngOnInit(): void {
-    this.profile = JSON.parse(localStorage.getItem('profile') || '')
+    this.profile = JSON.parse(localStorage.getItem('profile') || '');
+    this.isLangEn = localStorage.getItem('lang') === 'en';
+    this.listRouteNav = JSON.parse(localStorage.getItem('listNav')) || [];
+  }
+  ngDoCheck() {
+    this.isLangEn = localStorage.getItem('lang') === 'en'
   }
   openOrCloseSidebar(event: any) {
     event.preventDefault();
@@ -29,5 +41,20 @@ export class HomeComponent implements OnInit {
       this.isOpen = false
       this.faArrow = this.isOpen ? faAngleLeft : faAngleRight;
     }
+  }
+  getSubNav(event: any) {
+    this.listRouteNav = event
+    localStorage.setItem('listNav', JSON.stringify(event));
+  }
+  redirectTo(link: any, index: any) {
+    if (link != '') {
+      this.listRouteNav.splice(index + 1, this.listRouteNav.length - index - 1)
+    }
+    if (link === '') {
+      link = this.router.url;
+    }
+    localStorage.setItem('listNav', JSON.stringify(this.listRouteNav));
+    localStorage.setItem('check', 'true');
+    this.router.navigate([link])
   }
 }

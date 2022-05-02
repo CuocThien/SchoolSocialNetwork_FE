@@ -24,4 +24,73 @@ const LIST_ROLE = [
         nameVi: "Sinh viên"
     }
 ]
-export { HOST, LIST_ROLE }
+
+const OBJ_ROUTE_NAV = {
+    'index': {
+        route: 'home/index',
+        nameEn: 'Index',
+        nameVi: 'Trang chủ'
+    },
+    'new-feed': {
+        route: 'home/new-feed',
+        nameEn: 'New feed',
+        nameVi: 'Bảng tin'
+    },
+    'group': {
+        route: 'home/group',
+        nameEn: 'Group',
+        nameVi: 'Nhóm'
+    },
+    'manage': {
+        route: '',
+        nameEn: 'Manage',
+        nameVi: 'Quản lý'
+    },
+    'account': {
+        route: '',
+        nameEn: 'Users',
+        nameVi: 'Người dùng'
+    },
+    'sign-up': {
+        route: 'home/sign-up',
+        nameEn: 'Sign up',
+        nameVi: 'Đăng ký'
+    },
+    'users': {
+        route: 'home/users',
+        nameEn: 'Members',
+        nameVi: 'Thành viên'
+    },
+    'information': {
+        route: 'home/account',
+        nameEn: 'Users Information',
+        nameVi: 'Thông tin người dùng'
+    },
+    'faculty': {
+        route: 'home/faculty',
+        nameEn: 'Faculty',
+        nameVi: 'Khoa'
+    },
+    'category': {
+        route: 'home/category',
+        nameEn: 'Category',
+        nameVi: 'Danh mục'
+    },
+    'report': {
+        route: '',
+        nameEn: 'Report',
+        nameVi: 'Báo cáo'
+    },
+    'report/group': {
+        route: 'home/report/group',
+        nameEn: 'Groups',
+        nameVi: 'Nhóm'
+    },
+    'report/post': {
+        route: 'home/report/post',
+        nameEn: 'Post',
+        nameVi: 'Bài viết'
+    }
+}
+
+export { HOST, LIST_ROLE, OBJ_ROUTE_NAV }

@@ -5,6 +5,12 @@
   display: block;
   background-color: #F0F2F5;
   //   box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2);
+  -ms-overflow-style: none;
+      /* for Internet Explorer, Edge */
+      scrollbar-width: none;
+ &::-webkit-scrollbar {
+  display: none;
+}
 }
 
 
