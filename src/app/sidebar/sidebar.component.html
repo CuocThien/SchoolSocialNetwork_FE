@@ -3,29 +3,35 @@
     <img class="u-margin-auto d-table-cell d-lg-table-cell d-md-table-cell d-sm-table-cell d-xl-none "
       [routerLink]="['index']" src="../../assets/img/logo.png" alt="logo" style="max-width: 100%; max-height: 100%;">
     <div class="d-none d-xl-table h-100-pc u-margin-auto">
-      <h3 class="title d-none d-xl-table-cell" [routerLink]="['index']">HCMUTE NETWORK</h3>
+      <h3 class="title d-none d-xl-table-cell" (click)="redirectTo('index')">HCMUTE NETWORK</h3>
     </div>
   </div>
 
   <div class="button-container">
     <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none" [routerLink]="['index']">
+      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
+        [ngClass]="{'button-sidebar__active':mainActive === 'index'}" (click)="redirectTo('index')">
         <i class="bi bi-house-door"></i>
       </button>
-      <button class="button-sidebar text-start d-xl-block d-none text-start" [routerLink]="['index']">
+      <button class="button-sidebar text-start d-xl-block d-none text-start"
+        [ngClass]="{'button-sidebar__active':mainActive === 'index'}" (click)="redirectTo('index')">
         <i class="bi bi-house-door ps-3 pe-3"></i>{{'SIDEBAR.HOME'|translate}}</button>
     </div>
     <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none" [routerLink]="['new-feed']"><i
+      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
+        [ngClass]="{'button-sidebar__active':mainActive === 'new-feed'}" (click)="redirectTo('new-feed')"><i
           class="bi bi-newspaper"></i></button>
-      <button class="button-sidebar d-xl-block d-none text-start" [routerLink]="['new-feed']">
+      <button class="button-sidebar d-xl-block d-none text-start"
+        [ngClass]="{'button-sidebar__active':mainActive === 'new-feed'}" (click)="redirectTo('new-feed')">
         <i class="bi bi-newspaper ps-3 pe-3"></i>{{'SIDEBAR.NEW_FEED'|translate}}</button>
     </div>
     <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none" [routerLink]="['group']">
+      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
+        [ngClass]="{'button-sidebar__active':mainActive === 'group'}" (click)="redirectTo('group')">
         <i class="bi bi-people"></i>
       </button>
-      <button class="button-sidebar d-xl-block d-none text-start" [routerLink]="['group']">
+      <button class="button-sidebar d-xl-block d-none text-start"
+        [ngClass]="{'button-sidebar__active':mainActive === 'group'}" (click)="redirectTo('group')">
         <i class="bi bi-people ps-3 pe-3"></i>{{'SIDEBAR.GROUPS'|translate}}</button>
     </div>
     <!-- <div class="btn-group w-100-pc">
@@ -39,10 +45,14 @@
     <div *ngIf="isAdmin || isDean" class="btn-group-dropdown text-start w-100-pc">
       <!-- button dropdown -->
       <div class="btn-group w-100-pc">
-        <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none" (click)="dropdown($event)">
+        <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
+          [ngClass]="{'button-sidebar__active':mainActive === 'manage'}"
+          (click)="dropdown($event); redirectTo('manage')">
           <i class="bi bi-sliders"></i>
         </button>
-        <button class="button-sidebar d-xl-block d-none text-start" (click)="dropdown($event)"><i
+        <button class="button-sidebar d-xl-block d-none text-start"
+          [ngClass]="{'button-sidebar__active':mainActive === 'manage'}"
+          (click)="dropdown($event); redirectTo('manage')"><i
             class="bi bi-sliders ps-3 pe-3"></i>{{'SIDEBAR.MANAGE'|translate}}</button>
       </div>
       <!-- button account dropdown -->
@@ -50,10 +60,11 @@
       <div class="btn-account-dropdown text-start">
         <div class="btn-group w-100-pc">
           <button class="button-sidebar-text d-block d-lg-block d-sm-block d-xl-none button-sidebar-text-icon"
-            (click)="accountDropdown($event)">
+            [ngClass]="{'button-sidebar-text__active':subActive === 'account'}" (click)="accountDropdown($event)">
             <i class="bi bi-person-rolodex"></i>
           </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none" (click)="accountDropdown($event)"><i
+          <button class="button-sidebar-text text-start d-xl-block d-none"
+            [ngClass]="{'button-sidebar-text__active':subActive === 'account'}" (click)="accountDropdown($event)"><i
               class="bi bi-person-rolodex ps-3 pe-3"></i>{{'SIDEBAR.USERS'|translate}}
             <i [class]="arrowAccount"></i></button>
         </div>
@@ -61,27 +72,33 @@
         <div class="w-100-pc text-start">
           <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [routerLink]="['sign-up']">
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'sign-up'}"
+              (click)="redirectSubMenuTo('sign-up',2)">
               <i class="bi bi-person-plus"></i>
             </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none" [routerLink]="['sign-up']">
+            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'sign-up'}"
+              (click)="redirectSubMenuTo('sign-up',2)">
               {{'SIDEBAR.REGISTER'|translate}}</button>
           </div>
           <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [routerLink]="['users']">
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'users'}" (click)="redirectSubMenuTo('users',2)">
               <i class="bi bi-person-video2"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [routerLink]="['users']">{{'SIDEBAR.USERS'|translate}}</button>
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'users'}"
+              (click)="redirectSubMenuTo('users',2)">{{'SIDEBAR.USERS'|translate}}</button>
           </div>
           <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [routerLink]="['account']">
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
+              (click)="redirectSubMenuTo('account',2)">
               <i class="bi bi-info-square"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [routerLink]="['account']">{{'SIDEBAR.INFORMATION'|translate}}</button>
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
+              (click)="redirectSubMenuTo('account',2)">{{'SIDEBAR.INFORMATION'|translate}}</button>
           </div>
         </div>
       </div>
@@ -90,10 +107,13 @@
       <div *ngIf="isAdmin" class="btn-faculty-dropdown text-start">
         <div class="btn-group w-100-pc">
           <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-            [routerLink]="['faculty']">
+            [ngClass]="{'button-sidebar-text__active':subActive === 'faculty'}"
+            (click)="redirectSubMenuTo('faculty',1)">
             <i class="bi bi-building"></i>
           </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none" [routerLink]="['faculty']"><i
+          <button class="button-sidebar-text text-start d-xl-block d-none"
+            [ngClass]="{'button-sidebar-text__active':subActive === 'faculty'}"
+            (click)="redirectSubMenuTo('faculty',1)"><i
               class="bi bi-building ps-3 pe-3"></i>{{'SIDEBAR.FACULTY'|translate}}</button>
         </div>
       </div>
@@ -102,10 +122,13 @@
       <div *ngIf="isAdmin" class="btn-category-dropdown text-start">
         <div class="btn-group w-100-pc">
           <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-            [routerLink]="['category']">
+            [ngClass]="{'button-sidebar-text__active':subActive === 'category'}"
+            (click)="redirectSubMenuTo('category',1)">
             <i class="bi bi-tags"></i>
           </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none" [routerLink]="['category']"><i
+          <button class="button-sidebar-text text-start d-xl-block d-none"
+            [ngClass]="{'button-sidebar-text__active':subActive === 'category'}"
+            (click)="redirectSubMenuTo('category',1)"><i
               class="bi bi-tags ps-3 pe-3"></i>{{'SIDEBAR.CATEGORY'|translate}}</button>
         </div>
       </div>
@@ -115,10 +138,11 @@
       <div *ngIf="isAdmin || isAdminSubGr" class="btn-report-dropdown text-start">
         <div class="btn-group w-100-pc">
           <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-            (click)="reportDropdown($event)">
+            [ngClass]="{'button-sidebar-text__active':subActive === 'report'}" (click)="reportDropdown($event)">
             <i class="bi bi-flag"></i>
           </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none" (click)="reportDropdown($event)"><i
+          <button class="button-sidebar-text text-start d-xl-block d-none"
+            [ngClass]="{'button-sidebar-text__active':subActive === 'report'}" (click)="reportDropdown($event)"><i
               class="bi bi-flag ps-3 pe-3"></i>{{'SIDEBAR.REPORT'|translate}}
             <i [class]="arrowReport"></i></button>
         </div>
@@ -126,19 +150,23 @@
         <div class="w-100-pc text-start">
           <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [routerLink]="['report/group']">
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/group'}"
+              (click)="redirectSubMenuTo('report/group',2)">
               <i class="bi bi-person-circle"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [routerLink]="['report/group']">{{'SIDEBAR.GROUPS'|translate}}</button>
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/group'}"
+              (click)="redirectSubMenuTo('report/group',2)">{{'SIDEBAR.GROUPS'|translate}}</button>
           </div>
           <div class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [routerLink]="['report/post']">
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/post'}"
+              (click)="redirectSubMenuTo('report/post',2)">
               <i class="bi bi-stickies"></i>
             </button>
             <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [routerLink]="['report/post']">{{'SIDEBAR.POSTS'|translate}}</button>
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/post'}"
+              (click)="redirectSubMenuTo('report/post',2)">{{'SIDEBAR.POSTS'|translate}}</button>
           </div>
         </div>
       </div>

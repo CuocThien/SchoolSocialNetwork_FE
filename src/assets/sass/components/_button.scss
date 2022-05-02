@@ -161,6 +161,13 @@
     border: solid 2px $color-primary-dark-2;
     background-color: white;
   }
+
+  &__active{
+    color: $color-primary-dark-2;
+    border: solid 2px $color-primary-dark-2;
+    background-color: white;
+    font-weight: bolder!important;
+  }
 }
 
 .button-sidebar-text {
@@ -178,6 +185,10 @@
 
   &:hover {
     transform: scale(1.05);
+    color: yellow;
+  }
+
+  &__active{
     color: yellow;
   }
 }
