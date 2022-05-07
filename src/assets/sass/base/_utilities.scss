@@ -117,6 +117,12 @@
 
 .position-absolute {
   position: absolute !important;
+  &-center{
+    top: 50%;
+    left: 50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%)
+  }
 }
 
 .invalid {
@@ -125,4 +131,14 @@
 
 .table-nowrap{
   white-space: nowrap;
+}
+
+.color-white{
+  color: white!important;
+}
+.background-color-red{
+  background-color: red!important;
+}
+.background-color-green{
+  background-color: green!important;
 }

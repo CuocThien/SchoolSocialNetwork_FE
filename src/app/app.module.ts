@@ -46,6 +46,8 @@ import { TransferFacultyComponent } from './popup/transfer-faculty/transfer-facu
 import { ChangeAdminComponent } from './popup/change-admin/change-admin.component';
 import { UpdateUserInfoComponent } from './popup/update-user-info/update-user-info.component';
 import { SurveyComponent } from './popup/survey/survey.component';
+import { VideoChatComponent } from './popup/video-chat/video-chat.component';
+import { IncomingCallComponent } from './popup/incoming-call/incoming-call.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { SurveyComponent } from './popup/survey/survey.component';
     ChangeAdminComponent,
     UpdateUserInfoComponent,
     SurveyComponent,
+    VideoChatComponent,
+    IncomingCallComponent,
   ],
   imports: [
     BrowserModule,

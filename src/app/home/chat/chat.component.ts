@@ -7,6 +7,9 @@ import { faPaperPlane, } from '@fortawesome/free-solid-svg-icons';
 import { ChatService } from '../../services/index';
 import { HOST } from 'src/app/utils/constant';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { EVENT_VIDEO_CHAT_CSS } from 'src/app/socket-event/client/video-chat';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { VideoChatComponent } from 'src/app/popup/video-chat/video-chat.component';
 
 
 @Component({
@@ -44,9 +47,11 @@ export class ChatComponent implements OnInit {
   flag = false;
   @ViewChild('chatBoxContent') private chatbox!: ElementRef;
 
+  modalRef: NgbModalRef;
   constructor(
     private service: ChatService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal
   ) {
     this.socket = io.io(`${HOST}`);
     this.socket.on(EVENT_MESSAGE_SSC.JOIN_ROOM_SSC, (data: any) => {
@@ -135,10 +140,11 @@ export class ChatComponent implements OnInit {
   }
 
   _setChatTitle(data: any) {
-    const { avatar, fullname } = data || {}
+    const { avatar, fullname, _id } = data || {}
     this.chatTitle = {
       avatar,
-      fullname
+      fullname,
+      _id
     }
   }
 
@@ -266,5 +272,23 @@ export class ChatComponent implements OnInit {
   onUp(ev: any) {
     this.getMoreMessage();
     this.isLoadOldMessage = true;
+  }
+  call() {
+    this.socket.emit(EVENT_VIDEO_CHAT_CSS.JOIN_ROOM_VIDEO_CHAT_CSS,
+      { userId: this.chatTitle._id, callerId: this.currentUserId })
+    this.modalRef = this.modalService.open(VideoChatComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+      fullscreen: true
+    });
+    this.modalRef.componentInstance.profile = this.chatTitle;
+    this.modalRef.result.then((res: any) => {
+      console.log("🐼 => HomeComponent => res", res)
+
+    }).catch((err: any) => {
+      console.log("🐼 => HomeComponent => err", err)
+    });
+
   }
 }

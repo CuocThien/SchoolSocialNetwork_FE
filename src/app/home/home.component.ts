@@ -1,6 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import * as io from 'socket.io-client';
+import { IncomingCallComponent } from '../popup/incoming-call/incoming-call.component';
+import { VideoChatComponent } from '../popup/video-chat/video-chat.component';
+import { EVENT_VIDEO_CHAT_CSS } from '../socket-event/client/video-chat';
+import { EVENT_VIDEO_CHAT_SSC } from '../socket-event/server/video-chat';
+import { HOST } from '../utils/constant';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +17,40 @@ import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private modalService: NgbModal,
+
+  ) {
+    this.socket = io.io(`${HOST}`);
+    this.socket.on(EVENT_VIDEO_CHAT_SSC.JOIN_ROOM_VIDEO_CHAT_SSC, (payload: any) => {
+      this.modalRef = this.modalService.open(IncomingCallComponent, {
+        backdrop: 'static',
+        size: 'sm',
+        centered: true,
+      });
+      this.modalRef.componentInstance.profile = payload.data?.profile;
+      this.modalRef.result.then((res: any) => {
+        this.modalRef = this.modalService.open(VideoChatComponent, {
+          backdrop: 'static',
+          size: 'lg',
+          centered: false,
+          fullscreen: true
+        });
+        this.modalRef.componentInstance.profile = res;
+        this.modalRef.componentInstance.isReceiverAccept = true;
+        this.modalRef.result.then((res: any) => {
+          console.log("🐼 => HomeComponent => res", res)
+
+        }).catch((err: any) => {
+          console.log("🐼 => HomeComponent => err", err)
+        });
+
+      }).catch((err: any) => {
+        console.log("🐼 => HomeComponent => err", err)
+      });
+    });
+  }
+  socket: any;
 
   faArrow = faAngleLeft;
   isOpen = true;
@@ -21,8 +60,17 @@ export class HomeComponent implements OnInit {
 
   listRouteNav = [];
   listStrNav = [];
+
+  private modalRef: NgbModalRef;
+
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '');
+
+    this.socket.emit(EVENT_VIDEO_CHAT_CSS.JOIN_ROOM_VIDEO_CHAT_CSS, {
+      userId: this.profile._id,
+      callerId: this.profile._id
+    })
+
     this.isLangEn = localStorage.getItem('lang') === 'en';
     this.listRouteNav = JSON.parse(localStorage.getItem('listNav')) || [];
   }
