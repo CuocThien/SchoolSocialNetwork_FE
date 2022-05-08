@@ -42,7 +42,7 @@ export class VideoChatComponent implements OnInit {
   intervalId: any;
   conversationId: any;
 
-  remainingCallingTime = 10;
+  remainingCallingTime = 30;
   remainingInterval: any;
 
 
