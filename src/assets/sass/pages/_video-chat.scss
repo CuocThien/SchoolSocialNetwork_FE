@@ -25,6 +25,28 @@
     }
 }
 
+.caller-info{
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    height: 20rem;
+    position: absolute;
+    bottom: 25px;
+    right: 90px;
+    border-radius: 10px;
+    z-index: 30;
+
+    &__avatar{
+        max-width: 10rem;
+        max-height: 10rem;
+        width: auto;
+        height: auto;
+        border: none;
+        border-radius: 50%;
+    }
+}
+
 .control-bar{
     width: 100%;
     text-align: center;

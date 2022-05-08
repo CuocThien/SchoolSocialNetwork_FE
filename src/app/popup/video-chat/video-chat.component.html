@@ -2,17 +2,21 @@
   <div *ngIf="isAccept" class="remote-camera">
     <video class="remote-camera__video" #remoteVideo [autoplay]="true"></video>
   </div>
-  <div *ngIf="isAccept" class="receiver-info">
+  <div *ngIf="isOnRemoteVideo" class="receiver-info">
     <h2 class="color-white">{{profile.fullname}}</h2>
+    <h5 class="color-white text-center">{{timeString}}</h5>
   </div>
-  <div *ngIf="!isAccept" class="receiver-info position-absolute-center">
+  <div *ngIf="!isOnRemoteVideo" class="receiver-info position-absolute-center">
     <img class="receiver-info__avatar u-margin-auto col-12" [src]="profile?.avatar" alt="">
     <h2 class="color-white d-inline col-12 text-center">{{profile.fullname}}</h2>
-    <h5 class="color-white text-center">Đang gọi</h5>
-    <h5 class="color-white text-center">00:01</h5>
+    <h5 *ngIf="callingTime==0" class="color-white text-center">Đang gọi</h5>
+    <h5 class="color-white text-center">{{timeString}}</h5>
   </div>
   <div class="local-camera">
     <video class="local-camera__video" #localVideo [autoplay]="true"></video>
+  </div>
+  <div *ngIf="!isOnLocalVideo" class="caller-info">
+    <img class="caller-info__avatar u-margin-auto col-12" [src]="auth?.avatar" alt="">
   </div>
 
   <div class="control-bar">
@@ -20,11 +24,11 @@
         class="bi bi-mic-fill"></i></button>
     <button *ngIf="isMute" class="control-bar__button" (click)="mute($event,true)"><i
         class="bi bi-mic-mute-fill"></i></button>
-    <button *ngIf="!isOnVideo" class="control-bar__button" (click)="startLocalVideo()"><i
+    <button *ngIf="!isOnLocalVideo" class="control-bar__button" (click)="startLocalVideo()"><i
         class="bi bi-camera-video-off-fill"></i></button>
-    <button *ngIf="isOnVideo" class="control-bar__button" (click)="pauseLocalVideo()"><i
+    <button *ngIf="isOnLocalVideo" class="control-bar__button" (click)="pauseLocalVideo()"><i
         class="bi bi-camera-video-fill"></i></button>
-    <button class="control-bar__button background-color-red" (click)="close()"><i
+    <button class="control-bar__button background-color-red" (click)="endCall()"><i
         class="bi bi-telephone-x-fill"></i></button>
   </div>
 </div>
