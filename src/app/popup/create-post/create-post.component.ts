@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { LIST_CATEGORY_POST } from 'src/app/utils/constant';
 import { CreatePostService } from '../../services/index';
 
 @Component({
@@ -24,8 +25,12 @@ export class CreatePostComponent implements OnInit {
   isUpdate = false;
   isStudent = false;
   postId: any;
-  title = 'BUTTON.CREATE_POST'
+  title = 'BUTTON.CREATE_POST';
+  isLangEn = false;
+  categoryId = '';
+  listCategory = LIST_CATEGORY_POST;
   ngOnInit(): void {
+    this.isLangEn = localStorage.getItem('lang') === 'en'
     if (this.isUpdate)
       this.title = 'BUTTON.UPDATE_POST'
     this.ckeConfig = {

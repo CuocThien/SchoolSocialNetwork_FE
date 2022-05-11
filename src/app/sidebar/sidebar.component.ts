@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
     if (!this.check) {
       return;
     }
-    let listTmp = JSON.parse(localStorage.getItem('listNav'));
+    let listTmp = JSON.parse(localStorage.getItem('listNav')) || [];
     if (listTmp.length > 1) {
       if (['Manage', 'Group', 'New feed'].includes(listTmp[1].nameEn)) {
         listTmp = listTmp.splice(1, 4);

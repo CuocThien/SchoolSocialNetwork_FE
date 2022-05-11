@@ -4,8 +4,6 @@
   <div *ngIf="!isAlumni" class="main-group">
     <h2 class="ps-3">{{'HOME.MAIN_NOTIFICATION'|translate}}</h2>
     <hr>
-    <!-- <iframe height="430" width="350" src="https://bot.dialogflow.com/9d15600f-d0ba-4d2b-a3fa-37483ee760d1"></iframe> -->
-
     <div *ngIf="isAdmin">
       <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
         {{'HOME.TEACHER'|translate}}</h3>
@@ -67,38 +65,216 @@
       <hr>
     </div>
     <div class="main-student" *ngIf="isAdmin || isStudent">
-      <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainStudentPost"
-        (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-        <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
-          <div class="post__auth-avatar ps-3 pe-3">
-            <img [src]="post?.avatar" alt="">
+
+      <!-- list post common -->
+      <div class="common d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        <div class=" main-group">
+          <h4 class="ps-3">{{isLangEn?listCategory[3].nameEn:listCategory[3].nameVi}}</h4>
+          <hr>
+          <div class="post d-flex" *ngFor="let post of listPostCommon"
+            (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
+            <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+              <div class="post__auth-avatar ps-3 pe-3">
+                <img [src]="post?.avatar" alt="">
+              </div>
+            </div>
+            <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
+              <div class="post__auth-info">
+                <span class="post__auth-info__id">{{post?.author}} - </span>
+                <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+              </div>
+              <div class="post__info-title">
+                <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              </div>
+            </div>
           </div>
-          <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
-            <span class="post__auth-info__id">{{post?.author}} - </span>
-            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-            <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
-          </div>
-        </div>
-        <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
-          <div class="post__auth-info d-sm-block d-md-none">
-            <span class="post__auth-info__id">{{post?.author}} - </span>
-            <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-          </div>
-          <div class="post__info-title">
-            <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+
+          <h2 *ngIf="!listPostCommon?.length" class="text-center">
+            {{'TITLE.NO_DATA'|translate}}
+          </h2>
+          <div class="pagination">
+            <ngb-pagination [collectionSize]="maxPagePostCommon" [maxSize]="5" [pageSize]="1" [rotate]="true"
+              (pageChange)="goToPageInPostCategory($event,'62711cb8442b05ae533b8e60')" [(page)]="pagePostCommon">
+            </ngb-pagination>
           </div>
         </div>
       </div>
-      <h2 *ngIf="!listMainStudentPost?.length" class="text-center">
-        {{'TITLE.NO_DATA'|translate}}
-      </h2>
-      <div class="pagination">
-        <ngb-pagination [collectionSize]="totalMainStudent" [maxSize]="5" [pageSize]="1" [rotate]="true"
-          (pageChange)="goToPage('mainStudent',$event)" [(page)]="pageMainStudent">
-        </ngb-pagination>
+
+      <!-- list post study -->
+      <div class="study d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        <div class="main-group">
+          <h4 class="ps-3">{{isLangEn?listCategory[0].nameEn:listCategory[0].nameVi}}</h4>
+          <hr>
+          <div class="post" *ngFor="let post of listPostStudy"
+            (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
+            <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+              <div class="post__auth-avatar ps-3 pe-3">
+                <img [src]="post?.avatar" alt="">
+              </div>
+            </div>
+            <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
+              <div class="post__auth-info">
+                <span class="post__auth-info__id">{{post?.author}} - </span>
+                <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+              </div>
+              <div class="post__info-title">
+                <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              </div>
+            </div>
+          </div>
+          <h2 *ngIf="!listPostStudy?.length" class="text-center">
+            {{'TITLE.NO_DATA'|translate}}
+          </h2>
+          <div class="pagination">
+            <ngb-pagination [collectionSize]="maxPagePostStudy" [maxSize]="5" [pageSize]="1" [rotate]="true"
+              (pageChange)="goToPageInPostCategory($event, '62711c4f442b05ae533b8b7a')" [(page)]="pagePostStudy">
+            </ngb-pagination>
+          </div>
+        </div>
       </div>
+
+      <!-- list post union -->
+      <div class="union d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        <div class=" main-group">
+          <h4 class="ps-3">{{isLangEn?listCategory[1].nameEn:listCategory[1].nameVi}}</h4>
+          <hr>
+          <div class="post" *ngFor="let post of listPostUnion"
+            (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
+            <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+              <div class="post__auth-avatar ps-3 pe-3">
+                <img [src]="post?.avatar" alt="">
+              </div>
+            </div>
+            <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
+              <div class="post__auth-info">
+                <span class="post__auth-info__id">{{post?.author}} - </span>
+                <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+              </div>
+              <div class="post__info-title">
+                <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <h2 *ngIf="!listPostUnion?.length" class="text-center">
+            {{'TITLE.NO_DATA'|translate}}
+          </h2>
+          <div class="pagination">
+            <ngb-pagination [collectionSize]="maxPagePostUnion" [maxSize]="5" [pageSize]="1" [rotate]="true"
+              (pageChange)="goToPageInPostCategory($event, '62711c71442b05ae533b8c6d')" [(page)]="pagePostUnion">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+
+      <!-- list post english -->
+      <div
+        class="english d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        <div class=" main-group">
+          <h4 class="ps-3">{{isLangEn?listCategory[2].nameEn:listCategory[2].nameVi}}</h4>
+          <hr>
+          <div class="post d-flex" *ngFor="let post of listPostEnglish"
+            (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
+            <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+              <div class="post__auth-avatar ps-3 pe-3">
+                <img [src]="post?.avatar" alt="">
+              </div>
+            </div>
+            <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
+              <div class="post__auth-info">
+                <span class="post__auth-info__id">{{post?.author}} - </span>
+                <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+              </div>
+              <div class="post__info-title">
+                <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <h2 *ngIf="!listPostEnglish?.length" class="text-center">
+            {{'TITLE.NO_DATA'|translate}}
+          </h2>
+          <div class="pagination">
+            <ngb-pagination [collectionSize]="maxPagePostEnglish" [maxSize]="5" [pageSize]="1" [rotate]="true"
+              (pageChange)="goToPageInPostCategory($event, '62711c84442b05ae533b8cf1')" [(page)]="pagePostEnglish">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+
+      <!-- list post tuition -->
+      <div
+        class="tuition d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        <div class=" main-group">
+          <h4 class="ps-3">{{isLangEn?listCategory[4].nameEn:listCategory[4].nameVi}}</h4>
+          <hr>
+          <div class="post d-flex" *ngFor="let post of listPostTuition"
+            (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
+            <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+              <div class="post__auth-avatar ps-3 pe-3">
+                <img [src]="post?.avatar" alt="">
+              </div>
+            </div>
+            <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
+              <div class="post__auth-info">
+                <span class="post__auth-info__id">{{post?.author}} - </span>
+                <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+              </div>
+              <div class="post__info-title">
+                <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <h2 *ngIf="!listPostTuition?.length" class="text-center">
+            {{'TITLE.NO_DATA'|translate}}
+          </h2>
+          <div class="pagination">
+            <ngb-pagination [collectionSize]="maxPagePostTuition" [maxSize]="5" [pageSize]="1" [rotate]="true"
+              (pageChange)="goToPageInPostCategory($event, '62711d2f442b05ae533b919d')" [(page)]="pagePostTuition">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+
+      <!-- list post scholarship -->
+      <div
+        class="scholarship d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        <div class=" main-group">
+          <h4 class="ps-3">{{isLangEn?listCategory[5].nameEn:listCategory[5].nameVi}}</h4>
+          <hr>
+          <div class="post d-flex" *ngFor="let post of listPostScholarship"
+            (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
+            <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+              <div class="post__auth-avatar ps-3 pe-3">
+                <img [src]="post?.avatar" alt="">
+              </div>
+            </div>
+            <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
+              <div class="post__auth-info">
+                <span class="post__auth-info__id">{{post?.author}} - </span>
+                <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+              </div>
+              <div class="post__info-title">
+                <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <h2 *ngIf="!listPostScholarship?.length" class="text-center">
+            {{'TITLE.NO_DATA'|translate}}
+          </h2>
+          <div class="pagination">
+            <ngb-pagination [collectionSize]="maxPagePostScholarship" [maxSize]="5" [pageSize]="1" [rotate]="true"
+              (pageChange)="goToPageInPostCategory($event,'62712024442b05ae533ba622')" [(page)]="pagePostScholarship">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+
 
   <div class="main-group mt-5">
 

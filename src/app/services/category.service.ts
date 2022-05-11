@@ -18,6 +18,12 @@ export class CategoryService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get<Category>(url, { headers })
     }
+    getListCategoryPost(data: any) {
+        const { isDelete = false } = data
+        const url = `${HOST}/category/post/${isDelete}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
     createNewCategory(body: any) {
         const { type } = body || {}
         const url = `${HOST}/category/${type}`;

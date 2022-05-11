@@ -9,7 +9,7 @@
   <div *ngIf="!isOnRemoteVideo" class="receiver-info position-absolute-center">
     <img class="receiver-info__avatar u-margin-auto col-12" [src]="profile?.avatar" alt="">
     <h2 class="color-white d-inline col-12 text-center">{{profile.fullname}}</h2>
-    <h5 *ngIf="callingTime==0" class="color-white text-center">Đang gọi</h5>
+    <h5 *ngIf="callingTime==0" class="color-white text-center">{{'POPUP.CALLING'|translate}}</h5>
     <h5 class="color-white text-center">{{timeString}}</h5>
   </div>
   <div class="local-camera">

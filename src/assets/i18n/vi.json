@@ -135,6 +135,12 @@
         "UPDATE_USER_INFO": "Chỉnh sửa thông tin",
         "SURVEY": "Khảo sát",
         "CHOOSE_AOC": "Chọn lĩnh vực mà bạn quan tâm",
-        "AOC": "Lĩnh vực quan tâm"
+        "AOC": "Lĩnh vực quan tâm",
+        "VIDEO_CHAT": "Cuộc gọi video",
+        "CALL_ENDED": "Cuộc gọi kết thúc",
+        "INCOMING_CALL": "Cuộc gọi đến",
+        "CALLING": "Đang gọi", 
+        "TITLE_LENGTH": "Tiêu đề không lớn hơn 100 kí tự...",
+        "INPUT_TITLE": "Nhập tiêu đề ở đây..."
     }
 }

@@ -75,7 +75,8 @@ export class HomeComponent implements OnInit {
     this.listRouteNav = JSON.parse(localStorage.getItem('listNav')) || [];
   }
   ngDoCheck() {
-    this.isLangEn = localStorage.getItem('lang') === 'en'
+    this.isLangEn = localStorage.getItem('lang') === 'en';
+    this.listRouteNav = JSON.parse(localStorage.getItem('listNav')) || [];
   }
   openOrCloseSidebar(event: any) {
     event.preventDefault();

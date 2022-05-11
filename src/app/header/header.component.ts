@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   ) {
     //CONNECT SOCKET NOTIFICATION
     this.socket = io.io(`${HOST}`);
-    this.socket.on(EVENT_NOTIFICATION_SSC.JOIN_ROOM_SSC, (data: any) => {
+    this.socket.on(EVENT_NOTIFICATION_SSC.JOIN_ROOM_NOTIFICATION_SSC, (data: any) => {
       //console.log(data)
     });
     this.socket.on(EVENT_NOTIFICATION_SSC.SEND_NOTIFICATION_SSC, (payload: any) => {
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
     this.socket.on(EVENT_MESSAGE_SSC.SEND_MESSAGE_OFFLINE_SSC, (payload: any) => {
       this.isRecievedMessage = true;
     })
-    this.socket.on(EVENT_NOTIFICATION_SSC.LEAVE_ROOM_SSC, (data: any) => {
+    this.socket.on(EVENT_NOTIFICATION_SSC.LEAVE_ROOM_NOTIFICATION_SSC, (data: any) => {
       //console.log(data)
     });
   }
@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
-    this.socket.emit(EVENT_NOTIFICATION_CSS.JOIN_ROOM_CSS, { _id: this.profile._id })
+    this.socket.emit(EVENT_NOTIFICATION_CSS.JOIN_ROOM_NOTIFICATION_CSS, { _id: this.profile._id })
     this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_OFFLINE_CSS, {
       room: `Channel_offline_${this.profile._id}`
     })
@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.socket.emit(EVENT_NOTIFICATION_CSS.LEAVE_ROOM_CSS, {
+    this.socket.emit(EVENT_NOTIFICATION_CSS.LEAVE_ROOM_NOTIFICATION_CSS, {
       _id: this.profile._id
     });
   }

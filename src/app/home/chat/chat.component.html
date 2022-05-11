@@ -39,10 +39,12 @@
       <div class="chat-box__title-avatar col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3">
         <img [src]="chatTitle?.avatar" alt="">
       </div>
-      <div class="chat-box__title-info col-xxl-11 col-xl-11 col-lg-11 col-md-10 col-sm-9 col-9">
-        <h3>{{chatTitle?.fullname}}</h3>
-        <button class="control-bar__button background-color-green" (click)="call()">
-          <i class="bi bi-telephone-fill"></i></button>
+      <div class="chat-box__title-info d-flex col-xxl-11 col-xl-11 col-lg-11 col-md-10 col-sm-9 col-9">
+        <h3 class="d-inline col-10">{{chatTitle?.fullname}}</h3>
+        <div class="text-end col-2">
+          <button class="control-bar__button background-color-green" (click)="call()">
+            <i class="bi bi-telephone-fill"></i></button>
+        </div>
       </div>
     </div>
 
@@ -50,11 +52,22 @@
       [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
       (scrolledUp)="onUp($event)">
       <div class=""
-        [ngClass]="message.isAuth ? 'chat-box__content-message  text-end' : 'chat-box__content-message text-start'"
+        [ngClass]="message.isAuth ? 'chat-box__content-message text-end' : 'chat-box__content-message text-start'"
         *ngFor="let message of messageList">
-        <div class=""
+        <div *ngIf="message.type == 0" class=""
           [ngClass]="message.isAuth ? 'chat-box__content-message__content isAuth' : 'chat-box__content-message__content'">
           {{message.data}}</div>
+        <div *ngIf="message.type == 3" class="d-inline-flex" style="width: 250px;"
+          [ngClass]="message.isAuth ? 'chat-box__content-message__content isAuth' : 'chat-box__content-message__content'">
+          <div class="col-2 u-margin-vertical-auto">
+            <i class="bi bi-camera-video-fill fs-1"></i>
+          </div>
+          <div class="col-10">
+            <h4>{{'POPUP.VIDEO_CHAT'|translate}}</h4>
+            <h5>{{'POPUP.CALL_ENDED'|translate}}&nbsp;·&nbsp;{{message.data}}</h5>
+          </div>
+
+        </div>
       </div>
     </div>
     <div class="chat-box__input">

@@ -1,6 +1,6 @@
 const SERVER_HOST = 'https://schoolsocialnetwork.herokuapp.com'
 const LOCAL_HOST = 'http://localhost:3000'
-const HOST = LOCAL_HOST
+const HOST = SERVER_HOST
 
 const LIST_ROLE = [
     {
@@ -93,4 +93,43 @@ const OBJ_ROUTE_NAV = {
     }
 }
 
-export { HOST, LIST_ROLE, OBJ_ROUTE_NAV }
+
+const LIST_CATEGORY_POST = [
+    {
+        "_id": "62711c4f442b05ae533b8b7a",
+        "nameEn": "Study",
+        "nameVi": "Học vụ",
+        "isDelete": false,
+    },
+    {
+        "_id": "62711c71442b05ae533b8c6d",
+        "nameEn": "Union",
+        "nameVi": "Đoàn - Hội",
+        "isDelete": false,
+    },
+    {
+        "_id": "62711c84442b05ae533b8cf1",
+        "nameEn": "English",
+        "nameVi": "Anh văn đầu ra",
+        "isDelete": false,
+    },
+    {
+        "_id": "62711cb8442b05ae533b8e60",
+        "nameEn": "Common",
+        "nameVi": "Chung",
+        "isDelete": false,
+    },
+    {
+        "_id": "62711d2f442b05ae533b919d",
+        "nameEn": "Tuition ",
+        "nameVi": "Học phí",
+        "isDelete": false,
+    },
+    {
+        "_id": "62712024442b05ae533ba622",
+        "nameEn": "Scholarship ",
+        "nameVi": "Học bổng",
+        "isDelete": false,
+    }
+]
+export { HOST, LIST_ROLE, OBJ_ROUTE_NAV, LIST_CATEGORY_POST }

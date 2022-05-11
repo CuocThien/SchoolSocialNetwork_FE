@@ -15,22 +15,33 @@ export class IncomingCallComponent implements OnInit {
 
   socket: any;
   constructor(
-    private activeModel: NgbActiveModal,
+    private activeModal: NgbActiveModal,
     private chatService: ChatService
   ) { }
   myId: any;
   profile: any;
+  remainingInterval: any;
+  remainingCallingTime = 30;
   ngOnInit(): void {
     this.socket = io.io(`${HOST}`);
-    this.myId = JSON.parse(localStorage.getItem('profile'))._id
+    this.myId = JSON.parse(localStorage.getItem('profile'))._id;
+    this.remainingInterval = setInterval(() => {
+      --this.remainingCallingTime;
+      if (this.remainingCallingTime < 0) {
+        clearInterval(this.remainingInterval);
+        this.activeModal.dismiss();
+      }
+    }, 1000)
   }
 
   accept() {
-    this.activeModel.close(this.profile);
+    this.activeModal.close(this.profile);
+    clearInterval(this.remainingInterval);
   }
 
   reject() {
-    this.activeModel.dismiss('reject');
+    this.activeModal.dismiss('reject');
+    clearInterval(this.remainingInterval);
     this.chatService.getConversation({ id1: this.profile._id, id2: this.myId }).subscribe({
       next: (res: any) => {
         const senderId = this.profile._id;

@@ -135,6 +135,12 @@
         "UPDATE_USER_INFO": "Update user information",
         "SURVEY": "Survey",
         "CHOOSE_AOC": "Choose your Area of Concern",
-        "AOC": "Area of Concern"
+        "AOC": "Area of Concern",
+        "VIDEO_CHAT": "Video chat",
+        "CALL_ENDED": "Call ended",
+        "INCOMING_CALL": "Incoming call",
+        "CALLING": "Calling", 
+        "TITLE_LENGTH": "Title is less than 100 character...",
+        "INPUT_TITLE": "Input title here..."
     }
 }

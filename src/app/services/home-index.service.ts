@@ -15,8 +15,9 @@ export class HomeIndexService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
-    getListPostMainGroupForStudent(page: any) {
-        const url = `${HOST}/post/main/grsv?page=${page}`;
+    getListPostMainGroupForStudent(data: any) {
+        const { page = 0, categoryId = '' } = data || {}
+        const url = `${HOST}/post/main/grsv?page=${page}&categoryId=${categoryId}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
