@@ -60,7 +60,7 @@
             </li>
             <li *ngFor="let notification of listNotification; let i = index" style="cursor: pointer;"
               (click)="readNotification(notification.notifyId, i);openNoti($event)">
-              <div class="col-2 avatar">
+              <div class="col-2 u-margin-vertical-auto img-avatar">
                 <img [src]="notification.avatar" alt="">
               </div>
               <div class="col-10 ps-3 content" [ngClass]="!notification.isRead ? 'color-black' : 'color-grey'"

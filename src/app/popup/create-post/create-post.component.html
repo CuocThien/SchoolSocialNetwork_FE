@@ -10,7 +10,7 @@
       required></textarea>
     <p class="error-msg" *ngIf="isOverMaxLength && isMainGroup">{{'POPUP.TITLE_LENGTH'|translate}}</p>
 
-    <div class="text-end d-flex">
+    <div class="text-end d-flex flex-column flex-sm-column flex-md-row">
       <h5 class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12" *ngIf="groupId=='grsv'">
         {{'TITLE.CATEGORY'|translate}}</h5>
       <ng-select

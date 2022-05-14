@@ -11,7 +11,7 @@
         <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grgv',true,false)">
           {{'BUTTON.CREATE_POST'|translate}}
         </button>
-        <button class="btn btn-outline-primary me-4 d-block d-lg-none">
+        <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost('grgv',true,false)">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
       </div>
@@ -58,7 +58,7 @@
         <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grsv',true,true)">
           {{'BUTTON.CREATE_POST'|translate}}
         </button>
-        <button class="btn btn-outline-primary me-4 d-block d-lg-none">
+        <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost('grsv',true,true)">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
       </div>
@@ -67,7 +67,8 @@
     <div class="main-student" *ngIf="isAdmin || isStudent">
 
       <!-- list post common -->
-      <div class="common d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+      <div
+        class="common d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
         <div class=" main-group">
           <h4 class="ps-3">{{isLangEn?listCategory[3].nameEn:listCategory[3].nameVi}}</h4>
           <hr>
@@ -101,7 +102,7 @@
       </div>
 
       <!-- list post study -->
-      <div class="study d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+      <div class="study d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
         <div class="main-group">
           <h4 class="ps-3">{{isLangEn?listCategory[0].nameEn:listCategory[0].nameVi}}</h4>
           <hr>
@@ -134,7 +135,7 @@
       </div>
 
       <!-- list post union -->
-      <div class="union d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+      <div class="union d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
         <div class=" main-group">
           <h4 class="ps-3">{{isLangEn?listCategory[1].nameEn:listCategory[1].nameVi}}</h4>
           <hr>
@@ -169,7 +170,7 @@
 
       <!-- list post english -->
       <div
-        class="english d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        class="english d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
         <div class=" main-group">
           <h4 class="ps-3">{{isLangEn?listCategory[2].nameEn:listCategory[2].nameVi}}</h4>
           <hr>
@@ -204,7 +205,7 @@
 
       <!-- list post tuition -->
       <div
-        class="tuition d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        class="tuition d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
         <div class=" main-group">
           <h4 class="ps-3">{{isLangEn?listCategory[4].nameEn:listCategory[4].nameVi}}</h4>
           <hr>
@@ -239,7 +240,7 @@
 
       <!-- list post scholarship -->
       <div
-        class="scholarship d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pt-3 pb-3 m-0">
+        class="scholarship d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
         <div class=" main-group">
           <h4 class="ps-3">{{isLangEn?listCategory[5].nameEn:listCategory[5].nameVi}}</h4>
           <hr>
@@ -294,7 +295,7 @@
         <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, false)">
           {{'BUTTON.CREATE_POST'|translate}}
         </button>
-        <button class="btn btn-outline-primary me-4 d-block d-lg-none">
+        <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost(faculty, true, false)">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
       </div>
@@ -341,7 +342,7 @@
         <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, true)">
           {{'BUTTON.CREATE_POST'|translate}}
         </button>
-        <button class="btn btn-outline-primary me-4 d-block d-lg-none">
+        <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost(faculty, true, true)">
           <i class="bi bi-pencil-square fs-lg"></i>
         </button>
       </div>

@@ -5,19 +5,19 @@
     <div class="gr-de__list-post text-center">
       <div class="card-content mb-5" *ngFor="let post of listPost; let i = index">
         <div class="card-content__post-title d-flex">
-          <div (click)="goToGroup(post)" class="position-relative col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2"
+          <div (click)="goToGroup(post)" class="position-relative col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3"
             style="height: 60px; cursor: pointer;">
             <img class="image-group-nf position-absolute" style="top: 0; left: 0;" [src]="post.group.image" alt="">
             <img class="position-absolute image-avatar" style="bottom: -5px; right: 6px;" [src]="post.avatar" alt="">
           </div>
-          <div class="ps-3 col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-8 col-8 d-inline-block h-100-pc text-start">
+          <div class="ps-3 col-xxl-9 col-xl-9 col-lg-9 col-md-8 col-sm-7 col-7 d-inline-block h-100-pc text-start">
             <h3 (click)="goToGroup(post)" style="cursor: pointer; display: inline-block;">{{post.group.nameEn}}</h3>
             <br>
             <h5 (click)="goToGroup(post)" style="cursor: pointer; display: inline-block;">
               <strong>{{post.fullname}}</strong> -
               {{post.createdDate | date:'HH:mm dd/MM/YYYY'}}</h5>
           </div>
-          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3 text-end">
+          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 text-end">
             <button [ngClass]="post.author == userId?'opacity-100 visible':'opacity-0 invisible'"
               class="btn-report col-2" (click)="updatePost(post, i)">
               <i class="bi bi-pencil-square"></i></button>
