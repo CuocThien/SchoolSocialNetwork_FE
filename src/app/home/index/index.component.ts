@@ -85,8 +85,8 @@ export class IndexComponent implements OnInit {
   private modalRef: NgbModalRef;
 
   async ngOnInit(): Promise<void> {
-
-    let listNavLS = JSON.parse(localStorage.getItem('listNav'))[0]
+    const existedListNav = JSON.parse(localStorage.getItem('listNav'))
+    let listNavLS = existedListNav ? JSON.parse(localStorage.getItem('listNav'))[0] : null
     listNavLS = listNavLS ? JSON.stringify([listNavLS]) : JSON.stringify([{ "route": "home/index", "nameEn": "Index", "nameVi": "Trang chủ" }])
     localStorage.setItem('listNav', listNavLS)
     if (localStorage.getItem('isSurvey') === 'false') {

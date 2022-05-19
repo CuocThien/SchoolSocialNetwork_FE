@@ -106,4 +106,7 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('check', 'true');
     this.router.navigate([link])
   }
+  ngOnDestroy() {
+    this.socket.emit(EVENT_VIDEO_CHAT_CSS.LEAVE_ROOM_VIDEO_CHAT_CSS, { room: `Channel_call_${this.profile._id}` })
+  }
 }
