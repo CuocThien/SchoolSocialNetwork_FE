@@ -181,7 +181,7 @@ export class IndexComponent implements OnInit {
         }
       },
       error: (err) => console.log(err),
-      complete: () => console.log('complete'),
+      complete: () => { },
     };
     this.spinner.show();
     forkJoin([

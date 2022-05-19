@@ -1,9 +1,11 @@
 .home-container {
-  background-color: #fff;
+  // background-color: #fff;
+  background-color: #F0F2F5;
 }
 
 .sub-navigation{
-  padding-left: 3rem;
+  padding-left: 5rem;
+  padding-top: 1rem;
   display: flex;
   &__background{
     cursor: pointer;
