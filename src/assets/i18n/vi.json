@@ -39,7 +39,9 @@
         "POSTS": "Bài viết",
         "INFORMATION":"Thông tin",
         "NEW_FEED": "Bảng tin",
-        "MEMBERS": "Thành viên"
+        "MEMBERS": "Thành viên",
+        "ENTERPRISE": "Doanh nghiệp",
+        "RECRUITMENT": "Tuyển dụng"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Thông báo của Trường",

@@ -41,6 +41,11 @@ const OBJ_ROUTE_NAV = {
         nameEn: 'Group',
         nameVi: 'Nhóm'
     },
+    'enterprise': {
+        route: 'home/enterprise',
+        nameEn: 'Enterprise',
+        nameVi: 'Doanh nghiệp'
+    },
     'manage': {
         route: '',
         nameEn: 'Manage',
@@ -65,6 +70,21 @@ const OBJ_ROUTE_NAV = {
         route: 'home/account',
         nameEn: 'Users Information',
         nameVi: 'Thông tin người dùng'
+    },
+    'sub-enterprise': {
+        route: '',
+        nameEn: 'Enterprise',
+        nameVi: 'Doanh nghiệp'
+    },
+    'register-enterprise': {
+        route: 'home/register-enterprise',
+        nameEn: 'Register',
+        nameVi: 'Đăng ký'
+    },
+    'recruitment-news': {
+        route: 'home/recruitment-news',
+        nameEn: 'Recruitment',
+        nameVi: 'Tin tuyển dụng'
     },
     'faculty': {
         route: 'home/faculty',

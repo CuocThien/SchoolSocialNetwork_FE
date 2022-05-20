@@ -21,9 +21,11 @@ export class SidebarComponent implements OnInit {
   isAdminSubGr = false;
   isDropdown = false;
   isAccountDropdown = false;
+  isEnterpriseDropdown = false;
   isReportDropdown = false;
   arrowReport = 'bi bi-chevron-down';
   arrowAccount = 'bi bi-chevron-down';
+  arrowEnterprise = 'bi bi-chevron-down';
 
   mainActive = 'index';
   subActive = '';
@@ -40,7 +42,7 @@ export class SidebarComponent implements OnInit {
     }
     let listTmp = JSON.parse(localStorage.getItem('listNav')) || [];
     if (listTmp.length > 1) {
-      if (['Manage', 'Group', 'New feed'].includes(listTmp[1].nameEn)) {
+      if (['Manage', 'Group', 'New feed', 'Enterprise'].includes(listTmp[1].nameEn)) {
         listTmp = listTmp.splice(1, 4);
       }
     }
@@ -83,6 +85,13 @@ export class SidebarComponent implements OnInit {
     this.arrowAccount = (!this.isAccountDropdown) ? 'bi bi-chevron-down' : 'bi bi-chevron-up';
     if (this.isAccountDropdown) this.subActive = 'account';
   }
+  enterpriseDropdown(event: any) {
+    localStorage.setItem('check', 'false')
+    event.preventDefault();
+    this.isEnterpriseDropdown = !this.isEnterpriseDropdown;
+    this.arrowEnterprise = (!this.isEnterpriseDropdown) ? 'bi bi-chevron-down' : 'bi bi-chevron-up';
+    if (this.isEnterpriseDropdown) this.subActive = 'sub-enterprise';
+  }
   reportDropdown(event: any) {
     localStorage.setItem('check', 'false')
     event.preventDefault();
@@ -121,6 +130,8 @@ export class SidebarComponent implements OnInit {
     }
     if (['sign-up', 'users', 'account'].includes(link)) {
       this.subActive = 'account';
+    } else if (['register-enterprise', 'recruitment-news'].includes(link)) {
+      this.subActive = 'sub-enterprise'
     } else {
       this.subActive = 'report';
     }

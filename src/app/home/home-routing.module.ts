@@ -21,6 +21,9 @@ import { AccountComponent } from './account/account.component';
 import { NewFeedComponent } from './new-feed/new-feed.component';
 import { SearchUserComponent } from './search-user/search-user.component';
 import { VideoChatComponent } from '../popup/video-chat/video-chat.component';
+import { EnterpriseComponent } from './enterprise/enterprise.component';
+import { RegisterEnterpriseComponent } from './register-enterprise/register-enterprise.component';
+import { RecruitmentNewsComponent } from './recruitment-news/recruitment-news.component';
 
 const homeRoutes: Routes = [
     {
@@ -44,6 +47,9 @@ const homeRoutes: Routes = [
             { path: 'new-feed', component: NewFeedComponent, pathMatch: 'full' },
             { path: 'search-user', component: SearchUserComponent, pathMatch: 'full' },
             { path: 'video-chat', component: VideoChatComponent, pathMatch: 'full' },
+            { path: 'enterprise', component: EnterpriseComponent, pathMatch: 'full' },
+            { path: 'register-enterprise', component: RegisterEnterpriseComponent, pathMatch: 'full' },
+            { path: 'recruitment-news', component: RecruitmentNewsComponent, pathMatch: 'full' },
 
 
         ]

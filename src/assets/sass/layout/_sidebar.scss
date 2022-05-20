@@ -29,7 +29,7 @@
 
 .cb-manage-dropdown {
   &:checked~.btn-group-dropdown {
-    height: 60rem;
+    height: 70rem;
     overflow: hidden;
   }
 }
@@ -44,6 +44,19 @@
 .cb-account-dropdown {
   &:checked~.btn-account-dropdown {
     height: 19rem;
+  }
+}
+
+// dropdown enterprise
+.btn-enterprise-dropdown {
+  height: 4.4rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-enterprise-dropdown {
+  &:checked~.btn-enterprise-dropdown {
+    height: 14rem;
   }
 }
 

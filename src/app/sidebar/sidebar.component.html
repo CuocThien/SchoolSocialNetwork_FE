@@ -34,13 +34,15 @@
         [ngClass]="{'button-sidebar__active':mainActive === 'group'}" (click)="redirectTo('group')">
         <i class="bi bi-people ps-3 pe-3"></i>{{'SIDEBAR.GROUPS'|translate}}</button>
     </div>
-    <!-- <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none" [routerLink]="['chat']">
-        <i class="bi bi-chat-dots"></i>
+    <div class="btn-group w-100-pc">
+      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
+        [ngClass]="{'button-sidebar__active':mainActive==='enterprise'}" (click)="redirectTo('enterprise')">
+        <i class="bi bi-briefcase"></i>
       </button>
-      <button class="button-sidebar d-xl-block d-none text-start" [routerLink]="['chat']">
-        <i class="bi bi-chat-dots ps-3 pe-3"></i>{{'SIDEBAR.CHAT'|translate}}</button>
-    </div> -->
+      <button class="button-sidebar d-xl-block d-none text-start"
+        [ngClass]="{'button-sidebar__active':mainActive==='enterprise'}" (click)="redirectTo('enterprise')">
+        <i class="bi bi-briefcase ps-3 pe-3"></i>{{'SIDEBAR.ENTERPRISE'|translate}}</button>
+    </div>
     <input class="d-none cb-manage-dropdown" type="checkbox" [checked]="isDropdown">
     <div *ngIf="isAdmin || isDean" class="btn-group-dropdown text-start w-100-pc">
       <!-- button dropdown -->
@@ -68,7 +70,7 @@
               class="bi bi-person-rolodex ps-3 pe-3"></i>{{'SIDEBAR.USERS'|translate}}
             <i [class]="arrowAccount"></i></button>
         </div>
-        <!-- group button -->
+        <!-- button User -->
         <div class="w-100-pc text-start">
           <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
             <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
@@ -100,6 +102,57 @@
               [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
               (click)="redirectSubMenuTo('account',2)">{{'SIDEBAR.INFORMATION'|translate}}</button>
           </div>
+        </div>
+      </div>
+
+      <!-- button enterprise dropdown -->
+      <input class="d-none cb-enterprise-dropdown" type="checkbox" [checked]="isEnterpriseDropdown">
+      <div class="btn-enterprise-dropdown text-start">
+        <div class="btn-group w-100-pc">
+          <button class="button-sidebar-text d-block d-lg-block d-sm-block d-xl-none button-sidebar-text-icon"
+            [ngClass]="{'button-sidebar-text__active':subActive === 'sub-enterprise'}"
+            (click)="enterpriseDropdown($event)">
+            <i class="bi bi-briefcase"></i>
+          </button>
+          <button class="button-sidebar-text text-start d-xl-block d-none"
+            [ngClass]="{'button-sidebar-text__active':subActive === 'sub-enterprise'}"
+            (click)="enterpriseDropdown($event)"><i
+              class="bi bi-briefcase ps-3 pe-3"></i>{{'SIDEBAR.ENTERPRISE'|translate}}
+            <i [class]="arrowEnterprise"></i></button>
+        </div>
+        <!-- button User -->
+        <div class="w-100-pc text-start">
+          <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
+            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'register-enterprise'}"
+              (click)="redirectSubMenuTo('register-enterprise',2)">
+              <i class="bi bi-person-plus"></i>
+            </button>
+            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'register-enterprise'}"
+              (click)="redirectSubMenuTo('register-enterprise',2)">
+              {{'SIDEBAR.REGISTER'|translate}}</button>
+          </div>
+          <div class="btn-group w-100-pc ps-3 ">
+            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'recruitment-news'}"
+              (click)="redirectSubMenuTo('recruitment-news',2)">
+              <i class="bi bi-person-video2"></i>
+            </button>
+            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'recruitment-news'}"
+              (click)="redirectSubMenuTo('recruitment-news',2)">{{'SIDEBAR.RECRUITMENT'|translate}}</button>
+          </div>
+          <!-- <div class="btn-group w-100-pc ps-3 ">
+            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
+              (click)="redirectSubMenuTo('account',2)">
+              <i class="bi bi-info-square"></i>
+            </button>
+            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
+              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
+              (click)="redirectSubMenuTo('account',2)">{{'SIDEBAR.INFORMATION'|translate}}</button>
+          </div> -->
         </div>
       </div>
 

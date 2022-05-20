@@ -39,7 +39,9 @@
         "POSTS": "Posts",
         "INFORMATION":"Information",
         "NEW_FEED": "New feed",
-        "MEMBERS": "Members"
+        "MEMBERS": "Members",
+        "ENTERPRISE": "Enterprise",
+        "RECRUITMENT": "Recruitment"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Main notification",

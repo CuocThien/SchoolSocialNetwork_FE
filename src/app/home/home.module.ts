@@ -32,6 +32,9 @@ import { AccountComponent } from './account/account.component';
 import { NewFeedComponent } from './new-feed/new-feed.component';
 import { SearchUserComponent } from './search-user/search-user.component';
 import { SafeHtmlPipe } from '../safe-html.pipe';
+import { EnterpriseComponent } from './enterprise/enterprise.component';
+import { RegisterEnterpriseComponent } from './register-enterprise/register-enterprise.component';
+import { RecruitmentNewsComponent } from './recruitment-news/recruitment-news.component';
 
 
 
@@ -40,7 +43,7 @@ import { SafeHtmlPipe } from '../safe-html.pipe';
 @NgModule({
   declarations: [
     SafeHtmlPipe,
-    GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent, SearchUserComponent],
+    GroupComponent, GroupDetailComponent, ChatComponent, ProfileComponent, ChangePasswordComponent, IndexComponent, PostDetailComponent, CommentComponent, ReplyComponent, SignUpComponent, FacultyComponent, CategoryComponent, UsersComponent, ReportGroupComponent, ReportPostComponent, AccountComponent, NewFeedComponent, SearchUserComponent, EnterpriseComponent, RegisterEnterpriseComponent, RecruitmentNewsComponent],
   imports: [
     BrowserAnimationsModule,
     CommonModule,
