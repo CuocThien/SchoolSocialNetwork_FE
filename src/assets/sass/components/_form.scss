@@ -142,3 +142,45 @@
     }
   }
 }
+
+.form-register{
+  background-color: white;
+  &__form{
+    padding: 3rem 0;
+    &-control{
+      height: 4rem;
+      width: 90%;
+      padding: 3px 1.5rem;
+      margin: 5px auto;
+      font-size: 1.5rem;
+      background-color: #FFF;
+      border: 1px solid grey;
+      border-radius: 8px;
+      &__area{
+        width: 90%;
+        font-size: 1.5rem;
+        border-radius: 3px;
+        // border: solid 1px grey;
+        background-color: #FFF;
+      border: 1px solid grey;
+      border-radius: 8px;
+      }
+      &__avatar{
+        border: 1px solid grey;
+        max-width: 15rem;
+        max-height: 15rem;
+        height: auto;
+        width: auto;
+      }
+    }
+  }
+  &__background{
+    height: 50rem;
+    background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');
+    background-repeat: no-repeat;
+    background-position: center; /* Center the image */
+    background-size: cover;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

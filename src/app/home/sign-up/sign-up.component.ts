@@ -4,9 +4,9 @@ import { FacultyService, SignUpService } from '../../services/index';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isEmpty } from 'lodash'
-import FileSaver from 'file-saver'
 import { LIST_ROLE } from 'src/app/utils/constant';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { exportAsExcelFile } from 'src/app/utils/function';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,8 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['../../../assets/sass/main.scss']
 })
 export class SignUpComponent implements OnInit {
-  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-  EXCEL_EXTENSION = '.xlsx';
+
   constructor(
     private facultyService: FacultyService,
     private toastr: ToastrService,
@@ -81,7 +80,7 @@ export class SignUpComponent implements OnInit {
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.signUpForm.reset();
-        this.exportAsExcelFile(Object.values(res.data.accountData), Object.values(res.data.logs), 'account_signup');
+        exportAsExcelFile(Object.values(res.data.accountData), Object.values(res.data.logs), 'account_signup');
         this.spinner.hide();
       },
       error: (err: any) => {
@@ -108,15 +107,5 @@ export class SignUpComponent implements OnInit {
     this.isSingleSignup = !this.isSingleSignup;
     this.contentButton = (this.isSingleSignup) ? 'SIGNUP.MULTIPLE_SIGNUP' : 'SIGNUP.SINGLE_SIGNUP'
   }
-  public exportAsExcelFile(data: any[], logs: any[], excelFileName: string): Promise<Object> {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-    const worksheet2: XLSX.WorkSheet = XLSX.utils.json_to_sheet(logs);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet, 'logs': worksheet2 }, SheetNames: ['data', 'logs'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    return (this.saveAsExcelFile(excelBuffer, excelFileName));
-  }
-  private saveAsExcelFile(buffer: any, fileName: string): Promise<Object> {
-    const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
-    return FileSaver.saveAs(data, fileName + this.EXCEL_EXTENSION);
-  }
+
 }

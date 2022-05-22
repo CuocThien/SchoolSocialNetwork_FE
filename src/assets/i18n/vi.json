@@ -15,7 +15,8 @@
         "READ_ALL": "Đánh dấu tất cả là đã đọc",
         "SEARCH_USER": "Tìm kiếm người dùng",
         "NO_DATA": "Không có dữ liệu",
-        "ABOUT": "Giới thiệu"
+        "ABOUT": "Giới thiệu",
+        "REGISTER_ENTERPRISE": "ĐĂNG KÝ DOANH NGHIỆP"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -112,7 +113,12 @@
         "PHONE": "Số điện thoại",
         "COUNT_POST": "Số lượng bài viết",
         "COUNT_COMMENT": "Số lượng bình luận",
-        "CONTENT": "Nội dung"
+        "CONTENT": "Nội dung",
+        "ADDRESS": "Địa chỉ",
+        "EMAIL": "Email",
+        "ABBREVIATION": "Tên viết tắt",
+        "DESCRIPTION": "Mô tả",
+        "COMPANY_NAME": "Tên công ty"
     },
     "POPUP":{
         "CREATE_FACULTY":"Thêm khoa mới",

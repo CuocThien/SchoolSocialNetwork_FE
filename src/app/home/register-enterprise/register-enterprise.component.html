@@ -1,1 +1,31 @@
-
+<div class="form-register d-flex w-100-pc h-100-pc">
+  <div class="col-6 h-100-pc form-register__form text-center">
+    <h1 class="mb-3">{{'TITLE.REGISTER_ENTERPRISE'|translate}}</h1>
+    <form class="u-margin-auto" [formGroup]="registerForm" (ngSubmit)="onSubmit();">
+      <div style="margin:auto; width: 90%">
+        <div class="text-start w-100-pc">
+          <img class="form-register__form-control__avatar me-3 d-inline"
+            [src]="imageSrc || 'https://res.cloudinary.com/blogreview/image/upload/v1652884439/fwur45xk4dnbrkcopxqm.png'"
+            alt="your image" require />
+          <input class="u-margin-bottom-small d-inline" type='file' (change)="readURL($event);" accept="image/*" />
+        </div>
+      </div>
+      <input class="form-register__form-control" type="text" placeholder="{{'TABLE.COMPANY_NAME'|translate}}"
+        formControlName="name">
+      <textarea class="form-register__form-control__area" type="text" rows="7" formControlName="description"
+        placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
+      <input class="form-register__form-control" type="text" placeholder="{{'TABLE.ADDRESS'|translate}}"
+        formControlName="address">
+      <input class="form-register__form-control" type="text" placeholder="{{'TABLE.PHONE'|translate}}"
+        formControlName="phone">
+      <input class="form-register__form-control" type="text" placeholder="{{'TABLE.EMAIL'|translate}}"
+        formControlName="email">
+      <input class="form-register__form-control" type="text" placeholder="{{'TABLE.ABBREVIATION'|translate}}"
+        formControlName="abbreviation">
+      <button class="button-signup d-inline-block mt-3">{{'BUTTON.SIGN_UP'|translate}}</button>
+    </form>
+  </div>
+  <div class="col-6 position-relative" style="background-color: #EDF5FD;">
+    <div class="w-100-pc position-absolute form-register__background">&nbsp;</div>
+  </div>
+</div>

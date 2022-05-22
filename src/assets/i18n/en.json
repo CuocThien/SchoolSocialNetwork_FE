@@ -15,7 +15,8 @@
         "READ_ALL": "Mark all as read",
         "SEARCH_USER": "Search user",
         "NO_DATA": "No data available",
-        "ABOUT": "About this group"
+        "ABOUT": "About this group",
+        "REGISTER_ENTERPRISE": "REGISTER ENTERPRISE"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -112,7 +113,12 @@
         "PHONE": "Phone",
         "COUNT_POST": "Count posts",
         "COUNT_COMMENT": "Count comments",
-        "CONTENT": "Content"
+        "CONTENT": "Content",
+        "ADDRESS": "Address",
+        "EMAIL": "Email",
+        "ABBREVIATION": "Abbreviation",
+        "DESCRIPTION": "Description",
+        "COMPANY_NAME": "Company name"
     },
     "POPUP":{
         "CREATE_FACULTY":"Create faculty",
