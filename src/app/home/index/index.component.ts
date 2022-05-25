@@ -46,6 +46,7 @@ export class IndexComponent implements OnInit {
   isTeacher = false;
   isStudent = false;
   isAlumni = false;
+  isCompany = false;
 
   listFaculty = [];
   faculty: any;
@@ -94,6 +95,11 @@ export class IndexComponent implements OnInit {
     }
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
     this.role = localStorage.getItem('role') || '';
+    if (this.role === 'company') {
+      this.isCompany = true;
+      // this.router.navigate(['home/new-feed']);
+      return;
+    }
     if (this.role === 'admin') {
       this.isAdmin = true;
       this._getListFaculty();

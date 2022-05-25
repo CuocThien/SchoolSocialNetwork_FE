@@ -32,9 +32,9 @@ export class RegisterEnterpriseComponent implements OnInit {
       return;
     }
 
-    const validData = Object.assign(this.registerForm.value, { logo: this.imageSrc })
+    const validData = Object.assign(this.registerForm.value, { avatar: this.imageSrc })
     this.spinner.show();
-    this.service.registerEnterprise(this.registerForm.value).subscribe({
+    this.service.registerEnterprise(validData).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
         this.registerForm.reset();
@@ -68,7 +68,7 @@ export class RegisterEnterpriseComponent implements OnInit {
   }
   createFormRegister() {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      fullname: ['', Validators.required],
       description: ['', Validators.required],
       address: ['', Validators.required],
       phone: ['', Validators.required],

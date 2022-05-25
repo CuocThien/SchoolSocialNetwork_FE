@@ -26,7 +26,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 //service
 import { AuthGuardService } from './auth.guard';
-import { AccountService, CategoryService, ChangePasswordService, ChatService, CommentService, CreatePostService, FacultyService, GroupService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService, UsersService } from './services/index';
+import { AccountService, CategoryService, ChangePasswordService, ChatService, CommentService, CreatePostService, EnterpriseService, FacultyService, GroupService, HomeIndexService, LogInService, PostDetailService, ProfileService, SignUpService, UploadImageService, UsersService } from './services/index';
 import { ChangePasswordOtpComponent } from './popup/change-password-otp/change-password-otp.component';
 import { CreatePostComponent } from './popup/create-post/create-post.component';
 import { ChangeCommentComponent } from './popup/change-comment/change-comment.component';
@@ -48,6 +48,7 @@ import { UpdateUserInfoComponent } from './popup/update-user-info/update-user-in
 import { SurveyComponent } from './popup/survey/survey.component';
 import { VideoChatComponent } from './popup/video-chat/video-chat.component';
 import { IncomingCallComponent } from './popup/incoming-call/incoming-call.component';
+import { CreateRecruitmentNewsComponent } from './popup/create-recruitment-news/create-recruitment-news.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { IncomingCallComponent } from './popup/incoming-call/incoming-call.compo
     SurveyComponent,
     VideoChatComponent,
     IncomingCallComponent,
+    CreateRecruitmentNewsComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,7 +127,7 @@ import { IncomingCallComponent } from './popup/incoming-call/incoming-call.compo
     SignUpService,
     UploadImageService,
     UsersService,
-    AccountService
+    AccountService, EnterpriseService
   ],
   bootstrap: [AppComponent]
 })

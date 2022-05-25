@@ -95,7 +95,9 @@
         "LOAD_MORE": "Load more",
         "UPLOAD": "Upload",
         "CHOOSE_ALL": "Choose all",
-        "REMOVE_ALL": "Remove all"
+        "REMOVE_ALL": "Remove all",
+        "REQUEST_OTP": "Request OTP",
+        "UPDATE_PROFILE": "Update Profile"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
@@ -150,6 +152,15 @@
         "INCOMING_CALL": "Incoming call",
         "CALLING": "Calling", 
         "TITLE_LENGTH": "Title is less than 100 character...",
-        "INPUT_TITLE": "Input title here..."
+        "INPUT_TITLE": "Input title here...",
+        "TITLE": "Title",
+        "POSTER": "Poster",
+        "POSITION": "Position",
+        "QUANTITY": "Quantity",
+        "SALARY": "Salary",
+        "EXPERIENCE": "Experience",
+        "START_DATE": "Start date",
+        "END_DATE": "End date",
+        "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS"
     }
 }

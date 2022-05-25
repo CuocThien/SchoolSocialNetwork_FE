@@ -1,0 +1,51 @@
+<div class="form-popup text-center position-relative">
+  <h2 class="mb-3">{{'POPUP.CREATE_RECRUITMENT_NEWS'|translate}}</h2>
+  <button class="btn-cancel position-absolute" (click)="onClose()"><img
+      src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
+  <form class="u-margin-auto" [formGroup]="createNewsForm" (ngSubmit)="onSubmit();">
+    <h3 class="form-popup__direction">{{'POPUP.TITLE'|translate}}</h3>
+    <input class="form-register__form-control" type="text" placeholder="{{'POPUP.TITLE'|translate}}"
+      formControlName="title">
+    <div style="margin:auto; width: 90%">
+      <h3 class="text-start mt-3 mb-3">{{'POPUP.POSTER'|translate}}</h3>
+      <div class="text-start w-100-pc">
+        <img class="form-register__form-control__avatar me-3 d-inline"
+          [src]="imageSrc || 'https://res.cloudinary.com/blogreview/image/upload/v1652884439/fwur45xk4dnbrkcopxqm.png'"
+          alt="your image" require />
+        <input class="u-margin-bottom-small d-inline" type='file' (change)="readURL($event);" accept="image/*" />
+      </div>
+    </div>
+    <h3 class="form-popup__direction">{{'TABLE.DESCRIPTION'|translate}}</h3>
+    <textarea class="form-register__form-control__area" type="text" rows="7" formControlName="description"
+      placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
+    <h3 class="form-popup__direction">{{'POPUP.POSITION'|translate}}</h3>
+    <input class="form-register__form-control" type="text" placeholder="{{'POPUP.POSITION'|translate}}"
+      formControlName="position">
+    <h3 class="form-popup__direction">{{'POPUP.QUANTITY'|translate}}</h3>
+    <input class="form-register__form-control" type="text" placeholder="{{'POPUP.QUANTITY'|translate}}"
+      formControlName="quantity">
+    <h3 class="form-popup__direction">{{'POPUP.SALARY'|translate}}</h3>
+    <input class="form-register__form-control" type="text" placeholder="{{'POPUP.SALARY'|translate}}"
+      formControlName="salary">
+    <h3 class="form-popup__direction">{{'POPUP.EXPERIENCE'|translate}}</h3>
+    <ng-select style="width: 90%; margin: auto;" [searchable]="true" [clearable]="false" formControlName="experience"
+      formControlName="experience">
+      <ng-option *ngFor="let experience of listExperience" [value]="experience.id">
+        {{isLangEn ? experience.nameEn : experience.nameVi}}
+      </ng-option>
+    </ng-select>
+    <div class="d-flex u-margin-auto justify-content-between" style="width: 90%;">
+      <div class="col-6 pe-3">
+        <h3 class="text-start mt-3 mb-3">{{'POPUP.START_DATE'|translate}}</h3>
+        <input class="form-register__form-control  w-100-pc" type="date"
+          placeholder="{{'TABLE.ABBREVIATION'|translate}}" formControlName="startDate">
+      </div>
+      <div class="col-6 ps-3">
+        <h3 class="text-start mt-3 mb-3">{{'POPUP.END_DATE'|translate}}</h3>
+        <input class="form-register__form-control w-100-pc" type="date" placeholder="{{'TABLE.ABBREVIATION'|translate}}"
+          formControlName="endDate">
+      </div>
+    </div>
+    <button class="button-signup d-inline-block mt-3">{{'BUTTON.CREATE_POST'|translate}}</button>
+  </form>
+</div>

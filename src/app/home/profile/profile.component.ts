@@ -24,6 +24,8 @@ export class ProfileComponent implements OnInit {
   isVisible = true;
   intervalId: any;
   timeOut = 120;
+
+  isCompany = false;
   constructor(
     private service: ProfileService,
     private uploadImageService: UploadImageService,
@@ -32,7 +34,8 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.profile = JSON.parse(localStorage.getItem('profile') || '')
+    this.profile = JSON.parse(localStorage.getItem('profile') || '');
+    this.isCompany = localStorage.getItem('role') === 'company';
     this.dob = moment(this.profile.dob).format('YYYY-MM-DD')
     this.imageSrc = this.profile.avatar
   }

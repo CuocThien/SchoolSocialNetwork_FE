@@ -95,7 +95,9 @@
         "LOAD_MORE": "Xem thêm",
         "UPLOAD": "Tải ảnh lên",
         "CHOOSE_ALL": "Chọn tất cả",
-        "REMOVE_ALL": "Xoá tất cả"
+        "REMOVE_ALL": "Xoá tất cả",
+        "REQUEST_OTP": "Yêu cầu OTP",
+        "UPDATE_PROFILE": "Chỉnh sửa thông tin"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
@@ -150,6 +152,15 @@
         "INCOMING_CALL": "Cuộc gọi đến",
         "CALLING": "Đang gọi", 
         "TITLE_LENGTH": "Tiêu đề không lớn hơn 100 kí tự...",
-        "INPUT_TITLE": "Nhập tiêu đề ở đây..."
+        "INPUT_TITLE": "Nhập tiêu đề ở đây...",
+        "TITLE": "Tiêu đề",
+        "POSTER": "Hình ảnh quảng cáo",
+        "POSITION": "Vị trí công việc",
+        "QUANTITY": "Số lượng",
+        "SALARY": "Lương",
+        "EXPERIENCE": "Kinh nghiệm",
+        "START_DATE": "Ngày bắt đầu",
+        "END_DATE": "Ngày kết thúc",
+        "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG"
     }
 }

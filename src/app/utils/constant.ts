@@ -152,4 +152,32 @@ const LIST_CATEGORY_POST = [
         "isDelete": false,
     }
 ]
-export { HOST, LIST_ROLE, OBJ_ROUTE_NAV, LIST_CATEGORY_POST }
+
+const LIST_EXPERIENCE = [
+    {
+        "id": "1",
+        "nameEn": "No experience required",
+        "nameVi": "Không yêu cầu kinh nghiệm",
+    },
+    {
+        "id": "2",
+        "nameEn": "Less than 1 year",
+        "nameVi": "Dưới 1 năm",
+    },
+    {
+        "id": "3",
+        "nameEn": "1 - 2 years",
+        "nameVi": "1 - 2 năm",
+    },
+    {
+        "id": "4",
+        "nameEn": "2 - 3 years",
+        "nameVi": "2 - 3 năm",
+    },
+    {
+        "id": "5",
+        "nameEn": "More than 3 years",
+        "nameVi": "Hơn 3 năm",
+    },
+]
+export { HOST, LIST_ROLE, OBJ_ROUTE_NAV, LIST_CATEGORY_POST, LIST_EXPERIENCE }
