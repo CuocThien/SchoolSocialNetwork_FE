@@ -16,7 +16,8 @@
         "SEARCH_USER": "Tìm kiếm người dùng",
         "NO_DATA": "Không có dữ liệu",
         "ABOUT": "Giới thiệu",
-        "REGISTER_ENTERPRISE": "ĐĂNG KÝ DOANH NGHIỆP"
+        "REGISTER_ENTERPRISE": "ĐĂNG KÝ DOANH NGHIỆP",
+        "RECRUITMENT_NEWS": "TIN TUYỂN DỤNG"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -97,7 +98,10 @@
         "CHOOSE_ALL": "Chọn tất cả",
         "REMOVE_ALL": "Xoá tất cả",
         "REQUEST_OTP": "Yêu cầu OTP",
-        "UPDATE_PROFILE": "Chỉnh sửa thông tin"
+        "UPDATE_PROFILE": "Chỉnh sửa thông tin",
+        "CREATE_NEWS": "Đăng tin tuyển dụng",
+        "UPDATE": "Chỉnh sửa",
+        "DELETE": "Xoá"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
@@ -157,10 +161,12 @@
         "POSTER": "Hình ảnh quảng cáo",
         "POSITION": "Vị trí công việc",
         "QUANTITY": "Số lượng",
+        "LOCATION": "Vị trí",
         "SALARY": "Lương",
         "EXPERIENCE": "Kinh nghiệm",
         "START_DATE": "Ngày bắt đầu",
         "END_DATE": "Ngày kết thúc",
-        "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG"
+        "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG",
+        "DELETE_NEWS": "Xoá tin tuyển dụng"
     }
 }

@@ -16,7 +16,8 @@
         "SEARCH_USER": "Search user",
         "NO_DATA": "No data available",
         "ABOUT": "About this group",
-        "REGISTER_ENTERPRISE": "REGISTER ENTERPRISE"
+        "REGISTER_ENTERPRISE": "REGISTER ENTERPRISE",
+        "RECRUITMENT_NEWS": "RECRUITMENT NEWS"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -97,7 +98,10 @@
         "CHOOSE_ALL": "Choose all",
         "REMOVE_ALL": "Remove all",
         "REQUEST_OTP": "Request OTP",
-        "UPDATE_PROFILE": "Update Profile"
+        "UPDATE_PROFILE": "Update Profile",
+        "CREATE_NEWS": "Create recruitment news",
+        "UPDATE": "Update",
+        "DELETE": "Delete"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
@@ -157,10 +161,12 @@
         "POSTER": "Poster",
         "POSITION": "Position",
         "QUANTITY": "Quantity",
+        "LOCATION": "Location",
         "SALARY": "Salary",
         "EXPERIENCE": "Experience",
         "START_DATE": "Start date",
         "END_DATE": "End date",
-        "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS"
+        "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS",
+        "DELETE_NEWS": "Delete recruitment news"
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { EnterpriseService, UploadImageService } from 'src/app/services';
@@ -26,24 +27,15 @@ export class CreateRecruitmentNewsComponent implements OnInit {
   listExperience = LIST_EXPERIENCE;
   isLangEn = false;
   isUpdate = false;
-  news = {
-    "title": "Tuyển dụng thực tập sinh NodeJs",
-    "description": "- Môi trường năng động.\n- Lương cao.\n- Thời gian thoải mái.",
-    "position": "Back-End developers",
-    "quantity": "12-15",
-    "salary": "10.000.000 - 15.000.000",
-    "experience": "1",
-    "startDate": "2022-05-25",
-    "endDate": "2022-05-30",
-    "poster": "http://res.cloudinary.com/blogreview/image/upload/v1653492652/review_web/t0vwalngnd5p7gouyxl1.png"
-  }
+  news: any;
+  formTitle: any;
   ngOnInit(): void {
-    this.isLangEn = localStorage.getItem('lang') === 'en'
+    this.isLangEn = localStorage.getItem('lang') === 'en';
+    this.formTitle = !this.isUpdate ? 'BUTTON.CREATE_POST' : 'BUTTON.UPDATE_POST'
     this.createFormCreateNew();
     if (this.isUpdate) this.patchValueForm();
   }
   onSubmit() {
-    console.log(this.createNewsForm.value)
     if (this.createNewsForm.invalid) {
       this.toastr.error('Please fill information!')
       return;
@@ -52,7 +44,6 @@ export class CreateRecruitmentNewsComponent implements OnInit {
       let validData = this.createNewsForm.value;
       if (this.imageSrc)
         validData.poster = this.imageSrc
-
       this.spinner.show();
       this.service.createRecruitmentNews(validData).subscribe({
         next: (res: any) => {
@@ -66,7 +57,27 @@ export class CreateRecruitmentNewsComponent implements OnInit {
           this.spinner.hide();
         }
       })
+      return;
     }
+    let validData = this.createNewsForm.value;
+    validData._id = this.news._id;
+    if (this.imageSrc)
+      validData.poster = this.imageSrc
+    this.spinner.show();
+    this.service.updateRecruitmentNews(validData).subscribe({
+      next: (res: any) => {
+        this.toastr.success(res.msg);
+        this.createNewsForm.reset();
+        this.activeModal.close(res);
+        this.spinner.hide();
+      },
+      error: (err: any) => {
+        this.toastr.error(err.error.msg);
+        this.spinner.hide();
+      }
+    })
+    return;
+
   }
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -96,6 +107,8 @@ export class CreateRecruitmentNewsComponent implements OnInit {
       description: ['', Validators.required],
       position: ['', Validators.required],
       quantity: ['', Validators.required],
+      location: ['', Validators.required],
+      phone: ['', Validators.required],
       salary: ['', Validators.required],
       experience: ['', Validators.required],
       startDate: ['', Validators.required],
@@ -107,10 +120,12 @@ export class CreateRecruitmentNewsComponent implements OnInit {
     this.createNewsForm.patchValue({ description: this.news.description });
     this.createNewsForm.patchValue({ quantity: this.news.quantity });
     this.createNewsForm.patchValue({ position: this.news.position });
+    this.createNewsForm.patchValue({ location: this.news.location });
+    this.createNewsForm.patchValue({ phone: this.news.phone });
     this.createNewsForm.patchValue({ salary: this.news.salary });
     this.createNewsForm.patchValue({ experience: this.news.experience });
-    this.createNewsForm.patchValue({ startDate: this.news.startDate });
-    this.createNewsForm.patchValue({ endDate: this.news.endDate });
+    this.createNewsForm.patchValue({ startDate: moment(this.news.startDate).format('YYYY-MM-DD') });
+    this.createNewsForm.patchValue({ endDate: moment(this.news.endDate).format('YYYY-MM-DD') });
     this.imageSrc = this.news.poster;
   }
 }

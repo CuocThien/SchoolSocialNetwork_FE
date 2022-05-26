@@ -24,6 +24,12 @@
     <h3 class="form-popup__direction">{{'POPUP.QUANTITY'|translate}}</h3>
     <input class="form-register__form-control" type="text" placeholder="{{'POPUP.QUANTITY'|translate}}"
       formControlName="quantity">
+    <h3 class="form-popup__direction">{{'POPUP.LOCATION'|translate}}</h3>
+    <input class="form-register__form-control" type="text" placeholder="{{'POPUP.LOCATION'|translate}}"
+      formControlName="location">
+    <h3 class="form-popup__direction">{{'TABLE.PHONE'|translate}}</h3>
+    <input class="form-register__form-control" type="text" placeholder="{{'TABLE.PHONE'|translate}}"
+      formControlName="phone">
     <h3 class="form-popup__direction">{{'POPUP.SALARY'|translate}}</h3>
     <input class="form-register__form-control" type="text" placeholder="{{'POPUP.SALARY'|translate}}"
       formControlName="salary">
@@ -46,6 +52,6 @@
           formControlName="endDate">
       </div>
     </div>
-    <button class="button-signup d-inline-block mt-3">{{'BUTTON.CREATE_POST'|translate}}</button>
+    <button class="button-signup d-inline-block mt-3">{{formTitle|translate}}</button>
   </form>
 </div>

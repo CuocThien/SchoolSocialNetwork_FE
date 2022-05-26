@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { keyBy } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
+import { CreateRecruitmentNewsComponent } from 'src/app/popup/create-recruitment-news/create-recruitment-news.component';
+import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
 import { SurveyComponent } from 'src/app/popup/survey/survey.component';
-import { CategoryService, FacultyService, HomeIndexService } from 'src/app/services';
-import { LIST_CATEGORY_POST } from 'src/app/utils/constant';
+import { ChatService, EnterpriseService, FacultyService, HomeIndexService } from 'src/app/services';
+import { LIST_CATEGORY_POST, LIST_EXPERIENCE } from 'src/app/utils/constant';
 
 @Component({
   selector: 'app-index',
@@ -19,7 +22,8 @@ export class IndexComponent implements OnInit {
   constructor(
     private service: HomeIndexService,
     private facultyService: FacultyService,
-    private categoryService: CategoryService,
+    private enterpriseService: EnterpriseService,
+    private chatService: ChatService,
     private toastr: ToastrService,
     private router: Router,
     private modalService: NgbModal,
@@ -81,6 +85,11 @@ export class IndexComponent implements OnInit {
   totalFacultyStudent = 0;
   totalFacultyTeacher = 0;
 
+  pageRecruitmentNews = 1;
+  maxPageRecruitmentNews = 0;
+  listRecruitmentNews = [];
+  objExperience = keyBy(LIST_EXPERIENCE, 'id');
+
   isLangEn = true;
 
   private modalRef: NgbModalRef;
@@ -97,6 +106,7 @@ export class IndexComponent implements OnInit {
     this.role = localStorage.getItem('role') || '';
     if (this.role === 'company') {
       this.isCompany = true;
+      this._getListNews();
       // this.router.navigate(['home/new-feed']);
       return;
     }
@@ -314,9 +324,12 @@ export class IndexComponent implements OnInit {
     } else if (filter === 'facultyTeacher') {
       this.pageFacultyTeacher = event;
       this.getListPostMainGroupFacultyForTeacher();
-    } else {
+    } else if (filter === 'facultyStudent') {
       this.pageFacultyStudent = event;
       this.getListPostMainGroupFacultyForStudent();
+    } else {
+      this.pageRecruitmentNews = event;
+      this._getListNews();
     }
   }
   goToDetailPost(postId: any) {
@@ -391,5 +404,47 @@ export class IndexComponent implements OnInit {
     if (!this.isAdmin && !this.isDean) {
       this.service.readPost(notifyId).subscribe()
     }
+  }
+  _getListNews() {
+    this.enterpriseService.getListNewsByCompany({ page: this.pageRecruitmentNews }).subscribe({
+      next: (res: any) => {
+        this.listRecruitmentNews = res.data.result;
+        this.maxPageRecruitmentNews = res.data.total ? Math.ceil(res.data.total / 10) : 1
+      }
+    })
+  }
+  createNews() {
+    this.modalRef = this.modalService.open(CreateRecruitmentNewsComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+    })
+    this.modalRef.result.then((res: any) => {
+      this._getListNews();
+    }).catch(() => { });
+  }
+  updateNews(news: any) {
+    this.modalRef = this.modalService.open(CreateRecruitmentNewsComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+    })
+    this.modalRef.componentInstance.isUpdate = true;
+    this.modalRef.componentInstance.news = news;
+    this.modalRef.result.then((res: any) => {
+      this._getListNews();
+    }).catch(() => { });
+  }
+  deleteNews(news: any) {
+    this.modalRef = this.modalService.open(DeleteUserComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+    })
+    this.modalRef.componentInstance.isNews = true;
+    this.modalRef.componentInstance.data = news;
+    this.modalRef.result.then((res: any) => {
+      this._getListNews();
+    }).catch(() => { });
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { AccountService, GroupService, PostDetailService, UsersService } from '../../services/index';
+import { AccountService, EnterpriseService, GroupService, PostDetailService, UsersService } from '../../services/index';
 import * as XLSX from 'xlsx';
 import { map } from 'lodash';
 
@@ -20,7 +20,8 @@ export class DeleteUserComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private accountService: AccountService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private enterpriseService: EnterpriseService,
   ) { }
   isReply = false;
   data: any;
@@ -31,6 +32,7 @@ export class DeleteUserComponent implements OnInit {
   isMulti = false;
   isRecoveryAccount = false;
   isGroup = false;
+  isNews = false
   title = 'POPUP.DELETE_USER'
   ngOnInit(): void {
     if (this.isPost)
@@ -43,6 +45,8 @@ export class DeleteUserComponent implements OnInit {
       this.title = 'POPUP.RECOVERY_ACCOUNT'
     if (this.isGroup)
       this.title = 'POPUP.DELETE_GROUP'
+    if (this.isNews)
+      this.title = 'POPUP.DELETE_NEWS'
   }
   onDelete() {
     this.spinner.show();;
@@ -104,6 +108,20 @@ export class DeleteUserComponent implements OnInit {
     }
     if (this.isRecoveryAccount) {
       this.accountService.recoveryAccount({ _id: this.data._id }).subscribe({
+        next: (res: any) => {
+          this.toastr.success(res.msg);
+          this.activeModal.close(res);
+          this.spinner.hide();
+        },
+        error: (err: any) => {
+          this.toastr.error(err.error.msg);
+          this.spinner.hide();
+        }
+      })
+      return;
+    }
+    if (this.isNews) {
+      this.enterpriseService.deleteRecruitmentNews(this.data._id).subscribe({
         next: (res: any) => {
           this.toastr.success(res.msg);
           this.activeModal.close(res);
