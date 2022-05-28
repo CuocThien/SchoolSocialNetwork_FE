@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { keyBy } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CreatePostComponent } from 'src/app/popup/create-post/create-post.component';
 import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
 import { ReportComponent } from 'src/app/popup/report/report.component';
-import { HomeIndexService } from 'src/app/services';
+import { EnterpriseService, HomeIndexService } from 'src/app/services';
+import { LIST_EXPERIENCE } from 'src/app/utils/constant';
 
 @Component({
   selector: 'app-new-feed',
@@ -16,7 +18,7 @@ import { HomeIndexService } from 'src/app/services';
 export class NewFeedComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute,
+    private enterpriseService: EnterpriseService,
     private service: HomeIndexService,
     private modalService: NgbModal,
     private toastr: ToastrService,
@@ -28,6 +30,12 @@ export class NewFeedComponent implements OnInit {
   listPost = [];
   page = 1;
   maxPage = 1;
+  objExperience = keyBy(LIST_EXPERIENCE, 'id');
+  isLangEn = false;
+
+  listPostRecruitment = [];
+  pageRecruitment = 1;
+  maxPageRecruitment = 1;
   isAdmin = false;
   userId: any;
   private modalRef: NgbModalRef;
@@ -36,7 +44,12 @@ export class NewFeedComponent implements OnInit {
     this.myAvatar = JSON.parse(localStorage.getItem('profile') || '').avatar;
     this.fullname = JSON.parse(localStorage.getItem('profile') || '').fullname;
     this.userId = JSON.parse(localStorage.getItem('profile') || '')._id;
+    this.isLangEn = localStorage.getItem('lang') === 'en';
     this._getListPost();
+    this._getListRecruimentNews();
+  }
+  ngDoCheck() {
+    this.isLangEn = localStorage.getItem('lang') === 'en';
   }
   goToPage() {
     this.page++;
@@ -100,5 +113,21 @@ export class NewFeedComponent implements OnInit {
   }
   goToGroup(post: any) {
     this.router.navigate([`home/group/${post.group._id}`])
+  }
+  private _getListRecruimentNews() {
+    this.spinner.show();
+    this.enterpriseService.getListNewsForNewfeed({ page: this.pageRecruitment }).subscribe({
+      next: (res: any) => {
+        this.spinner.hide();
+        this.listPostRecruitment = res.data.result;
+        this.maxPageRecruitment = res.data.total ? Math.ceil(res.data.total / 3) : 1;
+        console.log("🐼 => NewFeedComponent => this.listPostRecruitment", this.listPostRecruitment)
+
+      },
+      error: (err: any) => {
+        this.spinner.hide();
+        this.toastr.error(err.error.msg);
+      }
+    })
   }
 }

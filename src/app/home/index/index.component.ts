@@ -91,6 +91,7 @@ export class IndexComponent implements OnInit {
   objExperience = keyBy(LIST_EXPERIENCE, 'id');
 
   isLangEn = true;
+  profile: any;
 
   private modalRef: NgbModalRef;
 
@@ -102,6 +103,7 @@ export class IndexComponent implements OnInit {
     if (localStorage.getItem('isSurvey') === 'false') {
       this._survey();
     }
+    this.profile = JSON.parse(localStorage.getItem('profile'))
     this.isLangEn = (localStorage.getItem('lang') === 'en') ? true : false;
     this.role = localStorage.getItem('role') || '';
     if (this.role === 'company') {

@@ -1,8 +1,81 @@
 <div class="group-detail-container w-100-pc pt-1 d-flex">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <div class="d-flex w-100-pc">
-    <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+  <div class="d-flex flex-lg-row-reverse flex-md-column flex-column w-100-pc">
+    <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-4 col-sm-4 col-4 p-3 d-inline-flex"
+        *ngFor="let news of listPostRecruitment">
+        <div class="card-recruitment-news d-lg-flex d-md-none d-none">
+          <!-- <div class="dropdown-container">
+            <button class="card-recruitment-news__button-control dropdown-toggle" role="button" id="dropdownNewsControl"
+              data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownNewsControl">
+              <li (click)="updateNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.UPDATE'|translate}}</a></li>
+              <li (click)="deleteNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.DELETE'|translate}}</a></li>
+            </ul>
+          </div> -->
+          <div class="card-recruitment-news__poster col-3">
+            <img class="card-recruitment-news__poster-img" [src]="news.poster" alt="">
+          </div>
+          <div class="card-recruitment-news__info text-start col-9">
+            <h3 class="card-recruitment-news__info-title">{{news?.title}}</h3>
+            <h4 class="card-recruitment-news__info-company">{{news?.fullname}}</h4>
+            <h5 class="card-recruitment-news__info-salary"><i class="bi bi-currency-dollar pe-3"></i>
+              {{'POPUP.SALARY'|translate}}: {{news?.salary}}
+            </h5>
+            <h5 class="card-recruitment-news__info-location"><i class="bi bi-geo-alt-fill pe-3"></i>{{news?.location}}
+            </h5>
+            <h5 class="card-recruitment-news__info-experience"><i class="bi bi-award-fill pe-3"></i>
+              {{isLangEn?objExperience[news.experience].nameEn:objExperience[news.experience].nameVi}}
+            </h5>
+            <h5 class="card-recruitment-news__info-position"><i class="bi bi-file-person pe-3"></i>
+              {{news?.quantity}}
+              &nbsp;·&nbsp;
+              {{news?.position}}</h5>
+            <h5><i class="bi bi-telephone-fill pe-3"></i><a class="pe-3">{{news.phone}}</a>
+              <!-- <a (click)="goToChat(news)"><i class="bi bi-chat-dots pe-2"></i>Chat</a> -->
+            </h5>
+          </div>
+        </div>
+
+        <div class="card-recruitment-news pe-0 d-flex d-md-flex flex-column d-lg-none h-px-300">
+          <!-- <div class="dropdown-container">
+            <button class="card-recruitment-news__button-control dropdown-toggle" role="button" id="dropdownNewsControl"
+              data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownNewsControl">
+              <li (click)="updateNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.UPDATE'|translate}}</a></li>
+              <li (click)="deleteNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.DELETE'|translate}}</a></li>
+            </ul>
+          </div> -->
+          <div class="card-recruitment-news__poster u-margin-auto w-100-pc" style="max-height: 20rem;">
+            <img class="card-recruitment-news__poster-img" [src]="news.poster" alt="">
+          </div>
+          <div class="card-recruitment-news__info text-center pt-0">
+            <h3 class="card-recruitment-news__info-title">{{news?.title}}</h3>
+            <h4 class="card-recruitment-news__info-company">{{news?.fullname}}</h4>
+            <!-- <h5 class="card-recruitment-news__info-salary"><i class="bi bi-currency-dollar pe-3"></i>
+              {{'POPUP.SALARY'|translate}}: {{news?.salary}}
+            </h5>
+            <h5 class="card-recruitment-news__info-location"><i class="bi bi-geo-alt-fill pe-3"></i>{{news?.location}}
+            </h5>
+            <h5 class="card-recruitment-news__info-experience"><i class="bi bi-award-fill pe-3"></i>
+              {{isLangEn?objExperience[news.experience].nameEn:objExperience[news.experience].nameVi}}
+            </h5>
+            <h5 class="card-recruitment-news__info-position"><i class="bi bi-file-person pe-3"></i>
+              {{news?.quantity}}
+              &nbsp;·&nbsp;
+              {{news?.position}}</h5>
+            <h5><i class="bi bi-telephone-fill pe-3"></i><a class="pe-3">{{news.phone}}</a>
+               <a (click)="goToChat(news)"><i class="bi bi-chat-dots pe-2"></i>Chat</a> 
+            </h5> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
       <div class="gr-de u-margin-auto">
         <div class="gr-de__list-post text-center">
           <div class="card-content mb-5" *ngFor="let post of listPost; let i = index">
@@ -49,7 +122,6 @@
 
     </div>
 
-    <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
-    </div>
+
   </div>
 </div>

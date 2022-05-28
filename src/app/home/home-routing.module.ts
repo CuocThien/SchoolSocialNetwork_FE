@@ -24,6 +24,7 @@ import { VideoChatComponent } from '../popup/video-chat/video-chat.component';
 import { EnterpriseComponent } from './enterprise/enterprise.component';
 import { RegisterEnterpriseComponent } from './register-enterprise/register-enterprise.component';
 import { RecruitmentNewsComponent } from './recruitment-news/recruitment-news.component';
+import { RecruitmentNewsDetailComponent } from './recruitment-news-detail/recruitment-news-detail.component';
 
 const homeRoutes: Routes = [
     {
@@ -50,6 +51,7 @@ const homeRoutes: Routes = [
             { path: 'enterprise', component: EnterpriseComponent, pathMatch: 'full' },
             { path: 'register-enterprise', component: RegisterEnterpriseComponent, pathMatch: 'full' },
             { path: 'recruitment-news', component: RecruitmentNewsComponent, pathMatch: 'full' },
+            { path: 'enterprise/:companyId/:newsId', component: RecruitmentNewsDetailComponent, pathMatch: 'full' },
 
 
         ]

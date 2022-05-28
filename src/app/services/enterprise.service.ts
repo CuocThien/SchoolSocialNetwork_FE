@@ -18,14 +18,31 @@ export class EnterpriseService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.put(url, value, { headers })
     }
+    getRecruitmentNewsDetail(newsId: any) {
+        const url = `${HOST}/company/news/${newsId}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
     deleteRecruitmentNews(id: any) {
         const url = `${HOST}/company/news?newsId=${id}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.delete(url, { headers })
     }
     getListNewsByCompany(data: any) {
-        const { page = 1, limit = 10 } = data || {}
-        const url = `${HOST}/company/news?page=${page}&limit=${limit}`;
+        const { page = 1 } = data || {}
+        const url = `${HOST}/company/news?page=${page}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
+    getListNewsSameCompany(data: any) {
+        const { page = 1, companyId, newsId } = data || {}
+        const url = `${HOST}/company/news/${companyId}/${newsId}?page=${page}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
+    getListNewsForNewfeed(data: any) {
+        const { page = 1 } = data || {};
+        const url = `${HOST}/post/company/recruitment?page=${page}`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
