@@ -325,3 +325,31 @@
   color: #000;
   box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
 }
+
+.btn-paging-news{
+  position: absolute;
+  font-size: 3.5rem;
+  height: 5rem;
+  width: 5rem;
+  border: none;
+  border-radius: 50%;
+  z-index: 1000;
+  opacity: .3;
+  
+  &:hover{
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &__next{
+    top: 50%;
+    right: -0.2rem;
+    transform: translateY(-50%);
+  }
+  &__pre{
+    top: 50%;
+    left: -0.2rem;
+    transform: translateY(-50%);
+
+  }
+}

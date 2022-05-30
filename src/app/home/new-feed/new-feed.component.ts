@@ -121,7 +121,6 @@ export class NewFeedComponent implements OnInit {
         this.spinner.hide();
         this.listPostRecruitment = res.data.result;
         this.maxPageRecruitment = res.data.total ? Math.ceil(res.data.total / 3) : 1;
-        console.log("🐼 => NewFeedComponent => this.listPostRecruitment", this.listPostRecruitment)
 
       },
       error: (err: any) => {
@@ -129,5 +128,17 @@ export class NewFeedComponent implements OnInit {
         this.toastr.error(err.error.msg);
       }
     })
+  }
+  nextNews() {
+    this.pageRecruitment++;
+    if (this.pageRecruitment > this.maxPageRecruitment)
+      this.pageRecruitment = 1;
+    this._getListRecruimentNews();
+  }
+  preNews() {
+    this.pageRecruitment--;
+    if (this.pageRecruitment < 1)
+      this.pageRecruitment = this.maxPageRecruitment;
+    this._getListRecruimentNews();
   }
 }
