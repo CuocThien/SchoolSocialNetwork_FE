@@ -63,6 +63,9 @@ export class CreateRecruitmentNewsComponent implements OnInit {
     validData._id = this.news._id;
     if (this.imageSrc)
       validData.poster = this.imageSrc
+    if (moment(validData.endDate).format() > moment().format()) {
+      validData.isExpire = false;
+    }
     this.spinner.show();
     this.service.updateRecruitmentNews(validData).subscribe({
       next: (res: any) => {

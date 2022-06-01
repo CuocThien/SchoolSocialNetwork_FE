@@ -93,6 +93,8 @@ export class IndexComponent implements OnInit {
   isLangEn = true;
   profile: any;
 
+  isExpire = false;
+
   private modalRef: NgbModalRef;
 
   async ngOnInit(): Promise<void> {
@@ -408,7 +410,7 @@ export class IndexComponent implements OnInit {
     }
   }
   _getListNews() {
-    this.enterpriseService.getListNewsByCompany({ page: this.pageRecruitmentNews }).subscribe({
+    this.enterpriseService.getListNewsByCompany({ page: this.pageRecruitmentNews, isExpire: this.isExpire }).subscribe({
       next: (res: any) => {
         this.listRecruitmentNews = res.data.result;
         this.maxPageRecruitmentNews = res.data.total ? Math.ceil(res.data.total / 10) : 1
@@ -448,5 +450,10 @@ export class IndexComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this._getListNews();
     }).catch(() => { });
+  }
+
+  filterExpire(isExpire: boolean) {
+    this.isExpire = isExpire;
+    this._getListNews()
   }
 }

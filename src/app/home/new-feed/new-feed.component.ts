@@ -131,14 +131,17 @@ export class NewFeedComponent implements OnInit {
   }
   nextNews() {
     this.pageRecruitment++;
-    if (this.pageRecruitment > this.maxPageRecruitment)
+    if (this.pageRecruitment > 3 || this.pageRecruitment > this.maxPageRecruitment)
       this.pageRecruitment = 1;
     this._getListRecruimentNews();
   }
   preNews() {
     this.pageRecruitment--;
     if (this.pageRecruitment < 1)
-      this.pageRecruitment = this.maxPageRecruitment;
+      this.pageRecruitment = this.maxPageRecruitment > 3 ? 3 : this.maxPageRecruitment;
     this._getListRecruimentNews();
+  }
+  readNewsDetail(news: any) {
+    this.router.navigate([`/home/enterprise/${news?.companyId}/${news?._id}`])
   }
 }

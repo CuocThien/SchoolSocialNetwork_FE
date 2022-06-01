@@ -1,1 +1,169 @@
-<p>recruitment-news-detail works!</p>
+<div class="recruitment-container">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
+  <div class="recruitment-image d-flex">
+    <div class="position-relative w-100-pc">
+      <img class="recruitment-image__background  ps-5 pe-5" src="../../../assets/img/recruitment-news.jpeg" alt="">
+      <div class="col-6 position-absolute d-flex" style="top: 0; right: 0; height: 25rem;">
+        <div class="w-100-pc u-margin-auto text-center">
+          <img class="recruitment-image__company-avt" [src]="data?.avatar" alt="">
+          <h4 class="recruitment-image__company-name">{{data?.fullname}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-100-pc ps-3">
+    <ul class=" menu-control-group-detail">
+      <li class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-4 col-5 text-center"
+        [ngClass]="{'li-active': isDetailActive}" (click)="onDetail()">
+        {{'ENTERPRISE.RECRUITMENT_NEWS'|translate}}</li>
+      <li class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-4 col-5 text-center"
+        [ngClass]="{'li-active': !isDetailActive}" (click)="onOtherJobs()">
+        {{'ENTERPRISE.OTHER_JOBS'|translate}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="isDetailActive" class="d-flex flex-column-reverse flex-lg-row container-fluid ps-5 pe-5 pt-3"
+    style="background-color: white;">
+    <div class="news-detail pt-3 col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+      <h3>{{'ENTERPRISE.NEWS_DETAIL'|translate}}</h3>
+      <div class="news-detail__common-info">
+        <h2 class="text-center mb-3">{{data?.title}}</h2>
+        <h4 class="fw-bold mb-3"><u>{{'TITLE.COMMON_INFO'|translate}}</u></h4>
+
+        <div class="news-detail__common-info--card-item col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="col-2 news-detail__common-info--card-item__avt">
+            <img src="https://www.topcv.vn/v4/image/job-detail/icon/1.svg" alt="">
+          </div>
+          <div>
+            <h5><b>{{'POPUP.SALARY'|translate}}</b></h5>
+            <h5>{{data?.salary}}</h5>
+          </div>
+        </div>
+
+        <div class="news-detail__common-info--card-item  col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="col-2 news-detail__common-info--card-item__avt">
+            <img src="https://www.topcv.vn/v4/image/job-detail/icon/10.svg" alt="">
+          </div>
+          <div>
+            <h5><b>{{'POPUP.LOCATION'|translate}}</b></h5>
+            <h5>{{data?.location}}</h5>
+          </div>
+        </div>
+
+        <div class="news-detail__common-info--card-item  col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="col-2 news-detail__common-info--card-item__avt">
+            <img src="https://www.topcv.vn/v4/image/job-detail/icon/7.svg" alt="">
+          </div>
+          <div>
+            <h5><b>{{'POPUP.EXPERIENCE'|translate}}</b></h5>
+            <h5>{{isLangEn?objExperience[data?.experience]?.nameEn:objExperience[data?.experience]?.nameVi}}</h5>
+          </div>
+        </div>
+
+        <div class="news-detail__common-info--card-item  col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="col-2 news-detail__common-info--card-item__avt">
+            <img src="https://www.topcv.vn/v4/image/job-detail/icon/5.svg" alt="">
+          </div>
+          <div>
+            <h5><b>{{'POPUP.QUANTITY'|translate}}</b></h5>
+            <h5>{{data?.quantity}}</h5>
+          </div>
+        </div>
+
+        <div class="news-detail__common-info--card-item  col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="col-2 news-detail__common-info--card-item__avt">
+            <img src="https://www.topcv.vn/v4/image/job-detail/icon/2.svg" alt="">
+          </div>
+          <div>
+            <h5><b>{{'POPUP.POSITION'|translate}}</b></h5>
+            <h5>{{data?.position}}</h5>
+          </div>
+        </div>
+
+        <div class="news-detail__common-info--card-item  col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="col-2 news-detail__common-info--card-item__avt">
+            <img src="https://www.topcv.vn/v4/image/job-detail/icon/6.svg" alt="">
+          </div>
+          <div>
+            <h5><b>{{'TABLE.PHONE'|translate}}</b></h5>
+            <h5>{{data?.phone}}</h5>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="news-detail__common-info mt-4">
+        <h4 class="fw-bold mb-3"><u>{{'ENTERPRISE.VALID_APPLY_DATE'|translate}}</u></h4>
+        <h5 class="d-inline">{{data?.startDate|date: 'dd/MM/yyyy'}}</h5> -
+        <h5 class="d-inline">{{data?.endDate|date: 'dd/MM/yyyy'}}</h5>
+      </div>
+
+      <div class="news-detail__common-info mt-4 mb-5">
+        <h4 class="fw-bold mb-3"><u>{{'TABLE.DESCRIPTION'|translate}}</u></h4>
+        <h4 style="line-height: 2.5rem;" [innerText]="data?.description"></h4>
+      </div>
+
+    </div>
+
+    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 p-4">
+      <div class="company-info pt-4 pb-4">
+        <h3>{{'ENTERPRISE.COMPANY_INFO'|translate}}</h3>
+        <h4 class="mb-3 mt-3"><strong>{{'TABLE.COMPANY_NAME'|translate}}: </strong> {{data?.fullname}}</h4>
+        <h4 class="mb-3"><strong>{{'TABLE.EMAIL'|translate}}: </strong> {{data?.email}}</h4>
+        <h4 class="mb-3"><strong>{{'TABLE.PHONE'|translate}}: </strong> {{data?.phone}}</h4>
+        <h4 class="mb-3"><strong>{{'TABLE.ADDRESS'|translate}}: </strong> {{data?.address}}</h4>
+        <h4 class="mb-3"><strong>{{'TABLE.DESCRIPTION'|translate}}: </strong> {{data?.companyDescription}}</h4>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isDetailActive" class="d-block container-fluid ps-5 pe-5 pt-3" style="background-color: white;">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3 d-inline-flex"
+      *ngFor="let news of listRecruitmentNews" (click)="readNewsDetail(news._id)" style="cursor: pointer;">
+      <div class="card-recruitment-news">
+        <!-- <div class="dropdown-container">
+            <button class="card-recruitment-news__button-control dropdown-toggle" role="button" id="dropdownNewsControl"
+              data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownNewsControl">
+              <li (click)="updateNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.UPDATE'|translate}}</a></li>
+              <li (click)="deleteNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.DELETE'|translate}}</a></li>
+            </ul>
+          </div> -->
+        <div class="card-recruitment-news__poster col-3">
+          <img class="card-recruitment-news__poster-img" [src]="news.poster" alt="">
+        </div>
+        <div class="card-recruitment-news__info col-9">
+          <h3 class="card-recruitment-news__info-title">{{news?.title}}</h3>
+          <h4 class="card-recruitment-news__info-company">{{data?.fullname}}</h4>
+          <h5 class="card-recruitment-news__info-salary"><i class="bi bi-currency-dollar pe-3"></i>
+            {{'POPUP.SALARY'|translate}}: {{news?.salary}}
+          </h5>
+          <h5 class="card-recruitment-news__info-location"><i class="bi bi-geo-alt-fill pe-3"></i>{{news?.location}}
+          </h5>
+          <h5 class="card-recruitment-news__info-experience"><i class="bi bi-award-fill pe-3"></i>
+            {{isLangEn?objExperience[news.experience].nameEn:objExperience[news.experience].nameVi}}
+          </h5>
+          <h5 class="card-recruitment-news__info-position"><i class="bi bi-file-person pe-3"></i>
+            {{news?.quantity}}
+            &nbsp;·&nbsp;
+            {{news?.position}}</h5>
+          <h5><i class="bi bi-telephone-fill pe-3"></i><a class="pe-3">{{news.phone}}</a>
+            <!-- <a (click)="goToChat(news)"><i class="bi bi-chat-dots pe-2"></i>Chat</a> -->
+          </h5>
+        </div>
+      </div>
+    </div>
+    <h2 *ngIf="!listRecruitmentNews?.length" class="text-center">
+      {{'TITLE.NO_DATA'|translate}}
+    </h2>
+    <div class="pagination">
+      <ngb-pagination [collectionSize]="maxPage" [maxSize]="5" [pageSize]="10" [rotate]="true"
+        (pageChange)="goToPage($event)" [(page)]="page">
+      </ngb-pagination>
+    </div>
+  </div>
+
+</div>

@@ -17,7 +17,8 @@
         "NO_DATA": "No data available",
         "ABOUT": "About this group",
         "REGISTER_ENTERPRISE": "REGISTER ENTERPRISE",
-        "RECRUITMENT_NEWS": "RECRUITMENT NEWS"
+        "RECRUITMENT_NEWS": "RECRUITMENT NEWS",
+        "COMMON_INFO": "General information"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -168,5 +169,14 @@
         "END_DATE": "End date",
         "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS",
         "DELETE_NEWS": "Delete recruitment news"
+    },
+    "ENTERPRISE": {
+        "RECRUITMENT_NEWS": "Recruitment news",
+        "OTHER_JOBS": "Other jobs",
+        "NEWS_DETAIL": "Recruitment news detail",
+        "COMPANY_INFO": "Company's information",
+        "VALID_APPLY_DATE": "The deadline for submission",
+        "VALID_NEWS": "Recruiting",
+        "INVALID_NEWS": "Expired"
     }
 }

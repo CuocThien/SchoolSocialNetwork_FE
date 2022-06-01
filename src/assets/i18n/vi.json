@@ -17,7 +17,8 @@
         "NO_DATA": "Không có dữ liệu",
         "ABOUT": "Giới thiệu",
         "REGISTER_ENTERPRISE": "ĐĂNG KÝ DOANH NGHIỆP",
-        "RECRUITMENT_NEWS": "TIN TUYỂN DỤNG"
+        "RECRUITMENT_NEWS": "TIN TUYỂN DỤNG",
+        "COMMON_INFO": "Thông tin chung"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -168,5 +169,14 @@
         "END_DATE": "Ngày kết thúc",
         "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG",
         "DELETE_NEWS": "Xoá tin tuyển dụng"
+    },
+    "ENTERPRISE": {
+        "RECRUITMENT_NEWS": "Tin tuyển dụng",
+        "OTHER_JOBS": "Việc làm khác",
+        "NEWS_DETAIL": "Chi tiết tin tuyển dụng",
+        "COMPANY_INFO": "Thông tin công ty",
+        "VALID_APPLY_DATE": "Hạn nộp hồ sơ",
+        "VALID_NEWS": "Đang tuyển",
+        "INVALID_NEWS": "Hết hạn"
     }
 }

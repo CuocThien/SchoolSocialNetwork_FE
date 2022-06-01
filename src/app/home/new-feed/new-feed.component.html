@@ -9,7 +9,7 @@
           class="bi bi-arrow-right-circle"></i></button>
       <div class="main-group mt-3">
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-4 col-sm-4 col-4 p-3 d-inline-flex"
-          *ngFor="let news of listPostRecruitment">
+          *ngFor="let news of listPostRecruitment" (click)="readNewsDetail(news)" style="cursor: pointer;">
           <div class="card-recruitment-news d-lg-flex d-md-none d-none">
             <!-- <div class="dropdown-container">
             <button class="card-recruitment-news__button-control dropdown-toggle" role="button" id="dropdownNewsControl"

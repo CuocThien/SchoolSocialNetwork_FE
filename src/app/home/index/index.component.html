@@ -393,6 +393,16 @@
           (click)="createNews()">{{'BUTTON.CREATE_NEWS'|translate}}</button>
       </div>
     </div>
+    <div class="w-100-pc ps-3">
+      <ul class=" menu-control-group-detail">
+        <li class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-4 col-5 text-center" [ngClass]="{'li-active': !isExpire}"
+          (click)="filterExpire(false)">
+          {{'ENTERPRISE.VALID_NEWS'|translate}}</li>
+        <li class="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-4 col-5 text-center" [ngClass]="{'li-active': isExpire}"
+          (click)="filterExpire(true)">
+          {{'ENTERPRISE.INVALID_NEWS'|translate}}</li>
+      </ul>
+    </div>
     <div>
       <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3 d-inline-flex"
         *ngFor="let news of listRecruitmentNews">

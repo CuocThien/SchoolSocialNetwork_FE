@@ -29,10 +29,13 @@
     </div>
     <input *ngIf="!isCompany" class="form-control u-margin-bottom-small" type="date" [(ngModel)]="dob" name="dob"
       required>
+
     <input class="form-control u-margin-bottom-small" type="text" placeholder="{{'TABLE.ADDRESS'|translate}}"
       [(ngModel)]="profile.address" name="address" required>
     <input class="form-control u-margin-bottom-small" type="text" [(ngModel)]="profile.email" name="email" required
       disabled>
+    <textarea *ngIf="isCompany" class="form-register__form-control__area w-100-pc" type="text" rows="7"
+      [(ngModel)]="profile.description" name="description" placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
     <button class="btn-update" (click)="onSubmit(formUpdateProfile)">{{'BUTTON.UPDATE_PROFILE'|translate}}</button>
   </form>
 </div>
