@@ -32,21 +32,43 @@ export class DeleteUserComponent implements OnInit {
   isMulti = false;
   isRecoveryAccount = false;
   isGroup = false;
-  isNews = false
+  isNews = false;
+  isCompany = false;
+  isAlumni = false;
   title = 'POPUP.DELETE_USER'
   ngOnInit(): void {
-    if (this.isPost)
+    if (this.isPost) {
       this.title = 'POPUP.DELETE_POST'
-    if (this.isOutGroup)
+      return;
+    }
+    if (this.isOutGroup) {
       this.title = 'POPUP.OUT_GROUP'
-    if (this.isAccount)
+      return;
+    }
+    if (this.isAccount) {
       this.title = 'POPUP.DELETE_ACCOUNT'
-    if (this.isRecoveryAccount)
+      return;
+    }
+    if (this.isRecoveryAccount) {
       this.title = 'POPUP.RECOVERY_ACCOUNT'
-    if (this.isGroup)
+      return;
+    }
+    if (this.isGroup) {
       this.title = 'POPUP.DELETE_GROUP'
-    if (this.isNews)
+      return;
+    }
+    if (this.isNews) {
       this.title = 'POPUP.DELETE_NEWS'
+      return;
+    }
+    if (this.isCompany) {
+      this.title = 'POPUP.DELETE_COMPANY'
+      return;
+    }
+    if (this.isAlumni) {
+      this.title = 'POPUP.UPDATE_STUDENT_ALUMNI'
+      return;
+    }
   }
   onDelete() {
     this.spinner.show();;
@@ -79,7 +101,7 @@ export class DeleteUserComponent implements OnInit {
       })
       return;
     }
-    if (this.isAccount) {
+    if (this.isAccount || this.isCompany) {
       if (this.isMulti) {
         const userIds = map(this.dataMultiDel, '_id');
         this.accountService.deleteMultiAccount({
@@ -103,6 +125,17 @@ export class DeleteUserComponent implements OnInit {
           this.toastr.error(err.error.msg);
           this.spinner.hide();
         }
+      })
+      return;
+    }
+    if (this.isAlumni) {
+      const userIds = map(this.dataMultiDel, '_id');
+      this.accountService.changeToAlumni({ userIds }).subscribe({
+        next: (res: any) => {
+          this.toastr.success(res.msg);
+          this.activeModal.close(res);
+        },
+        error: (err: any) => this.toastr.error(err.error.msg)
       })
       return;
     }

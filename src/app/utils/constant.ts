@@ -83,8 +83,8 @@ const OBJ_ROUTE_NAV = {
     },
     'recruitment-news': {
         route: 'home/recruitment-news',
-        nameEn: 'Recruitment',
-        nameVi: 'Tin tuyển dụng'
+        nameEn: 'Company',
+        nameVi: 'Công ty'
     },
     'faculty': {
         route: 'home/faculty',

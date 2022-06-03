@@ -23,10 +23,15 @@ export class UpdateUserInfoComponent implements OnInit {
   isLangEn = false;
   data: any;
   userInfoForm: FormGroup;
+  isCompany = false;
 
   ngOnInit(): void {
     this.isLangEn = localStorage.getItem('lang') === 'en';
-    this.createFormSignUp();
+    if (!this.isCompany) {
+      this.createFormUserInfo();
+      return;
+    }
+    this.createFormCompanyInfo();
   }
   ngDoCheck() {
     this.isLangEn = localStorage.getItem('lang') === 'en'
@@ -50,7 +55,7 @@ export class UpdateUserInfoComponent implements OnInit {
   onCancel() {
     this.activeModal.dismiss();
   }
-  createFormSignUp() {
+  createFormUserInfo() {
     this.userInfoForm = this.formBuilder.group({
       _id: [this.data._id || '', Validators.required],
       fullname: [this.data.fullname || '', Validators.required],
@@ -58,6 +63,16 @@ export class UpdateUserInfoComponent implements OnInit {
       address: [this.data.address || '', Validators.required],
       phone: [this.data.phone || '', Validators.required],
       year: [this.data.year || '', Validators.required],
+    });
+  }
+  createFormCompanyInfo() {
+    this.userInfoForm = this.formBuilder.group({
+      _id: [this.data._id || '', Validators.required],
+      fullname: [this.data.fullname || '', Validators.required],
+      address: [this.data.address || '', Validators.required],
+      phone: [this.data.phone || '', Validators.required],
+      email: [this.data.email || '', Validators.required],
+      description: [this.data.description || '', Validators.required],
     });
   }
 }

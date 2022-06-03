@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { DeleteUserComponent } from 'src/app/popup/delete-user/delete-user.component';
 import { TransferFacultyComponent } from 'src/app/popup/transfer-faculty/transfer-faculty.component';
 import { FacultyService, UsersService } from '../../services/index';
 
@@ -173,5 +174,19 @@ export class UsersComponent implements OnInit {
     this.modalRef.result.then((res: any) => {
       this.listUsers.splice(index, 1);
     }).catch((err: any) => { })
+  }
+  updateStudentToAlumni() {
+    this.modalRef = this.modalService.open(DeleteUserComponent, {
+      backdrop: 'static',
+      centered: true,
+      size: 'md'
+    })
+    this.modalRef.componentInstance.isAlumni = true;
+    this.modalRef.componentInstance.isMulti = true;
+    this.modalRef.result.then((res: any) => {
+      this._getListUser({ groupId: this.groupId, isStudent: this.isStudent, page: this.page });
+    }).catch(() => {
+
+    });
   }
 }

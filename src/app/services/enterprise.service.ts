@@ -46,4 +46,16 @@ export class EnterpriseService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.get(url, { headers })
     }
+    searchNews(data: any) {
+        const { page = 1, keyword = '' } = data || {};
+        const url = `${HOST}/company/search/news?page=${page}&keyword=${keyword}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
+    getListCompany(data: any) {
+        const { page = 1, keyword = '' } = data || {};
+        const url = `${HOST}/company?page=${page}&keyword=${keyword}`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.get(url, { headers })
+    }
 }

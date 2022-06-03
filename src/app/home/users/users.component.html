@@ -13,7 +13,13 @@
               (click)="searchUser()"></i></button>
         </form>
       </div>
-      <div class="btn-create-group d-inline-block col-xxl-3 col-xl-3 col-lg-3 col-md-1 col-sm-1 col-1">
+      <div
+        class="btn-create-group ps-3 pe-3 d-inline-block u-margin-auto col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-2 col-2">
+        <button class="btn btn-outline-primary d-block d-lg-block d-sm-block d-xl-none"
+          (click)="updateStudentToAlumni()"><i class="bi bi-arrow-left-right fs-3"></i></button>
+        <button class="btn btn-outline-primary d-xl-block fs-5 d-none text-center w-100-pc"
+          (click)="updateStudentToAlumni()">
+          <i class="bi bi-arrow-left-right fs-3 ps-3 pe-3"></i>{{'POPUP.UPDATE_STUDENT_ALUMNI'|translate}}</button>
       </div>
     </div>
   </div>

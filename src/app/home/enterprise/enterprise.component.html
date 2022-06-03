@@ -2,27 +2,37 @@
   <div class="d-flex">
     <h2 class="col-xxl-9 col-xl-9 col-lg-8 col-md-8 col-sm-7 col-6">{{'TITLE.RECRUITMENT_NEWS'|translate}}</h2>
     <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-5 col-6 text-end">
-      <!-- <button class="btn btn-outline-primary fs-3 text-end"
-          (click)="createNews()">{{'BUTTON.CREATE_NEWS'|translate}}</button> -->
+      <button *ngIf="isCompany" class="btn btn-outline-primary fs-3 text-end"
+        (click)="createNews()">{{'BUTTON.CREATE_NEWS'|translate}}</button>
+    </div>
+  </div>
+  <div class="d-flex mt-4 h-auto">
+    <div class="search-group col-xxl-6 col-xl-6 col-lg-8 col-md-10 col-sm-10 col-11 u-margin-auto">
+      <form class="search__form position-relative" (ngSubmit)="searchNews()">
+        <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
+          name="search" placeholder="{{'SEARCH.SEARCH_ENTERPRISE'|translate}}">
+        <button class="search__form--button-search position-absolute" type="submit"><i
+            class="bi bi-search"></i></button>
+      </form>
     </div>
   </div>
   <div>
     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 p-3 d-inline-flex"
-      *ngFor="let news of listRecruitmentNews" (click)="readNewsDetail(news)" style="cursor: pointer;">
+      *ngFor="let news of listRecruitmentNews">
       <div class="card-recruitment-news">
-        <!-- <div class="dropdown-container">
-            <button class="card-recruitment-news__button-control dropdown-toggle" role="button" id="dropdownNewsControl"
-              data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
-  
-            <ul class="dropdown-menu" aria-labelledby="dropdownNewsControl">
-              <li (click)="updateNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.UPDATE'|translate}}</a></li>
-              <li (click)="deleteNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.DELETE'|translate}}</a></li>
-            </ul>
-          </div> -->
-        <div class="card-recruitment-news__poster col-3">
+        <div *ngIf="news.companyId == companyId" class="dropdown-container">
+          <button class="card-recruitment-news__button-control dropdown-toggle" role="button" id="dropdownNewsControl"
+            data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownNewsControl">
+            <li (click)="updateNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.UPDATE'|translate}}</a></li>
+            <li (click)="deleteNews(news)"><a class="dropdown-item fs-5">{{'BUTTON.DELETE'|translate}}</a></li>
+          </ul>
+        </div>
+        <div class="card-recruitment-news__poster col-3" (click)="readNewsDetail(news)" style="cursor: pointer;">
           <img class="card-recruitment-news__poster-img" [src]="news.poster" alt="">
         </div>
-        <div class="card-recruitment-news__info col-9">
+        <div class="card-recruitment-news__info col-9" (click)="readNewsDetail(news)" style="cursor: pointer;">
           <h3 class="card-recruitment-news__info-title">{{news?.title}}</h3>
           <h4 class="card-recruitment-news__info-company">{{news?.fullname}}</h4>
           <h5 class="card-recruitment-news__info-salary"><i class="bi bi-currency-dollar pe-3"></i>

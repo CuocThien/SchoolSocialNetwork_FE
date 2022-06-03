@@ -44,7 +44,7 @@
         "NEW_FEED": "New feed",
         "MEMBERS": "Members",
         "ENTERPRISE": "Enterprise",
-        "RECRUITMENT": "Recruitment"
+        "RECRUITMENT": "Company"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Main notification",
@@ -108,7 +108,8 @@
         "SEARCH_INFOR": "Search...",
         "SEARCH_GROUP": "Search your groups...",
         "SEARCH_USER": "Search your friends...",
-        "SEARCH_MEMBER": "Search members..."
+        "SEARCH_MEMBER": "Search members...",
+        "SEARCH_ENTERPRISE": "Search enterprise"
     },
     "TABLE":{
         "NAME": "Name",
@@ -168,7 +169,9 @@
         "START_DATE": "Start date",
         "END_DATE": "End date",
         "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS",
-        "DELETE_NEWS": "Delete recruitment news"
+        "DELETE_NEWS": "Delete recruitment news",
+        "DELETE_COMPANY": "Delete company",
+        "UPDATE_STUDENT_ALUMNI": "Update student to alumni"
     },
     "ENTERPRISE": {
         "RECRUITMENT_NEWS": "Recruitment news",

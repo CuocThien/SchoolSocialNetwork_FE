@@ -31,6 +31,11 @@ export class AccountService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
         return this.http.request('delete', url, { body, headers })
     }
+    changeToAlumni(body: any) {
+        const url = `${HOST}/group/user/alumni`;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+        return this.http.put(url, body, { headers })
+    }
     recoveryAccount(body: any) {
         const url = `${HOST}/account/recovery`;
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })

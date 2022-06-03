@@ -44,7 +44,7 @@
         "NEW_FEED": "Bảng tin",
         "MEMBERS": "Thành viên",
         "ENTERPRISE": "Doanh nghiệp",
-        "RECRUITMENT": "Tuyển dụng"
+        "RECRUITMENT": "Công ty"
     },
     "HOME": {
         "MAIN_NOTIFICATION": "Thông báo của Trường",
@@ -108,7 +108,8 @@
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
         "SEARCH_GROUP": "Tìm nhóm của bạn...",
         "SEARCH_USER": "Tìm bạn bè...",
-        "SEARCH_MEMBER": "Tìm kiếm thành viên..."
+        "SEARCH_MEMBER": "Tìm kiếm thành viên...",
+        "SEARCH_ENTERPRISE": "Tìm kiếm doanh nghiệp"
     },
     "TABLE":{
         "NAME": "Tên",
@@ -168,7 +169,9 @@
         "START_DATE": "Ngày bắt đầu",
         "END_DATE": "Ngày kết thúc",
         "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG",
-        "DELETE_NEWS": "Xoá tin tuyển dụng"
+        "DELETE_NEWS": "Xoá tin tuyển dụng",
+        "DELETE_COMPANY": "Xoá công ty",
+        "UPDATE_STUDENT_ALUMNI": "Cập nhật cựu sinh viên"
     },
     "ENTERPRISE": {
         "RECRUITMENT_NEWS": "Tin tuyển dụng",
