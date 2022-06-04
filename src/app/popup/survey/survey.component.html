@@ -3,22 +3,19 @@
     <hr class="m-0">
     <div class="d-flex ps-3 pe-3" style="min-height: 55vh;">
       <div class="item-container position-relative pt-3 col-8">
-        <div class="position-absolute form-check-default box-checkbox" style="top: 1rem; right: .5rem;">
-          <h2 class="d-block d-xxl-none" style="visibility: hidden; opacity: 0;">abc</h2>
+        <h2 class="text-center text-md-start text-lg-center">{{'POPUP.CHOOSE_AOC'|translate}}</h2>
+        <div class="form-check-default box-checkbox text-end me-3 mb-3">
           <input class="form-checkbox-input" type="checkbox" name="" [checked]="isChooseAll" id="chooseAll"
             (change)="chooseAll($event)">
           <label class="form-checkbox-label-2" for="chooseAll">{{'BUTTON.CHOOSE_ALL'|translate}}</label>
         </div>
-        <h2 class="text-center text-md-start text-lg-center pb-3">{{'POPUP.CHOOSE_AOC'|translate}}</h2>
-        <h2 class="d-block d-xxl-none" style="visibility: hidden; opacity: 0;">abc</h2>
-
         <div class="survey-item" [ngClass]="{'survey-item__active': item.isPicked}"
           *ngFor="let item of listCategoryGroup; let i = index" (click)="pick(item, i)">
           <h4 class="u-margin-vertical-auto d-inline">{{isLangEn ? item.nameEn : item.nameVi}}</h4>
         </div>
       </div>
       <div class="item-picked-container col-4 ps-3 pt-3" style=" border-left: 1px solid grey;">
-        <h2 class="text-center pb-3">{{'POPUP.AOC'|translate}}</h2>
+        <h2 class="text-center">{{'POPUP.AOC'|translate}}</h2>
         <div class="text-end pb-2">
           <h5 *ngIf="listCategoryPicked.length" style="cursor: pointer; color: #273156;" class="d-inline"
             (click)="removeAll()">{{'BUTTON.REMOVE_ALL'|translate}}</h5>

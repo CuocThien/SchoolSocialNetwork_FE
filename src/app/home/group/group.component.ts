@@ -46,7 +46,7 @@ export class GroupComponent implements OnInit {
   maxPageAllGroup = 1;
 
   isAllGroup = false;
-  contentButton = 'Nhóm của bạn'
+  contentButton = 'BUTTON.ALL_GROUP'
   ngOnInit(): void {
     this._getListGroup();
     this._getListGroupRelative();
@@ -80,7 +80,8 @@ export class GroupComponent implements OnInit {
       error: () => this.spinner.hide()
     })
   }
-  redirectGroupDetail(groupId: any) {
+  redirectGroupDetail(group: any) {
+    const groupId = !!group._id ? group._id : group.groupId
     this.router.navigate([`home/group/${groupId}`])
   }
   goToPage() {
@@ -114,15 +115,15 @@ export class GroupComponent implements OnInit {
   joinNow(group: any, index: any) {
     this.spinner.show();
     this.service.addUser({
-      groupId: group._id,
+      groupId: group.groupId,
       userId: this.userId
     }).subscribe({
       next: (res: any) => {
         this.toastr.success(res.msg);
-        group.groupId = group._id;
+        group.groupId = group.groupId;
         this.listGroupRelative.splice(index, 1);
         this.listGroup.push(group);
-        this.goToGroup(group._id)
+        this.goToGroup(group.groupId)
         this.spinner.hide();
       },
       error: (err: any) => {
@@ -184,13 +185,6 @@ export class GroupComponent implements OnInit {
     this._getListAllGroup();
   }
 
-  switchToAll(check: any) {
-    this.isAllGroup = check;
-    if (this.isAllGroup) {
-      if (!this.listAllGroup.length)
-        this._getListAllGroup();
-    }
-  }
   changeButton(event: any) {
     event.preventDefault();
     this.isAllGroup = !this.isAllGroup;
@@ -198,6 +192,6 @@ export class GroupComponent implements OnInit {
       if (!this.listAllGroup.length)
         this._getListAllGroup();
     }
-    this.contentButton = (this.isAllGroup) ? 'Xem tất cả' : 'Nhóm của bạn'
+    this.contentButton = this.isAllGroup ? 'BUTTON.YOUR_GROUP' : 'BUTTON.ALL_GROUP';
   }
 }

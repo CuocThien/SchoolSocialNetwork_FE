@@ -92,6 +92,7 @@ export class ChatComponent implements OnInit {
     })
     this.service.getListConversation().subscribe((res: any) => {
       this.listConversation = res.data.result;
+      console.log("🐼 => ChatComponent => this.listConversation", this.listConversation)
       if (this.listConversation.length) {
         if (!this.isRedirectFromSearch) {
           this.conversationId = this.listConversation[0]._id;
@@ -239,7 +240,10 @@ export class ChatComponent implements OnInit {
     this.isLoadOldMessage = true;
   }
   sendMessage(): void {
-    if (this.message == '') return;
+    if (this.message.trim() == '') {
+      this.message = ''
+      return;
+    }
     this.countSendMessage++;
     const msg = {
       conversationId: this.conversationId,

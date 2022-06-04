@@ -85,7 +85,7 @@
     "BUTTON": {
         "CREATE_POST": "Create post",
         "UPDATE_POST": "Update post",
-        "CREATE_GROUP": "Create your group",
+        "CREATE_GROUP": "Create group",
         "JOIN_NOW": "Join now",
         "SIGN_UP": "Sign up",
         "CREATE_FACULTY": "Create new faculty",
@@ -102,7 +102,9 @@
         "UPDATE_PROFILE": "Update Profile",
         "CREATE_NEWS": "Create recruitment news",
         "UPDATE": "Update",
-        "DELETE": "Delete"
+        "DELETE": "Delete",
+        "YOUR_GROUP": "Your groups",
+        "ALL_GROUP": "All groups"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Search...",
@@ -169,10 +171,16 @@
         "START_DATE": "Start date",
         "END_DATE": "End date",
         "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS",
+        "UPDATE_RECRUITMENT_NEWS": "UPDATE RECRUITMENT NEWS",
         "DELETE_NEWS": "Delete recruitment news",
         "DELETE_COMPANY": "Delete company",
         "DELETE_GROUP":"Delete group",
         "UPDATE_STUDENT_ALUMNI": "Update student to alumni"
+    },
+    "PLACEHOLDER":{
+        "OLD_PASS": "Old password",
+        "NEW_PASS": "New password",
+        "CONFIRM_PASS": "Confirm password"
     },
     "ENTERPRISE": {
         "RECRUITMENT_NEWS": "Recruitment news",

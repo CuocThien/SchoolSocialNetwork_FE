@@ -102,7 +102,9 @@
         "UPDATE_PROFILE": "Chỉnh sửa thông tin",
         "CREATE_NEWS": "Đăng tin tuyển dụng",
         "UPDATE": "Chỉnh sửa",
-        "DELETE": "Xoá"
+        "DELETE": "Xoá",
+        "YOUR_GROUP": "Nhóm của bạn",
+        "ALL_GROUP": "Xem tất cả nhóm"
     },
     "SEARCH":{
         "SEARCH_INFOR": "Nhập gì đó để tìm kiếm...",
@@ -163,16 +165,22 @@
         "POSTER": "Hình ảnh quảng cáo",
         "POSITION": "Vị trí công việc",
         "QUANTITY": "Số lượng",
-        "LOCATION": "Vị trí",
+        "LOCATION": "Địa chỉ làm việc",
         "SALARY": "Lương",
         "EXPERIENCE": "Kinh nghiệm",
         "START_DATE": "Ngày bắt đầu",
         "END_DATE": "Ngày kết thúc",
         "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG",
+        "UPDATE_RECRUITMENT_NEWS": "CHỈNH SỬA TIN TUYỂN DỤNG",
         "DELETE_NEWS": "Xoá tin tuyển dụng",
         "DELETE_COMPANY": "Xoá công ty",
         "DELETE_GROUP": "Xoá nhóm",
         "UPDATE_STUDENT_ALUMNI": "Cập nhật cựu sinh viên"
+    },
+    "PLACEHOLDER":{
+        "OLD_PASS": "Mật khẩu cũ",
+        "NEW_PASS": "Mật khẩu mới",
+        "CONFIRM_PASS": "Xác nhận mật khẩu"
     },
     "ENTERPRISE": {
         "RECRUITMENT_NEWS": "Tin tuyển dụng",

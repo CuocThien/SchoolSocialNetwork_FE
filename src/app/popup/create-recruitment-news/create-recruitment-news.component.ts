@@ -31,7 +31,7 @@ export class CreateRecruitmentNewsComponent implements OnInit {
   formTitle: any;
   ngOnInit(): void {
     this.isLangEn = localStorage.getItem('lang') === 'en';
-    this.formTitle = !this.isUpdate ? 'BUTTON.CREATE_POST' : 'BUTTON.UPDATE_POST'
+    this.formTitle = !this.isUpdate ? 'POPUP.CREATE_RECRUITMENT_NEWS' : 'POPUP.UPDATE_RECRUITMENT_NEWS'
     this.createFormCreateNew();
     if (this.isUpdate) this.patchValueForm();
   }

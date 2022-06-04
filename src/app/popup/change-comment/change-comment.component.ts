@@ -32,6 +32,10 @@ export class ChangeCommentComponent implements OnInit {
   }
 
   onEdit() {
+    if (this.content.trim() == '') {
+      this.toastr.error('Please input something to change!');
+      return;
+    }
     this.spinner.show();
     if (this.isReply) {
       const validData = {

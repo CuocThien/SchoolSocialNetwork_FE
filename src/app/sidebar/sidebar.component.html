@@ -107,7 +107,7 @@
 
       <!-- button enterprise dropdown -->
       <input class="d-none cb-enterprise-dropdown" type="checkbox" [checked]="isEnterpriseDropdown">
-      <div class="btn-enterprise-dropdown text-start">
+      <div *ngIf="!isDean" class="btn-enterprise-dropdown text-start">
         <div class="btn-group w-100-pc">
           <button class="button-sidebar-text d-block d-lg-block d-sm-block d-xl-none button-sidebar-text-icon"
             [ngClass]="{'button-sidebar-text__active':subActive === 'sub-enterprise'}"
