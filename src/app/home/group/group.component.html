@@ -62,23 +62,26 @@
     <div class="groups__suggestion col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
       <div class="groups__suggestion--container">
         <h1>{{'GROUP.GROUPS_SUGGEST'|translate}}</h1>
-        <div class="group d-sm-flex d-flex d-md-block" *ngFor="let groupR of listGroupRelative; let i = index">
-          <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5"
-            (click)="redirectGroupDetail(groupR)">
-            <img [src]="groupR.image" alt="">
-          </div>
-          <div
-            class="group__info u-padding-left-2rem col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
-            <h3>{{groupR.nameEn}}</h3>
-            <i class="bi bi-eye fs-4 me-3"></i>
-            <h5 class="d-inline-block">{{groupR.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
-            </h5> -
-            <h5 class="d-inline-block">{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
-            <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{groupR.createdDate | date:'MM, YYYY'}}</h5>
-            <i class=""></i>
-            <br>
-            <fa-icon *ngIf="groupR.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
-            <h5 *ngIf="groupR.desciption" class="d-inline">{{groupR.description}}</h5>
+        <div class="group d-sm-flex d-flex d-md-block mb-3 pb-3"
+          style="border: 1px solid rgb(219, 219, 219); border-radius: 3px"
+          *ngFor="let groupR of listGroupRelative; let i = index">
+          <div (click)="redirectGroupDetail(groupR)">
+            <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
+              <img [src]="groupR.image" alt="">
+            </div>
+            <div
+              class="group__info u-padding-left-2rem col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
+              <h3>{{groupR.nameEn}}</h3>
+              <i class="bi bi-eye fs-4 me-3"></i>
+              <h5 class="d-inline-block">{{groupR.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
+              </h5> -
+              <h5 class="d-inline-block">{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
+              <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{groupR.createdDate | date:'MM, YYYY'}}</h5>
+              <i class=""></i>
+              <br>
+              <fa-icon *ngIf="groupR.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
+              <h5 *ngIf="groupR.desciption" class="d-inline">{{groupR.description}}</h5>
+            </div>
           </div>
           <div class="w-100-pc d-flex">
             <button class="btn btn-outline-primary u-margin-auto" (click)="joinNow(groupR, i)">

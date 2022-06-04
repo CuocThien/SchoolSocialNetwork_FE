@@ -60,7 +60,7 @@ export class ChatComponent implements OnInit {
     this.socket.on(EVENT_MESSAGE_SSC.SEND_MESSAGE_SSC, (data: any) => {
       //console.log(data)
       this.isLoadOldMessage = false;
-      this.messageList.push({ data: data.data.data, isAuth: false })
+      this.messageList.push({ data: data.data.data, isAuth: false, type: 0 })
       this.listConversation[this.activeIndex].lastestMessage = data.data.data;
     });
     this.socket.on(EVENT_MESSAGE_SSC.LEAVE_ROOM_SSC, (data: any) => {
@@ -92,7 +92,6 @@ export class ChatComponent implements OnInit {
     })
     this.service.getListConversation().subscribe((res: any) => {
       this.listConversation = res.data.result;
-      console.log("🐼 => ChatComponent => this.listConversation", this.listConversation)
       if (this.listConversation.length) {
         if (!this.isRedirectFromSearch) {
           this.conversationId = this.listConversation[0]._id;
@@ -113,7 +112,7 @@ export class ChatComponent implements OnInit {
       if (this.isRedirectFromSearch) {
         this.listConversation.unshift(this.conversationFromSearch);
         this.conversationId = this.conversationFromSearch._id;
-        this.partnerUserId = this.conversationFromSearch.participantId;
+        this.partnerUserId = this.conversationFromSearch.user._id;
         this._setChatTitle(this.conversationFromSearch.user);
         this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_CSS,
           [this.currentUserId, this.partnerUserId]);
@@ -251,7 +250,7 @@ export class ChatComponent implements OnInit {
       data: this.message
     }
     this.socket.emit(EVENT_MESSAGE_CSS.SEND_MESSAGE_CSS, msg);
-    this.messageList.push({ data: this.message, isAuth: true });
+    this.messageList.push({ data: this.message, isAuth: true, type: 0 });
     this.listConversation[this.activeIndex].lastestMessage = this.message;
     this.isLoadOldMessage = false;
     this.message = '';
@@ -288,10 +287,8 @@ export class ChatComponent implements OnInit {
     });
     this.modalRef.componentInstance.profile = this.chatTitle;
     this.modalRef.result.then((res: any) => {
-      console.log("🐼 => HomeComponent => res", res)
-
+      this.messageList.push(res.data)
     }).catch((err: any) => {
-      console.log("🐼 => HomeComponent => err", err)
     });
 
   }

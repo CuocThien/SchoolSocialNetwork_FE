@@ -75,7 +75,7 @@ export class VideoChatComponent implements OnInit {
     this.socket.on(EVENT_VIDEO_CHAT_SSC.END_CALL_SSC, (payload: any) => {
       if (this.isReceiverAccept)
         this.socket.emit(EVENT_VIDEO_CHAT_CSS.LEAVE_ROOM_VIDEO_CHAT_CSS, { room: `Channel_call_${this.profile._id}` })
-      this.activeModal.close();
+      this.activeModal.close(payload);
     })
   }
 

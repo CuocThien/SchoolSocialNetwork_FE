@@ -39,14 +39,11 @@ export class HomeComponent implements OnInit {
         this.modalRef.componentInstance.profile = res;
         this.modalRef.componentInstance.isReceiverAccept = true;
         this.modalRef.result.then((res: any) => {
-          console.log("🐼 => HomeComponent => res", res)
 
         }).catch((err: any) => {
-          console.log("🐼 => HomeComponent => err", err)
         });
 
       }).catch((err: any) => {
-        console.log("🐼 => HomeComponent => err", err)
       });
     });
   }
