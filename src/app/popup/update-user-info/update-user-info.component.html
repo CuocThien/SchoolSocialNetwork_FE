@@ -5,14 +5,16 @@
   <hr>
   <form class="mt-4" [formGroup]="userInfoForm">
     <input class="form-control-bs w-100-pc mb-4 fs-2" readonly type="text" placeholder="Id..." formControlName="_id">
-    <input class="form-control-bs w-100-pc mb-4 fs-2" [autofocus]="true" type="text" placeholder="Full name..."
-      formControlName="fullname">
-    <input *ngIf="!isCompany" class="form-control-bs w-100-pc mb-4 fs-2" type="date" placeholder="Birthday..."
-      formControlName="dob">
-    <input class="form-control-bs w-100-pc mb-4 fs-2" type="text" placeholder="Address..." formControlName="address">
-    <input class="form-control-bs w-100-pc mb-4 fs-2" type="text" placeholder="Phone..." formControlName="phone">
-    <input *ngIf="!isCompany" class="form-control-bs w-100-pc mb-4 fs-2" readonly type="number" placeholder="Year..."
-      formControlName="year">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" [autofocus]="true" type="text"
+      placeholder="{{'TABLE.FULLNAME'|translate}}" formControlName="fullname">
+    <input *ngIf="!isCompany" class="form-control-bs w-100-pc mb-4 fs-2" type="date"
+      placeholder="{{'TABLE.DOB'|translate}}" formControlName="dob">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" type="text" placeholder="{{'TABLE.ADDRESS'|translate}}"
+      formControlName="address">
+    <input class="form-control-bs w-100-pc mb-4 fs-2" type="text" placeholder="{{'TABLE.PHONE'|translate}}"
+      formControlName="phone">
+    <input *ngIf="!isCompany" class="form-control-bs w-100-pc mb-4 fs-2" readonly type="number"
+      placeholder="{{'TABLE.YAER'|translate}}" formControlName="year">
     <textarea *ngIf="isCompany" class="form-register__form-control__area w-100-pc" type="text" rows="7"
       formControlName="description" placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
   </form>

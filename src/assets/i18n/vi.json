@@ -18,7 +18,8 @@
         "ABOUT": "Giới thiệu",
         "REGISTER_ENTERPRISE": "ĐĂNG KÝ DOANH NGHIỆP",
         "RECRUITMENT_NEWS": "TIN TUYỂN DỤNG",
-        "COMMON_INFO": "Thông tin chung"
+        "COMMON_INFO": "Thông tin chung",
+        "ROLE": "Chức vụ"
     },
     "HEADER":{
         "PROFILE": "Thông tin cá nhân",
@@ -121,6 +122,7 @@
         "FULLNAME": "Họ và tên",
         "DOB": "Ngày sinh",
         "PHONE": "Số điện thoại",
+        "YEAR":"Niên khoá",
         "COUNT_POST": "Số lượng bài viết",
         "COUNT_COMMENT": "Số lượng bình luận",
         "CONTENT": "Nội dung",
@@ -180,7 +182,9 @@
     "PLACEHOLDER":{
         "OLD_PASS": "Mật khẩu cũ",
         "NEW_PASS": "Mật khẩu mới",
-        "CONFIRM_PASS": "Xác nhận mật khẩu"
+        "CONFIRM_PASS": "Xác nhận mật khẩu",
+        "COMMENT":"Bình luận",
+        "GROUP_NAME": "Tên nhóm"
     },
     "ENTERPRISE": {
         "RECRUITMENT_NEWS": "Tin tuyển dụng",

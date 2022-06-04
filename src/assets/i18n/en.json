@@ -18,7 +18,8 @@
         "ABOUT": "About this group",
         "REGISTER_ENTERPRISE": "REGISTER ENTERPRISE",
         "RECRUITMENT_NEWS": "RECRUITMENT NEWS",
-        "COMMON_INFO": "General information"
+        "COMMON_INFO": "General information",
+        "ROLE": "Role"
     },
     "HEADER":{
         "PROFILE": "Profile",
@@ -121,6 +122,7 @@
         "FULLNAME": "Full name",
         "DOB": "DoB",
         "PHONE": "Phone",
+        "YEAR":"Year",
         "COUNT_POST": "Count posts",
         "COUNT_COMMENT": "Count comments",
         "CONTENT": "Content",
@@ -180,7 +182,9 @@
     "PLACEHOLDER":{
         "OLD_PASS": "Old password",
         "NEW_PASS": "New password",
-        "CONFIRM_PASS": "Confirm password"
+        "CONFIRM_PASS": "Confirm password",
+        "COMMENT":"Comment",
+        "GROUP_NAME": "Group name"
     },
     "ENTERPRISE": {
         "RECRUITMENT_NEWS": "Recruitment news",

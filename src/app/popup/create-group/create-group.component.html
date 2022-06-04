@@ -12,8 +12,10 @@
           {{isLangEn?category.nameEn:category.nameVi}}
         </ng-option>
       </ng-select>
-      <input class="signup-form__control mb-5" type="text" placeholder="Name..." formControlName="name">
-      <textarea type="text" rows="7" formControlName="description" placeholder="Input description here..."></textarea>
+      <input class="signup-form__control mb-5" type="text" placeholder="{{'PLACEHOLDER.GROUP_NAME'|translate}}"
+        formControlName="name">
+      <textarea type="text" rows="7" formControlName="description"
+        placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
       <button class="btn btn-primary" type="submit">{{'BUTTON.SUBMIT'|translate}}</button>
     </form>
   </div>

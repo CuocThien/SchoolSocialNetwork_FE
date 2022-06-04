@@ -31,7 +31,8 @@
         [src]="myAvatar||'https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png'" alt="">
     </div>
     <div class="comment-create__box col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 position-relative">
-      <textarea name="" [(ngModel)]="content" placeholder="Reply..." rows="4" (keyup.enter)="onReply()"></textarea>
+      <textarea name="" [(ngModel)]="content" placeholder="{{'COMMENT.REPLY'|translate}}" rows="4"
+        (keyup.enter)="onReply()"></textarea>
       <button class="btnPostReply" (click)="onReply()">
         <i class="bi bi-send"></i>
       </button>
