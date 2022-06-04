@@ -171,6 +171,7 @@
         "CREATE_RECRUITMENT_NEWS": "CREATE RECRUITMENT NEWS",
         "DELETE_NEWS": "Delete recruitment news",
         "DELETE_COMPANY": "Delete company",
+        "DELETE_GROUP":"Delete group",
         "UPDATE_STUDENT_ALUMNI": "Update student to alumni"
     },
     "ENTERPRISE": {

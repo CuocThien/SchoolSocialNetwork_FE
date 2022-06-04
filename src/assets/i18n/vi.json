@@ -171,6 +171,7 @@
         "CREATE_RECRUITMENT_NEWS": "TẠO TIN TUYỂN DỤNG",
         "DELETE_NEWS": "Xoá tin tuyển dụng",
         "DELETE_COMPANY": "Xoá công ty",
+        "DELETE_GROUP": "Xoá nhóm",
         "UPDATE_STUDENT_ALUMNI": "Cập nhật cựu sinh viên"
     },
     "ENTERPRISE": {
