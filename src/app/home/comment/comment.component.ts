@@ -42,7 +42,7 @@ export class CommentComponent implements OnInit {
     this.replyCmtId = event;
   }
   postComment() {
-    if (this.commentContent == '') {
+    if (this.commentContent.trim() == '') {
       this.toastr.error('Please input comment!!!')
       return;
     }
