@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FacultyService } from 'src/app/services';
@@ -17,13 +18,21 @@ export class CreateFacultyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private service: FacultyService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   faculty: any;
   isEdit = false;
   createFacultyForm: FormGroup;
-  title = 'POPUP.CREATE_FACULTY'
+  title = 'POPUP.CREATE_FACULTY';
+  notiFill = ''
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_FORM',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.EMPTY_FORM'];
+      });
     if (this.faculty) {
       this.isEdit = true;
       this.title = 'POPUP.UPDATE_FACULTY'
@@ -35,7 +44,7 @@ export class CreateFacultyComponent implements OnInit {
   }
   onSubmit() {
     if (this.createFacultyForm.invalid) {
-      this.toastr.error('Please fill information!')
+      this.toastr.error(this.notiFill)
       return;
     }
     this.spinner.show();

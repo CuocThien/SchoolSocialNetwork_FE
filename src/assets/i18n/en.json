@@ -197,7 +197,16 @@
     },
     "NOTIFICATION": {
         "PASS_MIN_LENGTH": "Password must have more than 6 character!",
-        "CONFIRM_PASSS": "Please confirm password!",
-        "EMPTY_FORM": "Please fill the form!"
+        "CONFIRM_PASS": "Please confirm password!",
+        "EMPTY_FORM": "Please fill the form!",
+        "EMPTY_COMMENT": "Please input comment!!!",
+        "EMPTY_REPLY": "Please input reply!!!",
+        "EMPTY_EXCEL_FILE": "Please choose an excel file!",
+        "EMPTY_INPUT": "Please input something to change!",
+        "EMPTY_POST_TITLE": "Please input the title of post!",
+        "EMPTY_POST_CONTENT": "Please input content of post!",
+        "EMPTY_USERNAME": "Please input username to requets OTP",
+        "INVALID_OTP": "Invalid OTP code",
+        "CHOOSE_CATE_RP": "Please choose category of report"
     }
 }

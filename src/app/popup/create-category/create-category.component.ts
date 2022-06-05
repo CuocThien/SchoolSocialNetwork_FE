@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from '../../services/index';
@@ -17,14 +18,22 @@ export class CreateCategoryComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private service: CategoryService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   category: any;
   isEdit = false;
   createCategoryForm: FormGroup;
   type: string;
-  title = 'POPUP.CREATE_CATEGORY'
+  title = 'POPUP.CREATE_CATEGORY';
+  notiFill = '';
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_FORM',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.EMPTY_FORM'];
+      });
     if (this.category) {
       this.isEdit = true;
       this.title = 'POPUP.UPDATE_CATEGORY'
@@ -37,7 +46,7 @@ export class CreateCategoryComponent implements OnInit {
   }
   onSubmit() {
     if (this.createCategoryForm.invalid) {
-      this.toastr.error('Please fill information!')
+      this.toastr.error(this.notiFill)
       return;
     }
     this.spinner.show();

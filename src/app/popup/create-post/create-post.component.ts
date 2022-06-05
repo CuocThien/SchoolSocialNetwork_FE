@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { LIST_CATEGORY_POST } from 'src/app/utils/constant';
@@ -16,7 +17,8 @@ export class CreatePostComponent implements OnInit {
     private toastr: ToastrService,
     private createPostService: CreatePostService,
     private activeModal: NgbActiveModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   ckeConfig: any;
   content: any;
@@ -29,7 +31,18 @@ export class CreatePostComponent implements OnInit {
   isLangEn = false;
   categoryId = '';
   listCategory = LIST_CATEGORY_POST;
+
+  notiEmptyTitle = '';
+  notiEmptyContent = '';
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_POST_TITLE',
+      'NOTIFICATION.EMPTY_POST_CONTENT',
+    ])
+      .subscribe(translations => {
+        this.notiEmptyTitle = translations['NOTIFICATION.EMPTY_POST_TITLE'];
+        this.notiEmptyContent = translations['NOTIFICATION.EMPTY_POST_CONTENT'];
+      });
     this.isLangEn = localStorage.getItem('lang') === 'en'
     if (this.isUpdate)
       this.title = 'BUTTON.UPDATE_POST'
@@ -49,9 +62,9 @@ export class CreatePostComponent implements OnInit {
     if (this.isMainGroup)
       this.data.isStudent = this.isStudent;
     if (form.value.title == "" && this.isMainGroup) {
-      this.toastr.error("Please input the title of post")
+      this.toastr.error(this.notiEmptyTitle)
     } else if (form.value.content == "") {
-      this.toastr.error("Please input content of post")
+      this.toastr.error(this.notiEmptyContent)
     } else {
       this.spinner.show();
       if (this.isUpdate) {

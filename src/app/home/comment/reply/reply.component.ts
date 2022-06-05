@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { ChangeCommentComponent } from 'src/app/popup/change-comment/change-comment.component';
 import { DeleteCommentComponent } from 'src/app/popup/delete-comment/delete-comment.component';
@@ -15,7 +16,8 @@ export class ReplyComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private service: CommentService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) { }
 
   myAvatar: any;
@@ -28,9 +30,17 @@ export class ReplyComponent implements OnInit {
   @Input() isOpenCreateReply = '';
   @Input() commentId = '';
   listReply = [];
+
+  notiReply = ''
   private modalRef: NgbModalRef;
 
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_REPLY',
+    ])
+      .subscribe(translations => {
+        this.notiReply = translations['NOTIFICATION.EMPTY_REPLY'];
+      });
     this.myAvatar = JSON.parse(localStorage.getItem('profile') || '').avatar;
     this.userId = JSON.parse(localStorage.getItem('profile') || '')._id;
     if (localStorage.getItem('role') === 'admin') {
@@ -38,6 +48,11 @@ export class ReplyComponent implements OnInit {
     }
   }
   onReply() {
+    if (this.content.trim() == '') {
+      this.toastr.error(this.notiReply)
+      this.content = ''
+      return;
+    }
     const validData = {
       commentId: this.commentId,
       content: this.content

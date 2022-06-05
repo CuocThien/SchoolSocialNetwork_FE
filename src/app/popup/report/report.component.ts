@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
@@ -18,14 +19,22 @@ export class ReportComponent implements OnInit {
     private postService: PostDetailService,
     private activeModal: NgbActiveModal,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   listReport: any;
   isLangEn = true;
   type: any;
   id: any;
   reportId = ''
+  notiFill = ''
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.CHOOSE_CATE_RP',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.CHOOSE_CATE_RP'];
+      });
     this.isLangEn = localStorage.getItem('lang') === 'en';
     this._getListReport()
   }
@@ -34,7 +43,7 @@ export class ReportComponent implements OnInit {
   }
   onSubmit() {
     if (this.reportId == '') {
-      this.toastr.error('Please choose category of report')
+      this.toastr.error(this.notiFill)
     }
     this.spinner.show();
     if (this.type == 'group') {

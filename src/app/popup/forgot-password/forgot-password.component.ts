@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { LogInService } from 'src/app/services';
 import { ChangePasswordOtpComponent } from '../change-password-otp/change-password-otp.component';
@@ -12,8 +13,12 @@ import { ChangePasswordOtpComponent } from '../change-password-otp/change-passwo
 export class ForgotPasswordComponent implements OnInit {
   private modalRef: NgbModalRef | undefined;
 
-  constructor(private activeModal: NgbActiveModal, private service: LogInService, private toastr: ToastrService,
+  constructor(
+    private activeModal: NgbActiveModal,
+    private service: LogInService,
+    private toastr: ToastrService,
     private modalService: NgbModal,
+    private translate: TranslateService
   ) { }
 
   timeOut = 180;
@@ -24,7 +29,17 @@ export class ForgotPasswordComponent implements OnInit {
   userId = ''
   OTPCode = ''
   OTP = ''
+  notiFill = ''
+  notiInvalidOTP
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_USERNAME',
+      'NOTIFICATION.INVALID_OTP',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.EMPTY_USERNAME'];
+        this.notiInvalidOTP = translations['NOTIFICATION.INVALID_OTP'];
+      });
   }
   onClose() {
     this.activeModal.close();
@@ -58,7 +73,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   requestOPT() {
     if (this.userId == '') {
-      this.toastr.error('Please input username to requets OTP')
+      this.toastr.error(this.notiFill)
       return;
     }
     const data = {
@@ -86,7 +101,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.modalRef.componentInstance.userId = this.userId;
       this.modalRef.result.then().catch();
     } else {
-      this.toastr.error('Invalid OTP code')
+      this.toastr.error(this.notiInvalidOTP)
 
     }
   }

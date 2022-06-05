@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { isEmpty } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -18,17 +19,25 @@ export class RegisterEnterpriseComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private uploadImageService: UploadImageService,
     private toastr: ToastrService,
-    private service: SignUpService
+    private service: SignUpService,
+    private translate: TranslateService
   ) { }
   registerForm: FormGroup;
   imageSrc: any;
+  notiFillForm = '';
 
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_FORM',
+    ])
+      .subscribe(translations => {
+        this.notiFillForm = translations['NOTIFICATION.EMPTY_FORM'];
+      });
     this.createFormRegister()
   }
   onSubmit() {
     if (this.registerForm.invalid) {
-      this.toastr.error('Please fill information!')
+      this.toastr.error(this.notiFillForm)
       return;
     }
 

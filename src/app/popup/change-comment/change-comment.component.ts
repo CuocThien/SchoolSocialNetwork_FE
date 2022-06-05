@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CommentService } from '../../services/index';
@@ -15,7 +16,8 @@ export class ChangeCommentComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private service: CommentService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   comment: any;
   isReply = false;
@@ -23,7 +25,15 @@ export class ChangeCommentComponent implements OnInit {
   content = '';
   title = 'POPUP.EDIT_COMMENT';
 
+  notiFill = ''
+
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_INPUT',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.EMPTY_INPUT'];
+      });
     this.commentId = (this.isReply) ? this.comment.replyId : this.comment.commentId;
     this.content = this.comment.content;
     if (this.isReply) {
@@ -33,7 +43,7 @@ export class ChangeCommentComponent implements OnInit {
 
   onEdit() {
     if (this.content.trim() == '') {
-      this.toastr.error('Please input something to change!');
+      this.toastr.error(this.notiFill);
       return;
     }
     this.spinner.show();

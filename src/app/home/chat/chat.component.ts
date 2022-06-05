@@ -85,7 +85,6 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.conversationFromSearch = JSON.parse(localStorage.getItem('conversation'))
     this.isRedirectFromSearch = !!this.conversationFromSearch;
-    console.log("🐼 => ChatComponent => this.isRedirectFromSearch", this.conversationFromSearch)
     this.profile = JSON.parse(localStorage.getItem('profile') || '')
     this.currentUserId = this.profile._id;
     this.socket.emit(EVENT_MESSAGE_CSS.JOIN_ROOM_OFFLINE_CSS, {

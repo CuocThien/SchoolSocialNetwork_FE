@@ -142,6 +142,8 @@ export class GroupComponent implements OnInit {
         this.spinner.hide();
         this.listGroup = [...this.listGroup, ...res.data.result];
         this.maxPage = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+        this.listAllGroup = [...this.listAllGroup, ...res.data.result];
+        this.maxPageAllGroup = res.data.total ? res.data.total : 1;
       },
       error: () => {
         this.spinner.hide();
@@ -153,14 +155,18 @@ export class GroupComponent implements OnInit {
   }
   searchGroup() {
     this.listGroup = []
+    this.listAllGroup = []
     if (!this.searchString) {
       this.isSearch = false;
-      this._getListGroup();
+      if (!this.isAllGroup) {
+        this._getListGroup();
+      } else {
+        this._getListAllGroup();
+      }
       return;
     }
     this.isSearch = true;
     this.page = 1;
-    this.listGroup
     this._search();
   }
 
@@ -181,6 +187,10 @@ export class GroupComponent implements OnInit {
     if (!this.isAllGroup) return;
     this.pageAllGroup++;
     if (this.pageAllGroup === this.maxPageAllGroup) return;
+    if (this.isSearch) {
+      this._search();
+      return;
+    }
     this.isRefresh = false;
     this._getListAllGroup();
   }

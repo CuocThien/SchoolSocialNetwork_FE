@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { ChangeCommentComponent } from 'src/app/popup/change-comment/change-comment.component';
 import { DeleteCommentComponent } from 'src/app/popup/delete-comment/delete-comment.component';
@@ -23,15 +24,24 @@ export class CommentComponent implements OnInit {
   isLoadCmt = true;
   maxPage = 1;
   page = 1;
+
+  notiCmt = '';
   private modalRef: NgbModalRef;
 
   constructor(
     private modalService: NgbModal,
     private service: CommentService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_COMMENT',
+    ])
+      .subscribe(translations => {
+        this.notiCmt = translations['NOTIFICATION.EMPTY_COMMENT'];
+      });
     this.userId = JSON.parse(localStorage.getItem('profile') || '')._id;
     this.myAvatar = JSON.parse(localStorage.getItem('profile') || '').avatar;
     if (localStorage.getItem('role') === 'admin') {
@@ -43,7 +53,8 @@ export class CommentComponent implements OnInit {
   }
   postComment() {
     if (this.commentContent.trim() == '') {
-      this.toastr.error('Please input comment!!!')
+      this.toastr.error(this.notiCmt)
+      this.commentContent = '';
       return;
     }
     const validData = {

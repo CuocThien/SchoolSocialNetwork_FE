@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
@@ -19,14 +20,23 @@ export class CreateGroupComponent implements OnInit {
     private toastr: ToastrService,
     private categoryService: CategoryService,
     private service: GroupService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   createGroupForm: FormGroup;
   listCategory: any;
   category = '';
   isLangEn = false;
 
+  notiFill = ''
+
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_FORM',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.EMPTY_FORM'];
+      });
     this.isLangEn = localStorage.getItem('lang') === 'en';
     this.createFormCreateGroup();
     this._listCategory();
@@ -40,7 +50,7 @@ export class CreateGroupComponent implements OnInit {
   }
   onSubmit() {
     if (this.createGroupForm.invalid) {
-      this.toastr.error('Please fill information!')
+      this.toastr.error(this.notiFill)
       return;
     }
     this.spinner.show();

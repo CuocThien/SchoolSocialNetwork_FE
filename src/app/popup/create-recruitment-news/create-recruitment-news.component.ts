@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +21,8 @@ export class CreateRecruitmentNewsComponent implements OnInit {
     private uploadImageService: UploadImageService,
     private toastr: ToastrService,
     private activeModal: NgbActiveModal,
-    private service: EnterpriseService
+    private service: EnterpriseService,
+    private translate: TranslateService
   ) { }
   createNewsForm: FormGroup;
   imageSrc: any;
@@ -29,7 +31,14 @@ export class CreateRecruitmentNewsComponent implements OnInit {
   isUpdate = false;
   news: any;
   formTitle: any;
+  notiFill = '';
   ngOnInit(): void {
+    this.translate.get([
+      'NOTIFICATION.EMPTY_FORM',
+    ])
+      .subscribe(translations => {
+        this.notiFill = translations['NOTIFICATION.EMPTY_FORM'];
+      });
     this.isLangEn = localStorage.getItem('lang') === 'en';
     this.formTitle = !this.isUpdate ? 'POPUP.CREATE_RECRUITMENT_NEWS' : 'POPUP.UPDATE_RECRUITMENT_NEWS'
     this.createFormCreateNew();
@@ -37,7 +46,7 @@ export class CreateRecruitmentNewsComponent implements OnInit {
   }
   onSubmit() {
     if (this.createNewsForm.invalid) {
-      this.toastr.error('Please fill information!')
+      this.toastr.error(this.notiFill)
       return;
     }
     if (!this.isUpdate) {

@@ -7,6 +7,7 @@ import { isEmpty } from 'lodash'
 import { LIST_ROLE } from 'src/app/utils/constant';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { exportAsExcelFile } from 'src/app/utils/function';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,7 +21,8 @@ export class SignUpComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private service: SignUpService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) { }
   isSingleSignup = false;
   contentButton = 'SIGNUP.SINGLE_SIGNUP'
@@ -32,8 +34,19 @@ export class SignUpComponent implements OnInit {
 
   listRole = LIST_ROLE;
   role = null;
+
+  notiFillForm = '';
+  notiAddFile = '';
   ngOnInit(): void {
     this.isLangEn = localStorage.getItem('lang') === 'en'
+    this.translate.get([
+      'NOTIFICATION.EMPTY_FORM',
+      'NOTIFICATION.EMPTY_EXCEL_FILE',
+    ])
+      .subscribe(translations => {
+        this.notiFillForm = translations['NOTIFICATION.EMPTY_FORM'];
+        this.notiAddFile = translations['NOTIFICATION.EMPTY_EXCEL_FILE'];
+      });
     this._getListFaculty();
     this.createFormSignUp();
   }
@@ -66,13 +79,13 @@ export class SignUpComponent implements OnInit {
   onSubmit() {
     if (this.isSingleSignup) {
       if (this.signUpForm.invalid) {
-        this.toastr.error('Please fill information!')
+        this.toastr.error(this.notiFillForm)
         return;
       }
       Object.assign(this.data, { 0: this.signUpForm.value })
     }
     if (isEmpty(this.data)) {
-      this.toastr.error('Please choose an excel file!')
+      this.toastr.error(this.notiAddFile)
       return;
     }
     this.spinner.show();
