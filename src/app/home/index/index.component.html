@@ -108,7 +108,7 @@
           <div class="main-group">
             <h4 class="ps-3">{{isLangEn?listCategory[0].nameEn:listCategory[0].nameVi}}</h4>
             <hr>
-            <div class="post" *ngFor="let post of listPostStudy"
+            <div class="post d-flex" *ngFor="let post of listPostStudy"
               (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
               <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
                 <div class="post__auth-avatar ps-3 pe-3">
@@ -142,7 +142,7 @@
           <div class=" main-group">
             <h4 class="ps-3">{{isLangEn?listCategory[1].nameEn:listCategory[1].nameVi}}</h4>
             <hr>
-            <div class="post" *ngFor="let post of listPostUnion"
+            <div class="post d-flex" *ngFor="let post of listPostUnion"
               (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
               <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
                 <div class="post__auth-avatar ps-3 pe-3">
