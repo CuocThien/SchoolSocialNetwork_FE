@@ -199,9 +199,11 @@ export class IndexComponent implements OnInit {
           this.listPostTuition = this.listPostTuition.map((itm: any) => Object.assign(itm, { isRead: false }));
           this.listPostScholarship = this.listPostScholarship.map((itm: any) => Object.assign(itm, { isRead: false }));
         }
+        this.spinner.hide();
       },
-      error: (err) => console.log(err),
-      complete: () => { },
+      error: (err) => this.spinner.hide()
+      ,
+      complete: () => this.spinner.hide(),
     };
     this.spinner.show();
     forkJoin([
