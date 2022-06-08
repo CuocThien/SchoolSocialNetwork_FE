@@ -290,7 +290,7 @@
       </ng-select>
       <hr>
 
-      <div *ngIf="isAdmin || isDean">
+      <div *ngIf="(isAdmin || isDean)&&faculty!='alumni'">
         <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
           {{'HOME.TEACHER'|translate}}</h3>
         <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
@@ -303,7 +303,7 @@
         </div>
         <hr>
       </div>
-      <div class="faculty-teacher" *ngIf="isAdmin || isDean || isTeacher">
+      <div class="faculty-teacher" *ngIf="(isAdmin || isDean || isTeacher)&&faculty!='alumni'">
         <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyTeacherPost"
           (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
           <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
@@ -337,7 +337,7 @@
       </div>
 
       <div *ngIf="isAdmin || isDean">
-        <hr>
+        <hr *ngIf="faculty!='alumni'">
         <h3 class="ps-5 mt-3 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
           {{'HOME.STUDENT'|translate}}</h3>
         <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
