@@ -86,7 +86,7 @@
 
     <div class="card-content text-start">
       <h3 class="mb-3" style="display:inline-block; width: 90%;">{{'TITLE.ABOUT'|translate}}</h3>
-      <div *ngIf="isAdmin">
+      <div class="d-inline" *ngIf="isAdmin">
         <i *ngIf="!isUpdateDescription" class="bi bi-pencil fs-3" style="cursor: pointer;"
           (click)="onDescription()"></i>
         <i *ngIf="isUpdateDescription" class="bi bi-check-lg" style="cursor: pointer; color: green; font-size: 2.5rem;"
