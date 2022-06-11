@@ -13,16 +13,21 @@
     </div>
     <div class="gr-intro__info mt-3">
       <div class="d-flex">
-        <div class="d-flex col-10">
+        <div class="d-flex col-9">
           <input *ngIf="isRename" class="change-name-group col-6" type="text" [(ngModel)]="groupName">
           <button *ngIf="isRename" class="btn-report btn-report__check col-1" (click)="rename()"><i
               class="bi bi-check-lg"></i></button>
           <h1 *ngIf="!isRename" class="d-inline-block">{{groupName}}</h1>
         </div>
-        <button [ngClass]="{'opacity-0 invisible':isRename||!isAdmin}" class="btn-report col-1 text-end pe-3"
-          (click)="onRename()"><i class="bi bi-pencil"></i></button>
-        <button class="btn-report col-1 text-start ps-3" (click)="report('group', groupId)"><i
-            class="bi bi-flag"></i></button>
+        <div class="col-3 text-end">
+          <button [ngClass]="{'opacity-0 invisible':isRename||!isAdmin}" class="btn-report text-center pe-3"
+            (click)="onRename()"><i class="bi bi-pencil"></i></button>
+          <button class="btn-report text-center ps-3 pe-3" (click)="report('group', groupId)"><i
+              class="bi bi-flag"></i></button>
+          <button *ngIf="isAdmin" class="btn-report text-center ps-3" (click)="deleteGroup()"><i
+              class="bi bi-trash3"></i></button>
+        </div>
+
       </div>
       <h4>{{groupDetail?.numPost}} {{'GROUP.POSTS'|translate}} - {{(totalMember + totalAdmin)||0}}
         {{'GROUP.MEMBERS'|translate}}</h4>

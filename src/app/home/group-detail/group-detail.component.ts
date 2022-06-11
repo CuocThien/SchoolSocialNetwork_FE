@@ -381,4 +381,18 @@ export class GroupDetailComponent implements OnInit {
       }
     })
   }
+  deleteGroup() {
+    this.modalRef = this.modalService.open(DeleteUserComponent, {
+      backdrop: 'static',
+      size: 'md',
+      centered: true,
+    });
+    this.modalRef.componentInstance.isGroup = true;
+    this.modalRef.componentInstance.data = this.groupId
+    this.modalRef.result.then((res: any) => {
+      this.router.navigate(['/home/group'])
+    }).catch((err: any) => {
+
+    });
+  }
 }
