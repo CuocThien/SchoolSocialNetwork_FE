@@ -23,7 +23,6 @@
         <tr class="text-center text-overflow font-size-15">
           <th>ID</th>
           <th>{{'TABLE.FULLNAME'|translate}}</th>
-          <th>{{'TABLE.DOB'|translate}}</th>
           <th>{{'TABLE.PHONE'|translate}}</th>
           <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
         </tr>
@@ -32,7 +31,6 @@
         <tr *ngFor="let company of listCompany; let i = index">
           <td class="text-center">{{company._id}}</td>
           <td class="text-center">{{company.fullname}}</td>
-          <td class="text-center">{{company.dob|date:'dd-MM-yyyy'}}</td>
           <td class="text-center">{{company.phone}}</td>
           <td class="text-center">
             <i class="bi bi-pencil-square btn-delete me-3" (click)="updateAccount(company)"></i>
