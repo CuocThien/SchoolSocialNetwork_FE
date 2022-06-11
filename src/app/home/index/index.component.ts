@@ -185,12 +185,12 @@ export class IndexComponent implements OnInit {
   async getListPostMainGroupForStudent() {
     const observer = {
       next: (val) => {
-        [this.listPostStudy, this.maxPagePostStudy] = [val[0].data.result, val[0].data.total ? Math.ceil(val[0].data.total / 10) : 1];
-        [this.listPostUnion, this.maxPagePostUnion] = [val[1].data.result, val[1].data.total ? Math.ceil(val[1].data.total / 10) : 1];
-        [this.listPostEnglish, this.maxPagePostEnglish] = [val[2].data.result, val[2].data.total ? Math.ceil(val[2].data.total / 10) : 1];
-        [this.listPostCommon, this.maxPagePostCommon] = [val[3].data.result, val[3].data.total ? Math.ceil(val[3].data.total / 10) : 1];
-        [this.listPostTuition, this.maxPagePostTuition] = [val[4].data.result, val[4].data.total ? Math.ceil(val[4].data.total / 10) : 1];
-        [this.listPostScholarship, this.maxPagePostScholarship] = [val[5].data.result, val[5].data.total ? Math.ceil(val[5].data.total / 10) : 1];
+        [this.listPostStudy, this.maxPagePostStudy] = [val[0].data.result, val[0].data.total ? Math.ceil(val[0].data.total / 5) : 1];
+        [this.listPostUnion, this.maxPagePostUnion] = [val[1].data.result, val[1].data.total ? Math.ceil(val[1].data.total / 5) : 1];
+        [this.listPostEnglish, this.maxPagePostEnglish] = [val[2].data.result, val[2].data.total ? Math.ceil(val[2].data.total / 5) : 1];
+        [this.listPostCommon, this.maxPagePostCommon] = [val[3].data.result, val[3].data.total ? Math.ceil(val[3].data.total / 5) : 1];
+        [this.listPostTuition, this.maxPagePostTuition] = [val[4].data.result, val[4].data.total ? Math.ceil(val[4].data.total / 5) : 1];
+        [this.listPostScholarship, this.maxPagePostScholarship] = [val[5].data.result, val[5].data.total ? Math.ceil(val[5].data.total / 5) : 1];
         if (this.isAdmin) {
           this.listPostStudy = this.listPostStudy.map((itm: any) => Object.assign(itm, { isRead: false }));
           this.listPostUnion = this.listPostUnion.map((itm: any) => Object.assign(itm, { isRead: false }));
@@ -224,7 +224,7 @@ export class IndexComponent implements OnInit {
       this._getListPostCategoryStudent(this.pagePostStudy, categoryId).subscribe({
         next: (res: any) => {
           this.listPostStudy = res.data.result;
-          this.maxPagePostStudy = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+          this.maxPagePostStudy = res.data.total ? Math.ceil(res.data.total / 5) : 1;
           if (this.isAdmin) {
             this.listPostStudy = this.listPostStudy.map((itm: any) => Object.assign(itm, { isRead: false }))
           }
@@ -237,7 +237,7 @@ export class IndexComponent implements OnInit {
       this._getListPostCategoryStudent(this.pagePostUnion, categoryId).subscribe({
         next: (res: any) => {
           this.listPostUnion = res.data.result;
-          this.maxPagePostUnion = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+          this.maxPagePostUnion = res.data.total ? Math.ceil(res.data.total / 5) : 1;
           if (this.isAdmin) {
             this.listPostUnion = this.listPostUnion.map((itm: any) => Object.assign(itm, { isRead: false }))
           }
@@ -250,7 +250,7 @@ export class IndexComponent implements OnInit {
       this._getListPostCategoryStudent(this.pagePostEnglish, categoryId).subscribe({
         next: (res: any) => {
           this.listPostEnglish = res.data.result;
-          this.maxPagePostEnglish = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+          this.maxPagePostEnglish = res.data.total ? Math.ceil(res.data.total / 5) : 1;
           if (this.isAdmin) {
             this.listPostEnglish = this.listPostEnglish.map((itm: any) => Object.assign(itm, { isRead: false }))
           }
@@ -263,7 +263,7 @@ export class IndexComponent implements OnInit {
       this._getListPostCategoryStudent(this.pagePostCommon, categoryId).subscribe({
         next: (res: any) => {
           this.listPostCommon = res.data.result;
-          this.maxPagePostCommon = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+          this.maxPagePostCommon = res.data.total ? Math.ceil(res.data.total / 5) : 1;
           if (this.isAdmin) {
             this.listPostCommon = this.listPostCommon.map((itm: any) => Object.assign(itm, { isRead: false }))
           }
@@ -276,7 +276,7 @@ export class IndexComponent implements OnInit {
       this._getListPostCategoryStudent(this.pagePostTuition, categoryId).subscribe({
         next: (res: any) => {
           this.listPostTuition = res.data.result;
-          this.maxPagePostTuition = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+          this.maxPagePostTuition = res.data.total ? Math.ceil(res.data.total / 5) : 1;
           if (this.isAdmin) {
             this.listPostTuition = this.listPostTuition.map((itm: any) => Object.assign(itm, { isRead: false }))
           }
@@ -289,7 +289,7 @@ export class IndexComponent implements OnInit {
       this._getListPostCategoryStudent(this.pagePostScholarship, categoryId).subscribe({
         next: (res: any) => {
           this.listPostScholarship = res.data.result;
-          this.maxPagePostScholarship = res.data.total ? Math.ceil(res.data.total / 10) : 1;
+          this.maxPagePostScholarship = res.data.total ? Math.ceil(res.data.total / 5) : 1;
           if (this.isAdmin) {
             this.listPostScholarship = this.listPostScholarship.map((itm: any) => Object.assign(itm, { isRead: false }))
           }
@@ -324,9 +324,6 @@ export class IndexComponent implements OnInit {
     if (filter === 'mainTeacher') {
       this.pageMainTeacher = event;
       this.getListPostMainGroupForTeacher();
-    } else if (filter === 'mainStudent') {
-      this.pageMainStudent = event;
-      this.getListPostMainGroupForStudent();
     } else if (filter === 'facultyTeacher') {
       this.pageFacultyTeacher = event;
       this.getListPostMainGroupFacultyForTeacher();

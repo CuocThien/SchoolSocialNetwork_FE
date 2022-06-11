@@ -70,7 +70,7 @@
         <!-- list post common -->
         <div
           class="common d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group">
+          <div class=" main-group position-relative" style="min-height: 44rem;">
             <h4 class="ps-3">{{isLangEn?listCategory[3].nameEn:listCategory[3].nameVi}}</h4>
             <hr>
             <div class="post d-flex" *ngFor="let post of listPostCommon"
@@ -94,7 +94,7 @@
             <h2 *ngIf="!listPostCommon?.length" class="text-center">
               {{'TITLE.NO_DATA'|translate}}
             </h2>
-            <div class="pagination">
+            <div class="pagination position-absolute" style="bottom: 1rem">
               <ngb-pagination [collectionSize]="maxPagePostCommon" [maxSize]="5" [pageSize]="1" [rotate]="true"
                 (pageChange)="goToPageInPostCategory($event,'62711cb8442b05ae533b8e60')" [(page)]="pagePostCommon">
               </ngb-pagination>
@@ -105,7 +105,7 @@
         <!-- list post study -->
         <div
           class="study d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class="main-group">
+          <div class="main-group position-relative" style="min-height: 44rem;">
             <h4 class="ps-3">{{isLangEn?listCategory[0].nameEn:listCategory[0].nameVi}}</h4>
             <hr>
             <div class="post d-flex" *ngFor="let post of listPostStudy"
@@ -128,7 +128,7 @@
             <h2 *ngIf="!listPostStudy?.length" class="text-center">
               {{'TITLE.NO_DATA'|translate}}
             </h2>
-            <div class="pagination">
+            <div class="pagination position-absolute" style="bottom: 1rem">
               <ngb-pagination [collectionSize]="maxPagePostStudy" [maxSize]="5" [pageSize]="1" [rotate]="true"
                 (pageChange)="goToPageInPostCategory($event, '62711c4f442b05ae533b8b7a')" [(page)]="pagePostStudy">
               </ngb-pagination>
@@ -139,7 +139,7 @@
         <!-- list post union -->
         <div
           class="union d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group">
+          <div class=" main-group position-relative" style="min-height: 44rem;">
             <h4 class="ps-3">{{isLangEn?listCategory[1].nameEn:listCategory[1].nameVi}}</h4>
             <hr>
             <div class="post d-flex" *ngFor="let post of listPostUnion"
@@ -163,7 +163,7 @@
             <h2 *ngIf="!listPostUnion?.length" class="text-center">
               {{'TITLE.NO_DATA'|translate}}
             </h2>
-            <div class="pagination">
+            <div class="pagination position-absolute" style="bottom: 1rem">
               <ngb-pagination [collectionSize]="maxPagePostUnion" [maxSize]="5" [pageSize]="1" [rotate]="true"
                 (pageChange)="goToPageInPostCategory($event, '62711c71442b05ae533b8c6d')" [(page)]="pagePostUnion">
               </ngb-pagination>
@@ -174,7 +174,7 @@
         <!-- list post english -->
         <div
           class="english d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group">
+          <div class=" main-group position-relative" style="min-height: 44rem;">
             <h4 class="ps-3">{{isLangEn?listCategory[2].nameEn:listCategory[2].nameVi}}</h4>
             <hr>
             <div class="post d-flex" *ngFor="let post of listPostEnglish"
@@ -198,7 +198,7 @@
             <h2 *ngIf="!listPostEnglish?.length" class="text-center">
               {{'TITLE.NO_DATA'|translate}}
             </h2>
-            <div class="pagination">
+            <div class="pagination position-absolute" style="bottom: 1rem">
               <ngb-pagination [collectionSize]="maxPagePostEnglish" [maxSize]="5" [pageSize]="1" [rotate]="true"
                 (pageChange)="goToPageInPostCategory($event, '62711c84442b05ae533b8cf1')" [(page)]="pagePostEnglish">
               </ngb-pagination>
@@ -209,7 +209,7 @@
         <!-- list post tuition -->
         <div
           class="tuition d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group">
+          <div class=" main-group position-relative" style="min-height: 44rem;">
             <h4 class="ps-3">{{isLangEn?listCategory[4].nameEn:listCategory[4].nameVi}}</h4>
             <hr>
             <div class="post d-flex" *ngFor="let post of listPostTuition"
@@ -233,7 +233,7 @@
             <h2 *ngIf="!listPostTuition?.length" class="text-center">
               {{'TITLE.NO_DATA'|translate}}
             </h2>
-            <div class="pagination">
+            <div class="pagination position-absolute" style="bottom: 1rem">
               <ngb-pagination [collectionSize]="maxPagePostTuition" [maxSize]="5" [pageSize]="1" [rotate]="true"
                 (pageChange)="goToPageInPostCategory($event, '62711d2f442b05ae533b919d')" [(page)]="pagePostTuition">
               </ngb-pagination>
@@ -244,7 +244,7 @@
         <!-- list post scholarship -->
         <div
           class="scholarship d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group">
+          <div class=" main-group position-relative" style="min-height: 44rem;">
             <h4 class="ps-3">{{isLangEn?listCategory[5].nameEn:listCategory[5].nameVi}}</h4>
             <hr>
             <div class="post d-flex" *ngFor="let post of listPostScholarship"
@@ -268,7 +268,7 @@
             <h2 *ngIf="!listPostScholarship?.length" class="text-center">
               {{'TITLE.NO_DATA'|translate}}
             </h2>
-            <div class="pagination">
+            <div class="pagination position-absolute" style="bottom: 1rem">
               <ngb-pagination [collectionSize]="maxPagePostScholarship" [maxSize]="5" [pageSize]="1" [rotate]="true"
                 (pageChange)="goToPageInPostCategory($event,'62712024442b05ae533ba622')" [(page)]="pagePostScholarship">
               </ngb-pagination>
