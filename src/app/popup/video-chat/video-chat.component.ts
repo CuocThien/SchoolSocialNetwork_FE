@@ -61,6 +61,7 @@ export class VideoChatComponent implements OnInit {
       this._startCountCallingTime();
       navigator.mediaDevices.getUserMedia(mediaConstraints)
         .then((stream: any) => {
+          console.log("🐼 => VideoChatComponent => stream", stream)
           clearInterval(this.remainingInterval);
           const call = this.myPeer.call(payload.data.receiverId, this.localStream);
           call.on('stream', (remoteStream) => {
@@ -103,6 +104,7 @@ export class VideoChatComponent implements OnInit {
     this.myPeer.on('call', (call: any) => {
       navigator.mediaDevices.getUserMedia(mediaConstraints)
         .then((stream: any) => {
+          console.log("🐼 => VideoChatComponent => stream", stream)
           this.isAccept = true;
           this.isOnRemoteVideo = true;
           clearInterval(this.remainingInterval);
