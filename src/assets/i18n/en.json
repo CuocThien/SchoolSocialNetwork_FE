@@ -6,7 +6,7 @@
         "FACULTY":"Faculty",
         "CATEGORY":"Category",
         "DELETED": "Deleted",
-        "USERS": "Users",
+        "USERS": "USERS",
         "STUDENT": "Student",
         "REPORT_GROUP": "Report group",
         "REPORT_POST": "Report post",
@@ -54,8 +54,8 @@
         "STUDENT": "Student"
     },
     "GROUP":{
-        "GROUPS_JOINED": "Groups you joined",
-        "GROUPS_SUGGEST": "Suggestions for you",
+        "GROUPS_JOINED": "GROUPS YOU JOINED",
+        "GROUPS_SUGGEST": "SUGGESTIONS FOR YOU",
         "MEMBERS": "members",
         "POSTS": "posts",
         "MEMBERS2": "Members",
@@ -67,7 +67,7 @@
         "ADD_MEMBER": "Add member",
         "ADMIN": "Admin",
         "SINCE": "Since",
-        "ALL_GROUP": "All groups"
+        "ALL_GROUP": "ALL GROUPS"
     },
     "SIGNUP":{
         "SINGLE_SIGNUP": "Single signup",

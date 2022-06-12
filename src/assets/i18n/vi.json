@@ -6,7 +6,7 @@
         "FACULTY":"Quản lý Khoa",
         "CATEGORY":"Danh mục",
         "DELETED": "Đã xoá",
-        "USERS": "Người dùng",
+        "USERS": "NGƯỜI DÙNG",
         "STUDENT": "Sinh viên",
         "REPORT_GROUP": "Quản lý báo cáo của nhóm",
         "REPORT_POST": "Quản lý báo cáo của bài viết",
@@ -54,8 +54,8 @@
         "STUDENT": "Sinh viên"
     },
     "GROUP":{
-        "GROUPS_JOINED": "Nhóm đã tham gia",
-        "GROUPS_SUGGEST": "Dành cho bạn",
+        "GROUPS_JOINED": "NHÓM ĐÃ THAM GIA",
+        "GROUPS_SUGGEST": "DÀNH CHO BẠN",
         "MEMBERS": "thành viên",
         "POSTS": "bài viết",
         "MEMBERS2": "Thành viên",
