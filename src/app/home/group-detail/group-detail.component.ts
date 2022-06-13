@@ -58,6 +58,7 @@ export class GroupDetailComponent implements OnInit {
     this.userId = JSON.parse(localStorage.getItem('profile') || '')._id;
     this.groupId = this.route.snapshot.paramMap.get("id");
     this._checkAdmin();
+    this._checkMember();
     this._groupDetail();
     this._getListPost();
     this._getListAdmin();
@@ -80,6 +81,14 @@ export class GroupDetailComponent implements OnInit {
     this.service.checkAdminSubGr({ groupId: this.groupId }).subscribe({
       next: (res: any) => {
         this.isAdmin = res.data
+      }
+    })
+  }
+
+  private _checkMember() {
+    this.service.checkMemberSubGr({ groupId: this.groupId }).subscribe({
+      next: (res: any) => {
+        this.isJoinedGroup = res.data
       }
     })
   }
@@ -120,13 +129,10 @@ export class GroupDetailComponent implements OnInit {
       type: 'sub',
       groupId: this.groupId,
       isAdmin: false,
-      page: this.page
+      page: this.pageUser
     }).subscribe({
       next: (res: any) => {
         this.listMember = [...this.listMember, ...res.data?.result];
-        this.listMember.map(itm => {
-          if (itm.userId == this.userId) this.isJoinedGroup = true;
-        })
         this.maxPageUser = res.data.total ? Math.ceil(res.data.total / 10) : 1;
         this.totalMember = res.data.total;
         this.spinner.hide();

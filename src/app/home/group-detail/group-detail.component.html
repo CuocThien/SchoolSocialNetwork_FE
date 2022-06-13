@@ -154,7 +154,8 @@
         <h2 *ngIf="!listMember?.length" class="text-center">
           {{'TITLE.NO_DATA'|translate}}
         </h2>
-        <h5 class="btn-text" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">{{'BUTTON.LOAD_MORE'|translate}}
+        <h5 class="btn-text" style="cursor: pointer;" *ngIf="pageUser!=maxPageUser" (click)="goToPageUser()">
+          {{'BUTTON.LOAD_MORE'|translate}}
         </h5>
       </div>
     </div>

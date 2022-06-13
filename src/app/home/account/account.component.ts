@@ -110,6 +110,7 @@ export class AccountComponent implements OnInit {
       size: 'md'
     })
     this.modalRef.componentInstance.data = user;
+    this.modalRef.componentInstance.isRecoveryAccount = true;
     this.modalRef.result.then((res: any) => {
       this._getListAccount();
     }).catch(() => {

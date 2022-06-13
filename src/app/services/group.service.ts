@@ -99,6 +99,12 @@ export class GroupService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
     return this.http.get(url, { headers })
   }
+  checkMemberSubGr(data: any) {
+    const { groupId } = data || {}
+    const url = `${HOST}/group/sub/member?groupId=${groupId}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
+    return this.http.get(url, { headers })
+  }
   checkExistedAdminSubGr() {
     const url = `${HOST}/account/admin`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept-Language': localStorage.getItem('lang'), 'Authorization': 'Bearer ' + localStorage.getItem('token') })
