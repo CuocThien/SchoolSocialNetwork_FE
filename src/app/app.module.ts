@@ -49,6 +49,7 @@ import { SurveyComponent } from './popup/survey/survey.component';
 import { VideoChatComponent } from './popup/video-chat/video-chat.component';
 import { IncomingCallComponent } from './popup/incoming-call/incoming-call.component';
 import { CreateRecruitmentNewsComponent } from './popup/create-recruitment-news/create-recruitment-news.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { CreateRecruitmentNewsComponent } from './popup/create-recruitment-news/
     VideoChatComponent,
     IncomingCallComponent,
     CreateRecruitmentNewsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
