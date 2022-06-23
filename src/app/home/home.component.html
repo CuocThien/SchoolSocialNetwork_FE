@@ -10,7 +10,7 @@
   </div>
   <div class="home-container col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-9 col-9">
     <app-header class="position-fixed"></app-header>
-    <div class="u-margin-top-big">
+    <div class="u-margin-top-big min-h-sub">
       <div class="sub-navigation">
         <div class="sub-navigation__background" *ngFor="let item of listRouteNav; let i = index"
           [style.z-index]="listRouteNav.length - i" (click)="redirectTo(item.route, i)">

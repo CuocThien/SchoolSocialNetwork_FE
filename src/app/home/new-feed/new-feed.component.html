@@ -86,13 +86,13 @@
           <div class="card-content mb-5" *ngFor="let post of listPost; let i = index">
             <div class="card-content__post-title d-flex">
               <div (click)="goToGroup(post)"
-                class="position-relative col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3"
+                class="position-relative col-xxl-2 col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3"
                 style="height: 60px; cursor: pointer;">
                 <img class="image-group-nf position-absolute" style="top: 0; left: 0;" [src]="post.group.image" alt="">
                 <img class="position-absolute image-avatar" style="bottom: -5px; right: 6px;" [src]="post.avatar"
                   alt="">
               </div>
-              <div class="ps-3 col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-sm-8 col-7 d-inline-block h-100-pc text-start">
+              <div class="ps-3 col-xxl-8 col-xl-8 col-lg-7 col-md-8 col-sm-8 col-7 d-inline-block h-100-pc text-start">
                 <h3 (click)="goToGroup(post)" style="cursor: pointer; display: inline-block;">{{post.group.nameEn}}</h3>
                 <br>
                 <h5 (click)="goToGroup(post)" style="cursor: pointer; display: inline-block;">
@@ -100,14 +100,11 @@
                   {{post.createdDate | date:'HH:mm dd/MM/YYYY'}}</h5>
               </div>
               <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 text-end">
-                <button [ngClass]="post.author == userId?'opacity-100 visible':'opacity-0 invisible'"
-                  class="btn-report col-2" (click)="updatePost(post, i)">
+                <button *ngIf="post.author == userId" class="btn-report me-3" (click)="updatePost(post, i)">
                   <i class="bi bi-pencil-square"></i></button>
-                <button [ngClass]="post.author == userId?'opacity-100 visible':'opacity-0 invisible'"
-                  class="btn-report col-4" (click)="deletePost(post._id, i)">
+                <button *ngIf="post.author == userId" class="btn-report ms-3 me-3" (click)="deletePost(post._id, i)">
                   <i class="bi bi-trash3"></i></button>
-                <button [ngClass]="post.author != userId?'opacity-100 visible':'opacity-0 invisible'"
-                  class="btn-report col-2" (click)="report('post', post._id)">
+                <button *ngIf="post.author != userId" class="btn-report ms-3" (click)="report('post', post._id)">
                   <i class="bi bi-flag"></i></button>
               </div>
             </div>
