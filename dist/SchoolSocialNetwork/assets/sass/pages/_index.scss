@@ -1,0 +1,121 @@
+.index-container {
+  // background-color: #FFF;
+  background-color: #F0F2F5;
+  padding-bottom: 2rem;
+}
+
+.main-group {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 3rem 0;
+  padding-top: 1rem;
+  margin: 2rem;
+  border-radius: 1.5rem;
+  background-color: #FFF;
+}
+
+.post {
+  height: auto;
+  border-bottom: 1px solid rgba(grey, .3);
+  cursor: pointer;
+
+  &__auth {
+    height: fit-content;
+
+    &-avatar {
+      img {
+        max-width: 5rem;
+        max-height: 5rem;
+        width: auto;
+        height: auto;
+        border-radius: 50%;
+      }
+    }
+
+    &-info {
+      font-size: 1.4rem;
+
+      &__fullname {
+        color: $color-blue;
+      }
+    }
+  }
+}
+
+.pagination {
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+ngb-pagination {
+  display: inline-block;
+}
+.recruiment-news-container{
+  background-color: #FFF;
+  padding: 1rem 2rem;
+}
+.dropdown-container{
+  position: absolute;
+  right: 1rem;
+  top: 5px;
+}
+.card-recruitment-news{
+  position: relative;
+  width: 100%;
+  display: flex;
+  height: 20rem;
+  padding-right: 2rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  overflow: hidden;
+  &__button-control{
+   position: relative;
+    border:  none;
+    background-color: transparent;
+    font-size: 2rem;
+    height: 2rem;
+    color: #5F6778;
+    &::after{
+      content: none;
+    }
+  }
+  &__poster{
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    
+    &-img{
+      position: absolute;
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      border: 1px solid #e5e5e5;
+      margin: auto;
+      border-radius: 5px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &__info{
+    padding-left: 1rem;
+    padding-top: 2rem;
+    &-title{
+      font-weight: 700;
+      max-height: 4.2rem;
+      overflow: hidden;
+    }
+    &-company, &-location, &-position{
+      color: #5F6778;
+    }
+    &-salary{
+      color:  green;
+    }
+    &-experience{
+      color: red;
+    }
+  }
+}
