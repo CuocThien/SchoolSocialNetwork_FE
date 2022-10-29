@@ -1,0 +1,84 @@
+.sidebar {
+  height: 100%;
+  // background-image: linear-gradient(to right, #6A29D8, #4080E7);
+  background-color: #3950AD;
+  width: 16.67%;
+  -webkit-box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
+  -moz-box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
+  box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
+  transition: all .2s;
+}
+
+.button-container{
+ height: calc(100vh - 7.5rem);
+ overflow: scroll;
+ -ms-overflow-style: none;
+      /* for Internet Explorer, Edge */
+      scrollbar-width: none;
+ &::-webkit-scrollbar {
+  display: none;
+}
+}
+
+// dropdown manage
+.btn-group-dropdown {
+  height: 5.8rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-manage-dropdown {
+  &:checked~.btn-group-dropdown {
+    height: 70rem;
+    overflow: hidden;
+  }
+}
+
+// dropdown account
+.btn-account-dropdown {
+  height: 4.4rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-account-dropdown {
+  &:checked~.btn-account-dropdown {
+    height: 19rem;
+  }
+}
+
+// dropdown enterprise
+.btn-enterprise-dropdown {
+  height: 4.4rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-enterprise-dropdown {
+  &:checked~.btn-enterprise-dropdown {
+    height: 14rem;
+  }
+}
+
+// faculty
+.btn-faculty-dropdown {
+  height: 4.4rem;
+}
+// category
+.btn-category-dropdown {
+  height: 4.4rem;
+}
+
+
+// report
+.btn-report-dropdown {
+  height: 4.4rem;
+  overflow: hidden;
+  transition: height .5s;
+}
+
+.cb-report-dropdown {
+  &:checked~.btn-report-dropdown {
+    height: 14rem;
+  }
+}
