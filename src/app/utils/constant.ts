@@ -1,5 +1,5 @@
 const SERVER_HOST = 'https://schoolsocialnetwork.herokuapp.com'
-const LOCAL_HOST = 'http://54.179.69.206:3000'
+const LOCAL_HOST = 'http://54.169.230.175:3000'
 const HOST = LOCAL_HOST
 
 const LIST_ROLE = [
