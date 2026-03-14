@@ -1,5 +1,274 @@
-.button {
+// ========================================
+// MODERN SCHOLAR - BUTTON COMPONENT
+// ========================================
+// Comprehensive button system with variants, sizes, and states
+// Uses design tokens from _variables.scss
 
+// Base button styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  border: none;
+  cursor: pointer;
+  font-family: $font-body;
+  font-weight: $font-semibold;
+  line-height: 1;
+  text-decoration: none;
+  transition: all 150ms ease-out;
+  position: relative;
+
+  // Focus ring for accessibility
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // Disabled state
+  &:disabled,
+  &.disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Loading state
+  &.loading {
+    opacity: 0.7;
+    cursor: wait;
+    pointer-events: none;
+  }
+}
+
+// ========================================
+// BUTTON VARIANTS
+// ========================================
+
+// Primary Button
+.btn-primary {
+  background-color: $color-primary;
+  color: $color-text-inverse;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: darken($color-primary, 10%);
+  }
+
+  &:active:not(:disabled):not(.disabled) {
+    background-color: darken($color-primary, 20%);
+    transform: scale(0.98);
+    transition: all 100ms ease-in;
+  }
+}
+
+// Secondary Button
+.btn-secondary {
+  background-color: $color-secondary;
+  color: $color-text-inverse;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: darken($color-secondary, 10%);
+  }
+
+  &:active:not(:disabled):not(.disabled) {
+    background-color: darken($color-secondary, 20%);
+    transform: scale(0.98);
+    transition: all 100ms ease-in;
+  }
+}
+
+// Success Button
+.btn-success {
+  background-color: $color-success;
+  color: $color-text-inverse;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: darken($color-success, 10%);
+  }
+
+  &:active:not(:disabled):not(.disabled) {
+    background-color: darken($color-success, 20%);
+    transform: scale(0.98);
+    transition: all 100ms ease-in;
+  }
+}
+
+// Danger Button
+.btn-danger {
+  background-color: $color-danger;
+  color: $color-text-inverse;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: darken($color-danger, 10%);
+  }
+
+  &:active:not(:disabled):not(.disabled) {
+    background-color: darken($color-danger, 20%);
+    transform: scale(0.98);
+    transition: all 100ms ease-in;
+  }
+}
+
+// Outline Button
+.btn-outline {
+  background-color: transparent;
+  color: $color-primary;
+  border: 2px solid $color-border;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: rgba($color-primary, 0.05);
+    border-color: darken($color-border, 10%);
+  }
+
+  &:active:not(:disabled):not(.disabled) {
+    background-color: rgba($color-primary, 0.1);
+    transform: scale(0.98);
+    transition: all 100ms ease-in;
+  }
+}
+
+// ========================================
+// BUTTON SIZES
+// ========================================
+
+// Small Button (36px height)
+.btn-small {
+  height: 36px;
+  font-size: 12px;
+  padding: 0 $spacing-lg;
+  border-radius: 18px; // Pill shape
+
+  &.btn-icon-only {
+    width: 36px;
+    padding: 0;
+
+    i, svg, .icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Icon + Text or Text + Icon
+  &:not(.btn-icon-only) {
+    i, svg, .icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+
+    gap: 6px;
+  }
+}
+
+// Medium Button (48px height)
+.btn-medium {
+  height: 48px;
+  font-size: 14px;
+  padding: 0 $spacing-xl;
+  border-radius: $radius-pill; // Pill shape (24px)
+
+  &.btn-icon-only {
+    width: 48px;
+    padding: 0;
+
+    i, svg, .icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // Icon + Text or Text + Icon
+  &:not(.btn-icon-only) {
+    i, svg, .icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    gap: $spacing-sm;
+  }
+}
+
+// Large Button (56px height)
+.btn-large {
+  height: 56px;
+  font-size: 16px;
+  padding: 0 $spacing-xl;
+  border-radius: 28px; // Pill shape
+  font-weight: $font-bold;
+
+  &.btn-icon-only {
+    width: 56px;
+    padding: 0;
+
+    i, svg, .icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Icon + Text or Text + Icon
+  &:not(.btn-icon-only) {
+    i, svg, .icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    gap: $spacing-sm;
+  }
+}
+
+// ========================================
+// BUTTON VARIATIONS
+// ========================================
+
+// Icon Only Button (square, centered icon)
+.btn-icon-only {
+  // Ensure minimum touch target of 44x44px
+  min-width: 44px;
+  min-height: 44px;
+
+  // Ensure accessibility
+  &:not([aria-label]) {
+    @sr-only;
+  }
+}
+
+// Full Width Button
+.btn-full-width {
+  width: 100%;
+  display: flex;
+}
+
+// ========================================
+// BUTTON WITH ICONS
+// ========================================
+
+// Icon leading (icon before text)
+.btn-icon-leading {
+  flex-direction: row;
+}
+
+// Icon trailing (icon after text)
+.btn-icon-trailing {
+  flex-direction: row-reverse;
+}
+
+// ========================================
+// LEGACY BUTTON CLASSES
+// ========================================
+// Maintained for backwards compatibility
+// These will be gradually replaced with new .btn classes
+
+.button {
   &,
   &:link,
   &:visited {
@@ -31,7 +300,6 @@
 }
 
 .button-signup {
-
   &,
   &:link,
   &:visited {
@@ -63,7 +331,6 @@
 }
 
 .button-text {
-
   &,
   &:link,
   &:visited {
@@ -110,7 +377,6 @@
   transition: all .2s;
   cursor: pointer;
 
-
   &:hover,
   &:active {
     transform: scale(1.1);
@@ -150,7 +416,6 @@
   border: solid 2px white;
   color: white;
   background: transparent;
-  // font-weight: 700;
   letter-spacing: .1rem;
   font-family: 'Be Vietnam Pro', sans-serif;
   transition: all .3s ease-out;
@@ -225,7 +490,6 @@
 
 .btn-create-group {
   text-align: -webkit-right;
-  // text-align: right;
 
   button {
     font-size: 1.4rem;
@@ -277,42 +541,49 @@
   background-color: transparent;
   cursor: pointer;
 }
+
 .btn-lang{
   background-color: transparent;
   color: #263059;
   font-weight: bold;
   font-size: 1.3rem;
   border: none;
+
   &:hover{
     background-color: transparent;
-  color: #263059;
-  border: none;
+    color: #263059;
+    border: none;
   }
+
   &:active, &::after, &:focus{
     outline: none;
     box-shadow: none;
   }
 }
+
 .button-sidebar-text-icon{
-  border: 2px white solid; 
+  border: 2px white solid;
   border-radius: 5px;
 }
+
 .btn-report{
   background-color: transparent;
   border: none;
   font-size: 1.6rem;
   color: black;
   font-weight: bold;
+
   &__check{
     font-size: 2.3rem;
     color: green;
   }
 }
+
 .btn-load-reply{
   cursor: pointer;
   font-weight: bold;
-  
 }
+
 .btn-load-more{
   height: 3.5rem;
   font-size: 1.5rem;
@@ -335,7 +606,7 @@
   border-radius: 50%;
   z-index: 1000;
   opacity: .3;
-  
+
   &:hover{
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.2);
@@ -346,10 +617,31 @@
     right: -0.2rem;
     transform: translateY(-50%);
   }
+
   &__pre{
     top: 50%;
     left: -0.2rem;
     transform: translateY(-50%);
-
   }
+}
+
+// ========================================
+// SCREEN READER ONLY UTILITY
+// ========================================
+// For accessibility - hide content visually but keep it available to screen readers
+
+%sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only {
+  @extend %sr-only;
 }
