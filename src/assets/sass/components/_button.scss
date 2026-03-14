@@ -236,10 +236,11 @@
   min-width: 44px;
   min-height: 44px;
 
-  // Ensure accessibility
-  &:not([aria-label]) {
-    @sr-only;
-  }
+  // Ensure accessibility - icon-only buttons MUST have aria-label
+  // Developers should add: <button class="btn-icon-only" aria-label="Close icon">
+  // &:not([aria-label]) {
+  //   @extend %sr-only;
+  // }
 }
 
 // Full Width Button
