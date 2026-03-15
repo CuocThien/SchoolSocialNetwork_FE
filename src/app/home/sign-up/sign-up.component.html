@@ -1,182 +1,195 @@
-<input class="change-type-signup" [checked]="isSingleSignup" type="checkbox" name="" id="cb-sidebar">
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
-</ngx-spinner>
-
 <div class="signup-page">
-  <!-- Mode Toggle -->
-  <div class="signup-page__toggle-container">
-    <button class="signup-page__toggle-btn" (click)="changeButton($event)">
-      <span class="signup-page__toggle-text">{{contentButton|translate}}</span>
-    </button>
-  </div>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+  </ngx-spinner>
 
-  <div class="signup-container">
-    <!-- Single Signup Mode -->
-    <div class="single-signup">
-      <!-- Left Section - Form -->
-      <div class="signup-page__form-section">
-        <div class="signup-page__card">
-          <div class="signup-page__header">
-            <h2 class="signup-page__title">{{'SIGNUP.SINGLE_SIGNUP'|translate}}</h2>
-            <p class="signup-page__subtitle">Create your account to get started</p>
-          </div>
+  <!-- Single Signup Mode - Full Page -->
+  <div class="signup-container single-signup" [class.active]="isSingleSignup">
+    <!-- Left Section - Branding -->
+    <div class="signup-page__brand">
+      <h1 class="signup-page__logo-1">HCMUTE</h1>
+      <h1 class="signup-page__logo-2">NETWORK</h1>
+      <p class="signup-page__tagline">Join Our Academic Community</p>
 
-          <form class="signup-page__form" [formGroup]="signUpForm" (ngSubmit)="onSubmit();">
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-id">{{'TABLE.USERNAME'|translate}}</label>
-              <input
-                class="signup-page__input"
-                type="text"
-                id="signup-id"
-                placeholder="{{'TABLE.USERNAME'|translate}}"
-                formControlName="_id"
-                required
-              >
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-fullname">{{'TABLE.FULLNAME'|translate}}</label>
-              <input
-                class="signup-page__input"
-                type="text"
-                id="signup-fullname"
-                placeholder="{{'TABLE.FULLNAME'|translate}}"
-                formControlName="fullname"
-                required
-              >
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-dob">{{'TABLE.DOB'|translate}}</label>
-              <input
-                class="signup-page__input"
-                type="date"
-                id="signup-dob"
-                formControlName="dob"
-                required
-              >
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-address">{{'TABLE.ADDRESS'|translate}}</label>
-              <input
-                class="signup-page__input"
-                type="text"
-                id="signup-address"
-                placeholder="{{'TABLE.ADDRESS'|translate}}"
-                formControlName="address"
-                required
-              >
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-phone">{{'TABLE.PHONE'|translate}}</label>
-              <input
-                class="signup-page__input"
-                type="tel"
-                id="signup-phone"
-                placeholder="{{'TABLE.PHONE'|translate}}"
-                formControlName="phone"
-                required
-              >
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-year">{{'TABLE.YEAR'|translate}}</label>
-              <input
-                class="signup-page__input"
-                type="number"
-                id="signup-year"
-                placeholder="{{'TABLE.YEAR'|translate}}"
-                formControlName="year"
-                required
-              >
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-faculty">{{'SIDEBAR.FACULTY'|translate}}</label>
-              <ng-select
-                class="signup-page__select"
-                [searchable]="false"
-                [clearable]="false"
-                placeholder="{{'SIDEBAR.FACULTY'|translate}}"
-                formControlName="faculty"
-              >
-                <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
-                  {{isLangEn ? faculty.nameEn: faculty.nameVi}}
-                </ng-option>
-              </ng-select>
-            </div>
-
-            <div class="signup-page__form-group">
-              <label class="signup-page__label" for="signup-role">{{'TITLE.ROLE'|translate}}</label>
-              <ng-select
-                class="signup-page__select"
-                [searchable]="false"
-                [clearable]="false"
-                placeholder="{{'TITLE.ROLE'|translate}}"
-                formControlName="roleId"
-              >
-                <ng-option *ngFor="let role of listRole" [value]="role.roleId">
-                  {{isLangEn?role.nameEn:role.nameVi}}
-                </ng-option>
-              </ng-select>
-            </div>
-
-            <button type="submit" class="signup-page__submit-btn">{{'BUTTON.SIGN_UP'|translate}}</button>
-          </form>
-
-          <p class="signup-page__login-link">
-            Already have an account? <a routerLink="/login">Sign in</a>
-          </p>
-        </div>
-      </div>
-
-      <!-- Right Section - Branding -->
-      <div class="signup-page__brand">
-        <h1 class="signup-page__logo-1">HCMUTE</h1>
-        <h1 class="signup-page__logo-2">NETWORK</h1>
-        <p class="signup-page__tagline">Join Our Academic Community</p>
+      <!-- Toggle Button at Bottom of Branding -->
+      <div class="signup-page__brand-footer">
+        <button class="signup-page__toggle-btn" (click)="changeButton($event)">
+          <span class="signup-page__toggle-text">{{contentButton|translate}}</span>
+        </button>
       </div>
     </div>
 
-    <!-- Multiple Signup Mode -->
-    <div class="multiple-signup">
-      <!-- Left Section - Branding -->
-      <div class="signup-page__brand">
-        <h1 class="signup-page__logo-1">HCMUTE</h1>
-        <h1 class="signup-page__logo-2">NETWORK</h1>
-        <p class="signup-page__tagline">Bulk Student Registration</p>
-      </div>
+    <!-- Right Section - Form -->
+    <div class="signup-page__form-section">
+      <div class="signup-page__card">
+        <div class="signup-page__header">
+          <h2 class="signup-page__title">{{'SIGNUP.SINGLE_SIGNUP'|translate}}</h2>
+          <p class="signup-page__subtitle">Create your account to get started</p>
+        </div>
 
-      <!-- Right Section - Form -->
-      <div class="signup-page__form-section">
-        <div class="signup-page__card">
-          <div class="signup-page__header">
-            <h2 class="signup-page__title">{{'SIGNUP.MULTIPLE_SIGNUP'|translate}}</h2>
-            <p class="signup-page__subtitle">Upload student data file</p>
+        <form class="signup-page__form" [formGroup]="signUpForm" (ngSubmit)="onSubmit();">
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-id">{{'TABLE.USERNAME'|translate}}</label>
+            <input
+              class="signup-page__input"
+              type="text"
+              id="signup-id"
+              placeholder="{{'TABLE.USERNAME'|translate}}"
+              formControlName="_id"
+              required
+            >
           </div>
 
-          <form id="file-upload-form" class="signup-page__upload-form">
-            <div class="signup-page__upload-area" id="file-drag">
-              <input
-                class="signup-page__file-input"
-                id="file-upload"
-                type="file"
-                name="fileUpload"
-                accept=".xls,.xlsx"
-                (change)="fileUpload($event)"
-              >
-              <label for="file-upload" class="signup-page__upload-label">
-                <i class="bi bi-cloud-upload"></i>
-                <span class="signup-page__upload-text">Click to upload or drag and drop</span>
-                <span class="signup-page__upload-hint">.XLS, .XLSX (Max 5MB)</span>
-              </label>
-            </div>
-          </form>
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-fullname">{{'TABLE.FULLNAME'|translate}}</label>
+            <input
+              class="signup-page__input"
+              type="text"
+              id="signup-fullname"
+              placeholder="{{'TABLE.FULLNAME'|translate}}"
+              formControlName="fullname"
+              required
+            >
+          </div>
 
-          <button class="signup-page__submit-btn" (click)="onSubmit()">{{'BUTTON.SIGN_UP'|translate}}</button>
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-dob">{{'TABLE.DOB'|translate}}</label>
+            <input
+              class="signup-page__input"
+              type="date"
+              id="signup-dob"
+              formControlName="dob"
+              required
+            >
+          </div>
+
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-address">{{'TABLE.ADDRESS'|translate}}</label>
+            <input
+              class="signup-page__input"
+              type="text"
+              id="signup-address"
+              placeholder="{{'TABLE.ADDRESS'|translate}}"
+              formControlName="address"
+              required
+            >
+          </div>
+
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-phone">{{'TABLE.PHONE'|translate}}</label>
+            <input
+              class="signup-page__input"
+              type="tel"
+              id="signup-phone"
+              placeholder="{{'TABLE.PHONE'|translate}}"
+              formControlName="phone"
+              required
+            >
+          </div>
+
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-year">{{'TABLE.YEAR'|translate}}</label>
+            <input
+              class="signup-page__input"
+              type="number"
+              id="signup-year"
+              placeholder="{{'TABLE.YEAR'|translate}}"
+              formControlName="year"
+              required
+            >
+          </div>
+
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-faculty">{{'SIDEBAR.FACULTY'|translate}}</label>
+            <ng-select
+              class="signup-page__select"
+              [searchable]="false"
+              [clearable]="false"
+              placeholder="{{'SIDEBAR.FACULTY'|translate}}"
+              formControlName="faculty"
+            >
+              <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
+                {{isLangEn ? faculty.nameEn: faculty.nameVi}}
+              </ng-option>
+            </ng-select>
+          </div>
+
+          <div class="signup-page__form-group">
+            <label class="signup-page__label" for="signup-role">{{'TITLE.ROLE'|translate}}</label>
+            <ng-select
+              class="signup-page__select"
+              [searchable]="false"
+              [clearable]="false"
+              placeholder="{{'TITLE.ROLE'|translate}}"
+              formControlName="roleId"
+            >
+              <ng-option *ngFor="let role of listRole" [value]="role.roleId">
+                {{isLangEn?role.nameEn:role.nameVi}}
+              </ng-option>
+            </ng-select>
+          </div>
+
+          <button type="submit" class="signup-page__submit-btn">{{'BUTTON.SIGN_UP'|translate}}</button>
+        </form>
+
+        <p class="signup-page__login-link">
+          Already have an account? <a routerLink="/login">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Multiple Signup Mode - Full Page -->
+  <div class="signup-container multiple-signup" [class.active]="!isSingleSignup">
+    <!-- Left Section - Branding -->
+    <div class="signup-page__brand">
+      <h1 class="signup-page__logo-1">HCMUTE</h1>
+      <h1 class="signup-page__logo-2">NETWORK</h1>
+      <p class="signup-page__tagline">Bulk Student Registration</p>
+
+      <!-- Toggle Button at Bottom of Branding -->
+      <div class="signup-page__brand-footer">
+        <button class="signup-page__toggle-btn" (click)="changeButton($event)">
+          <span class="signup-page__toggle-text">{{contentButton|translate}}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Section - Form -->
+    <div class="signup-page__form-section">
+      <div class="signup-page__card">
+        <div class="signup-page__header">
+          <h2 class="signup-page__title">{{'SIGNUP.MULTIPLE_SIGNUP'|translate}}</h2>
+          <p class="signup-page__subtitle">Upload Excel file with student data</p>
         </div>
+
+        <form id="file-upload-form" class="signup-page__upload-form">
+          <div class="signup-page__upload-area" id="file-drag">
+            <input
+              class="signup-page__file-input"
+              id="file-upload"
+              type="file"
+              name="fileUpload"
+              accept=".xls,.xlsx"
+              (change)="fileUpload($event)"
+            >
+            <label for="file-upload" class="signup-page__upload-label">
+              <i class="bi bi-cloud-arrow-up signup-page__upload-icon"></i>
+              <div class="signup-page__upload-content">
+                <span class="signup-page__upload-text">Click to upload or drag and drop</span>
+                <span class="signup-page__upload-hint">.XLS or .XLSX format (Max 5MB)</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Features List -->
+          <div class="signup-page__upload-features">
+            <div class="signup-page__upload-feature">Supports bulk student registration</div>
+            <div class="signup-page__upload-feature">Auto-generate login credentials</div>
+            <div class="signup-page__upload-feature">Download account details as Excel</div>
+          </div>
+        </form>
+
+        <button class="signup-page__submit-btn" (click)="onSubmit()">{{'BUTTON.SIGN_UP'|translate}}</button>
       </div>
     </div>
   </div>
