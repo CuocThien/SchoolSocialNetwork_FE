@@ -208,5 +208,12 @@
         "EMPTY_USERNAME": "Vui lòng nhập username để yêu cầu OTP",
         "INVALID_OTP": "OTP không hợp lệ",
         "CHOOSE_CATE_RP": "Vui lòng chọn vấn đề cần báo cáo"
+    },
+    "CHAT": {
+        "NO_CONVERSATIONS": "Chưa có cuộc trò chuyện nào",
+        "START_SEARCHING": "Bắt đầu trò chuyện bằng cách tìm kiếm người dùng ở trên",
+        "START_CONVERSATION": "Bắt đầu cuộc trò chuyện",
+        "SEND_MESSAGE_TO": "Gửi tin nhắn đến",
+        "TYPE_MESSAGE": "Nhập tin nhắn..."
     }
 }

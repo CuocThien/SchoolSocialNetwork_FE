@@ -6,6 +6,7 @@
   height: calc(100vh - #{$header-height});
   background-color: $color-bg-pure;
   display: flex;
+  position: relative;
 }
 
 // ========================================
@@ -28,6 +29,7 @@
   display: flex;
   flex-direction: column;
   background-color: $color-bg-pure;
+  position: relative;
 
   @media (max-width: 1023px) {
     width: 300px;
@@ -38,7 +40,8 @@
     inset: 0;
     z-index: 10;
     transform: translateX(-100%);
-    transition: transform 300ms ease-out;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-xl;
 
     &.chat-page__sidebar--open {
       transform: translateX(0);
@@ -57,6 +60,78 @@
   font-weight: $font-bold;
   color: $color-text-primary;
   margin: 0;
+}
+
+// ========================================
+// MOBILE NAVIGATION BUTTONS
+// ========================================
+
+.chat-page__mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  color: $color-text-primary;
+  transition: all 150ms ease-out;
+  margin-right: $spacing-sm;
+
+  &:hover {
+    background-color: $color-bg-warm;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+
+  i {
+    font-size: $font-xl;
+  }
+}
+
+.chat-page__mobile-back-btn {
+  display: none;
+  position: absolute;
+  top: $spacing-lg;
+  left: $spacing-lg;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: $color-bg-pure;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  color: $color-text-primary;
+  box-shadow: $shadow-sm;
+  transition: all 150ms ease-out;
+
+  &:hover {
+    background-color: $color-bg-warm;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+
+  i {
+    font-size: $font-lg;
+  }
 }
 
 .chat-page__search {
@@ -91,11 +166,13 @@
   gap: $spacing-md;
   padding: $spacing-md $spacing-xl;
   cursor: pointer;
-  transition: all 150ms ease-out;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   border-left: 3px solid transparent;
+  position: relative;
 
   &:hover {
     background-color: $color-bg-warm;
+    transform: translateX(2px);
   }
 
   &:focus-visible {
@@ -107,6 +184,16 @@
   &--active {
     background-color: rgba($color-primary, 0.08);
     border-left-color: $color-primary;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, $color-primary 0%, lighten($color-primary, 10%) 100%);
+    }
   }
 
   &--hidden {
@@ -326,11 +413,26 @@
   padding: $spacing-md $spacing-lg;
   border-radius: $radius-lg;
   position: relative;
+  box-shadow: $shadow-xs;
+  transition: all 150ms ease-out;
 
   .chat-page__message--sent & {
     background-color: $color-primary;
     color: $color-text-inverse;
     border-bottom-right-radius: $spacing-xs;
+    box-shadow: 0 2px 8px rgba(48, 63, 159, 0.2);
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(48, 63, 159, 0.3);
+      transform: translateY(-1px);
+    }
+
+    // System message when sent (dark background, white text)
+    &.chat-page__message-bubble--system {
+      background-color: rgba(48, 63, 159, 0.9);
+      color: $color-text-inverse;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+    }
   }
 
   .chat-page__message--received & {
@@ -338,12 +440,20 @@
     color: $color-text-primary;
     border: 1px solid $color-border-light;
     border-bottom-left-radius: $spacing-xs;
-  }
+    border-left: 3px solid rgba($color-primary, 0.3);
 
-  &--system {
-    background-color: $color-bg-warm;
-    color: $color-text-secondary;
-    border: 1px dashed $color-border;
+    &:hover {
+      border-left-color: rgba($color-primary, 0.5);
+      box-shadow: $shadow-sm;
+    }
+
+    // System message when received (light background, dark text - original colors)
+    &.chat-page__message-bubble--system {
+      background-color: $color-bg-warm;
+      color: $color-text-secondary;
+      border: 1px dashed $color-border;
+      box-shadow: none;
+    }
   }
 }
 
@@ -351,8 +461,16 @@
   font-family: $font-body;
   font-size: $font-base;
   line-height: $leading-normal;
-  margin: 0 0 $spacing-2xl 0;
+  margin: 0 0 $spacing-sm 0;
   word-wrap: break-word;
+
+  .chat-page__message--sent & {
+    color: $color-text-inverse;
+  }
+
+  .chat-page__message--received & {
+    color: $color-text-primary;
+  }
 }
 
 .chat-page__message-time {
@@ -361,6 +479,14 @@
   font-size: $font-xs;
   opacity: 0.7;
   margin-top: $spacing-xs;
+
+  .chat-page__message--sent & {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .chat-page__message--received & {
+    color: $color-text-muted;
+  }
 }
 
 .chat-page__message-call {
@@ -370,7 +496,11 @@
 
   i {
     font-size: $font-2xl;
-    color: $color-primary;
+    color: $color-text-inverse;
+
+    .chat-page__message--received & {
+      color: $color-primary;
+    }
   }
 
   h4 {
@@ -378,12 +508,22 @@
     font-size: $font-sm;
     font-weight: $font-semibold;
     margin: 0;
+    color: $color-text-inverse;
+
+    .chat-page__message--received & {
+      color: $color-text-primary;
+    }
   }
 
   p {
     font-family: $font-body;
     font-size: $font-xs;
     margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+
+    .chat-page__message--received & {
+      color: $color-text-secondary;
+    }
   }
 }
 
@@ -406,10 +546,13 @@
   border-radius: $radius-pill;
   padding: $spacing-xs $spacing-xs $spacing-xs $spacing-lg;
   transition: all 150ms ease-out;
+  outline: none;
+  box-shadow: none;
 
   &:focus-within {
-    border-color: $color-accent;
-    box-shadow: 0 0 0 $focus-width rgba($color-accent, 0.2);
+    border-color: $color-info;
+    outline: none;
+    box-shadow: none;
   }
 }
 
@@ -420,6 +563,8 @@
   font-family: $font-body;
   font-size: $font-base;
   color: $color-text-primary;
+  outline: none;
+  box-shadow: none;
 
   &::placeholder {
     color: $color-text-muted;
@@ -427,6 +572,12 @@
 
   &:focus {
     outline: none;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
   }
 }
 
@@ -456,6 +607,134 @@
 
   i {
     font-size: $font-base;
+  }
+}
+
+// ========================================
+// EMPTY STATES
+// ========================================
+
+.chat-page__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-5xl $spacing-xl;
+  text-align: center;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: rgba($color-primary, 0.1);
+    border-radius: 50%;
+    margin-bottom: $spacing-lg;
+
+    i {
+      font-size: $font-4xl;
+      color: $color-primary;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $font-lg;
+    font-weight: $font-semibold;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  &__text {
+    font-family: $font-body;
+    font-size: $font-sm;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}
+
+.chat-page__messages-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: rgba($color-primary, 0.1);
+    border-radius: 50%;
+    margin-bottom: $spacing-md;
+
+    i {
+      font-size: $font-3xl;
+      color: $color-primary;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $font-base;
+    font-weight: $font-semibold;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-xs 0;
+  }
+
+  &__text {
+    font-family: $font-body;
+    font-size: $font-sm;
+    color: $color-text-muted;
+    margin: 0;
+  }
+}
+
+// ========================================
+// SCROLL TO BOTTOM BUTTON
+// ========================================
+
+.chat-page__scroll-bottom {
+  position: absolute;
+  bottom: 100px;
+  right: $spacing-xl;
+  width: 44px;
+  height: 44px;
+  background-color: $color-primary;
+  color: $color-text-inverse;
+  border: none;
+  border-radius: 50%;
+  box-shadow: $shadow-lg;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease-out;
+  z-index: 5;
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  i {
+    font-size: $font-lg;
+  }
+
+  @media (max-width: 767px) {
+    bottom: 80px;
+    right: $spacing-md;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -516,6 +795,7 @@
 
   &--online {
     background-color: $color-success;
+    animation: pulse 2s infinite;
   }
 
   &--offline {
@@ -524,6 +804,18 @@
 
   &--busy {
     background-color: $color-danger;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba($color-success, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba($color-success, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($color-success, 0);
   }
 }
 
@@ -636,4 +928,38 @@
 
 .chat-box__content-message__content {
   @extend .chat-page__message-bubble;
+}
+
+// ========================================
+// HIDE BREADCRUMB AND FOOTER ON CHAT PAGE
+// ========================================
+
+// Hide breadcrumb when chat page is active
+.u-margin-top-big:has(.chat-page) .breadcrumb-nav {
+  display: none !important;
+}
+
+// Hide footer when chat page is active
+.home-container:has(.chat-page) app-footer {
+  display: none !important;
+}
+
+// Alternative: Use general sibling combinator for broader compatibility
+// These hide breadcrumb/footer when chat page appears as a sibling
+.chat-page ~ .breadcrumb-nav,
+.chat-page ~ app-footer {
+  display: none !important;
+}
+
+// Hide breadcrumb and footer in the home container when chat is present
+.min-h-sub:has(.chat-page) {
+  .breadcrumb-nav {
+    display: none !important;
+  }
+}
+
+.home-container:has(.chat-page) {
+  app-footer {
+    display: none !important;
+  }
 }

@@ -208,5 +208,12 @@
         "EMPTY_USERNAME": "Please input username to requets OTP",
         "INVALID_OTP": "Invalid OTP code",
         "CHOOSE_CATE_RP": "Please choose category of report"
+    },
+    "CHAT": {
+        "NO_CONVERSATIONS": "No conversations yet",
+        "START_SEARCHING": "Start chatting by searching for users above",
+        "START_CONVERSATION": "Start the conversation",
+        "SEND_MESSAGE_TO": "Send a message to",
+        "TYPE_MESSAGE": "Type a message..."
     }
 }

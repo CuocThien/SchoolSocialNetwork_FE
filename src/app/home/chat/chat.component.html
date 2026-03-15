@@ -4,7 +4,16 @@
 
   <div class="chat-page__layout">
     <!-- Chat Sidebar (Conversation List) -->
-    <aside class="chat-page__sidebar">
+    <aside class="chat-page__sidebar" [class.chat-page__sidebar--open]="isSidebarOpen">
+      <!-- Mobile Back Button -->
+      <button
+        *ngIf="isMobile"
+        class="chat-page__mobile-back-btn"
+        (click)="closeSidebar()"
+        aria-label="Close conversations">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+
       <!-- Sidebar Header -->
       <div class="chat-page__sidebar-header">
         <h2 class="chat-page__sidebar-title">{{'TITLE.CHAT'|translate}}</h2>
@@ -26,6 +35,20 @@
 
       <!-- Conversation List -->
       <div class="chat-page__conversations">
+        <!-- Empty State - No Conversations -->
+        <div
+          *ngIf="!listConversation || listConversation.length === 0"
+          class="chat-page__empty-state"
+        >
+          <div class="chat-page__empty-state__icon">
+            <i class="bi bi-chat-dots"></i>
+          </div>
+          <h3 class="chat-page__empty-state__title">{{'CHAT.NO_CONVERSATIONS'|translate}}</h3>
+          <p class="chat-page__empty-state__text">
+            {{'CHAT.START_SEARCHING'|translate}}
+          </p>
+        </div>
+
         <!-- Active Conversations -->
         <div
           class="chat-page__conversation"
@@ -74,6 +97,15 @@
     <main class="chat-page__main">
       <!-- Chat Header -->
       <header class="chat-page__header">
+        <!-- Mobile Menu Toggle -->
+        <button
+          *ngIf="isMobile"
+          class="chat-page__mobile-menu-btn"
+          (click)="openSidebar()"
+          aria-label="Open conversations">
+          <i class="bi bi-list"></i>
+        </button>
+
         <div class="chat-page__header-user">
           <div class="chat-page__header-avatar">
             <img [src]="chatTitle?.avatar" alt="">
@@ -101,7 +133,22 @@
         [infiniteScrollThrottle]="throttle"
         [scrollWindow]="false"
         (scrolledUp)="onUp($event)"
+        (scrolled)="onScrolled()"
       >
+        <!-- Empty State - No Messages -->
+        <div
+          *ngIf="!messageList || messageList.length === 0"
+          class="chat-page__messages-empty"
+        >
+          <div class="chat-page__messages-empty__icon">
+            <i class="bi bi-paper-plane"></i>
+          </div>
+          <h3 class="chat-page__messages-empty__title">{{'CHAT.START_CONVERSATION'|translate}}</h3>
+          <p class="chat-page__messages-empty__text">
+            {{'CHAT.SEND_MESSAGE_TO'|translate}} {{chatTitle?.fullname || 'this user'}}
+          </p>
+        </div>
+
         <div
           class="chat-page__message"
           [class.chat-page__message--sent]="message.isAuth"
@@ -126,6 +173,15 @@
           </div>
         </div>
       </div>
+
+      <!-- Scroll to Bottom Button -->
+      <button
+        *ngIf="showScrollButton"
+        class="chat-page__scroll-bottom"
+        (click)="scrollToBottomSmooth()"
+        aria-label="Scroll to bottom">
+        <i class="bi bi-chevron-down"></i>
+      </button>
 
       <!-- Chat Input -->
       <div class="chat-page__input-wrapper">

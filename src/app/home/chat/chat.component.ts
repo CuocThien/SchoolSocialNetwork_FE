@@ -48,11 +48,20 @@ export class ChatComponent implements OnInit {
   @ViewChild('chatBoxContent') private chatbox!: ElementRef;
 
   modalRef: NgbModalRef;
+  isSidebarOpen = false;
+  isMobile = false;
+  showScrollButton = false;
   constructor(
     private service: ChatService,
     private spinner: NgxSpinnerService,
     private modalService: NgbModal
   ) {
+    // Check if mobile on init and resize
+    this.checkMobile();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => this.checkMobile());
+    }
+
     this.socket = io.io(`${HOST}`);
     this.socket.on(EVENT_MESSAGE_SSC.JOIN_ROOM_SSC, (data: any) => {
       //console.log(data)
@@ -291,5 +300,43 @@ export class ChatComponent implements OnInit {
     }).catch((err: any) => {
     });
 
+  }
+
+  // Mobile Navigation Methods
+  checkMobile() {
+    if (typeof window !== 'undefined') {
+      this.isMobile = window.innerWidth < 768;
+      if (!this.isMobile) {
+        this.isSidebarOpen = false;
+      }
+    }
+  }
+
+  openSidebar() {
+    this.isSidebarOpen = true;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
+
+  // Scroll Detection for Scroll to Bottom Button (using infinite scroll's scrolled event)
+  onScrolled() {
+    if (this.chatbox) {
+      const threshold = 100;
+      const element = this.chatbox.nativeElement;
+      const isAtBottom = element.scrollHeight - element.scrollTop - element.clientHeight < threshold;
+      this.showScrollButton = !isAtBottom;
+    }
+  }
+
+  scrollToBottomSmooth(): void {
+    try {
+      this.chatbox.nativeElement.scrollTo({
+        top: this.chatbox.nativeElement.scrollHeight,
+        behavior: 'smooth'
+      });
+      this.showScrollButton = false;
+    } catch (err) { }
   }
 }
