@@ -1,0 +1,355 @@
+.button {
+
+  &,
+  &:link,
+  &:visited {
+    display: block;
+    background-color: $color-primary-dark;
+    border-radius: 10rem;
+    border: none;
+    height: 4rem;
+    width: 50%;
+    color: $color-white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.button-signup {
+
+  &,
+  &:link,
+  &:visited {
+    display: block;
+    background-color: #7AAADF;
+    border-radius: 1rem;
+    border: none;
+    height: 4rem;
+    width: 50%;
+    color: $color-white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.button-text {
+
+  &,
+  &:link,
+  &:visited {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+    border: none;
+    text-align: right;
+    background-color: transparent;
+    width: 100%;
+    color: $color-primary-dark;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background-color: transparent;
+    color: $color-primary-dark-2;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &-resend {
+    width: fit-content;
+    top: .7rem;
+    right: .4rem;
+  }
+
+  &-cancel-modal {
+    top: -.2rem;
+    right: .5rem;
+    cursor: pointer;
+
+    i {
+      font-size: 4rem;
+    }
+  }
+}
+
+.btn-notification {
+  transition: all .2s;
+  cursor: pointer;
+
+
+  &:hover,
+  &:active {
+    transform: scale(1.1);
+  }
+
+  i {
+    color: #273156;
+    font-size: 3.2rem;
+
+    &:hover,
+    &:active {
+      color: #2d49af;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.button-control-sidebar {
+  z-index: 999;
+  left: 0;
+  top: 50%;
+  transition: all .3s;
+
+  fa-icon {
+    cursor: pointer;
+    color: $color-primary-dark-2;
+    font-size: 2rem;
+  }
+}
+
+.button-sidebar {
+  font-size: 1.6rem;
+  width: 80%;
+  margin: 1rem calc((100% - 80%)/2);
+  padding: .5rem;
+  border-radius: .5rem;
+  border: solid 2px white;
+  color: white;
+  background: transparent;
+  // font-weight: 700;
+  letter-spacing: .1rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .3s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    color: $color-primary-dark-2;
+    border: solid 2px $color-primary-dark-2;
+    background-color: white;
+  }
+
+  &__active{
+    color: $color-primary-dark-2;
+    border: solid 2px $color-primary-dark-2;
+    background-color: white;
+    font-weight: bolder!important;
+  }
+}
+
+.button-sidebar-text {
+  font-size: 1.6rem;
+  width: 80%;
+  padding: 0 .5rem;
+  margin: 1rem calc((100% - 80%)/2);
+  border: none;
+  color: white;
+  background: transparent;
+  letter-spacing: .1rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .3s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    color: yellow;
+  }
+
+  &__active{
+    color: yellow;
+  }
+}
+
+.button-bt {
+  min-height: 4rem;
+  height: auto;
+  width: 50%;
+  font-size: 1.5rem;
+}
+
+.btn-update {
+  width: 99%;
+  height: 42px;
+  font-size: 18px;
+  font-weight: 200;
+  padding: 0;
+  color: #FFF;
+  border: none;
+  border-radius: 10px;
+  background-color: #489FF4;
+  margin: auto 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: #FFF;
+  border: none;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+}
+
+.btn-create-group {
+  text-align: -webkit-right;
+  // text-align: right;
+
+  button {
+    font-size: 1.4rem;
+  }
+}
+
+.button-signup-group {
+  height: 6rem;
+  padding: 1rem 3rem;
+}
+
+.switch-button {
+  width: 80%;
+  height: 4rem;
+
+  &__single-signup {
+    display: inline-block;
+    margin: auto;
+    height: 3.5rem;
+    border: 2px solid #7AAADF;
+    border-radius: 100px;
+    color: #7AAADF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #7AAADF 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+    text-transform: uppercase;
+  }
+
+  &__multiple-signup {
+    margin: auto;
+    height: 3.5rem;
+    border: 2px solid #7AAADF;
+    border-radius: 100px;
+    color: white;
+    background-color: #7AAADF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: none;
+    transition: all .5s;
+    text-transform: uppercase;
+  }
+}
+
+.btn-edit, .btn-delete, .btn-restore{
+  font-size: 2rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+.btn-lang{
+  background-color: transparent;
+  color: #263059;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border: none;
+  &:hover{
+    background-color: transparent;
+  color: #263059;
+  border: none;
+  }
+  &:active, &::after, &:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
+.button-sidebar-text-icon{
+  border: 2px white solid; 
+  border-radius: 5px;
+}
+.btn-report{
+  background-color: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: black;
+  font-weight: bold;
+  &__check{
+    font-size: 2.3rem;
+    color: green;
+  }
+}
+.btn-load-reply{
+  cursor: pointer;
+  font-weight: bold;
+  
+}
+.btn-load-more{
+  height: 3.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border: 1px solid #EBEBEB;
+  width: 250px;
+  border-radius: 500px;
+  margin-bottom: 50px;
+  background-color: #FFF;
+  color: #000;
+  box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-paging-news{
+  position: absolute;
+  font-size: 3.5rem;
+  height: 5rem;
+  width: 5rem;
+  border: none;
+  border-radius: 50%;
+  z-index: 1000;
+  opacity: .3;
+  
+  &:hover{
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &__next{
+    top: 50%;
+    right: -0.2rem;
+    transform: translateY(-50%);
+  }
+  &__pre{
+    top: 50%;
+    left: -0.2rem;
+    transform: translateY(-50%);
+
+  }
+}

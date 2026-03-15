@@ -25,15 +25,12 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
-  line-height: 1.7;
-  color: $color-grey-dark;
-  // padding: 3rem;
-
-  // @include respond(tab-port) {
-  //     padding: 0;
-  // }
+  line-height: 1.6;
+  color: $color-text-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input::-webkit-outer-spin-button,

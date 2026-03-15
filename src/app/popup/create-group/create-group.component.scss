@@ -1,0 +1,51 @@
+// ========================================
+// MODERN SCHOLAR - CREATE GROUP MODAL
+// ========================================
+
+.create-group-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// ========================================
+// FORM ACTIONS
+// ========================================
+
+.create-group-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $color-border-light;
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    min-width: 120px;
+
+    i {
+      font-size: $font-base;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .create-group-form {
+    gap: $spacing-md;
+  }
+
+  .create-group-form__actions {
+    flex-direction: column-reverse;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

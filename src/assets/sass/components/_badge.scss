@@ -1,0 +1,363 @@
+// ========================================
+// MODERN SCHOLAR - BADGE COMPONENT
+// ========================================
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  height: 24px;
+  padding: 0 $spacing-md;
+  font-family: $font-body;
+  font-size: $font-xs;
+  font-weight: $font-semibold;
+  line-height: 1;
+  border-radius: $radius-pill;
+  white-space: nowrap;
+  transition: all 150ms ease-out;
+}
+
+// ========================================
+// BADGE VARIANTS
+// ========================================
+
+// Primary badge
+.badge--primary {
+  background-color: $color-primary;
+  color: $color-text-inverse;
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+  }
+}
+
+// Secondary badge
+.badge--secondary {
+  background-color: $color-secondary;
+  color: $color-text-inverse;
+
+  &:hover {
+    background-color: darken($color-secondary, 10%);
+  }
+}
+
+// Accent badge
+.badge--accent {
+  background-color: $color-accent;
+  color: $color-text-inverse;
+
+  &:hover {
+    background-color: darken($color-accent, 10%);
+  }
+}
+
+// Success badge
+.badge--success {
+  background-color: $color-success-bg;
+  color: $color-success;
+
+  &:hover {
+    background-color: darken($color-success-bg, 5%);
+  }
+}
+
+// Warning badge
+.badge--warning {
+  background-color: $color-warning-bg;
+  color: $color-warning;
+
+  &:hover {
+    background-color: darken($color-warning-bg, 5%);
+  }
+}
+
+// Danger badge
+.badge--danger {
+  background-color: $color-danger-bg;
+  color: $color-danger;
+
+  &:hover {
+    background-color: darken($color-danger-bg, 5%);
+  }
+}
+
+// Info badge
+.badge--info {
+  background-color: $color-info-bg;
+  color: $color-info;
+
+  &:hover {
+    background-color: darken($color-info-bg, 5%);
+  }
+}
+
+// Neutral/Muted badge
+.badge--muted {
+  background-color: $color-bg-warm;
+  color: $color-text-secondary;
+
+  &:hover {
+    background-color: darken($color-bg-warm, 5%);
+  }
+}
+
+// Outline badges
+.badge--outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+
+  &.badge--primary {
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+
+  &.badge--secondary {
+    color: $color-secondary;
+    border-color: $color-secondary;
+  }
+
+  &.badge--accent {
+    color: $color-accent;
+    border-color: $color-accent;
+  }
+
+  &.badge--success {
+    color: $color-success;
+    border-color: $color-success;
+  }
+
+  &.badge--warning {
+    color: $color-warning;
+    border-color: $color-warning;
+  }
+
+  &.badge--danger {
+    color: $color-danger;
+    border-color: $color-danger;
+  }
+}
+
+// ========================================
+// BADGE WITH ICON
+// ========================================
+
+.badge--with-icon {
+  .badge__icon {
+    font-size: $font-xs;
+  }
+}
+
+// ========================================
+// BADGE SIZES
+// ========================================
+
+.badge--small {
+  height: 20px;
+  padding: 0 $spacing-sm;
+  font-size: 10px;
+}
+
+.badge--large {
+  height: 28px;
+  padding: 0 $spacing-lg;
+  font-size: $font-sm;
+}
+
+// ========================================
+// DOT BADGE (indicator)
+// ========================================
+
+.badge--dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+
+  &.badge--primary {
+    background-color: $color-primary;
+  }
+
+  &.badge--success {
+    background-color: $color-success;
+  }
+
+  &.badge--warning {
+    background-color: $color-warning;
+  }
+
+  &.badge--danger {
+    background-color: $color-danger;
+  }
+
+  &.badge--info {
+    background-color: $color-info;
+  }
+}
+
+// Dot badge with pulse animation
+.badge--dot.badge--pulse {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: pulse 1.5s ease-out infinite;
+  }
+
+  &.badge--primary::after {
+    background-color: $color-primary;
+  }
+
+  &.badge--success::after {
+    background-color: $color-success;
+  }
+
+  &.badge--danger::after {
+    background-color: $color-danger;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+// ========================================
+// COUNTER BADGE
+// ========================================
+
+.badge--counter {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 $spacing-xs;
+  font-size: 10px;
+  font-weight: $font-bold;
+  border-radius: $radius-pill;
+  background-color: $color-danger;
+  color: $color-text-inverse;
+  border: 2px solid $color-bg-pure;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// ========================================
+// CLICKABLE BADGES
+// ========================================
+
+.badge--clickable {
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-sm;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+}
+
+// ========================================
+// DISMISSIBLE BADGE
+// ========================================
+
+.badge--dismissible {
+  padding-right: $spacing-sm;
+
+  .badge__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: $spacing-xs;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    border-radius: 50%;
+    transition: all 150ms ease-out;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+  }
+}
+
+// ========================================
+// BADGE GROUPS
+// ========================================
+
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.badge-group--stacked {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .badge {
+    font-size: 10px;
+  }
+
+  .badge--large {
+    font-size: $font-xs;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+
+  .badge--pulse::after {
+    animation: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .badge--outline {
+    border-width: 2px;
+  }
+}

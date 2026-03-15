@@ -1,0 +1,290 @@
+// ========================================
+// MODERN SCHOLAR - TABS COMPONENT
+// ========================================
+
+.tabs {
+  width: 100%;
+}
+
+// ========================================
+// TAB LIST
+// ========================================
+
+.tabs__list {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 2px solid $color-border;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: $spacing-md;
+}
+
+// ========================================
+// TAB ITEM
+// ========================================
+
+.tabs__item {
+  flex: 0 1 auto;
+  position: relative;
+}
+
+.tabs__trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 48px;
+  padding: 0 $spacing-lg;
+  font-family: $font-body;
+  font-size: $font-base;
+  font-weight: $font-medium;
+  color: $color-text-secondary;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  white-space: nowrap;
+
+  &:hover {
+    color: $color-text-primary;
+    background-color: $color-bg-warm;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $color-bg-warm;
+  }
+
+  &:focus-visible {
+    background-color: $color-bg-warm;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+    border-radius: $radius-sm;
+  }
+
+  &[aria-selected="true"] {
+    color: $color-primary;
+    font-weight: $font-semibold;
+    border-bottom-color: $color-primary;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover {
+      color: $color-text-secondary;
+      background-color: transparent;
+    }
+  }
+
+  // Icon in tabs
+  .tabs__icon {
+    font-size: $font-lg;
+  }
+}
+
+// ========================================
+// TAB PANEL
+// ========================================
+
+.tabs__panel {
+  padding: $spacing-xl 0;
+  animation: fadeIn 150ms ease-out;
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ========================================
+// TAB VARIANTS
+// ========================================
+
+// Vertical tabs
+.tabs--vertical {
+  display: flex;
+  gap: $spacing-lg;
+
+  .tabs__list {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 2px solid $color-border;
+    width: 240px;
+    flex-shrink: 0;
+  }
+
+  .tabs__trigger {
+    width: 100%;
+    border-bottom: none;
+    border-right: 3px solid transparent;
+    justify-content: flex-start;
+
+    &[aria-selected="true"] {
+      border-bottom-color: transparent;
+      border-right-color: $color-primary;
+    }
+  }
+
+  .tabs__panel {
+    flex: 1;
+  }
+}
+
+// Pill tabs
+.tabs--pill {
+  .tabs__list {
+    border-bottom: none;
+    gap: $spacing-sm;
+  }
+
+  .tabs__trigger {
+    height: 40px;
+    padding: 0 $spacing-lg;
+    border: none;
+    border-radius: $radius-pill;
+    background-color: $color-bg-warm;
+    color: $color-text-primary;
+
+    &:hover {
+      background-color: darken($color-bg-warm, 5%);
+    }
+
+    &[aria-selected="true"] {
+      background-color: $color-primary;
+      color: $color-text-inverse;
+      font-weight: $font-semibold;
+
+      &:hover {
+        background-color: darken($color-primary, 10%);
+      }
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+  }
+}
+
+// Underline tabs (minimal)
+.tabs--underline {
+  .tabs__list {
+    border-bottom: 1px solid $color-border;
+  }
+
+  .tabs__trigger {
+    border-bottom-width: 2px;
+    color: $color-text-muted;
+
+    &:hover {
+      color: $color-text-secondary;
+      background-color: transparent;
+    }
+
+    &[aria-selected="true"] {
+      color: $color-accent;
+      border-bottom-color: $color-accent;
+    }
+  }
+}
+
+// ========================================
+// TAB SIZES
+// ========================================
+
+.tabs--small {
+  .tabs__trigger {
+    height: 36px;
+    padding: 0 $spacing-md;
+    font-size: $font-sm;
+  }
+}
+
+.tabs--large {
+  .tabs__trigger {
+    height: 56px;
+    padding: 0 $spacing-xl;
+    font-size: $font-lg;
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  // Horizontal tabs become scrollable
+  .tabs__list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color-border;
+      border-radius: $radius-pill;
+    }
+  }
+
+  .tabs__item {
+    flex-shrink: 0;
+  }
+
+  // Vertical tabs stack on mobile
+  .tabs--vertical {
+    flex-direction: column;
+
+    .tabs__list {
+      width: 100%;
+      border-right: none;
+      border-bottom: 2px solid $color-border;
+      flex-direction: row;
+      overflow-x: auto;
+    }
+
+    .tabs__trigger {
+      border-right: none;
+      border-bottom: 3px solid transparent;
+
+      &[aria-selected="true"] {
+        border-right-color: transparent;
+        border-bottom-color: $color-primary;
+      }
+    }
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .tabs__trigger[aria-selected="true"] {
+    border-bottom-width: 4px;
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .tabs__panel {
+    animation: none;
+  }
+
+  .tabs__trigger {
+    transition: none;
+  }
+}

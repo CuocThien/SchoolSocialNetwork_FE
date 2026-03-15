@@ -1,30 +1,78 @@
-<div class="form-popup form-create-post position-relative">
+<div class="create-post-modal modal">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <button class="btn-cancel position-absolute" (click)="onClose()"><img
-      src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
-  <h2>{{title|translate}}</h2>
-  <form (ngSubmit)="onSubmit(form);" #form="ngForm">
-    <textarea *ngIf="isMainGroup" rows="2" type="text" name="title" ngModel class="form-create-post__title"
-      placeholder="{{'POPUP.INPUT_TITLE'|translate}}" maxlength="100" (ngModelChange)="checkLength($event)"
-      required></textarea>
-    <p class="error-msg" *ngIf="isOverMaxLength && isMainGroup">{{'POPUP.TITLE_LENGTH'|translate}}</p>
 
-    <div class="text-end d-flex flex-column flex-sm-column flex-md-row">
-      <h5 class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12" *ngIf="groupId=='grsv'">
-        {{'TITLE.CATEGORY'|translate}}</h5>
-      <ng-select
-        class="d-inline u-margin-vertical-auto text-center col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
-        [searchable]="true" [(ngModel)]="categoryId" name="categoryId" [clearable]="false" *ngIf="groupId=='grsv'">
-        <ng-option *ngFor="let category of listCategory" [value]="category._id">
-          {{isLangEn?category.nameEn:category.nameVi}}
-        </ng-option>
-      </ng-select>
+  <div class="modal__dialog">
+    <!-- Modal Header -->
+    <div class="modal__header">
+      <h2 class="modal__title">{{title|translate}}</h2>
+      <button class="modal__close" (click)="onClose()" aria-label="Close">
+        <i class="bi bi-x-lg"></i>
+      </button>
     </div>
-    <h5>{{'TABLE.CONTENT'|translate}}</h5>
-    <ckeditor #editor [config]="ckeConfig" id="description" [(ngModel)]="content" name="content">
-    </ckeditor>
 
-    <button class="btn btn-primary" type="submit">Post</button>
-  </form>
+    <!-- Modal Body -->
+    <div class="modal__body">
+      <form class="create-post-form" (ngSubmit)="onSubmit(form);" #form="ngForm">
+        <!-- Post Title (for main group) -->
+        <div class="form-group" *ngIf="isMainGroup">
+          <label class="form-label" for="post-title">{{'POPUP.INPUT_TITLE'|translate}}</label>
+          <textarea
+            class="form-control create-post-form__title"
+            id="post-title"
+            rows="2"
+            name="title"
+            ngModel
+            placeholder="{{'POPUP.INPUT_TITLE'|translate}}"
+            maxlength="100"
+            (ngModelChange)="checkLength($event)"
+            required
+          ></textarea>
+          <p class="form-text form-text--error" *ngIf="isOverMaxLength && isMainGroup">
+            {{'POPUP.TITLE_LENGTH'|translate}}
+          </p>
+        </div>
+
+        <!-- Category Selection (for general group) -->
+        <div class="form-group" *ngIf="groupId=='grsv'">
+          <label class="form-label" for="post-category">{{'TITLE.CATEGORY'|translate}}</label>
+          <ng-select
+            class="form-select"
+            [searchable]="true"
+            [(ngModel)]="categoryId"
+            name="categoryId"
+            [clearable]="false"
+            placeholder="{{'TITLE.SELECT_CATEGORY'|translate}}"
+          >
+            <ng-option *ngFor="let category of listCategory" [value]="category._id">
+              {{isLangEn?category.nameEn:category.nameVi}}
+            </ng-option>
+          </ng-select>
+        </div>
+
+        <!-- Post Content -->
+        <div class="form-group">
+          <label class="form-label" for="post-content">{{'TABLE.CONTENT'|translate}}</label>
+          <ckeditor
+            #editor
+            [config]="ckeConfig"
+            id="description"
+            [(ngModel)]="content"
+            name="content"
+          ></ckeditor>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="create-post-form__actions">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">
+            {{'BUTTON.CANCEL'|translate}}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-send"></i>
+            <span>{{'BUTTON.POST'|translate}}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

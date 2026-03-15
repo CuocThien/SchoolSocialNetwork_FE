@@ -1,0 +1,464 @@
+// ========================================
+// MODERN SCHOLAR - RADIO COMPONENT
+// ========================================
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+// ========================================
+// RADIO INPUT
+// ========================================
+
+.radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+
+  // Focus state
+  &:focus + .radio__control {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  &:focus:not(:focus-visible) + .radio__control {
+    box-shadow: none;
+  }
+
+  &:focus-visible + .radio__control {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  // Checked state
+  &:checked + .radio__control {
+    border-color: $color-primary;
+
+    .radio__dot {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Disabled state
+  &:disabled + .radio__control {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: $color-bg-warm;
+    border-color: $color-border;
+  }
+
+  // Invalid state
+  &:invalid:not(:placeholder-shown) + .radio__control {
+    border-color: $color-danger;
+
+    &:focus,
+    &:focus-visible {
+      border-color: $color-danger;
+      box-shadow: 0 0 0 $focus-width rgba($color-danger, 0.3);
+    }
+  }
+}
+
+// ========================================
+// RADIO CONTROL
+// ========================================
+
+.radio__control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: $color-bg-pure;
+  border: 2px solid $color-border;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  flex-shrink: 0;
+  position: relative;
+
+  &:hover {
+    border-color: darken($color-border, 15%);
+  }
+
+  .radio__input:disabled + & {
+    &:hover {
+      border-color: $color-border;
+    }
+  }
+}
+
+// ========================================
+// RADIO DOT (INDICATOR)
+// ========================================
+
+.radio__dot {
+  width: 10px;
+  height: 10px;
+  background-color: $color-primary;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 150ms ease-out;
+}
+
+// ========================================
+// RADIO LABEL
+// ========================================
+
+.radio__label {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-md;
+  font-family: $font-body;
+  font-size: $font-base;
+  color: $color-text-primary;
+  cursor: pointer;
+  user-select: none;
+
+  .radio__input:disabled ~ & {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.radio__label-text {
+  line-height: $leading-normal;
+}
+
+// ========================================
+// RADIO SIZES
+// ========================================
+
+.radio--small {
+  .radio__control {
+    width: 16px;
+    height: 16px;
+  }
+
+  .radio__dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .radio__label {
+    font-size: $font-sm;
+  }
+}
+
+.radio--large {
+  .radio__control {
+    width: 24px;
+    height: 24px;
+  }
+
+  .radio__dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .radio__label {
+    font-size: $font-lg;
+  }
+}
+
+// ========================================
+// RADIO VARIANTS
+// ========================================
+
+// Pill radio (segmented control style)
+.radio--pill {
+  .radio__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background-color: $color-bg-warm;
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    transition: all 150ms ease-out;
+
+    &:hover {
+      background-color: darken($color-bg-warm, 5%);
+      border-color: darken($color-border, 10%);
+    }
+  }
+
+  .radio__control {
+    display: none;
+  }
+
+  .radio__input:checked ~ .radio__label {
+    background-color: rgba($color-primary, 0.1);
+    border-color: $color-primary;
+    color: $color-primary;
+    font-weight: $font-semibold;
+  }
+
+  .radio__input:disabled ~ .radio__label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Card radio (larger clickable area)
+.radio--card {
+  display: block;
+
+  .radio__label {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    background-color: $color-bg-pure;
+    border: 2px solid $color-border;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+
+    &:hover {
+      border-color: darken($color-border, 15%);
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  .radio__control {
+    align-self: flex-start;
+  }
+
+  .radio__input:checked ~ .radio__label {
+    border-color: $color-primary;
+    background-color: rgba($color-primary, 0.05);
+    box-shadow: $shadow-md;
+  }
+
+  .radio__input:disabled ~ .radio__label {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .radio__card-title {
+    font-weight: $font-semibold;
+    color: $color-text-primary;
+  }
+
+  .radio__card-description {
+    font-size: $font-sm;
+    color: $color-text-secondary;
+  }
+}
+
+// Button radio style
+.radio--button {
+  .radio__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-md $spacing-lg;
+    background-color: $color-bg-pure;
+    border: 2px solid $color-border;
+    border-radius: $radius-md;
+    transition: all 150ms ease-out;
+    min-width: 80px;
+
+    &:hover {
+      background-color: $color-bg-warm;
+      border-color: darken($color-border, 15%);
+    }
+  }
+
+  .radio__control {
+    display: none;
+  }
+
+  .radio__input:checked ~ .radio__label {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: $color-text-inverse;
+    font-weight: $font-semibold;
+  }
+
+  .radio__input:disabled ~ .radio__label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ========================================
+// RADIO GROUP
+// ========================================
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.radio-group__label {
+  font-family: $font-heading;
+  font-size: $font-base;
+  font-weight: $font-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.radio-group__error {
+  font-family: $font-body;
+  font-size: $font-sm;
+  color: $color-danger;
+  margin-top: $spacing-xs;
+}
+
+.radio-group__help {
+  font-family: $font-body;
+  font-size: $font-sm;
+  color: $color-text-muted;
+  margin-top: $spacing-sm;
+}
+
+// ========================================
+// SEGMENTED CONTROL (iOS style)
+// ========================================
+
+.radio-segmented {
+  display: inline-flex;
+  background-color: $color-bg-warm;
+  border-radius: $radius-md;
+  padding: 4px;
+
+  .radio {
+    flex: 1;
+  }
+
+  .radio__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-sm;
+    transition: all 150ms ease-out;
+    font-weight: $font-medium;
+    font-size: $font-sm;
+  }
+
+  .radio__control {
+    display: none;
+  }
+
+  .radio__input:checked ~ .radio__label {
+    background-color: $color-bg-pure;
+    color: $color-primary;
+    box-shadow: $shadow-sm;
+  }
+
+  .radio__input:disabled ~ .radio__label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ========================================
+// RADIO WITH DESCRIPTION
+// ========================================
+
+.radio--with-description {
+  display: flex;
+  flex-direction: column;
+
+  .radio__label {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  .radio__description {
+    font-size: $font-sm;
+    color: $color-text-secondary;
+    margin-left: 32px;
+  }
+}
+
+// ========================================
+// ERROR STATE
+// ========================================
+
+.radio--error {
+  .radio__control {
+    border-color: $color-danger;
+  }
+
+  .radio__input:focus + .radio__control,
+  .radio__input:focus-visible + .radio__control {
+    box-shadow: 0 0 0 $focus-width rgba($color-danger, 0.3);
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .radio-group--horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .radio--card {
+    .radio__label {
+      padding: $spacing-md;
+    }
+  }
+
+  .radio-segmented {
+    flex-direction: column;
+    width: 100%;
+
+    .radio {
+      width: 100%;
+    }
+
+    .radio__label {
+      justify-content: flex-start;
+    }
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .radio__control,
+  .radio__dot,
+  .radio--pill .radio__label,
+  .radio--card .radio__label,
+  .radio--button .radio__label {
+    transition: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .radio__control {
+    border-width: 3px;
+  }
+
+  .radio__dot {
+    width: 12px;
+    height: 12px;
+  }
+}

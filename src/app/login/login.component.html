@@ -1,20 +1,76 @@
-<div class="container background-1 d-flex flex-row-reverse">
-  <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 col-12 u-margin-vertical-auto">
-    <div class="form u-center-text u-margin-horizontal-auto col-xl-6 col-lg-6 col-md-8 col-xm-10 col-12">
+<div class="login-page">
+  <!-- Left Section - Branding -->
+  <div class="login-page__brand">
+    <h1 class="login-page__logo-1">HCMUTE</h1>
+    <h1 class="login-page__logo-2">NETWORK</h1>
+    <p class="login-page__tagline">Connecting Students, Faculty & Knowledge</p>
+  </div>
+
+  <!-- Right Section - Login Form -->
+  <div class="login-page__form-section">
+    <!-- Mobile Logo -->
+    <div class="login-page__mobile-logo">
+      <h1>HCMUTE <span>NETWORK</span></h1>
+    </div>
+
+    <div class="login-page__card">
+      <div class="login-page__header">
+        <h2 class="login-page__title">Welcome Back</h2>
+        <p class="login-page__subtitle">Sign in to your account</p>
+      </div>
+
       <form (ngSubmit)="onSubmit(formSignIn);" #formSignIn="ngForm">
-        <h3 class="u-margin-bottom-medium heading-primary">Social Network</h3>
-        <input type="text" class="form-control u-margin-bottom-small" ngModel name="_id" placeholder="Username">
-        <div class="d-flex position-relative u-margin-bottom-small">
-          <input type="{{typeOfInputPass}}" class="form-control" ngModel name="password" placeholder="Password">
-          <a (click)="showPass()" class="position-absolute btn-show-pass">
-            <i class="bi {{iconShowPass}}"></i>
-          </a>
+        <!-- Username Field -->
+        <div class="login-page__form-group">
+          <label class="login-page__label" for="username">Username</label>
+          <input
+            type="text"
+            class="login-page__input"
+            id="username"
+            ngModel
+            name="_id"
+            placeholder="Enter your username"
+            required
+            autocomplete="username"
+          >
         </div>
-        <div class="w-100-pc text-end">
-          <a class="button-text u-margin-bottom-small d-inline-block w-auto" (click)="forgotPass()">Forgot password?</a>
+
+        <!-- Password Field -->
+        <div class="login-page__form-group">
+          <label class="login-page__label" for="password">Password</label>
+          <div class="login-page__password-wrapper">
+            <input
+              type="{{typeOfInputPass}}"
+              class="login-page__input"
+              id="password"
+              ngModel
+              name="password"
+              placeholder="Enter your password"
+              required
+              autocomplete="current-password"
+            >
+            <button
+              type="button"
+              class="login-page__toggle-password"
+              (click)="showPass()"
+              aria-label="Toggle password visibility"
+            >
+              <i class="bi {{iconShowPass}}"></i>
+            </button>
+          </div>
         </div>
-        <button class="button u-margin-bottom-small u-margin-horizontal-auto">LOG IN</button>
+
+        <!-- Forgot Password Link -->
+        <a class="login-page__forgot-link" (click)="forgotPass()">Forgot password?</a>
+
+        <!-- Submit Button -->
+        <button type="submit" class="login-page__submit-btn">LOG IN</button>
       </form>
+
+      <!-- Sign Up Link -->
+      <p class="login-page__signup-link">
+        Do not have an account? <a routerLink="/sign-up">Sign up</a>
+      </p>
     </div>
   </div>
 </div>

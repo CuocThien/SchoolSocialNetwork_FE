@@ -1,0 +1,310 @@
+// ========================================
+// MODERN SCHOLAR - TOOLTIP COMPONENT
+// ========================================
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+// ========================================
+// TOOLTIP POPPER
+// ========================================
+
+.tooltip__popper {
+  position: absolute;
+  z-index: 1070;
+  background-color: $color-text-primary;
+  color: $color-text-inverse;
+  font-family: $font-body;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  line-height: $leading-normal;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  max-width: 250px;
+  text-align: center;
+  pointer-events: none;
+  white-space: normal;
+  box-shadow: $shadow-md;
+
+  // Animation
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 150ms ease-out;
+
+  &[aria-hidden="false"] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  // Arrow
+  &::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: inherit;
+    transform: rotate(45deg);
+  }
+}
+
+// ========================================
+// TOOLTIP POSITIONS
+// ========================================
+
+// Top
+.tooltip--top .tooltip__popper {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+
+  &[aria-hidden="false"] {
+    transform: translateX(-50%) scale(1);
+  }
+
+  &::after {
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+// Bottom
+.tooltip--bottom .tooltip__popper {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+
+  &[aria-hidden="false"] {
+    transform: translateX(-50%) scale(1);
+  }
+
+  &::after {
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+// Left
+.tooltip--left .tooltip__popper {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+
+  &[aria-hidden="false"] {
+    transform: translateY(-50%) scale(1);
+  }
+
+  &::after {
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+// Right
+.tooltip--right .tooltip__popper {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+
+  &[aria-hidden="false"] {
+    transform: translateY(-50%) scale(1);
+  }
+
+  &::after {
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+// ========================================
+// TOOLTIP TRIGGER
+// ========================================
+
+.tooltip__trigger {
+  cursor: help;
+  text-decoration: none;
+  border-bottom: 1px dashed $color-text-secondary;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+    border-radius: $radius-sm;
+  }
+}
+
+// Icon trigger variant
+.tooltip__trigger--icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  color: $color-text-muted;
+  font-size: $font-xs;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+// ========================================
+// TOOLTIP VARIANTS
+// ========================================
+
+// Light tooltip
+.tooltip--light .tooltip__popper {
+  background-color: $color-bg-pure;
+  color: $color-text-primary;
+  border: 1px solid $color-border;
+}
+
+// Accent tooltip
+.tooltip--accent .tooltip__popper {
+  background-color: $color-accent;
+}
+
+// Success tooltip
+.tooltip--success .tooltip__popper {
+  background-color: $color-success;
+}
+
+// Warning tooltip
+.tooltip--warning .tooltip__popper {
+  background-color: $color-warning;
+}
+
+// Danger tooltip
+.tooltip--danger .tooltip__popper {
+  background-color: $color-danger;
+}
+
+// ========================================
+// TOOLTIP SIZES
+// ========================================
+
+.tooltip--small .tooltip__popper {
+  font-size: $font-xs;
+  padding: $spacing-xs $spacing-sm;
+  max-width: 200px;
+}
+
+.tooltip--large .tooltip__popper {
+  font-size: $font-base;
+  padding: $spacing-md $spacing-lg;
+  max-width: 300px;
+}
+
+// ========================================
+// TOOLTIP WITH HTML CONTENT
+// ========================================
+
+.tooltip__content {
+  // Rich content support
+  p {
+    margin: 0;
+
+    & + p {
+      margin-top: $spacing-xs;
+    }
+  }
+
+  strong {
+    font-weight: $font-semibold;
+  }
+
+  code {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 4px;
+    border-radius: $radius-sm;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+}
+
+// ========================================
+// DELAYED TOOLTIP
+// ========================================
+
+.tooltip--delayed .tooltip__popper {
+  transition-delay: 300ms;
+}
+
+// ========================================
+// PERSISTENT TOOLTIP (on click)
+// ========================================
+
+.tooltip--clickable {
+  .tooltip__popper {
+    pointer-events: auto;
+    cursor: default;
+  }
+
+  .tooltip__trigger {
+    cursor: pointer;
+    border-bottom-style: solid;
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  // Disable tooltips on touch devices by default
+  .tooltip .tooltip__popper {
+    display: none;
+  }
+
+  // Show persistent tooltips
+  .tooltip--clickable[aria-expanded="true"] .tooltip__popper {
+    display: block;
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: calc(100% - 32px);
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .tooltip__popper {
+    transition: none;
+  }
+
+  .tooltip--delayed .tooltip__popper {
+    transition-delay: 0;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .tooltip__popper {
+    border: 2px solid $color-text-inverse;
+  }
+
+  .tooltip--light .tooltip__popper {
+    border-width: 2px;
+  }
+}

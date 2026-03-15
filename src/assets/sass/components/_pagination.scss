@@ -1,0 +1,349 @@
+// ========================================
+// MODERN SCHOLAR - PAGINATION COMPONENT
+// ========================================
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// ========================================
+// PAGINATION ITEMS
+// ========================================
+
+.pagination__item {
+  flex-shrink: 0;
+
+  &.pagination__item--prev,
+  &.pagination__item--next {
+    margin: 0 $spacing-xs;
+  }
+}
+
+.pagination__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 $spacing-md;
+  font-family: $font-body;
+  font-size: $font-base;
+  font-weight: $font-medium;
+  color: $color-text-primary;
+  background-color: $color-bg-pure;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  &:hover:not(.pagination__link--disabled):not(.pagination__link--active) {
+    background-color: $color-bg-warm;
+    border-color: darken($color-border, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  &:active:not(.pagination__link--disabled) {
+    transform: scale(0.95);
+  }
+
+  // Active state
+  &--active {
+    background-color: $color-primary;
+    color: $color-text-inverse;
+    border-color: $color-primary;
+    font-weight: $font-semibold;
+
+    &:hover {
+      background-color: darken($color-primary, 10%);
+      border-color: darken($color-primary, 10%);
+    }
+  }
+
+  // Disabled state
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover {
+      background-color: $color-bg-pure;
+      border-color: $color-border;
+    }
+  }
+
+  // Icon-only links (prev/next)
+  &--icon {
+    padding: 0;
+    width: 40px;
+
+    i {
+      font-size: $font-lg;
+    }
+  }
+
+  // Ellipsis
+  &--ellipsis {
+    pointer-events: none;
+    border: none;
+    background: none;
+    cursor: default;
+
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+// ========================================
+// PAGINATION SIZES
+// ========================================
+
+.pagination--small {
+  gap: $spacing-xs;
+
+  .pagination__link {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 $spacing-sm;
+    font-size: $font-sm;
+  }
+
+  .pagination__link--icon {
+    width: 32px;
+
+    i {
+      font-size: $font-base;
+    }
+  }
+}
+
+.pagination--large {
+  gap: $spacing-md;
+
+  .pagination__link {
+    min-width: 48px;
+    height: 48px;
+    padding: 0 $spacing-lg;
+    font-size: $font-lg;
+  }
+
+  .pagination__link--icon {
+    width: 48px;
+
+    i {
+      font-size: $font-xl;
+    }
+  }
+}
+
+// ========================================
+// PAGINATION VARIANTS
+// ========================================
+
+// Pill variant
+.pagination--pill {
+  .pagination__link {
+    border-radius: $radius-pill;
+  }
+}
+
+// Bordered variant (more prominent)
+.pagination--bordered {
+  .pagination__link {
+    border-width: 2px;
+  }
+}
+
+// Minimal variant (no background)
+.pagination--minimal {
+  .pagination__link {
+    background: transparent;
+    border-color: transparent;
+
+    &:hover:not(.pagination__link--disabled):not(.pagination__link--active) {
+      background: $color-bg-warm;
+      border-color: $color-bg-warm;
+    }
+
+    &--active {
+      background: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}
+
+// ========================================
+// PAGINATION WITH INFO
+// ========================================
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
+}
+
+.pagination__info {
+  font-family: $font-body;
+  font-size: $font-sm;
+  color: $color-text-secondary;
+}
+
+.pagination__actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+// ========================================
+// PAGINATION WITH PAGE SIZE SELECTOR
+// ========================================
+
+.pagination__size-selector {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-body;
+  font-size: $font-sm;
+  color: $color-text-secondary;
+
+  select {
+    height: 36px;
+    padding: 0 $spacing-md;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background-color: $color-bg-pure;
+    color: $color-text-primary;
+    font-size: $font-sm;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent;
+    }
+  }
+}
+
+// ========================================
+// PAGINATION ALIGNMENT
+// ========================================
+
+.pagination--start {
+  justify-content: flex-start;
+}
+
+.pagination--center {
+  justify-content: center;
+}
+
+.pagination--end {
+  justify-content: flex-end;
+}
+
+// ========================================
+// LOADING STATE
+// ========================================
+
+.pagination__link--loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid $color-border;
+    border-top-color: $color-primary;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .pagination-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination {
+    overflow-x: auto;
+    justify-content: center;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color-border;
+      border-radius: $radius-pill;
+    }
+  }
+
+  .pagination__info {
+    text-align: center;
+  }
+
+  .pagination__actions {
+    justify-content: center;
+  }
+
+  // Hide middle pages on mobile
+  .pagination__item--page:not(.pagination__item--active):not(:first-child):not(:last-child):not(:nth-child(2)):not(:nth-last-child(2)) {
+    display: none;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .pagination__link {
+    transition: none;
+
+    &:active:not(.pagination__link--disabled) {
+      transform: none;
+    }
+  }
+
+  .pagination__link--loading::after {
+    animation: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .pagination__link {
+    border-width: 2px;
+  }
+}

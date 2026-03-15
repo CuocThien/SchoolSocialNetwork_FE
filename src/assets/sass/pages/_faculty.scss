@@ -1,6 +1,173 @@
-.faculty-container{
-    background-color: $color-white;
-    height: 100%;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding-bottom: 2rem;
+// ========================================
+// MODERN SCHOLAR - FACULTY PAGE
+// ========================================
+
+.faculty-page {
+  min-height: 100vh;
+  background-color: $color-bg-warm;
+  padding: $spacing-2xl $spacing-xl;
+}
+
+// ========================================
+// FACULTY PAGE HEADER
+// ========================================
+
+.faculty-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-2xl;
+  padding-bottom: $spacing-lg;
+  border-bottom: 2px solid $color-border-light;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+}
+
+.faculty-page__title {
+  font-family: $font-heading;
+  font-size: $font-3xl;
+  font-weight: $font-bold;
+  color: $color-text-primary;
+  margin: 0;
+
+  @media (max-width: 767px) {
+    font-size: $font-2xl;
+  }
+}
+
+.faculty-page__create-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  @media (max-width: 767px) {
+    span {
+      display: none;
+    }
+  }
+}
+
+// ========================================
+// FACULTY PAGE CONTENT
+// ========================================
+
+.faculty-page__content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// ========================================
+// EMPTY STATE
+// ========================================
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-5xl $spacing-xl;
+  text-align: center;
+
+  i {
+    font-size: $font-4xl;
+    color: $color-text-muted;
+    margin-bottom: $spacing-lg;
+  }
+
+  p {
+    font-family: $font-body;
+    font-size: $font-lg;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+}
+
+// ========================================
+// BUTTON ICON
+// ========================================
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  margin: 0 $spacing-xs;
+
+  &:hover {
+    background-color: $color-bg-warm;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  i {
+    font-size: $font-base;
+  }
+
+  &--primary {
+    color: $color-primary;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.1);
+      color: darken($color-primary, 10%);
+    }
+  }
+
+  &--secondary {
+    color: $color-accent;
+
+    &:hover {
+      background-color: rgba($color-accent, 0.1);
+      color: darken($color-accent, 10%);
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 1023px) {
+  .faculty-page {
+    padding: $spacing-xl $spacing-lg;
+  }
+}
+
+@media (max-width: 767px) {
+  .faculty-page {
+    padding: $spacing-lg;
+  }
+
+  .faculty-page__content {
+    .card {
+      overflow-x: auto;
+    }
+
+    table {
+      min-width: 600px;
+    }
+  }
+}
+
+// ========================================
+// LEGACY OVERRIDES (for compatibility)
+// ========================================
+
+.faculty-container {
+  @extend .faculty-page;
+  background-color: $color-bg-warm;
+  box-shadow: none;
+  padding-bottom: 0;
 }

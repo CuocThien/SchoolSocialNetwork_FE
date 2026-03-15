@@ -1,13 +1,41 @@
-<div class="form-popup form-create-post position-relative">
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
-  </ngx-spinner>
-  <button class="btn-cancel position-absolute" (click)="onClose()"><img
-      src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
-  <h2>{{title|translate}}</h2>
-  <form (ngSubmit)="onSubmit();" [formGroup]="createFacultyForm">
-    <input [readonly]="isEdit" class="signup-form__control" type="text" placeholder="Id" formControlName="_id">
-    <input class="signup-form__control" type="text" placeholder="{{'TABLE.NAMEEN'|translate}}" formControlName="nameEn">
-    <input class="signup-form__control" type="text" placeholder="{{'TABLE.NAMEVI'|translate}}" formControlName="nameVi">
-    <button class="btn btn-primary" type="submit">{{'BUTTON.SUBMIT'|translate}}</button>
-  </form>
+<div class="modal" (click)="onClose()">
+  <div class="modal__dialog" (click)="$event.stopPropagation()">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    </ngx-spinner>
+
+    <button class="modal__close" (click)="onClose()" attr.aria-label="{{'BUTTON.CLOSE'|translate}}">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <div class="modal__header">
+      <h2 class="modal__title">{{title|translate}}</h2>
+    </div>
+
+    <form class="create-faculty-form" (ngSubmit)="onSubmit();" [formGroup]="createFacultyForm">
+      <div class="form-group">
+        <label class="form-label" for="id">Id</label>
+        <input class="form-control" id="id" type="text" placeholder="Id" formControlName="_id" [readonly]="isEdit">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="nameEn">{{'TABLE.NAMEEN'|translate}}</label>
+        <input class="form-control" id="nameEn" type="text" [placeholder]="'TABLE.NAMEEN'|translate" formControlName="nameEn">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="nameVi">{{'TABLE.NAMEVI'|translate}}</label>
+        <input class="form-control" id="nameVi" type="text" [placeholder]="'TABLE.NAMEVI'|translate" formControlName="nameVi">
+      </div>
+
+      <div class="create-faculty-form__actions">
+        <button class="btn btn-secondary" type="button" (click)="onClose()">
+          {{'BUTTON.CANCEL'|translate}}
+        </button>
+        <button class="btn btn-primary" type="submit">
+          <i class="bi bi-check-circle"></i>
+          {{'BUTTON.SUBMIT'|translate}}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

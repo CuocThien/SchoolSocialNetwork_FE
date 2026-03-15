@@ -1,41 +1,172 @@
-<div class="profile-container u-center-text">
+<div class="profile-page">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <form class="form-profile col-xxl-6 col-xl-6 col-lg-8 col-md-8 col-sm-10 col-10 u-center-text position-relative"
-    #formUpdateProfile="ngForm">
-    <h1>{{'HEADER.PROFILE'|translate}}</h1>
-    <button class="btn-cancel position-absolute" routerLink="/home/index"><img
-        src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
-    <hr>
-    <img class="form-profile__avatar u-margin-bottom-small"
-      [src]="imageSrc || 'https://res.cloudinary.com/blogreview/image/upload/v1636626365/review_web/hzshd4vahy6hw6m0a9p5.png'"
-      alt="your image" require name="avatar" /> <br>
-    <input class="u-margin-bottom-small" type='file' (change)="readURL($event);" accept="image/*" />
-    <input *ngIf="!isCompany" class="form-control u-margin-bottom-small" type="text"
-      placeholder="{{'TABLE.FULLNAME'|translate}}" ngModel name="fullname" [(ngModel)]="profile.fullname" required>
-    <input *ngIf="isCompany" class="form-control u-margin-bottom-small" type="text"
-      placeholder="{{'TABLE.COMPANY_NAME'|translate}}" ngModel name="fullname" [(ngModel)]="profile.fullname" required>
-    <div class="d-flex">
-      <input class="form2-control u-margin-bottom-small col-9" type="text" placeholder="{{'TABLE.PHONE'|translate}}"
-        ngModel name="phone" [(ngModel)]="profile.phone" required [disabled]="!isAble">
-      <button [disabled]="isRequested" *ngIf="isVisible" class="button-text button-text-resend u-margin-auto col-3"
-        (click)="requestOTP()">{{'BUTTON.REQUEST_OTP'|translate}}</button>
-    </div>
-    <div class="d-flex" *ngIf="isRequested">
-      <input class="form2-control u-margin-bottom-small col-9" type="text" placeholder="OTP" ngModel name="OTP"
-        [(ngModel)]="OTPConfirm" required>
-      <button class="button-text button-text-resend u-margin-auto col-3"
-        (click)="submitOTP()">{{'BUTTON.SUBMIT'|translate}}</button>
-    </div>
-    <input *ngIf="!isCompany" class="form-control u-margin-bottom-small" type="date" [(ngModel)]="dob" name="dob"
-      required>
 
-    <input class="form-control u-margin-bottom-small" type="text" placeholder="{{'TABLE.ADDRESS'|translate}}"
-      [(ngModel)]="profile.address" name="address" required>
-    <input class="form-control u-margin-bottom-small" type="text" [(ngModel)]="profile.email" name="email" required
-      disabled>
-    <textarea *ngIf="isCompany" class="form-register__form-control__area w-100-pc" type="text" rows="7"
-      [(ngModel)]="profile.description" name="description" placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
-    <button class="btn-update" (click)="onSubmit(formUpdateProfile)">{{'BUTTON.UPDATE_PROFILE'|translate}}</button>
-  </form>
+  <div class="profile-page__container">
+    <!-- Profile Header -->
+    <div class="profile-page__header">
+      <h1 class="profile-page__title">{{'HEADER.PROFILE'|translate}}</h1>
+      <a class="profile-page__close" routerLink="/home/index" aria-label="Close">
+        <i class="bi bi-x-lg"></i>
+      </a>
+    </div>
+
+    <!-- Profile Form -->
+    <form class="profile-page__form" #formUpdateProfile="ngForm" (ngSubmit)="onSubmit(formUpdateProfile)">
+      <!-- Avatar Section -->
+      <div class="profile-page__avatar-section">
+        <div class="profile-page__avatar-wrapper">
+          <img
+            class="profile-page__avatar"
+            [src]="imageSrc || 'https://res.cloudinary.com/blogreview/image/upload/v1636626365/review_web/hzshd4vahy6hw6m0a9p5.png'"
+            alt="Profile avatar"
+          >
+          <label class="profile-page__avatar-upload" for="avatar-upload">
+            <i class="bi bi-camera"></i>
+          </label>
+          <input
+            id="avatar-upload"
+            class="profile-page__avatar-input"
+            type="file"
+            (change)="readURL($event);"
+            accept="image/*"
+            aria-label="Upload avatar"
+          >
+        </div>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="profile-page__fields">
+        <!-- Full Name / Company Name -->
+        <div class="form-group">
+          <label class="form-label" for="fullname">
+            <span *ngIf="!isCompany">{{'TABLE.FULLNAME'|translate}}</span>
+            <span *ngIf="isCompany">{{'TABLE.COMPANY_NAME'|translate}}</span>
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            id="fullname"
+            placeholder="{{!isCompany ? ('TABLE.FULLNAME'|translate) : ('TABLE.COMPANY_NAME'|translate)}}"
+            ngModel
+            name="fullname"
+            [(ngModel)]="profile.fullname"
+            required
+          >
+        </div>
+
+        <!-- Phone with OTP Request -->
+        <div class="form-group">
+          <label class="form-label" for="phone">{{'TABLE.PHONE'|translate}}</label>
+          <div class="profile-page__input-group">
+            <input
+              class="form-control profile-page__input-with-action"
+              type="tel"
+              id="phone"
+              placeholder="{{'TABLE.PHONE'|translate}}"
+              ngModel
+              name="phone"
+              [(ngModel)]="profile.phone"
+              required
+              [disabled]="!isAble"
+            >
+            <button
+              *ngIf="isVisible"
+              type="button"
+              class="btn btn-secondary profile-page__action-btn"
+              [disabled]="isRequested"
+              (click)="requestOTP()"
+            >
+              {{'BUTTON.REQUEST_OTP'|translate}}
+            </button>
+          </div>
+
+          <!-- OTP Input -->
+          <div class="profile-page__otp-section" *ngIf="isRequested">
+            <div class="profile-page__input-group">
+              <input
+                class="form-control profile-page__input-with-action"
+                type="text"
+                placeholder="OTP"
+                ngModel
+                name="OTP"
+                [(ngModel)]="OTPConfirm"
+                required
+              >
+              <button
+                type="button"
+                class="btn btn-primary profile-page__action-btn"
+                (click)="submitOTP()"
+              >
+                {{'BUTTON.SUBMIT'|translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date of Birth (Individual only) -->
+        <div class="form-group" *ngIf="!isCompany">
+          <label class="form-label" for="dob">{{'TABLE.DOB'|translate}}</label>
+          <input
+            class="form-control"
+            type="date"
+            id="dob"
+            [(ngModel)]="dob"
+            name="dob"
+            required
+          >
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+          <label class="form-label" for="address">{{'TABLE.ADDRESS'|translate}}</label>
+          <input
+            class="form-control"
+            type="text"
+            id="address"
+            placeholder="{{'TABLE.ADDRESS'|translate}}"
+            [(ngModel)]="profile.address"
+            name="address"
+            required
+          >
+        </div>
+
+        <!-- Email (Readonly) -->
+        <div class="form-group">
+          <label class="form-label" for="email">{{'TABLE.EMAIL'|translate}}</label>
+          <input
+            class="form-control"
+            type="email"
+            id="email"
+            [(ngModel)]="profile.email"
+            name="email"
+            required
+            disabled
+          >
+          <small class="form-text">{{'PROFILE.EMAIL_READONLY'|translate}}</small>
+        </div>
+
+        <!-- Description (Company only) -->
+        <div class="form-group" *ngIf="isCompany">
+          <label class="form-label" for="description">{{'TABLE.DESCRIPTION'|translate}}</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="5"
+            [(ngModel)]="profile.description"
+            name="description"
+            placeholder="{{'TABLE.DESCRIPTION'|translate}}"
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="profile-page__actions">
+          <button type="submit" class="btn btn-primary profile-page__submit-btn">
+            <i class="bi bi-check-circle"></i>
+            <span>{{'BUTTON.UPDATE_PROFILE'|translate}}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

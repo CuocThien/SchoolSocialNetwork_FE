@@ -1,43 +1,52 @@
-<div class="pt-3 ms-3 me-4 faculty-container">
+<div class="faculty-page">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <div class="d-flex control">
-    <h1 class="ps-5 d-inline-block text-uppercase col-xxl-10 col-xl-10 col-lg-8 col-md-8 col-sm-6 col-6">
-      {{'TITLE.FACULTY'|translate}}
-    </h1>
-    <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-sm-6 col-6">
-      <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createFaculty()">
-        {{'BUTTON.CREATE_FACULTY'|translate}}
-      </button>
-      <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createFaculty()">
-        <i class="bi bi-plus-square"></i>
-      </button>
+
+  <div class="faculty-page__header">
+    <h1 class="faculty-page__title">{{'TITLE.FACULTY'|translate}}</h1>
+    <button class="btn btn-primary faculty-page__create-btn" (click)="createFaculty()">
+      <i class="bi bi-plus-square"></i>
+      <span>{{'BUTTON.CREATE_FACULTY'|translate}}</span>
+    </button>
+  </div>
+
+  <div class="faculty-page__content">
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>{{'TABLE.NAMEEN'|translate}}</th>
+            <th>{{'TABLE.NAMEVI'|translate}}</th>
+            <th>{{'TABLE.NAME'|translate}}</th>
+            <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let faculty of listFaculty; let i = index">
+            <td><code>{{faculty._id}}</code></td>
+            <td>{{faculty.nameEn}}</td>
+            <td>{{faculty.nameVi}}</td>
+            <td>{{faculty?.profile?.fullname || '-'}}</td>
+            <td class="text-center">
+              <button class="btn-icon btn-icon--primary" (click)="editFaculty(faculty,i)" attr.aria-label="{{'BUTTON.EDIT'|translate}}">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn-icon btn-icon--secondary" (click)="tranferDean(faculty,i)" attr.aria-label="{{'BUTTON.TRANSFER'|translate}}">
+                <i class="bi bi-arrow-left-right"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!listFaculty?.length">
+            <td colspan="5" class="text-center">
+              <div class="empty-state">
+                <i class="bi bi-inbox"></i>
+                <p>{{'TITLE.NO_DATA'|translate}}</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <table class="table table-striped" style="width:100%">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>{{'TABLE.NAMEEN'|translate}}</th>
-        <th>{{'TABLE.NAMEVI'|translate}}</th>
-        <th>{{'TABLE.NAME'|translate}}</th>
-        <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let faculty of listFaculty; let i = index">
-        <td>{{faculty._id}}</td>
-        <td>{{faculty.nameEn}}</td>
-        <td>{{faculty.nameVi}}</td>
-        <td>{{faculty?.profile?.fullname || '-'}}</td>
-        <td class="text-center">
-          <i class="bi bi-pencil-square btn-edit me-3" (click)="editFaculty(faculty,i)"></i>
-          <i class="bi bi-arrow-left-right btn-delete" (click)="tranferDean(faculty,i)"></i>
-        </td>
-      </tr>
-      <tr *ngIf="!listFaculty?.length" class="text-center">
-        <td colspan="5" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
-      </tr>
-    </tbody>
-  </table>
 </div>

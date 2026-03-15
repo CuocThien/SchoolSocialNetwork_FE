@@ -1,0 +1,410 @@
+// ========================================
+// MODERN SCHOLAR - SPINNER COMPONENT
+// ========================================
+
+.spinner {
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+
+// ========================================
+// BASE SPINNER (CIRCULAR)
+// ========================================
+
+.spinner--circular {
+  border: 3px solid $color-border;
+  border-top-color: $color-primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================================
+// SPINNER SIZES
+// ========================================
+
+.spinner--xs {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.spinner--small {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.spinner--medium {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+.spinner--large {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+.spinner--xl {
+  width: 64px;
+  height: 64px;
+  border-width: 4px;
+}
+
+// ========================================
+// SPINNER COLORS
+// ========================================
+
+.spinner--primary {
+  border-top-color: $color-primary;
+}
+
+.spinner--secondary {
+  border-top-color: $color-secondary;
+}
+
+.spinner--accent {
+  border-top-color: $color-accent;
+}
+
+.spinner--success {
+  border-top-color: $color-success;
+}
+
+.spinner--warning {
+  border-top-color: $color-warning;
+}
+
+.spinner--danger {
+  border-top-color: $color-danger;
+}
+
+.spinner--inverse {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: $color-text-inverse;
+}
+
+// ========================================
+// DOTS SPINNER
+// ========================================
+
+.spinner--dots {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.spinner__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $color-primary;
+  animation: dotPulse 1.4s ease-in-out infinite;
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Dot sizes
+.spinner--small .spinner__dot {
+  width: 6px;
+  height: 6px;
+}
+
+.spinner--large .spinner__dot {
+  width: 12px;
+  height: 12px;
+}
+
+// ========================================
+// BAR SPINNER
+// ========================================
+
+.spinner--bars {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.spinner__bar {
+  width: 4px;
+  background-color: $color-primary;
+  animation: barStretch 1.2s ease-in-out infinite;
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes barStretch {
+  0%, 100% {
+    height: 12px;
+  }
+  50% {
+    height: 24px;
+  }
+}
+
+// Bar sizes
+.spinner--small .spinner__bar {
+  width: 3px;
+}
+
+.spinner--large .spinner__bar {
+  width: 5px;
+}
+
+// ========================================
+// PULSE SPINNER
+// ========================================
+
+.spinner--pulse {
+  background-color: rgba($color-primary, 0.3);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+// ========================================
+// GROW SPINNER (ANDROID STYLE)
+// ========================================
+
+.spinner--grow {
+  width: 40px;
+  height: 40px;
+  animation: grow 1.3s ease-in-out infinite;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: $color-primary;
+  }
+
+  &::before {
+    animation: grow 1.3s ease-in-out infinite reverse;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================================
+// SPINNER WITH TEXT
+// ========================================
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.spinner__text {
+  font-family: $font-body;
+  font-size: $font-sm;
+  color: $color-text-secondary;
+
+  &--large {
+    font-size: $font-base;
+  }
+
+  &--small {
+    font-size: $font-xs;
+  }
+}
+
+// ========================================
+// FULL PAGE SPINNER
+// ========================================
+
+.spinner-page {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-lg;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+
+  .spinner__text {
+    font-size: $font-base;
+    color: $color-text-primary;
+  }
+}
+
+.spinner-page--dark {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  .spinner__text {
+    color: $color-text-inverse;
+  }
+}
+
+// ========================================
+// INLINE SPINNER (inside buttons)
+// ========================================
+
+.btn__spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: $spacing-sm;
+}
+
+// ========================================
+// SPINNER SPEED VARIANTS
+// ========================================
+
+.spinner--slow {
+  animation-duration: 1.5s;
+}
+
+.spinner--fast {
+  animation-duration: 0.5s;
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .spinner-page {
+    padding: $spacing-sm;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .spinner--circular,
+  .spinner--grow {
+    animation: none;
+    opacity: 1;
+  }
+
+  .spinner__dot,
+  .spinner__bar {
+    animation: none;
+    opacity: 1;
+  }
+
+  .spinner--pulse {
+    animation: none;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Screen reader only
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// ========================================
+// SPINNER IN COMPONENTS
+// ========================================
+
+// Card with spinner overlay
+.card-spinner {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+}
+
+// Table with spinner
+.table-spinner {
+  position: relative;
+  min-height: 200px;
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

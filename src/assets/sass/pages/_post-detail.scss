@@ -1,52 +1,316 @@
-.post-detail {
-  margin: 0 auto;
-  width: 80%;
-  height: auto;
-  background-color: #FFF;
+// ========================================
+// MODERN SCHOLAR - POST DETAIL PAGE
+// ========================================
+
+.post-detail-page {
   min-height: 100vh;
-  padding: 1rem 3rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  position: relative;
+  background-color: $color-bg-warm;
+  padding: $spacing-2xl 0;
+}
+
+// ========================================
+// POST DETAIL CONTENT
+// ========================================
+
+.post-detail-page__content {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: $color-bg-pure;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-3xl;
+}
+
+// ========================================
+// POST DETAIL HEADER
+// ========================================
+
+.post-detail-page__header {
+  margin-bottom: $spacing-3xl;
+  padding-bottom: $spacing-2xl;
+  border-bottom: 2px solid $color-border-light;
+}
+
+.post-detail-page__title {
+  font-family: $font-heading;
+  font-size: $font-3xl;
+  font-weight: $font-bold;
+  color: $color-text-primary;
+  margin: 0 0 $spacing-2xl 0;
+  line-height: $leading-tight;
+
+  @media (max-width: 767px) {
+    font-size: $font-2xl;
+  }
+}
+
+.post-detail-page__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  align-items: center;
+}
+
+.post-detail-page__author,
+.post-detail-page__date {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-body;
+  font-size: $font-base;
+  color: $color-text-secondary;
+
+  i {
+    font-size: $font-lg;
+    color: $color-primary;
+  }
+}
+
+// ========================================
+// POST DETAIL BODY
+// ========================================
+
+.post-detail-page__body {
+  font-family: $font-body;
+  font-size: $font-lg;
+  line-height: $leading-relaxed;
+  color: $color-text-primary;
+
+  // Content styling
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-heading;
+    font-weight: $font-bold;
+    color: $color-text-primary;
+    margin-top: $spacing-2xl;
+    margin-bottom: $spacing-lg;
+  }
+
+  h1 { font-size: $font-3xl; }
+  h2 { font-size: $font-2xl; }
+  h3 { font-size: $font-xl; }
+  h4 { font-size: $font-lg; }
+  h5, h6 { font-size: $font-base; }
+
+  p {
+    margin-bottom: $spacing-lg;
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: color 150ms ease-out;
+
+    &:hover {
+      color: $color-accent;
+      text-decoration: underline;
+    }
+  }
+
+  ul, ol {
+    margin-bottom: $spacing-lg;
+    padding-left: $spacing-2xl;
+  }
+
+  li {
+    margin-bottom: $spacing-sm;
+  }
+
+  code {
+    background-color: $color-bg-warm;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    font-family: 'Courier New', monospace;
+    font-size: $font-sm;
+  }
+
+  pre {
+    background-color: $color-bg-warm;
+    padding: $spacing-lg;
+    border-radius: $radius-md;
+    overflow-x: auto;
+    margin-bottom: $spacing-lg;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid $color-primary;
+    padding-left: $spacing-lg;
+    margin: $spacing-lg 0;
+    font-style: italic;
+    color: $color-text-secondary;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $radius-md;
+    margin: $spacing-lg 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: $spacing-lg 0;
+
+    th, td {
+      padding: $spacing-md;
+      border: 1px solid $color-border;
+      text-align: left;
+    }
+
+    th {
+      background-color: $color-bg-warm;
+      font-weight: $font-semibold;
+    }
+  }
+}
+
+// ========================================
+// POST DETAIL FOOTER
+// ========================================
+
+.post-detail-page__footer {
+  margin-top: $spacing-3xl;
+  padding-top: $spacing-2xl;
+  border-top: 2px solid $color-border-light;
+}
+
+// ========================================
+// BACK TO TOP BUTTON
+// ========================================
+
+.back-to-top {
+  position: fixed;
+  bottom: $spacing-2xl;
+  right: $spacing-2xl;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: $color-primary;
+  color: $color-text-inverse;
+  border: none;
+  border-radius: 50%;
+  box-shadow: $shadow-lg;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  i {
+    font-size: $font-2xl;
+  }
+
+  @media (max-width: 767px) {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+    width: 48px;
+    height: 48px;
+
+    i {
+      font-size: $font-xl;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 1023px) {
+  .post-detail-page__content {
+    padding: $spacing-2xl;
+  }
+}
+
+@media (max-width: 767px) {
+  .post-detail-page {
+    padding: $spacing-xl 0;
+  }
+
+  .post-detail-page__content {
+    padding: $spacing-xl;
+    border-radius: $radius-md;
+  }
+
+  .post-detail-page__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+
+  .post-detail-page__body {
+    font-size: $font-base;
+
+    h1 { font-size: $font-2xl; }
+    h2 { font-size: $font-xl; }
+    h3 { font-size: $font-lg; }
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// ========================================
+// LEGACY OVERRIDES (for compatibility)
+// ========================================
+
+.post-detail {
+  @extend .post-detail-page__content;
+  width: 100%;
+  box-shadow: $shadow-md;
 
   &__title {
-    text-align: center;
-    font-size: 3rem;
-    margin-top: 2rem;
+    @extend .post-detail-page__title;
+    text-align: left;
   }
 
   &__author {
-    width: 100%;
-    text-align: right;
-    padding-right: 2rem;
-    font-size: 1.4rem;
-    margin-top: 2rem;
-    color: $color-blue;
+    @extend .post-detail-page__meta;
+    text-align: left;
+    padding: 0;
+    font-size: $font-base;
+    margin-top: 0;
+    color: $color-text-secondary;
   }
 
   &__content {
-    width: 100%;
-    font-size: 1.6rem;
-
+    @extend .post-detail-page__body;
+    font-size: $font-base;
   }
-
- 
 }
 
 .star-readpost {
   display: flex;
-  margin-left: 50px;
+  margin-left: 0;
 }
 
 #content {
   width: 100%;
-}
-
-.backToTop {
-  position: fixed;
-  z-index: 9999;
-  bottom: 0;
-  right: 10%;
-  height: 4.5rem;
-  width: 4.5rem;
-  font-size: 3rem;
 }

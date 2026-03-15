@@ -19,8 +19,13 @@
 
   // Hover effect with elevation
   &:hover {
-    box-shadow: $shadow-sm;
+    box-shadow: $shadow-md;
     transform: translateY(-2px);
+  }
+
+  // Post cards have stronger hover
+  &.card-post:hover {
+    box-shadow: $shadow-lg;
   }
 
   // Active state
@@ -106,48 +111,88 @@
 
 // Post Card
 .card-post {
-  padding: $spacing-xl; // 24px
-  gap: $spacing-lg; // 16px between sections
+  padding: 0;
+  gap: 0;
+  border: 1px solid rgba($color-border, 0.8);
+  box-shadow: $shadow-sm;
+  border-radius: $radius-xl;
+  background: $color-bg-pure;
+  overflow: hidden;
 
   .card-header {
-    // Avatar + Name + Time + Badge
-    .post-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
+    padding: $spacing-lg $spacing-xl $spacing-md;
+    border-bottom: 1px solid $color-border-light;
+    background: linear-gradient(135deg, rgba($color-accent, 0.01) 0%, transparent 100%);
+  }
+
+  .card-body {
+    padding: $spacing-lg $spacing-xl;
+    margin-bottom: 0;
+
+    .post-content {
+      font-family: $font-body;
+      font-size: $font-lg;
+      color: $color-text-primary;
+      line-height: $leading-relaxed;
+      margin-bottom: 0;
+
+      p {
+        margin-bottom: $spacing-md;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
+
+    .post-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: $radius-md;
+      margin-top: $spacing-lg;
+    }
+  }
+
+  .card-footer {
+    padding: $spacing-md $spacing-xl;
+    margin-top: 0;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border-light;
+    background: rgba($color-bg-warm, 0.3);
 
     .post-info {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: $spacing-xs; // 4px
+      gap: $spacing-xs;
 
       .post-author {
         font-family: $font-heading;
-        font-size: $font-base; // 14px
-        font-weight: $font-semibold;
+        font-size: $font-lg;
+        font-weight: $font-bold;
         color: $color-text-primary;
-        line-height: $leading-normal;
+        line-height: $leading-tight;
+        transition: color 200ms ease-out;
+        cursor: pointer;
+
+        &:hover {
+          color: $color-accent;
+        }
       }
 
       .post-time {
         font-family: $font-body;
-        font-size: $font-xs; // 12px
-        color: $color-text-muted;
+        font-size: $font-sm;
+        color: $color-text-secondary;
         line-height: $leading-normal;
-      }
-    }
+        font-weight: $font-medium;
 
-    .post-badge {
-      font-family: $font-body;
-      font-size: $font-xs; // 12px
-      padding: $spacing-xs $spacing-md; // 4px 12px
-      border-radius: $radius-pill;
-      font-weight: $font-medium;
-      white-space: nowrap;
+        strong {
+          color: $color-text-primary;
+          font-weight: $font-semibold;
+        }
+      }
     }
   }
 
@@ -155,10 +200,14 @@
     // Text content, optional image
     .post-content {
       font-family: $font-body;
-      font-size: $font-base; // 14px
+      font-size: $font-lg; // 16px (was 14px)
       color: $color-text-primary;
-      line-height: $leading-normal;
+      line-height: $leading-relaxed; // 1.75 (was 1.5)
       margin-bottom: $spacing-lg;
+
+      p {
+        margin-bottom: $spacing-md;
+      }
 
       &:last-child {
         margin-bottom: 0;
@@ -176,33 +225,37 @@
 
   .card-footer {
     // Like, Comment, Share actions
-    gap: $spacing-xl; // 24px between actions
+    gap: $spacing-lg;
+    background: transparent;
+    border-top-color: $color-border-light;
 
     .post-action {
       display: flex;
       align-items: center;
-      gap: $spacing-sm; // 8px
+      gap: $spacing-sm;
       font-family: $font-body;
-      font-size: $font-base; // 14px
+      font-size: $font-sm;
+      font-weight: $font-semibold;
       color: $color-text-secondary;
       background: none;
       border: none;
       cursor: pointer;
-      padding: $spacing-sm; // 8px
-      border-radius: $radius-sm;
-      transition: all 150ms ease-out;
+      padding: $spacing-sm $spacing-md;
+      border-radius: $radius-md;
+      transition: all 200ms ease-out;
 
       &:hover {
-        color: $color-primary;
-        background: $color-bg-warm;
+        color: $color-accent;
+        background: rgba($color-accent, 0.08);
+        transform: translateY(-1px);
       }
 
       &:active {
-        transform: scale(0.95);
+        transform: translateY(0);
       }
 
       i {
-        font-size: $font-base; // 14px
+        font-size: $font-lg;
       }
     }
   }
@@ -366,6 +419,19 @@
   gap: $spacing-lg; // 16px
   padding: $spacing-lg; // 16px (more compact)
   align-items: center;
+  border: 1px solid $color-border;
+  transition: all 200ms ease-out;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-accent;
+    box-shadow: $shadow-md;
+    transform: translateX(4px);
+  }
+
+  &:active {
+    transform: translateX(2px);
+  }
 
   .horizontal-image {
     width: 120px;
@@ -392,6 +458,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      transition: color 200ms ease-out;
     }
 
     .horizontal-description {
@@ -411,6 +478,11 @@
       color: $color-text-muted;
       margin-top: $spacing-xs; // 4px
     }
+  }
+
+  // Hover state for title color
+  &:hover .horizontal-title {
+    color: $color-accent;
   }
 }
 

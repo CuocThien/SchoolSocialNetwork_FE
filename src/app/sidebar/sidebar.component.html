@@ -1,229 +1,232 @@
-<div class="sidebar position-fixed">
-  <div class="h-header">
-    <img class="u-margin-auto d-table-cell d-lg-table-cell d-md-table-cell d-sm-table-cell d-xl-none "
-      [routerLink]="['index']" src="../../assets/img/logo.png" alt="logo" style="max-width: 100%; max-height: 100%;">
-    <div class="d-none d-xl-table h-100-pc u-margin-auto">
-      <h3 class="title d-none d-xl-table-cell" (click)="redirectTo('index')">HCMUTE NETWORK</h3>
-    </div>
+<aside class="app-sidebar">
+  <!-- Sidebar Header -->
+  <div class="app-sidebar__header">
+    <a class="app-sidebar__logo" [routerLink]="['index']">
+      <img src="../../assets/img/logo.png" alt="HCMUTE Network">
+    </a>
+    <h3 class="app-sidebar__title d-none d-xl-block" (click)="redirectTo('index')">HCMUTE NETWORK</h3>
   </div>
 
-  <div class="button-container">
-    <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
-        [ngClass]="{'button-sidebar__active':mainActive === 'index'}" (click)="redirectTo('index')">
-        <i class="bi bi-house-door"></i>
-      </button>
-      <button class="button-sidebar text-start d-xl-block d-none text-start"
-        [ngClass]="{'button-sidebar__active':mainActive === 'index'}" (click)="redirectTo('index')">
-        <i class="bi bi-house-door ps-3 pe-3"></i>{{'SIDEBAR.HOME'|translate}}</button>
-    </div>
-    <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
-        [ngClass]="{'button-sidebar__active':mainActive === 'new-feed'}" (click)="redirectTo('new-feed')"><i
-          class="bi bi-newspaper"></i></button>
-      <button class="button-sidebar d-xl-block d-none text-start"
-        [ngClass]="{'button-sidebar__active':mainActive === 'new-feed'}" (click)="redirectTo('new-feed')">
-        <i class="bi bi-newspaper ps-3 pe-3"></i>{{'SIDEBAR.NEW_FEED'|translate}}</button>
-    </div>
-    <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
-        [ngClass]="{'button-sidebar__active':mainActive === 'group'}" (click)="redirectTo('group')">
-        <i class="bi bi-people"></i>
-      </button>
-      <button class="button-sidebar d-xl-block d-none text-start"
-        [ngClass]="{'button-sidebar__active':mainActive === 'group'}" (click)="redirectTo('group')">
-        <i class="bi bi-people ps-3 pe-3"></i>{{'SIDEBAR.GROUPS'|translate}}</button>
-    </div>
-    <div class="btn-group w-100-pc">
-      <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
-        [ngClass]="{'button-sidebar__active':mainActive==='enterprise'}" (click)="redirectTo('enterprise')">
-        <i class="bi bi-briefcase"></i>
-      </button>
-      <button class="button-sidebar d-xl-block d-none text-start"
-        [ngClass]="{'button-sidebar__active':mainActive==='enterprise'}" (click)="redirectTo('enterprise')">
-        <i class="bi bi-briefcase ps-3 pe-3"></i>{{'SIDEBAR.ENTERPRISE'|translate}}</button>
-    </div>
-    <input class="d-none cb-manage-dropdown" type="checkbox" [checked]="isDropdown">
-    <div *ngIf="isAdmin || isDean" class="btn-group-dropdown text-start w-100-pc">
-      <!-- button dropdown -->
-      <div class="btn-group w-100-pc">
-        <button class="button-sidebar d-block d-lg-block d-sm-block d-xl-none"
-          [ngClass]="{'button-sidebar__active':mainActive === 'manage'}"
-          (click)="dropdown($event); redirectTo('manage')">
-          <i class="bi bi-sliders"></i>
-        </button>
-        <button class="button-sidebar d-xl-block d-none text-start"
-          [ngClass]="{'button-sidebar__active':mainActive === 'manage'}"
-          (click)="dropdown($event); redirectTo('manage')"><i
-            class="bi bi-sliders ps-3 pe-3"></i>{{'SIDEBAR.MANAGE'|translate}}</button>
-      </div>
-      <!-- button account dropdown -->
-      <input class="d-none cb-account-dropdown" type="checkbox" [checked]="isAccountDropdown">
-      <div class="btn-account-dropdown text-start">
-        <div class="btn-group w-100-pc">
-          <button class="button-sidebar-text d-block d-lg-block d-sm-block d-xl-none button-sidebar-text-icon"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'account'}" (click)="accountDropdown($event)">
-            <i class="bi bi-person-rolodex"></i>
-          </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'account'}" (click)="accountDropdown($event)"><i
-              class="bi bi-person-rolodex ps-3 pe-3"></i>{{'SIDEBAR.USERS'|translate}}
-            <i [class]="arrowAccount"></i></button>
-        </div>
-        <!-- button User -->
-        <div class="w-100-pc text-start">
-          <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'sign-up'}"
-              (click)="redirectSubMenuTo('sign-up',2)">
-              <i class="bi bi-person-plus"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'sign-up'}"
-              (click)="redirectSubMenuTo('sign-up',2)">
-              {{'SIDEBAR.REGISTER'|translate}}</button>
-          </div>
-          <div class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'users'}" (click)="redirectSubMenuTo('users',2)">
-              <i class="bi bi-person-video2"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'users'}"
-              (click)="redirectSubMenuTo('users',2)">{{'SIDEBAR.MEMBERS'|translate}}</button>
-          </div>
-          <div class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
-              (click)="redirectSubMenuTo('account',2)">
-              <i class="bi bi-info-square"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
-              (click)="redirectSubMenuTo('account',2)">{{'SIDEBAR.INFORMATION'|translate}}</button>
-          </div>
-        </div>
-      </div>
+  <!-- Navigation -->
+  <nav class="app-sidebar__nav">
+    <ul class="app-sidebar__list">
+      <!-- Home -->
+      <li class="app-sidebar__item">
+        <a
+          class="app-sidebar__link"
+          [class.app-sidebar__link--active]="mainActive === 'index'"
+          (click)="redirectTo('index')"
+          [routerLink]="['index']"
+        >
+          <i class="bi bi-house-door"></i>
+          <span class="app-sidebar__text">{{'SIDEBAR.HOME'|translate}}</span>
+        </a>
+      </li>
 
-      <!-- button enterprise dropdown -->
-      <input class="d-none cb-enterprise-dropdown" type="checkbox" [checked]="isEnterpriseDropdown">
-      <div *ngIf="!isDean" class="btn-enterprise-dropdown text-start">
-        <div class="btn-group w-100-pc">
-          <button class="button-sidebar-text d-block d-lg-block d-sm-block d-xl-none button-sidebar-text-icon"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'sub-enterprise'}"
-            (click)="enterpriseDropdown($event)">
-            <i class="bi bi-briefcase"></i>
-          </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'sub-enterprise'}"
-            (click)="enterpriseDropdown($event)"><i
-              class="bi bi-briefcase ps-3 pe-3"></i>{{'SIDEBAR.ENTERPRISE'|translate}}
-            <i [class]="arrowEnterprise"></i></button>
-        </div>
-        <!-- button User -->
-        <div class="w-100-pc text-start">
-          <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'register-enterprise'}"
-              (click)="redirectSubMenuTo('register-enterprise',2)">
-              <i class="bi bi-person-plus"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'register-enterprise'}"
-              (click)="redirectSubMenuTo('register-enterprise',2)">
-              {{'SIDEBAR.REGISTER'|translate}}</button>
-          </div>
-          <div class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'recruitment-news'}"
-              (click)="redirectSubMenuTo('recruitment-news',2)">
-              <i class="bi bi-person-video2"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'recruitment-news'}"
-              (click)="redirectSubMenuTo('recruitment-news',2)">{{'SIDEBAR.RECRUITMENT'|translate}}</button>
-          </div>
-          <!-- <div class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
-              (click)="redirectSubMenuTo('account',2)">
-              <i class="bi bi-info-square"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'account'}"
-              (click)="redirectSubMenuTo('account',2)">{{'SIDEBAR.INFORMATION'|translate}}</button>
-          </div> -->
-        </div>
-      </div>
+      <!-- News Feed -->
+      <li class="app-sidebar__item">
+        <a
+          class="app-sidebar__link"
+          [class.app-sidebar__link--active]="mainActive === 'new-feed'"
+          (click)="redirectTo('new-feed')"
+          [routerLink]="['new-feed']"
+        >
+          <i class="bi bi-newspaper"></i>
+          <span class="app-sidebar__text">{{'SIDEBAR.NEW_FEED'|translate}}</span>
+        </a>
+      </li>
 
-      <!-- button faculty -->
-      <div *ngIf="isAdmin" class="btn-faculty-dropdown text-start">
-        <div class="btn-group w-100-pc">
-          <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'faculty'}"
-            (click)="redirectSubMenuTo('faculty',1)">
-            <i class="bi bi-building"></i>
-          </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'faculty'}"
-            (click)="redirectSubMenuTo('faculty',1)"><i
-              class="bi bi-building ps-3 pe-3"></i>{{'SIDEBAR.FACULTY'|translate}}</button>
-        </div>
-      </div>
+      <!-- Groups -->
+      <li class="app-sidebar__item">
+        <a
+          class="app-sidebar__link"
+          [class.app-sidebar__link--active]="mainActive === 'group'"
+          (click)="redirectTo('group')"
+          [routerLink]="['group']"
+        >
+          <i class="bi bi-people"></i>
+          <span class="app-sidebar__text">{{'SIDEBAR.GROUPS'|translate}}</span>
+        </a>
+      </li>
 
-      <!-- button category -->
-      <div *ngIf="isAdmin" class="btn-category-dropdown text-start">
-        <div class="btn-group w-100-pc">
-          <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'category'}"
-            (click)="redirectSubMenuTo('category',1)">
-            <i class="bi bi-tags"></i>
-          </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'category'}"
-            (click)="redirectSubMenuTo('category',1)"><i
-              class="bi bi-tags ps-3 pe-3"></i>{{'SIDEBAR.CATEGORY'|translate}}</button>
-        </div>
-      </div>
+      <!-- Enterprise -->
+      <li class="app-sidebar__item">
+        <a
+          class="app-sidebar__link"
+          [class.app-sidebar__link--active]="mainActive === 'enterprise'"
+          (click)="redirectTo('enterprise')"
+          [routerLink]="['enterprise']"
+        >
+          <i class="bi bi-briefcase"></i>
+          <span class="app-sidebar__text">{{'SIDEBAR.ENTERPRISE'|translate}}</span>
+        </a>
+      </li>
+    </ul>
 
-      <!-- button report dropdown -->
-      <input class="d-none cb-report-dropdown" type="checkbox" [checked]="isReportDropdown">
-      <div *ngIf="isAdmin || isAdminSubGr" class="btn-report-dropdown text-start">
-        <div class="btn-group w-100-pc">
-          <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'report'}" (click)="reportDropdown($event)">
-            <i class="bi bi-flag"></i>
-          </button>
-          <button class="button-sidebar-text text-start d-xl-block d-none"
-            [ngClass]="{'button-sidebar-text__active':subActive === 'report'}" (click)="reportDropdown($event)"><i
-              class="bi bi-flag ps-3 pe-3"></i>{{'SIDEBAR.REPORT'|translate}}
-            <i [class]="arrowReport"></i></button>
-        </div>
-        <!-- group button -->
-        <div class="w-100-pc text-start">
-          <div *ngIf="isAdmin" class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/group'}"
-              (click)="redirectSubMenuTo('report/group',2)">
-              <i class="bi bi-person-circle"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/group'}"
-              (click)="redirectSubMenuTo('report/group',2)">{{'SIDEBAR.GROUPS'|translate}}</button>
-          </div>
-          <div class="btn-group w-100-pc ps-3 ">
-            <button class="button-sidebar-text button-sidebar-text-icon d-block d-lg-block d-sm-block d-xl-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/post'}"
-              (click)="redirectSubMenuTo('report/post',2)">
-              <i class="bi bi-stickies"></i>
-            </button>
-            <button class="button-sidebar-text text-start ps-5 d-xl-block d-none"
-              [ngClass]="{'button-sidebar-text__active':sub2Active === 'report/post'}"
-              (click)="redirectSubMenuTo('report/post',2)">{{'SIDEBAR.POSTS'|translate}}</button>
-          </div>
-        </div>
-      </div>
+    <!-- Management Section (Admin/Dean only) -->
+    <div *ngIf="isAdmin || isDean">
+      <div class="app-sidebar__divider"></div>
 
+      <ul class="app-sidebar__list">
+        <!-- Manage Dropdown -->
+        <li class="app-sidebar__item app-sidebar__item--has-submenu">
+          <button
+            class="app-sidebar__link app-sidebar__link--button"
+            [class.app-sidebar__link--active]="mainActive === 'manage'"
+            [class.app-sidebar__link--expanded]="isDropdown"
+            (click)="dropdown($event); redirectTo('manage')"
+            type="button"
+            attr.aria-expanded="{{isDropdown}}"
+          >
+            <i class="bi bi-sliders"></i>
+            <span class="app-sidebar__text">{{'SIDEBAR.MANAGE'|translate}}</span>
+            <i class="app-sidebar__arrow bi bi-chevron-down"></i>
+          </button>
+
+          <!-- Submenu: Users -->
+          <ul class="app-sidebar__submenu" [class.app-sidebar__submenu--open]="isDropdown">
+            <li class="app-sidebar__item">
+              <button
+                class="app-sidebar__sublink"
+                [class.app-sidebar__sublink--active]="subActive === 'account'"
+                (click)="accountDropdown($event)"
+                type="button"
+                attr.aria-expanded="{{isAccountDropdown}}"
+              >
+                <i class="bi bi-person-rolodex"></i>
+                <span class="app-sidebar__text">{{'SIDEBAR.USERS'|translate}}</span>
+                <i class="app-sidebar__arrow bi bi-chevron-down"></i>
+              </button>
+
+              <ul class="app-sidebar__submenu" [class.app-sidebar__submenu--open]="isAccountDropdown">
+                <li class="app-sidebar__item" *ngIf="isAdmin">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'sign-up'"
+                    (click)="redirectSubMenuTo('sign-up',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.REGISTER'|translate}}</span>
+                  </a>
+                </li>
+                <li class="app-sidebar__item">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'users'"
+                    (click)="redirectSubMenuTo('users',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.MEMBERS'|translate}}</span>
+                  </a>
+                </li>
+                <li class="app-sidebar__item">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'account'"
+                    (click)="redirectSubMenuTo('account',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.INFORMATION'|translate}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Submenu: Enterprise (Admin only) -->
+            <li class="app-sidebar__item" *ngIf="!isDean">
+              <button
+                class="app-sidebar__sublink"
+                [class.app-sidebar__sublink--active]="subActive === 'sub-enterprise'"
+                (click)="enterpriseDropdown($event)"
+                type="button"
+                attr.aria-expanded="{{isEnterpriseDropdown}}"
+              >
+                <i class="bi bi-briefcase"></i>
+                <span class="app-sidebar__text">{{'SIDEBAR.ENTERPRISE'|translate}}</span>
+                <i class="app-sidebar__arrow bi bi-chevron-down"></i>
+              </button>
+
+              <ul class="app-sidebar__submenu" [class.app-sidebar__submenu--open]="isEnterpriseDropdown">
+                <li class="app-sidebar__item" *ngIf="isAdmin">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'register-enterprise'"
+                    (click)="redirectSubMenuTo('register-enterprise',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.REGISTER'|translate}}</span>
+                  </a>
+                </li>
+                <li class="app-sidebar__item">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'recruitment-news'"
+                    (click)="redirectSubMenuTo('recruitment-news',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.RECRUITMENT'|translate}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Faculty (Admin only) -->
+            <li class="app-sidebar__item" *ngIf="isAdmin">
+              <a
+                class="app-sidebar__sublink"
+                [class.app-sidebar__sublink--active]="subActive === 'faculty'"
+                (click)="redirectSubMenuTo('faculty',1)"
+              >
+                <i class="bi bi-building"></i>
+                <span class="app-sidebar__text">{{'SIDEBAR.FACULTY'|translate}}</span>
+              </a>
+            </li>
+
+            <!-- Category (Admin only) -->
+            <li class="app-sidebar__item" *ngIf="isAdmin">
+              <a
+                class="app-sidebar__sublink"
+                [class.app-sidebar__sublink--active]="subActive === 'category'"
+                (click)="redirectSubMenuTo('category',1)"
+              >
+                <i class="bi bi-tags"></i>
+                <span class="app-sidebar__text">{{'SIDEBAR.CATEGORY'|translate}}</span>
+              </a>
+            </li>
+
+            <!-- Reports -->
+            <li class="app-sidebar__item">
+              <button
+                class="app-sidebar__sublink"
+                [class.app-sidebar__sublink--active]="subActive === 'report'"
+                (click)="reportDropdown($event)"
+                type="button"
+                attr.aria-expanded="{{isReportDropdown}}"
+              >
+                <i class="bi bi-flag"></i>
+                <span class="app-sidebar__text">{{'SIDEBAR.REPORT'|translate}}</span>
+                <i class="app-sidebar__arrow bi bi-chevron-down"></i>
+              </button>
+
+              <ul class="app-sidebar__submenu" [class.app-sidebar__submenu--open]="isReportDropdown">
+                <li class="app-sidebar__item" *ngIf="isAdmin">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'report/group'"
+                    (click)="redirectSubMenuTo('report/group',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.GROUPS'|translate}}</span>
+                  </a>
+                </li>
+                <li class="app-sidebar__item">
+                  <a
+                    class="app-sidebar__sublink"
+                    [class.app-sidebar__sublink--active]="sub2Active === 'report/post'"
+                    (click)="redirectSubMenuTo('report/post',2)"
+                  >
+                    <span class="app-sidebar__text">{{'SIDEBAR.POSTS'|translate}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </div>
-</div>
+  </nav>
+</aside>

@@ -1,77 +1,148 @@
-<div class="chat-container d-flex" style="background-color: #FFF;">
+<div class="chat-page">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <div class="chat-sidebar col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-2 col-2">
-    <h1>{{'TITLE.CHAT'|translate}}</h1>
-    <div class="chat-sidebar__control u-margin-bottom-small">
-      <form class="search__form u-margin-vertical-auto position-relative">
-        <input class="search__form--input-search" [(ngModel)]="searchString" (keyup)="searchAccount()" type="text"
-          name="search" placeholder="{{'SEARCH.SEARCH_USER'|translate}}">
-      </form>
-    </div>
 
-    <div class="card-user" *ngFor="let conversation of listConversation; let i = index;"
-      [ngClass]="{'active':i == activeIndex, 'd-none':searchString!=''}"
-      (click)="joinConversation(conversation.user, i, false)">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img [src]="conversation?.user?.avatar" alt="">
+  <div class="chat-page__layout">
+    <!-- Chat Sidebar (Conversation List) -->
+    <aside class="chat-page__sidebar">
+      <!-- Sidebar Header -->
+      <div class="chat-page__sidebar-header">
+        <h2 class="chat-page__sidebar-title">{{'TITLE.CHAT'|translate}}</h2>
       </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>{{conversation?.user?.fullname}}</h5>
-        <h6>{{conversation?.lastestMessage|slice:0:30}}{{conversation?.lastestMessage?.length>30?'...':''}}</h6>
-      </div>
-    </div>
 
-    <div class="card-user" [ngClass]="{'d-flex':searchString!='','d-none':searchString==''}"
-      *ngFor="let account of listAccountSearch; let j = index;" (click)="joinConversation(account, j, true)">
-      <div class="card-user__avatar col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
-        <img [src]="account.avatar" alt="">
-      </div>
-      <div class="card-user__info col-xxl-10 col-xl-10 col-lg-9 col-md-9 d-none d-md-inline-block">
-        <h5>{{account.fullname}}</h5>
-        <h6>{{account._id}}</h6>
-      </div>
-    </div>
-
-  </div>
-  <div class="chat-box col-xxl-9 col-xl-9 col-lg-9 col-md-8 col-sm-10 col-10">
-    <div class="chat-box__title d-flex">
-      <div class="chat-box__title-avatar col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3">
-        <img [src]="chatTitle?.avatar" alt="">
-      </div>
-      <div class="chat-box__title-info d-flex col-xxl-11 col-xl-11 col-lg-11 col-md-10 col-sm-9 col-9">
-        <h3 class="d-inline col-10">{{chatTitle?.fullname}}</h3>
-        <div class="text-end col-2">
-          <button class="control-bar__button background-color-green" (click)="call()">
-            <i class="bi bi-telephone-fill"></i></button>
+      <!-- Search -->
+      <div class="chat-page__search">
+        <div class="input-with-icon">
+          <i class="bi bi-search input-with-icon__icon"></i>
+          <input
+            class="input-with-icon__input"
+            type="text"
+            [(ngModel)]="searchString"
+            (keyup)="searchAccount()"
+            placeholder="{{'SEARCH.SEARCH_USER'|translate}}"
+          >
         </div>
       </div>
-    </div>
 
-    <div class="chat-box__content" #chatBoxContent infiniteScroll [infiniteScrollDistance]="scrollDistance"
-      [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
-      (scrolledUp)="onUp($event)">
-      <div class=""
-        [ngClass]="message.isAuth ? 'chat-box__content-message text-end' : 'chat-box__content-message text-start'"
-        *ngFor="let message of messageList">
-        <div *ngIf="message.type == 0" class=""
-          [ngClass]="message.isAuth ? 'chat-box__content-message__content isAuth' : 'chat-box__content-message__content'">
-          {{message.data}}</div>
-        <div *ngIf="message.type == 3" class="d-inline-flex" style="width: 250px;"
-          [ngClass]="message.isAuth ? 'chat-box__content-message__content isAuth' : 'chat-box__content-message__content'">
-          <div class="col-2 u-margin-vertical-auto">
-            <i class="bi bi-camera-video-fill fs-1"></i>
+      <!-- Conversation List -->
+      <div class="chat-page__conversations">
+        <!-- Active Conversations -->
+        <div
+          class="chat-page__conversation"
+          [class.chat-page__conversation--active]="i == activeIndex"
+          [class.chat-page__conversation--hidden]="searchString!=''"
+          *ngFor="let conversation of listConversation; let i = index;"
+          (click)="joinConversation(conversation.user, i, false)"
+        >
+          <div class="chat-page__conversation-avatar">
+            <img [src]="conversation?.user?.avatar" alt="">
+            <span class="avatar-status-dot" *ngIf="conversation.user?.isOnline"></span>
           </div>
-          <div class="col-10">
-            <h4>{{'POPUP.VIDEO_CHAT'|translate}}</h4>
-            <h5>{{'POPUP.CALL_ENDED'|translate}}&nbsp;·&nbsp;{{message.data}}</h5>
+          <div class="chat-page__conversation-info">
+            <h4 class="chat-page__conversation-name">{{conversation?.user?.fullname}}</h4>
+            <p class="chat-page__conversation-preview">
+              {{conversation?.lastestMessage|slice:0:30}}{{conversation?.lastestMessage?.length>30?'...':''}}
+            </p>
           </div>
+          <div class="chat-page__conversation-meta">
+            <span class="chat-page__conversation-time">{{conversation?.lastestTime}}</span>
+            <span class="chat-page__conversation-badge" *ngIf="conversation?.unreadCount">
+              {{conversation?.unreadCount}}
+            </span>
+          </div>
+        </div>
 
+        <!-- Search Results -->
+        <div
+          class="chat-page__conversation"
+          [class.chat-page__conversation--hidden]="searchString==''"
+          *ngFor="let account of listAccountSearch; let j = index;"
+          (click)="joinConversation(account, j, true)"
+        >
+          <div class="chat-page__conversation-avatar">
+            <img [src]="account.avatar" alt="">
+          </div>
+          <div class="chat-page__conversation-info">
+            <h4 class="chat-page__conversation-name">{{account.fullname}}</h4>
+            <p class="chat-page__conversation-preview">{{account._id}}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="chat-box__input">
-      <input [(ngModel)]="message" [value]="message" type="text" (keyup.enter)="sendMessage()">
-      <fa-icon [icon]="faSend" (click)="sendMessage()"></fa-icon>
-    </div>
+    </aside>
+
+    <!-- Chat Main Area -->
+    <main class="chat-page__main">
+      <!-- Chat Header -->
+      <header class="chat-page__header">
+        <div class="chat-page__header-user">
+          <div class="chat-page__header-avatar">
+            <img [src]="chatTitle?.avatar" alt="">
+            <span class="avatar-status-dot avatar-status-dot--online"></span>
+          </div>
+          <div class="chat-page__header-info">
+            <h3 class="chat-page__header-name">{{chatTitle?.fullname}}</h3>
+            <p class="chat-page__header-status">Online</p>
+          </div>
+        </div>
+        <div class="chat-page__header-actions">
+          <button class="chat-page__header-btn" (click)="call()" aria-label="Video call">
+            <i class="bi bi-telephone-fill"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Chat Messages -->
+      <div
+        class="chat-page__messages"
+        #chatBoxContent
+        infiniteScroll
+        [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance"
+        [infiniteScrollThrottle]="throttle"
+        [scrollWindow]="false"
+        (scrolledUp)="onUp($event)"
+      >
+        <div
+          class="chat-page__message"
+          [class.chat-page__message--sent]="message.isAuth"
+          [class.chat-page__message--received]="!message.isAuth"
+          *ngFor="let message of messageList"
+        >
+          <!-- Text Message -->
+          <div *ngIf="message.type == 0" class="chat-page__message-bubble">
+            <p class="chat-page__message-text">{{message.data}}</p>
+            <span class="chat-page__message-time">{{message.timestamp}}</span>
+          </div>
+
+          <!-- Video Call Message -->
+          <div *ngIf="message.type == 3" class="chat-page__message-bubble chat-page__message-bubble--system">
+            <div class="chat-page__message-call">
+              <i class="bi bi-camera-video-fill"></i>
+              <div>
+                <h4>{{'POPUP.VIDEO_CHAT'|translate}}</h4>
+                <p>{{'POPUP.CALL_ENDED'|translate}} · {{message.data}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <div class="chat-page__input-wrapper">
+        <div class="chat-page__input-container">
+          <input
+            class="chat-page__input"
+            type="text"
+            [(ngModel)]="message"
+            [value]="message"
+            (keyup.enter)="sendMessage()"
+            placeholder="{{'CHAT.TYPE_MESSAGE'|translate}}"
+          >
+          <button class="chat-page__send-btn" (click)="sendMessage()" aria-label="Send message">
+            <i class="bi bi-send-fill"></i>
+          </button>
+        </div>
+      </div>
+    </main>
   </div>
+</div>

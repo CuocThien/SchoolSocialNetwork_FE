@@ -33,6 +33,11 @@ export class NewFeedComponent implements OnInit {
   objExperience = keyBy(LIST_EXPERIENCE, 'id');
   isLangEn = false;
 
+  // Getter for user avatar (used in template)
+  get userAvatar(): any {
+    return this.myAvatar;
+  }
+
   listPostRecruitment = [];
   pageRecruitment = 1;
   maxPageRecruitment = 1;
@@ -143,5 +148,20 @@ export class NewFeedComponent implements OnInit {
   }
   readNewsDetail(news: any) {
     this.router.navigate([`/home/enterprise/${news?.companyId}/${news?._id}`])
+  }
+
+  openCreatePostModal() {
+    this.modalRef = this.modalService.open(CreatePostComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+    })
+    this.modalRef.result.then((res: any) => {
+      const data = res.data;
+      data.avatar = this.myAvatar;
+      data.fullname = this.fullname;
+      data.countCmt = 0;
+      this.listPost.unshift(data);
+    }).catch(() => { });
   }
 }

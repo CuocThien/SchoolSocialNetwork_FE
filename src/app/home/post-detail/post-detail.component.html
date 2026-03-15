@@ -1,15 +1,30 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
 </ngx-spinner>
-<div class="post-detail">
-  <h2 class="post-detail__title">{{post?.title}}</h2>
-  <div class="post-detail__author">
-    <span>{{post?.author}} - {{post?.createdDate|date:'HH:mm dd/MM/yyyy'}}</span>
-  </div>
-  <div class="post-detail__content" [innerHtml]="post?.content | safeHtml"></div>
-  <!-- <h5>Đánh giá bài viết</h5>
-      <app-star class="star-readpost" id="{{postData.Id}}" rate="{{post.RatingbyAcc}}"></app-star>-->
-  <app-comment [countCmt]="post?.countCmt" [postId]="postId"></app-comment>
+
+<div class="post-detail-page">
+  <article class="post-detail-page__content">
+    <header class="post-detail-page__header">
+      <h1 class="post-detail-page__title">{{post?.title}}</h1>
+      <div class="post-detail-page__meta">
+        <div class="post-detail-page__author">
+          <i class="bi bi-person-circle"></i>
+          <span>{{post?.author}}</span>
+        </div>
+        <div class="post-detail-page__date">
+          <i class="bi bi-calendar3"></i>
+          <span>{{post?.createdDate|date:'HH:mm dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="post-detail-page__body" [innerHtml]="post?.content | safeHtml"></div>
+
+    <footer class="post-detail-page__footer">
+      <app-comment [countCmt]="post?.countCmt" [postId]="postId"></app-comment>
+    </footer>
+  </article>
 </div>
-<button type="button" class="btn backToTop" (click)="backToTop()">
+
+<button type="button" class="back-to-top" (click)="backToTop()" attr.aria-label="{{'BUTTON.BACK_TO_TOP'|translate}}">
   <i class="bi bi-chevron-double-up"></i>
 </button>

@@ -1,22 +1,47 @@
-<div class="form-popup form-create-post position-relative">
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
-  </ngx-spinner>
-  <div class="mt-5 mb-5">
-    <button class="btn-cancel position-absolute" (click)="onClose()"><img
-        src="https://img.icons8.com/ios/30/000000/cancel.png" /></button>
-    <h2 class="mb-4">{{'POPUP.CREATE_GROUP'|translate}}</h2>
-    <form (ngSubmit)="onSubmit();" [formGroup]="createGroupForm">
-      <span class="fs-4"><strong>{{'TITLE.CATEGORY'|translate}}</strong></span>
-      <ng-select class="mt-3 mb-3" [searchable]="false" [clearable]="false" formControlName="cateId">
-        <ng-option *ngFor="let category of (listCategory | async)" [value]="category._id">
-          {{isLangEn?category.nameEn:category.nameVi}}
-        </ng-option>
-      </ng-select>
-      <input class="signup-form__control mb-5" type="text" placeholder="{{'PLACEHOLDER.GROUP_NAME'|translate}}"
-        formControlName="name">
-      <textarea type="text" rows="7" formControlName="description"
-        placeholder="{{'TABLE.DESCRIPTION'|translate}}"></textarea>
-      <button class="btn btn-primary" type="submit">{{'BUTTON.SUBMIT'|translate}}</button>
+<div class="modal" (click)="onClose()">
+  <div class="modal__dialog" (click)="$event.stopPropagation()">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+    </ngx-spinner>
+
+    <button class="modal__close" (click)="onClose()" attr.aria-label="{{'BUTTON.CLOSE'|translate}}">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <div class="modal__header">
+      <h2 class="modal__title">{{'POPUP.CREATE_GROUP'|translate}}</h2>
+    </div>
+
+    <form class="create-group-form" (ngSubmit)="onSubmit();" [formGroup]="createGroupForm">
+      <div class="form-group">
+        <label class="form-label" for="category">{{'TITLE.CATEGORY'|translate}}</label>
+        <ng-select id="category" class="form-select" [searchable]="false" [clearable]="false" formControlName="cateId" [attr.placeholder]="'SELECT.CATEGORY'|translate">
+          <ng-option *ngFor="let category of (listCategory | async)" [value]="category._id">
+            {{isLangEn?category.nameEn:category.nameVi}}
+          </ng-option>
+        </ng-select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="name">{{'TABLE.NAME'|translate}}</label>
+        <input class="form-control" id="name" type="text" [placeholder]="'PLACEHOLDER.GROUP_NAME'|translate"
+          formControlName="name">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="description">{{'TABLE.DESCRIPTION'|translate}}</label>
+        <textarea class="form-control" id="description" rows="5" formControlName="description"
+          [placeholder]="'PLACEHOLDER.DESCRIPTION'|translate"></textarea>
+      </div>
+
+      <div class="create-group-form__actions">
+        <button class="btn btn-secondary" type="button" (click)="onClose()">
+          {{'BUTTON.CANCEL'|translate}}
+        </button>
+        <button class="btn btn-primary" type="submit">
+          <i class="bi bi-check-circle"></i>
+          {{'BUTTON.SUBMIT'|translate}}
+        </button>
+      </div>
     </form>
   </div>
 </div>

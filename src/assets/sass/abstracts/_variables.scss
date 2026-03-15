@@ -64,6 +64,14 @@ $spacing-4xl: $spacing-unit * 16;  // 64px
 $spacing-5xl: $spacing-unit * 24;  // 96px
 
 // ========================================
+// LAYOUT DIMENSIONS
+// ========================================
+
+$header-height: 72px;
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 64px;
+
+// ========================================
 // BORDER RADIUS SYSTEM
 // ========================================
 
@@ -96,8 +104,8 @@ $focus-offset: 2px;
 // ========================================
 
 // Font Families
-$font-heading: 'Lora', serif;           // Professional, academic
-$font-body: 'Source Sans Pro', sans-serif;  // Clean, readable
+$font-heading: 'Plus Jakarta Sans', sans-serif;  // Modern, professional
+$font-body: 'Inter', sans-serif;               // Clean, highly readable
 
 // Font Sizes (rem-based, 1rem = 10px at root)
 $font-xs: 1.2rem;      // 12px

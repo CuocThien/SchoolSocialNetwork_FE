@@ -1,84 +1,449 @@
-.sidebar {
-  height: 100%;
-  // background-image: linear-gradient(to right, #6A29D8, #4080E7);
-  background-color: #3950AD;
-  width: 16.67%;
-  -webkit-box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
-  -moz-box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
-  box-shadow: .3rem 0 .8rem 0 rgba(57, 63, 72, 0.5);
-  transition: all .2s;
+// ========================================
+// MODERN SCHOLAR - APP SIDEBAR
+// ========================================
+
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100vh;
+  background: $color-bg-pure;
+  box-shadow: $shadow-sm;
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+  transition: transform 300ms ease-out, width 300ms ease-out;
+  border-right: 1px solid $color-border;
 }
 
-.button-container{
- height: calc(100vh - 7.5rem);
- overflow: scroll;
- -ms-overflow-style: none;
-      /* for Internet Explorer, Edge */
-      scrollbar-width: none;
- &::-webkit-scrollbar {
+// ========================================
+// SIDEBAR HEADER
+// ========================================
+
+.app-sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-xl;
+  height: calc(#{$header-height} - 1px); // Subtract border
+  border-bottom: 1px solid $color-border;
+}
+
+.app-sidebar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: $radius-md;
+  background: linear-gradient(135deg, $color-primary 0%, darken($color-primary, 8%) 100%);
+  transition: all 150ms ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba($color-primary, 0.3);
+  }
+
+  img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+}
+
+.app-sidebar__title {
+  font-family: $font-heading;
+  font-size: $font-lg;
+  font-weight: $font-bold;
+  color: $color-text-primary;
+  line-height: $leading-tight;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+// ========================================
+// SIDEBAR NAVIGATION
+// ========================================
+
+.app-sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: $spacing-lg 0;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-text-muted, 0.3);
+    border-radius: $radius-pill;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+.app-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-sidebar__divider {
+  height: 1px;
+  background: $color-border-light;
+  margin: $spacing-lg $spacing-xl;
+}
+
+// ========================================
+// SIDEBAR ITEMS
+// ========================================
+
+.app-sidebar__item {
+  margin-bottom: $spacing-xs;
+}
+
+.app-sidebar__item--has-submenu {
+  margin-bottom: $spacing-sm;
+}
+
+// ========================================
+// SIDEBAR LINKS
+// ========================================
+
+.app-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  width: 100%;
+  padding: $spacing-md $spacing-xl;
+  font-family: $font-body;
+  font-size: $font-base;
+  font-weight: $font-medium;
+  color: $color-text-secondary;
+  background: none;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  position: relative;
+
+  i:first-child {
+    font-size: $font-lg;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+    color: $color-text-muted;
+  }
+
+  &:hover {
+    color: $color-text-primary;
+    background-color: $color-bg-warm;
+  }
+
+  &:focus-visible {
+    outline: none;
+    background-color: $color-bg-warm;
+    box-shadow: inset 3px 0 0 $color-accent;
+  }
+
+  &--active {
+    color: $color-accent;
+    background-color: rgba($color-accent, 0.08);
+    font-weight: $font-semibold;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: $color-accent;
+      border-radius: 0 $radius-sm $radius-sm 0;
+    }
+  }
+
+  &--button {
+    width: 100%;
+  }
+
+  &--expanded {
+    .app-sidebar__arrow {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.app-sidebar__text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-sidebar__arrow {
+  font-size: $font-sm;
+  transition: transform 200ms ease-out;
+  flex-shrink: 0;
+}
+
+// ========================================
+// SIDEBAR SUBMENU
+// ========================================
+
+.app-sidebar__submenu {
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease-out;
+  background-color: $color-bg-warm;
+  border-radius: $radius-md;
+
+  &--open {
+    max-height: 500px;
+    margin: $spacing-xs $spacing-md $spacing-sm;
+  }
+
+  .app-sidebar__item {
+    margin-bottom: 0;
+  }
+}
+
+// ========================================
+// SIDEBAR SUBLINKS
+// ========================================
+
+.app-sidebar__sublink {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  width: 100%;
+  padding: $spacing-sm $spacing-xl $spacing-sm calc(#{$spacing-xl} + 20px);
+  font-family: $font-body;
+  font-size: $font-sm;
+  font-weight: $font-normal;
+  color: $color-text-secondary;
+  background: none;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  i {
+    font-size: $font-base;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    color: $color-text-muted;
+  }
+
+  &:hover {
+    color: $color-text-primary;
+    background-color: rgba($color-accent, 0.05);
+  }
+
+  &:focus-visible {
+    outline: none;
+    background-color: rgba($color-accent, 0.08);
+  }
+
+  &--active {
+    color: $color-accent;
+    font-weight: $font-medium;
+  }
+
+  .app-sidebar__arrow {
+    font-size: 10px;
+  }
+
+  &[aria-expanded="true"] {
+    .app-sidebar__arrow {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .app-sidebar {
+    width: $sidebar-collapsed-width;
+
+    &:hover {
+      width: $sidebar-width;
+    }
+  }
+
+  .app-sidebar__title,
+  .app-sidebar__text,
+  .app-sidebar__arrow {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .app-sidebar:hover {
+    .app-sidebar__title,
+    .app-sidebar__text,
+    .app-sidebar__arrow {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+
+    &.app-sidebar--open {
+      transform: translateX(0);
+    }
+  }
+
+  .app-sidebar__overlay {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .app-sidebar {
+    width: 85%;
+    max-width: 300px;
+  }
+
+  .app-sidebar__header {
+    padding: $spacing-md $spacing-lg;
+  }
+
+  .app-sidebar__link,
+  .app-sidebar__sublink {
+    padding: $spacing-sm $spacing-lg;
+  }
+}
+
+// ========================================
+// SIDEBAR OVERLAY (MOBILE)
+// ========================================
+
+.app-sidebar__overlay {
   display: none;
-}
-}
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 899;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  pointer-events: none;
 
-// dropdown manage
-.btn-group-dropdown {
-  height: 5.8rem;
-  overflow: hidden;
-  transition: height .5s;
-}
-
-.cb-manage-dropdown {
-  &:checked~.btn-group-dropdown {
-    height: 70rem;
-    overflow: hidden;
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
-// dropdown account
-.btn-account-dropdown {
-  height: 4.4rem;
-  overflow: hidden;
-  transition: height .5s;
-}
+// ========================================
+// COLLAPSED STATE
+// ========================================
 
-.cb-account-dropdown {
-  &:checked~.btn-account-dropdown {
-    height: 19rem;
+.app-sidebar--collapsed {
+  width: $sidebar-collapsed-width;
+
+  .app-sidebar__title,
+  .app-sidebar__text,
+  .app-sidebar__arrow {
+    display: none;
+  }
+
+  .app-sidebar__link {
+    padding: $spacing-md;
+    justify-content: center;
+
+    &::before {
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+
+  .app-sidebar__header {
+    padding: $spacing-lg;
+    justify-content: center;
+  }
+
+  .app-sidebar__logo {
+    margin: 0;
   }
 }
 
-// dropdown enterprise
-.btn-enterprise-dropdown {
-  height: 4.4rem;
-  overflow: hidden;
-  transition: height .5s;
-}
+// ========================================
+// ACCESSIBILITY
+// ========================================
 
-.cb-enterprise-dropdown {
-  &:checked~.btn-enterprise-dropdown {
-    height: 14rem;
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .app-sidebar,
+  .app-sidebar__link,
+  .app-sidebar__sublink,
+  .app-sidebar__arrow,
+  .app-sidebar__submenu,
+  .app-sidebar__overlay {
+    transition: none;
   }
 }
 
-// faculty
-.btn-faculty-dropdown {
-  height: 4.4rem;
-}
-// category
-.btn-category-dropdown {
-  height: 4.4rem;
-}
-
-
-// report
-.btn-report-dropdown {
-  height: 4.4rem;
-  overflow: hidden;
-  transition: height .5s;
-}
-
-.cb-report-dropdown {
-  &:checked~.btn-report-dropdown {
-    height: 14rem;
+// High contrast mode
+@media (prefers-contrast: high) {
+  .app-sidebar {
+    border-right: 2px solid $color-border;
   }
+
+  .app-sidebar__link--active::before {
+    width: 6px;
+  }
+}
+
+// ========================================
+// LEGACY OVERRIDES (for compatibility)
+// ========================================
+
+.sidebar {
+  @extend .app-sidebar;
+}
+
+.h-header {
+  @extend .app-sidebar__header;
+}
+
+.button-sidebar {
+  @extend .app-sidebar__link;
+}
+
+.button-sidebar__active {
+  @extend .app-sidebar__link--active;
+}
+
+.button-sidebar-text {
+  @extend .app-sidebar__sublink;
+}
+
+.button-sidebar-text__active {
+  @extend .app-sidebar__sublink--active;
 }

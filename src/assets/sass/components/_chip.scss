@@ -1,0 +1,516 @@
+// ========================================
+// MODERN SCHOLAR - CHIP COMPONENT
+// ========================================
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 32px;
+  padding: 0 $spacing-md;
+  font-family: $font-body;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  line-height: 1;
+  background-color: $color-bg-warm;
+  color: $color-text-primary;
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+  white-space: nowrap;
+  transition: all 150ms ease-out;
+  cursor: default;
+
+  &:hover:not(.chip--disabled) {
+    background-color: darken($color-bg-warm, 5%);
+    border-color: darken($color-border, 10%);
+  }
+
+  &:active:not(.chip--disabled) {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+}
+
+// ========================================
+// CHIP VARIANTS
+// ========================================
+
+// Filled chip
+.chip--filled {
+  background-color: $color-primary;
+  color: $color-text-inverse;
+  border: none;
+
+  &:hover:not(.chip--disabled) {
+    background-color: darken($color-primary, 10%);
+  }
+}
+
+.chip--filled-secondary {
+  background-color: $color-secondary;
+  color: $color-text-inverse;
+  border: none;
+
+  &:hover:not(.chip--disabled) {
+    background-color: darken($color-secondary, 10%);
+  }
+}
+
+.chip--filled-accent {
+  background-color: $color-accent;
+  color: $color-text-inverse;
+  border: none;
+
+  &:hover:not(.chip--disabled) {
+    background-color: darken($color-accent, 10%);
+  }
+}
+
+// Outline chip
+.chip--outline {
+  background-color: transparent;
+  border-width: 2px;
+
+  &.chip--primary {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+
+  &.chip--secondary {
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+
+  &.chip--accent {
+    border-color: $color-accent;
+    color: $color-accent;
+  }
+
+  &.chip--success {
+    border-color: $color-success;
+    color: $color-success;
+  }
+
+  &.chip--warning {
+    border-color: $color-warning;
+    color: $color-warning;
+  }
+
+  &.chip--danger {
+    border-color: $color-danger;
+    color: $color-danger;
+  }
+}
+
+// ========================================
+// CHIP WITH AVATAR
+// ========================================
+
+.chip--with-avatar {
+  padding-left: $spacing-sm;
+
+  .chip__avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .chip__avatar-initials {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-primary;
+    color: $color-text-inverse;
+    border-radius: 50%;
+    font-size: $font-xs;
+    font-weight: $font-semibold;
+  }
+}
+
+// ========================================
+// CHIP WITH ICON
+// ========================================
+
+.chip--with-icon {
+  .chip__icon {
+    font-size: $font-base;
+    color: inherit;
+  }
+}
+
+// ========================================
+// CHIP WITH CLOSE BUTTON
+// ========================================
+
+.chip--closable {
+  padding-right: $spacing-sm;
+
+  .chip__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+
+    i {
+      font-size: $font-xs;
+    }
+  }
+}
+
+// ========================================
+// CLICKABLE CHIP
+// ========================================
+
+.chip--clickable {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: $shadow-sm;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ========================================
+// SELECTABLE CHIP (CHECKBOX STYLE)
+// ========================================
+
+.chip--selectable {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    box-shadow: $shadow-sm;
+  }
+
+  &.chip--selected {
+    background-color: rgba($color-primary, 0.1);
+    border-color: $color-primary;
+    color: $color-primary;
+
+    .chip__check {
+      display: flex;
+    }
+  }
+}
+
+.chip__check {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-sm;
+}
+
+// ========================================
+// DELETABLE CHIP
+// ========================================
+
+.chip--deletable {
+  .chip__delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+    margin-left: $spacing-sm;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+
+    i {
+      font-size: $font-xs;
+    }
+  }
+}
+
+// ========================================
+// CHIP SIZES
+// ========================================
+
+.chip--small {
+  height: 24px;
+  padding: 0 $spacing-sm;
+  font-size: $font-xs;
+
+  &.chip--with-avatar {
+    padding-left: $spacing-sm;
+
+    .chip__avatar,
+    .chip__avatar-initials {
+      width: 18px;
+      height: 18px;
+      font-size: 9px;
+    }
+  }
+
+  .chip__close,
+  .chip__delete {
+    width: 16px;
+    height: 16px;
+
+    i {
+      font-size: 9px;
+    }
+  }
+
+  .chip__check {
+    font-size: $font-xs;
+  }
+}
+
+.chip--large {
+  height: 40px;
+  padding: 0 $spacing-lg;
+  font-size: $font-base;
+
+  &.chip--with-avatar {
+    padding-left: $spacing-sm;
+
+    .chip__avatar,
+    .chip__avatar-initials {
+      width: 32px;
+      height: 32px;
+      font-size: $font-sm;
+    }
+  }
+
+  .chip__close,
+  .chip__delete {
+    width: 24px;
+    height: 24px;
+
+    i {
+      font-size: $font-sm;
+    }
+  }
+
+  .chip__check {
+    font-size: $font-base;
+  }
+}
+
+// ========================================
+// CHIP WITH IMAGE
+// ========================================
+
+.chip--with-image {
+  padding-left: 0;
+
+  .chip__image {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: $radius-sm 0 0 $radius-sm;
+    margin-right: $spacing-sm;
+  }
+
+  &.chip--small .chip__image {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.chip--large .chip__image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// ========================================
+// CHIP GROUP
+// ========================================
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.chip-group--center {
+  justify-content: center;
+}
+
+.chip-group--end {
+  justify-content: flex-end;
+}
+
+// ========================================
+// CHIP LIST (VERTICAL)
+// ========================================
+
+.chip-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+// ========================================
+// CHIP INPUT WRAPPER
+// ========================================
+
+.chip-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  align-items: center;
+  padding: $spacing-sm;
+  background-color: $color-bg-pure;
+  border: 2px solid $color-border;
+  border-radius: $radius-md;
+  min-height: 48px;
+
+  &:focus-within {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  .chip {
+    margin: 0;
+  }
+
+  .chip-input__field {
+    flex: 1;
+    min-width: 120px;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: $font-body;
+    font-size: $font-base;
+    color: $color-text-primary;
+    padding: $spacing-xs;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+  }
+}
+
+// ========================================
+// CHIP STATES
+// ========================================
+
+// Disabled state
+.chip--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// Error state
+.chip--error {
+  background-color: $color-danger-bg;
+  color: $color-danger;
+  border-color: $color-danger;
+}
+
+// Success state
+.chip--success {
+  background-color: $color-success-bg;
+  color: $color-success;
+  border-color: $color-success;
+}
+
+// Warning state
+.chip--warning {
+  background-color: $color-warning-bg;
+  color: $color-warning;
+  border-color: $color-warning;
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .chip {
+    font-size: $font-xs;
+  }
+
+  .chip--large {
+    font-size: $font-sm;
+  }
+
+  .chip-group {
+    gap: $spacing-sm;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .chip,
+  .chip__close,
+  .chip__delete {
+    transition: none;
+  }
+
+  .chip:active,
+  .chip__close:active,
+  .chip__delete:active {
+    transform: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .chip--outline {
+    border-width: 3px;
+  }
+
+  .chip-input {
+    border-width: 3px;
+  }
+}
