@@ -123,6 +123,51 @@
     padding: $spacing-lg $spacing-xl $spacing-md;
     border-bottom: 1px solid $color-border-light;
     background: linear-gradient(135deg, rgba($color-accent, 0.01) 0%, transparent 100%);
+
+    // ========================================
+    // POST-AUTHOR IN CARD HEADER (GROUP NAME)
+    // ========================================
+    // This is the h3.post-author showing group name in header
+    // Optimized font sizes for all devices
+    // ========================================
+
+    .post-author {
+      margin: 0;
+      font-family: $font-body; // Body font, not heading
+      font-size: 14px; // Desktop
+      font-weight: $font-semibold;
+      color: $color-text-primary;
+      line-height: $leading-tight;
+      cursor: pointer;
+      transition: color 150ms ease-out;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 250px;
+
+      &:hover {
+        color: $color-accent;
+      }
+
+      // TABLET: Increased by 4px
+      @media (max-width: 1023px) {
+        font-size: 17px !important; // 13px + 4px = 17px on tablet
+        max-width: 220px;
+      }
+
+      // MOBILE: Increased by 4px
+      @media (max-width: 767px) {
+        font-size: 16px !important; // 12px + 4px = 16px on mobile
+        max-width: 180px;
+        font-weight: $font-medium; // Lighter weight on mobile
+      }
+
+      // Small mobile: Increased by 4px
+      @media (max-width: 480px) {
+        font-size: 15px !important; // 11px + 4px = 15px on small mobile
+        max-width: 150px;
+      }
+    }
   }
 
   .card-body {
@@ -168,17 +213,47 @@
       gap: $spacing-xs;
 
       .post-author {
-        font-family: $font-heading;
-        font-size: $font-lg;
-        font-weight: $font-bold;
-        color: $color-text-primary;
-        line-height: $leading-tight;
+        // ========================================
+        // PROFESSIONAL UI/UX DESIGN DECISIONS:
+        // ========================================
+        // Group names are CONTEXTUAL METADATA, not primary content
+        // Following standards: Facebook (11px, gray), LinkedIn (11px, muted)
+        // Visual hierarchy: Post Content > Author > Group Name (subtle) > Timestamp
+        // ========================================
+
+        font-family: $font-body; // Body font for metadata, not heading
+        font-size: 11px; // 11px desktop - very subtle, compact
+        font-weight: $font-medium; // Medium weight, not semibold
+        color: $color-text-secondary; // Muted color - clearly secondary
+        line-height: $leading-normal; // Normal line height for metadata
         transition: color 200ms ease-out;
         cursor: pointer;
+        text-transform: capitalize; // Only first letter capitalized for elegance
 
         &:hover {
           color: $color-accent;
         }
+
+        // Mobile: even smaller due to limited screen space
+        @media (max-width: 767px) {
+          font-size: 10px; // 10px on mobile - minimal but functional
+        }
+
+        // Truncate long names with ellipsis - aggressive for mobile
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 180px; // Tighter on desktop
+
+        @media (max-width: 767px) {
+          max-width: 120px; // Much tighter on mobile - "Khoa Đào Tạo" becomes "Khoa Đào..."
+        }
+
+        // Optional: Add "from:" prefix for clarity (uncomment if desired)
+        // &::before {
+        //   content: 'from ';
+        //   color: $color-text-muted;
+        // }
       }
 
       .post-time {

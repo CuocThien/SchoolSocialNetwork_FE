@@ -309,10 +309,44 @@
 
 @media (max-width: 1023px) {
   .app-sidebar {
-    transform: translateX(-100%);
+    // Keep sidebar visible by default (removed translateX(-100%))
+    transform: translateX(0);
+    // Collapse to icon-only width on tablet
+    width: $sidebar-collapsed-width;
 
-    &.app-sidebar--open {
-      transform: translateX(0);
+    &.app-sidebar--closed {
+      transform: translateX(-100%);
+    }
+
+    // Hide text, title, and arrows - show only icons
+    .app-sidebar__title,
+    .app-sidebar__text,
+    .app-sidebar__arrow {
+      display: none;
+    }
+
+    // Hide submenus in icon-only mode
+    .app-sidebar__submenu {
+      display: none;
+    }
+
+    .app-sidebar__link {
+      padding: $spacing-md;
+      justify-content: center;
+
+      // Remove the vertical line indicator in collapsed mode
+      &::before {
+        display: none;
+      }
+    }
+
+    .app-sidebar__header {
+      padding: $spacing-lg;
+      justify-content: center;
+    }
+
+    .app-sidebar__logo {
+      margin: 0;
     }
   }
 
@@ -323,17 +357,21 @@
 
 @media (max-width: 767px) {
   .app-sidebar {
-    width: 85%;
-    max-width: 300px;
+    // Keep collapsed width on mobile too - icon only
+    width: $sidebar-collapsed-width;
   }
 
   .app-sidebar__header {
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-md;
+    justify-content: center;
   }
 
-  .app-sidebar__link,
+  .app-sidebar__link {
+    padding: $spacing-sm;
+  }
+
   .app-sidebar__sublink {
-    padding: $spacing-sm $spacing-lg;
+    padding: $spacing-xs;
   }
 }
 

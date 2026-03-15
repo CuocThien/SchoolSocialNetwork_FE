@@ -12,7 +12,7 @@ import { HOST } from '../utils/constant';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['../../assets/sass/main.scss']
+  styleUrls: ['../../assets/sass/main.scss', './home.component.scss']
 })
 export class HomeComponent implements OnInit {
 

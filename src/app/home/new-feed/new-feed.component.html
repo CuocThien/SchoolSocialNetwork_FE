@@ -13,7 +13,7 @@
               <img [src]="userAvatar || 'assets/images/default-avatar.png'" alt="Your avatar">
             </div>
             <button class="create-post-trigger" (click)="openCreatePostModal()">
-              <span class="create-post-placeholder">What's on your mind?</span>
+              <span class="create-post-placeholder">Share something...</span>
             </button>
           </div>
           <div class="create-post-actions">
@@ -133,5 +133,34 @@
         </div>
       </div>
     </aside>
+
+    <!-- Mobile Horizontal News Ticker -->
+    <div class="mobile-news-ticker">
+      <div class="ticker-header">
+        <h3 class="ticker-title">
+          <i class="bi bi-briefcase"></i>
+          Recruitment News
+        </h3>
+      </div>
+      <div class="ticker-scroll">
+        <article class="ticker-card" *ngFor="let news of listPostRecruitment" (click)="readNewsDetail(news)">
+          <div class="ticker-card__image">
+            <img [src]="news.poster" alt="">
+          </div>
+          <div class="ticker-card__content">
+            <h4 class="ticker-card__title">{{news?.title}}</h4>
+            <p class="ticker-card__salary">
+              <i class="bi bi-currency-dollar"></i>
+              {{news?.salary}}
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Floating Action Button for Mobile -->
+    <button class="fab-create-post" (click)="openCreatePostModal()" aria-label="Create new post">
+      <i class="bi bi-plus-lg"></i>
+    </button>
   </div>
 </div>

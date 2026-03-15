@@ -14,9 +14,9 @@
   height: $header-height;
   transition: left 300ms ease-out;
 
-  // On smaller screens where sidebar is hidden/overlay
+  // On smaller screens where sidebar is collapsed
   @media (max-width: 1023px) {
-    left: 0;
+    left: $sidebar-collapsed-width; // Start after collapsed sidebar (64px)
   }
 
   // When sidebar is collapsed
@@ -448,18 +448,23 @@
 }
 
 @media (max-width: 767px) {
+  .app-header {
+    // Reduce height on mobile to avoid covering content
+    height: 60px;
+  }
+
   .app-header__container {
     height: auto;
-    min-height: $header-height;
+    min-height: 60px;
     flex-wrap: wrap;
-    padding: $spacing-md $spacing-sm;
+    padding: $spacing-sm;
   }
 
   .app-header__left {
     order: 2;
     width: 100%;
     max-width: none;
-    margin-top: $spacing-md;
+    margin-top: $spacing-sm;
   }
 
   .app-header__right {
@@ -468,7 +473,7 @@
   }
 
   .app-header__search-input {
-    height: 44px;
+    height: 40px;
   }
 
   .app-header__lang {

@@ -94,10 +94,27 @@ export class IndexComponent implements OnInit {
   profile: any;
 
   isExpire = false;
+  isFacultyCollapsed = false; // For collapsible faculty section
+  activeMobileTab = 0; // For mobile tab navigation
+
+  // Mobile categories configuration
+  mobileCategories = [
+    { id: 'common', nameEn: 'Common', nameVi: 'Chung', icon: 'bi-chat-left-quote' },
+    { id: 'study', nameEn: 'Study', nameVi: 'Học tập', icon: 'bi-book' },
+    { id: 'union', nameEn: 'Union', nameVi: 'Đoàn trường', icon: 'bi-people' },
+    { id: 'english', nameEn: 'English', nameVi: 'Tiếng Anh', icon: 'bi-translate' },
+    { id: 'tuition', nameEn: 'Tuition', nameVi: 'Học phí', icon: 'bi-cash-coin' },
+    { id: 'scholarship', nameEn: 'Scholarship', nameVi: 'Học bổng', icon: 'bi-award' }
+  ];
 
   private modalRef: NgbModalRef;
 
   async ngOnInit(): Promise<void> {
+    // Check if on mobile and collapse faculty section by default
+    if (window.innerWidth <= 767) {
+      this.isFacultyCollapsed = true;
+    }
+
     const existedListNav = JSON.parse(localStorage.getItem('listNav'))
     let listNavLS = existedListNav ? JSON.parse(localStorage.getItem('listNav'))[0] : null
     listNavLS = listNavLS ? JSON.stringify([listNavLS]) : JSON.stringify([{ "route": "home/index", "nameEn": "Index", "nameVi": "Trang chủ" }])
@@ -454,5 +471,18 @@ export class IndexComponent implements OnInit {
   filterExpire(isExpire: boolean) {
     this.isExpire = isExpire;
     this._getListNews()
+  }
+
+  // Get category count for mobile tab badges
+  getCategoryCount(categoryId: string): number {
+    const categoryMap = {
+      'common': () => this.listPostCommon?.length || 0,
+      'study': () => this.listPostStudy?.length || 0,
+      'union': () => this.listPostUnion?.length || 0,
+      'english': () => this.listPostEnglish?.length || 0,
+      'tuition': () => this.listPostTuition?.length || 0,
+      'scholarship': () => this.listPostScholarship?.length || 0
+    };
+    return categoryMap[categoryId]?.() || 0;
   }
 }

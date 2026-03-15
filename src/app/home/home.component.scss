@@ -1,0 +1,59 @@
+// ========================================
+// HOME LAYOUT - SIDEBAR & MAIN CONTAINER
+// ========================================
+
+// Override Bootstrap column widths for mobile and tablet
+// to show icon-only sidebar and maximize content area
+// Using high specificity to override Bootstrap col-* classes
+
+// TABLET (768px - 1023px): Icon-only sidebar
+@media (min-width: 768px) and (max-width: 1023px) {
+  .d-flex > .sidebar-container,
+  .d-flex > .col-md-3.sidebar-container,
+  .d-flex > .col-sm-3.sidebar-container {
+    width: 64px !important;
+    max-width: 64px !important;
+    flex: 0 0 64px !important;
+    padding-right: 2px !important;
+  }
+
+  .d-flex > .home-container,
+  .d-flex > .col-md-9.home-container,
+  .d-flex > .col-sm-9.home-container {
+    width: calc(100% - 64px) !important;
+    max-width: calc(100% - 64px) !important;
+    flex: 0 0 calc(100% - 64px) !important;
+  }
+
+  // Fix breadcrumb to fit in reduced home-container
+  .breadcrumb-nav {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+// MOBILE (< 768px): Compact icon-only sidebar
+@media (max-width: 767px) {
+  .d-flex > .sidebar-container,
+  .d-flex > .col-3.sidebar-container {
+    width: 56px !important;
+    max-width: 56px !important;
+    flex: 0 0 56px !important;
+    padding-right: 2px !important;
+  }
+
+  .d-flex > .home-container,
+  .d-flex > .col-9.home-container {
+    width: calc(100% - 56px) !important;
+    max-width: calc(100% - 56px) !important;
+    flex: 0 0 calc(100% - 56px) !important;
+  }
+
+  // Fix breadcrumb to fit in reduced home-container
+  .breadcrumb-nav {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+  }
+}
