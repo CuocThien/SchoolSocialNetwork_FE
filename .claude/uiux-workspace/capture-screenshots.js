@@ -1,41 +1,75 @@
 const { chromium } = require('@playwright/test');
 const path = require('path');
+const fs = require('fs');
 
-(async () => {
-  const browser = await chromium.launch();
-  const context = await browser.newContext();
-  const page = await context.newPage();
-
+async function captureScreenshots() {
   const viewports = [
     { name: 'desktop', width: 1920, height: 1080 },
     { name: 'tablet', width: 768, height: 1024 },
     { name: 'mobile', width: 375, height: 667 }
   ];
 
-  const screenshotsDir = path.join(__dirname, 'home-index/iteration-3/screenshots');
+  const authStatePath = path.join(__dirname, '.auth-state.json');
 
-  for (const viewport of viewports) {
-    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+  if (!fs.existsSync(authStatePath)) {
+    console.error('Auth state file not found. Please login first.');
+    return;
+  }
+
+  const browser = await chromium.launch({
+    headless: true
+  });
+
+  const context = await browser.newContext({
+    storageState: authStatePath
+  });
+
+  const page = await context.newPage();
+
+  console.log('Starting screenshot capture for group page...');
+  console.log('Using saved auth state for login...');
+
+  const outputDir = path.join(__dirname, 'group-page', 'iteration-1', 'screenshots');
+
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  for (const vp of viewports) {
+    console.log(`\nCapturing ${vp.name} (${vp.width}x${vp.height})...`);
+
+    await page.setViewportSize({ width: vp.width, height: vp.height });
 
     try {
-      // Navigate with longer timeout
-      await page.goto('http://localhost:4200/home/index', { timeout: 60000 });
+      await page.goto('http://localhost:4200/home/group', {
+        waitUntil: 'networkidle',
+        timeout: 30000
+      });
 
-      // Wait for the page to load completely
-      await page.waitForLoadState('networkidle', { timeout: 30000 });
       await page.waitForTimeout(3000);
 
-      const filename = `${viewport.name}-${viewport.width}x${viewport.height}.png`;
+      try {
+        await page.waitForSelector('.group-card--skeleton', { state: 'detached', timeout: 5000 });
+      } catch {}
+
+      try {
+        await page.waitForSelector('.group-card:not(.group-card--skeleton)', { timeout: 5000 });
+      } catch {}
+
+      const screenshotPath = path.join(outputDir, `${vp.name}-${vp.width}x${vp.height}.png`);
       await page.screenshot({
-        path: path.join(screenshotsDir, filename),
+        path: screenshotPath,
         fullPage: true
       });
-      console.log(`Captured: ${filename}`);
+
+      console.log(`✓ Captured ${vp.name}: ${screenshotPath}`);
     } catch (error) {
-      console.error(`Failed to capture ${viewport.name}:`, error.message);
+      console.error(`✗ Failed to capture ${vp.name}:`, error.message);
     }
   }
 
   await browser.close();
-  console.log('Screenshots captured successfully!');
-})();
+  console.log('\n✓ All screenshots captured successfully!');
+}
+
+captureScreenshots().catch(console.error);
