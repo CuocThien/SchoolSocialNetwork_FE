@@ -122,6 +122,8 @@
         "FULLNAME": "Họ và tên",
         "DOB": "Ngày sinh",
         "PHONE": "Số điện thoại",
+        "USER": "Người dùng",
+        "ROLE": "Vai trò",
         "YEAR":"Niên khoá",
         "COUNT_POST": "Số lượng bài viết",
         "COUNT_COMMENT": "Số lượng bình luận",
@@ -131,6 +133,13 @@
         "ABBREVIATION": "Tên viết tắt",
         "DESCRIPTION": "Mô tả",
         "COMPANY_NAME": "Tên công ty"
+    },
+    "USERS_MANAGEMENT":{
+        "SUBTITLE": "Quản lý tài khoản và quyền người dùng",
+        "SELECT_FACULTY": "Chọn khoa",
+        "TRANSFER_FACULTY": "Chuyển khoa",
+        "NO_USERS_TITLE": "Không tìm thấy người dùng",
+        "NO_USERS_DESC": "Thử điều chỉnh tìm kiếm hoặc bộ lọc"
     },
     "POPUP":{
         "CREATE_FACULTY":"Thêm khoa mới",

@@ -122,6 +122,8 @@
         "FULLNAME": "Full name",
         "DOB": "DoB",
         "PHONE": "Phone",
+        "USER": "User",
+        "ROLE": "Role",
         "YEAR":"Year",
         "COUNT_POST": "Count posts",
         "COUNT_COMMENT": "Count comments",
@@ -131,6 +133,13 @@
         "ABBREVIATION": "Abbreviation",
         "DESCRIPTION": "Description",
         "COMPANY_NAME": "Company name"
+    },
+    "USERS_MANAGEMENT":{
+        "SUBTITLE": "Manage user accounts and permissions",
+        "SELECT_FACULTY": "Select faculty",
+        "TRANSFER_FACULTY": "Transfer",
+        "NO_USERS_TITLE": "No users found",
+        "NO_USERS_DESC": "Try adjusting your search or filters"
     },
     "POPUP":{
         "CREATE_FACULTY":"Create faculty",

@@ -1,72 +1,185 @@
-<div class="pt-3 ms-3 me-4 faculty-container min-h-sub">
-  <ngx-spinner bdColor=" rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
-  </ngx-spinner>
-  <div class="d-flex control mb-3">
-    <h1 class="ps-5 d-inline-block col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4">{{'TITLE.USERS'|translate}}
-    </h1>
-    <div class="d-flex col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8">
-      <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-11 col-sm-11 col-11 u-margin-auto ">
-        <form class="search__form u-margin-vertical-auto position-relative">
-          <input class="search__form--input-search" type="text" name="search"
-            placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}" (keyup.enter)="searchUser()" [(ngModel)]="keyword">
-          <button class="search__form--button-search position-absolute" type="submit"><i class="bi bi-search"
-              (click)="searchUser()"></i></button>
-        </form>
+<div class="users-management__container min-h-sub">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true"></ngx-spinner>
+
+  <!-- Header Section -->
+  <div class="users-management__header">
+    <div class="users-management__title-section">
+      <h1 class="users-management__title">{{'TITLE.USERS'|translate}}</h1>
+      <p class="users-management__subtitle">{{'USERS_MANAGEMENT.SUBTITLE'|translate}}</p>
+    </div>
+
+    <div class="users-management__actions">
+      <!-- Search Box -->
+      <div class="search-box">
+        <i class="bi bi-search search-box__icon"></i>
+        <input
+          type="text"
+          class="search-box__input"
+          placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}"
+          [(ngModel)]="keyword"
+          (keyup.enter)="searchUser()"
+        >
       </div>
-      <div
-        class="btn-create-group ps-3 pe-3 d-inline-block u-margin-auto col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-2 col-2">
-        <button class="btn btn-outline-primary d-block d-lg-block d-sm-block d-xl-none"
-          (click)="updateStudentToAlumni()"><i class="bi bi-arrow-left-right fs-3"></i></button>
-        <button class="btn btn-outline-primary d-xl-block fs-5 d-none text-center w-100-pc"
-          (click)="updateStudentToAlumni()">
-          <i class="bi bi-arrow-left-right fs-3 ps-3 pe-3"></i>{{'POPUP.UPDATE_STUDENT_ALUMNI'|translate}}</button>
+
+      <!-- Faculty Filter -->
+      <div class="filter-select" *ngIf="isAdmin || isDean">
+        <ng-select
+          [searchable]="false"
+          [clearable]="false"
+          [(ngModel)]="groupId"
+          (change)="filterFaculty()"
+          class="filter-select__dropdown"
+          placeholder="{{'USERS_MANAGEMENT.SELECT_FACULTY'|translate}}"
+        >
+          <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
+            {{isLangEn ? faculty.nameEn : faculty.nameVi}}
+          </ng-option>
+        </ng-select>
+      </div>
+
+      <!-- Student Toggle -->
+      <div class="student-toggle" *ngIf="isAdmin || isDean">
+        <label class="toggle-switch">
+          <input type="checkbox" [(ngModel)]="isStudent" (change)="filterStudent()">
+          <span class="toggle-switch__slider"></span>
+        </label>
+        <span class="student-toggle__label">{{'TITLE.STUDENT'|translate}}</span>
+      </div>
+
+      <!-- Update Alumni Button -->
+      <button class="btn btn-primary btn--icon" (click)="updateStudentToAlumni()">
+        <i class="bi bi-arrow-left-right"></i>
+        <span>{{'POPUP.UPDATE_STUDENT_ALUMNI'|translate}}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!listUsers?.length">
+    <div class="empty-state__icon">
+      <i class="bi bi-people"></i>
+    </div>
+    <h3 class="empty-state__title">{{'USERS_MANAGEMENT.NO_USERS_TITLE'|translate}}</h3>
+    <p class="empty-state__description">{{'USERS_MANAGEMENT.NO_USERS_DESC'|translate}}</p>
+  </div>
+
+  <!-- Desktop/Tablet Table View -->
+  <div class="users-table__container" *ngIf="listUsers?.length">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th class="users-table__th users-table__th--user" (click)="sortBy('fullname')">
+            <span>{{'TABLE.USER'|translate}}</span>
+            <i class="bi bi-arrow-down-up sort-icon" *ngIf="sortField !== 'fullname'"></i>
+            <i class="bi bi-arrow-down sort-icon sort-active" *ngIf="sortField === 'fullname' && sortDirection === 'asc'"></i>
+            <i class="bi bi-arrow-up sort-icon sort-active" *ngIf="sortField === 'fullname' && sortDirection === 'desc'"></i>
+          </th>
+          <th class="users-table__th users-table__th--role" (click)="sortBy('role')">
+            <span>{{'TABLE.ROLE'|translate}}</span>
+            <i class="bi bi-arrow-down-up sort-icon" *ngIf="sortField !== 'role'"></i>
+            <i class="bi bi-arrow-down sort-icon sort-active" *ngIf="sortField === 'role' && sortDirection === 'asc'"></i>
+            <i class="bi bi-arrow-up sort-icon sort-active" *ngIf="sortField === 'role' && sortDirection === 'desc'"></i>
+          </th>
+          <th class="users-table__th" (click)="sortBy('dob')">
+            <span>{{'TABLE.DOB'|translate}}</span>
+            <i class="bi bi-arrow-down-up sort-icon" *ngIf="sortField !== 'dob'"></i>
+            <i class="bi bi-arrow-down sort-icon sort-active" *ngIf="sortField === 'dob' && sortDirection === 'asc'"></i>
+            <i class="bi bi-arrow-up sort-icon sort-active" *ngIf="sortField === 'dob' && sortDirection === 'desc'"></i>
+          </th>
+          <th class="users-table__th" (click)="sortBy('phone')">
+            <span>{{'TABLE.PHONE'|translate}}</span>
+            <i class="bi bi-arrow-down-up sort-icon" *ngIf="sortField !== 'phone'"></i>
+            <i class="bi bi-arrow-down sort-icon sort-active" *ngIf="sortField === 'phone' && sortDirection === 'asc'"></i>
+            <i class="bi bi-arrow-up sort-icon sort-active" *ngIf="sortField === 'phone' && sortDirection === 'desc'"></i>
+          </th>
+          <th class="users-table__th users-table__th--actions">{{'TABLE.ACTION'|translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="users-table__row" *ngFor="let user of listUsers; let i = index">
+          <td class="users-table__td">
+            <div class="user-cell">
+              <div class="user-cell__avatar">
+                <img [src]="user.avatar || 'assets/images/default-avatar.png'" [alt]="user.fullname">
+                <span class="user-cell__status-indicator user-cell__status-indicator--active"></span>
+              </div>
+              <div class="user-cell__info">
+                <div class="user-cell__id">ID: {{user.userId}}</div>
+                <div class="user-cell__name">{{user.fullname}}</div>
+              </div>
+            </div>
+          </td>
+          <td class="users-table__td">
+            <span class="role-badge" [ngClass]="'role-badge--' + getUserRoleClass(user)">{{getUserRole(user)}}</span>
+          </td>
+          <td class="users-table__td">
+            <span class="users-table__value">{{user.dob|date:'dd-MM-yyyy'}}</span>
+          </td>
+          <td class="users-table__td">
+            <span class="users-table__value">{{user.phone}}</span>
+          </td>
+          <td class="users-table__td users-table__td--actions">
+            <div class="action-buttons">
+              <button
+                class="action-btn action-btn--transfer"
+                (click)="transferFaculty(user, i)"
+                *ngIf="isAdmin||isDean"
+                attr.title="{{'USERS_MANAGEMENT.TRANSFER_FACULTY'|translate}}"
+              >
+                <i class="bi bi-arrow-left-right"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Card View -->
+  <div class="users-cards" *ngIf="listUsers?.length">
+    <div class="user-card" *ngFor="let user of listUsers; let i = index">
+      <div class="user-card__header">
+        <div class="user-card__avatar">
+          <img [src]="user.avatar || 'assets/images/default-avatar.png'" [alt]="user.fullname">
+          <span class="user-card__status-indicator user-card__status-indicator--active"></span>
+        </div>
+        <div class="user-card__info">
+          <div class="user-card__id">ID: {{user.userId}}</div>
+          <h3 class="user-card__name">{{user.fullname}}</h3>
+          <span class="role-badge role-badge--small" [ngClass]="'role-badge--' + getUserRoleClass(user)">{{getUserRole(user)}}</span>
+        </div>
+      </div>
+
+      <div class="user-card__details">
+        <div class="user-card__detail">
+          <span class="user-card__label">{{'TABLE.DOB'|translate}}</span>
+          <span class="user-card__value">{{user.dob|date:'dd-MM-yyyy'}}</span>
+        </div>
+        <div class="user-card__detail">
+          <span class="user-card__label">{{'TABLE.PHONE'|translate}}</span>
+          <span class="user-card__value">{{user.phone}}</span>
+        </div>
+      </div>
+
+      <div class="user-card__actions" *ngIf="isAdmin||isDean">
+        <button class="btn btn-outline btn-sm" (click)="transferFaculty(user, i)">
+          <i class="bi bi-arrow-left-right"></i>
+          {{'USERS_MANAGEMENT.TRANSFER_FACULTY'|translate}}
+        </button>
       </div>
     </div>
   </div>
-  <div class="w-100-pc d-flex flex-row-reverse">
-    <ng-select
-      class="u-margin-vertical-auto d-inline-block text-start mb-4 col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6"
-      [searchable]="false" [clearable]="false" [(ngModel)]="groupId" (change)="filterFaculty()">
-      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
-        {{isLangEn ? faculty.nameEn : faculty.nameVi}}
-      </ng-option>
-    </ng-select>
-    <div
-      class="form-check form-switch  ms-3 u-margin-vertical-auto col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4">
-      <input class="form-check-input fs-2 u-margin-auto" type="checkbox" role="switch" id="student"
-        (click)="filterStudent()">
-      <label class="form-check-label fs-4 ms-3" for="student">{{'TITLE.STUDENT'|translate}}</label>
-    </div>
-  </div>
-  <table class="table table-striped" style="width:100%">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>{{'TABLE.FULLNAME'|translate}}</th>
-        <th>{{'TABLE.DOB'|translate}}</th>
-        <th>{{'TABLE.PHONE'|translate}}</th>
-        <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of listUsers; let i = index">
-        <td>{{user.userId}}</td>
-        <td>{{user.fullname}}</td>
-        <td>{{user.dob|date:'dd-MM-YYY'}}</td>
-        <td>{{user.phone}}</td>
-        <td class="text-center">
-          <i class="bi bi-arrow-left-right btn-delete ms-3" (click)="transferFaculty(user, i)"
-            *ngIf="isAdmin||isDean"></i>
-        </td>
-      </tr>
-      <tr *ngIf="!listUsers?.length" class="text-center">
-        <td colspan="5" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="pagination">
-    <ngb-pagination [collectionSize]="maxPage" [maxSize]="5" [pageSize]="1" [rotate]="true"
-      (pageChange)="goToPage($event)" [(page)]="page">
+
+  <!-- Pagination -->
+  <div class="pagination-wrapper" *ngIf="listUsers?.length && maxPage > 1">
+    <ngb-pagination
+      [collectionSize]="maxPage"
+      [maxSize]="5"
+      [pageSize]="1"
+      [rotate]="true"
+      (pageChange)="goToPage($event)"
+      [(page)]="page"
+      class="pagination-modern">
     </ngb-pagination>
   </div>
 </div>

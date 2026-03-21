@@ -9,7 +9,7 @@ import { FacultyService, UsersService } from '../../services/index';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['../../../assets/sass/main.scss']
+  styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
 
@@ -35,6 +35,9 @@ export class UsersComponent implements OnInit {
   page = 1;
   maxPage = 1;
   isSearch = false;
+  sortField = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   ngOnInit(): void {
     this.isLangEn = (localStorage.getItem('lang') === 'en');
     const role = localStorage.getItem('role')
@@ -188,5 +191,70 @@ export class UsersComponent implements OnInit {
     }).catch(() => {
 
     });
+  }
+
+  // Sorting functionality
+  sortBy(field: string) {
+    if (this.sortField === field) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+
+    this.listUsers.sort((a: any, b: any) => {
+      let aVal = a[field];
+      let bVal = b[field];
+
+      // Handle date field
+      if (field === 'dob') {
+        aVal = new Date(aVal).getTime();
+        bVal = new Date(bVal).getTime();
+      }
+
+      // Handle string comparison
+      if (typeof aVal === 'string') {
+        aVal = aVal.toLowerCase();
+        bVal = bVal.toLowerCase();
+      }
+
+      if (aVal < bVal) return this.sortDirection === 'asc' ? -1 : 1;
+      if (aVal > bVal) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  // Get user role display name
+  getUserRole(user: any): string {
+    if (user.role) {
+      return user.role;
+    }
+
+    // Determine role based on user properties
+    if (user.isAdmin) return this.isLangEn ? 'Admin' : 'Quản trị viên';
+    if (user.isDean) return this.isLangEn ? 'Dean' : 'Trưởng khoa';
+    if (user.isAlumni) return this.isLangEn ? 'Alumni' : 'Cựu sinh viên';
+    if (user.isStudent !== undefined) {
+      return user.isStudent ?
+        (this.isLangEn ? 'Student' : 'Sinh viên') :
+        (this.isLangEn ? 'Teacher' : 'Giảng viên');
+    }
+
+    return this.isStudent ?
+      (this.isLangEn ? 'Student' : 'Sinh viên') :
+      (this.isLangEn ? 'Teacher' : 'Giảng viên');
+  }
+
+  // Get CSS class for role badge
+  getUserRoleClass(user: any): string {
+    const role = this.getUserRole(user).toLowerCase();
+
+    if (role.includes('admin') || role.includes('quản trị')) return 'admin';
+    if (role.includes('dean') || role.includes('trưởng khoa')) return 'dean';
+    if (role.includes('alumni') || role.includes('cựu sinh viên')) return 'alumni';
+    if (role.includes('student') || role.includes('sinh viên')) return 'student';
+    if (role.includes('teacher') || role.includes('giảng viên')) return 'teacher';
+
+    return 'student';
   }
 }

@@ -1,0 +1,835 @@
+// ============================================
+// Users Management Page - Modern Scholar Design
+// ============================================
+
+// Color Variables
+$primary: #4F46E5;
+$primary-hover: #4338CA;
+$primary-light: #EEF2FF;
+$primary-lighter: #E0E7FF;
+
+$gray-50: #F9FAFB;
+$gray-100: #F3F4F6;
+$gray-200: #E5E7EB;
+$gray-300: #D1D5DB;
+$gray-400: #9CA3AF;
+$gray-500: #6B7280;
+$gray-600: #4B5563;
+$gray-700: #374151;
+$gray-800: #1F2937;
+$gray-900: #111827;
+
+$white: #FFFFFF;
+$success: #10B981;
+$warning: #F59E0B;
+$danger: #EF4444;
+$danger-light: #FEF2F2;
+$danger-border: #FECACA;
+
+// Breakpoints
+$mobile: 900px;  // Changed from 767px to switch to cards earlier
+$tablet: $mobile + 1;
+$desktop: 1024px;
+
+// ============================================
+// Container & Header
+// ============================================
+.users-management__container {
+  padding: 2.5rem;
+  min-height: calc(100vh - 90px);
+
+  @media (max-width: $mobile) {
+    padding: 1.25rem;
+  }
+}
+
+.users-management__header {
+  margin-bottom: 2.5rem;
+
+  @media (max-width: $tablet) {
+    margin-bottom: 2rem;
+  }
+}
+
+.users-management__title-section {
+  margin-bottom: 2rem;
+
+  @media (max-width: $tablet) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.users-management__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $gray-900;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+
+  @media (max-width: $mobile) {
+    font-size: 1.75rem;
+  }
+}
+
+.users-management__subtitle {
+  font-size: 1.125rem;
+  color: $gray-500;
+  font-weight: 400;
+}
+
+.users-management__actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+// ============================================
+// Search Box
+// ============================================
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+
+  @media (max-width: $tablet) {
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray-400;
+    pointer-events: none;
+    font-size: 1.5rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 1.125rem 1.5rem 1.125rem 3.5rem;
+    border: 1px solid $gray-200;
+    border-radius: 0.875rem;
+    font-size: 1.125rem;
+    color: $gray-700;
+    background: $white;
+    transition: all 0.2s ease;
+    font-weight: 400;
+    min-height: 56px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    &::placeholder {
+      color: $gray-400;
+    }
+  }
+}
+
+// ============================================
+// Filter Select (ng-select)
+// ============================================
+.filter-select {
+  min-width: 250px;
+
+  @media (max-width: $tablet) {
+    min-width: 100%;
+  }
+
+  &__dropdown {
+    width: 100%;
+
+    ::ng-deep .ng-select-container {
+      border: 1px solid $gray-200;
+      border-radius: 0.875rem;
+      min-height: 56px;
+      background: $white;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: $gray-300;
+      }
+
+      &.ng-select-focused {
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+    }
+
+    ::ng-deep .ng-value-container {
+      padding: 0.75rem 1.25rem;
+      font-size: 1.125rem;
+      min-height: 54px;
+      align-items: center;
+    }
+
+    ::ng-deep .ng-placeholder {
+      color: $gray-400;
+      font-size: 1.125rem;
+    }
+
+    ::ng-deep .ng-arrow-wrapper {
+      padding-right: 1rem;
+      min-width: 36px;
+      .ng-arrow {
+        border-color: $gray-400 transparent transparent;
+        border-width: 7px 6px 0 6px;
+      }
+    }
+  }
+}
+
+// ============================================
+// Toggle Switch
+// ============================================
+.student-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: $gray-50;
+  border-radius: 0.875rem;
+  border: 1px solid $gray-200;
+
+  &__label {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: $gray-700;
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 34px;
+
+  & input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $gray-300;
+    transition: 0.3s ease;
+    border-radius: 34px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 28px;
+      width: 28px;
+      left: 3px;
+      bottom: 3px;
+      background-color: $white;
+      transition: 0.3s ease;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  & input:checked + &__slider {
+    background-color: $primary;
+  }
+
+  & input:checked + &__slider::before {
+    transform: translateX(30px);
+  }
+
+  & input:focus + &__slider {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+}
+
+// ============================================
+// Buttons
+// ============================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.125rem 1.75rem;
+  border-radius: 0.875rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  white-space: nowrap;
+  min-height: 56px;
+
+  @media (max-width: $mobile) {
+    width: 100%;
+  }
+
+  &--icon {
+    @media (max-width: $mobile) {
+      span {
+        display: inline;
+      }
+    }
+  }
+
+  &-sm {
+    padding: 0.875rem 1.5rem;
+    font-size: 1.0625rem;
+    min-height: 48px;
+  }
+
+  &-primary {
+    background: $primary;
+    color: $white;
+
+    &:hover {
+      background: $primary-hover;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &-outline {
+    background: transparent;
+    border: 1px solid $gray-300;
+    color: $gray-700;
+
+    &:hover {
+      background: $gray-50;
+      border-color: $gray-400;
+    }
+  }
+
+  i {
+    font-size: 1.25rem;
+  }
+}
+
+// ============================================
+// Table (Desktop/Tablet)
+// ============================================
+.users-table {
+  &__container {
+    background: $white;
+    border-radius: 1rem;
+    border: 1px solid $gray-200;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+    @media (max-width: $mobile) {
+      display: none;
+    }
+  }
+
+  width: 100%;
+  border-collapse: collapse;
+
+  &__th {
+    padding: 1.5rem 2.5rem;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $gray-500;
+    background: $gray-50;
+    border-bottom: 1px solid $gray-200;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    &--user {
+      width: 38%;
+    }
+
+    &--role {
+      width: 180px;
+    }
+
+    &--actions {
+      width: 140px;
+      text-align: center;
+    }
+  }
+
+  &__row {
+    transition: background 0.15s ease;
+    border-bottom: 1px solid $gray-100;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: $gray-50;
+    }
+  }
+
+  &__td {
+    padding: 2rem 2.5rem;
+    font-size: 1.125rem;
+    color: $gray-700;
+
+    &--actions {
+      text-align: center;
+    }
+  }
+
+  &__value {
+    color: $gray-600;
+    font-size: 1.125rem;
+  }
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, $primary-lighter 0%, $primary-light 100%);
+    flex-shrink: 0;
+    border: 3.5px solid $white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__id {
+    font-size: 1rem;
+    color: $gray-400;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.025em;
+  }
+
+  &__name {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: $gray-900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.3;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.action-btn {
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.375rem;
+
+  &--transfer {
+    background: $primary-light;
+    color: $primary;
+
+    &:hover {
+      background: darken($primary-light, 5%);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// ============================================
+// Mobile Cards
+// ============================================
+.users-cards {
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: $mobile) {
+    display: flex;
+  }
+}
+
+.user-card {
+  background: $white;
+  border-radius: 1rem;
+  border: 1px solid $gray-200;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $gray-100;
+  }
+
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, $primary-lighter 0%, $primary-light 100%);
+    flex-shrink: 0;
+    border: 3.5px solid $white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__id {
+    font-size: 1rem;
+    color: $gray-400;
+    font-weight: 500;
+    margin-bottom: 0.625rem;
+    letter-spacing: 0.025em;
+  }
+
+  &__name {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: $gray-900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.3;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  &__detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__label {
+    font-size: 1.0625rem;
+    color: $gray-500;
+    font-weight: 500;
+  }
+
+  &__value {
+    font-size: 1.125rem;
+    color: $gray-700;
+    font-weight: 600;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $gray-100;
+
+    .btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+}
+
+// ============================================
+// Empty State
+// ============================================
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 3rem;
+  text-align: center;
+  background: $white;
+  border-radius: 1rem;
+  border: 1px dashed $gray-300;
+
+  @media (max-width: $mobile) {
+    padding: 5rem 2rem;
+  }
+
+  &__icon {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $gray-100 0%, $gray-50 100%);
+    border-radius: 50%;
+    margin-bottom: 2.5rem;
+    color: $gray-400;
+    font-size: 3rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $gray-900;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    font-size: 1.125rem;
+    color: $gray-500;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+}
+
+// ============================================
+// Pagination
+// ============================================
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid $gray-200;
+
+  @media (max-width: $mobile) {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+  }
+}
+
+.pagination-modern {
+  ::ng-deep .pagination {
+    display: flex;
+    gap: 0.625rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::ng-deep .page-item {
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      height: 48px;
+      padding: 0.75rem 1rem;
+      border: 1px solid $gray-200;
+      border-radius: 0.75rem;
+      background: $white;
+      color: $gray-600;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      text-decoration: none;
+
+      &:hover {
+        background: $gray-50;
+        border-color: $gray-300;
+        color: $gray-700;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+    }
+
+    &.active .page-link {
+      background: $primary;
+      border-color: $primary;
+      color: $white;
+    }
+
+    &.disabled .page-link {
+      background: $gray-50;
+      border-color: $gray-200;
+      color: $gray-400;
+      cursor: not-allowed;
+    }
+  }
+
+  ::ng-deep .pagination-prev,
+  ::ng-deep .pagination-next {
+    .page-link {
+      padding: 0 1.25rem;
+    }
+  }
+}
+
+// ============================================
+// Role Badges
+// ============================================
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.375rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.025em;
+
+  &--small {
+    padding: 0.625rem 1.125rem;
+    font-size: 0.9375rem;
+  }
+
+  &--admin {
+    background: linear-gradient(135deg, $primary-lighter 0%, $primary-light 100%);
+    color: $primary;
+  }
+
+  &--dean {
+    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+    color: #D97706;
+  }
+
+  &--student {
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+    color: #059669;
+  }
+
+  &--teacher {
+    background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+    color: #2563EB;
+  }
+
+  &--alumni {
+    background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+    color: $gray-600;
+  }
+}
+
+// ============================================
+// Status Indicators
+// ============================================
+.user-cell__status-indicator,
+.user-card__status-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3.5px solid $white;
+
+  &--active {
+    background: $success;
+    box-shadow: 0 0 0 2px rgba($success, 0.2);
+  }
+
+  &--inactive {
+    background: $gray-400;
+    box-shadow: 0 0 0 2px rgba($gray-400, 0.2);
+  }
+}
+
+.user-card__status-indicator {
+  width: 22px;
+  height: 22px;
+}
+
+// ============================================
+// Sort Icons
+// ============================================
+.users-table__th {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &:hover {
+    background: darken($gray-50, 2%);
+  }
+}
+
+.sort-icon {
+  font-size: 0.75rem;
+  color: $gray-400;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+
+  &.sort-active {
+    opacity: 1;
+    color: $primary;
+  }
+}
+
+.users-table__th:hover .sort-icon {
+  opacity: 0.75;
+
+  &.sort-active {
+    opacity: 1;
+  }
+}
+
+// Role column width
+.users-table__th--role {
+  width: 140px;
+}
