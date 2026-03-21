@@ -1,0 +1,337 @@
+// ========================================
+// MODERN SCHOLAR - AVATAR COMPONENT
+// ========================================
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  background-color: $color-border;
+  color: $color-text-inverse;
+  font-family: $font-heading;
+  font-weight: $font-semibold;
+  overflow: hidden;
+  transition: all 150ms ease-out;
+
+  // Avatar image
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // Avatar placeholder (initials)
+  &__initials {
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  // Avatar icon
+  &__icon {
+    font-size: inherit;
+  }
+}
+
+// ========================================
+// AVATAR SIZES
+// ========================================
+
+.avatar--xs {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+  border-radius: $radius-sm;
+}
+
+.avatar--small {
+  width: 32px;
+  height: 32px;
+  font-size: $font-xs;
+  border-radius: $radius-sm;
+}
+
+.avatar--medium {
+  width: 40px;
+  height: 40px;
+  font-size: $font-sm;
+  border-radius: $radius-md;
+}
+
+.avatar--large {
+  width: 48px;
+  height: 48px;
+  font-size: $font-base;
+  border-radius: $radius-md;
+}
+
+.avatar--xl {
+  width: 64px;
+  height: 64px;
+  font-size: $font-lg;
+  border-radius: $radius-lg;
+}
+
+.avatar--2xl {
+  width: 96px;
+  height: 96px;
+  font-size: $font-2xl;
+  border-radius: $radius-lg;
+}
+
+// ========================================
+// AVATAR SHAPES
+// ========================================
+
+.avatar--circle {
+  border-radius: 50%;
+}
+
+.avatar--rounded {
+  border-radius: $radius-md;
+}
+
+.avatar--square {
+  border-radius: $radius-sm;
+}
+
+// ========================================
+// AVATAR WITH STATUS
+// ========================================
+
+.avatar--with-status {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    height: 25%;
+    min-width: 8px;
+    min-height: 8px;
+    border: 2px solid $color-bg-pure;
+    border-radius: 50%;
+  }
+
+  &.status--online::after {
+    background-color: $color-success;
+  }
+
+  &.status--offline::after {
+    background-color: $color-text-muted;
+  }
+
+  &.status--busy::after {
+    background-color: $color-danger;
+  }
+
+  &.status--away::after {
+    background-color: $color-warning;
+  }
+}
+
+// ========================================
+// AVATAR WITH BADGE
+// ========================================
+
+.avatar--with-badge {
+  .badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(25%, 25%);
+  }
+}
+
+// ========================================
+// AVATAR GROUP
+// ========================================
+
+.avatar-group {
+  display: flex;
+  align-items: center;
+
+  .avatar {
+    margin-left: -$spacing-md;
+    border: 2px solid $color-bg-pure;
+    transition: transform 150ms ease-out;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      z-index: 1;
+    }
+  }
+
+  // Counter for remaining avatars
+  &__more {
+    width: 40px;
+    height: 40px;
+    margin-left: -$spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-bg-warm;
+    color: $color-text-secondary;
+    font-family: $font-body;
+    font-size: $font-sm;
+    font-weight: $font-semibold;
+    border: 2px solid $color-bg-pure;
+    border-radius: 50%;
+  }
+}
+
+.avatar-group--small .avatar,
+.avatar-group--small .avatar-group__more {
+  width: 32px;
+  height: 32px;
+  font-size: $font-xs;
+}
+
+.avatar-group--large .avatar,
+.avatar-group--large .avatar-group__more {
+  width: 48px;
+  height: 48px;
+  font-size: $font-base;
+}
+
+// ========================================
+// CLICKABLE AVATAR
+// ========================================
+
+.avatar--clickable {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// ========================================
+// AVATAR COLORS (for initials)
+// ========================================
+
+.avatar--color-primary {
+  background-color: $color-primary;
+}
+
+.avatar--color-secondary {
+  background-color: $color-secondary;
+}
+
+.avatar--color-accent {
+  background-color: $color-accent;
+}
+
+.avatar--color-success {
+  background-color: $color-success;
+}
+
+.avatar--color-warning {
+  background-color: $color-warning;
+}
+
+.avatar--color-danger {
+  background-color: $color-danger;
+}
+
+.avatar--color-info {
+  background-color: $color-info;
+}
+
+// ========================================
+// AVATAR WITH PRESENCE
+// ========================================
+
+.avatar--presence {
+  &:hover {
+    box-shadow: 0 0 0 4px rgba($color-success, 0.2);
+  }
+}
+
+// ========================================
+// STACKED AVATARS (for cards/lists)
+// ========================================
+
+.avatar-stack {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  .avatar {
+    border: 2px solid $color-bg-pure;
+
+    &:nth-child(n+4) {
+      display: none;
+    }
+  }
+
+  &--show-more {
+    .avatar:nth-child(4) {
+      display: flex;
+      opacity: 0.7;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .avatar-group {
+    flex-wrap: wrap;
+
+    .avatar {
+      margin-left: -$spacing-sm;
+    }
+  }
+
+  .avatar-group__more {
+    margin-left: -$spacing-sm;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .avatar,
+  .avatar-group .avatar {
+    transition: none;
+  }
+
+  .avatar:hover,
+  .avatar-group .avatar:hover {
+    transform: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .avatar--with-status::after {
+    border-width: 3px;
+  }
+}
+
+// Focus visible for keyboard navigation
+.avatar--clickable:focus-visible {
+  outline: 3px solid $focus-color;
+  outline-offset: 2px;
+}

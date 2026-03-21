@@ -1,74 +1,81 @@
-<div class="group-detail-container">
+<div class="group-detail-container" role="main" aria-label="Group detail page">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
   <div class="gr-intro text-center">
     <div class="gr-intro__img">
-      <img [src]="image" alt="">
-      <div class="btn-group">
-        <button *ngIf="isAdmin" (click)="updateImage()">{{'GROUP.UPDATE'|translate}}</button>
-        <button *ngIf="isJoinedGroup" (click)="outGroup();removeUser(userId,1);"><i
+      <img [src]="image" [alt]="groupName ? groupName + ' cover image' : 'Group cover image'">
+      <div class="btn-group" role="group" aria-label="Group actions">
+        <button *ngIf="isAdmin" (click)="updateImage()" class="btn-action" aria-label="Update group image">{{'GROUP.UPDATE'|translate}}</button>
+        <button *ngIf="isJoinedGroup" (click)="outGroup();removeUser(userId,1);" class="btn-action btn-icon" aria-label="Leave group"><i
             class="bi bi-box-arrow-left"></i></button>
-        <button *ngIf="!isJoinedGroup" (click)="joinGroup();"><i class="bi bi-box-arrow-in-right"></i></button>
+        <button *ngIf="!isJoinedGroup" (click)="joinGroup();" class="btn-action btn-icon" aria-label="Join group"><i class="bi bi-box-arrow-in-right"></i></button>
       </div>
     </div>
     <div class="gr-intro__info mt-3">
       <div class="d-flex">
         <div class="d-flex col-9">
-          <input *ngIf="isRename" class="change-name-group col-6" type="text" [(ngModel)]="groupName">
-          <button *ngIf="isRename" class="btn-report btn-report__check col-1" (click)="rename()"><i
+          <input *ngIf="isRename" class="change-name-group col-6" type="text" [(ngModel)]="groupName" aria-label="Group name">
+          <button *ngIf="isRename" class="btn-report btn-report__check col-1" (click)="rename()" aria-label="Save group name"><i
               class="bi bi-check-lg"></i></button>
           <h1 *ngIf="!isRename" class="d-inline-block">{{groupName}}</h1>
         </div>
-        <div class="col-3 text-end">
-          <button [ngClass]="{'opacity-0 invisible':isRename||!isAdmin}" class="btn-report text-center pe-3"
-            (click)="onRename()"><i class="bi bi-pencil"></i></button>
-          <button class="btn-report text-center ps-3 pe-3" (click)="report('group', groupId)"><i
-              class="bi bi-flag"></i></button>
-          <button *ngIf="isAdmin" class="btn-report text-center ps-3" (click)="deleteGroup()"><i
-              class="bi bi-trash3"></i></button>
+        <div class="col-3 text-end group-management-buttons" role="group" aria-label="Group management">
+          <button [ngClass]="{'opacity-0 invisible':isRename||!isAdmin}" class="btn-icon-btn btn-ghost"
+            (click)="onRename()" aria-label="Rename group" tooltip="Rename group">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn-icon-btn btn-ghost" (click)="report('group', groupId)" aria-label="Report group" tooltip="Report group">
+            <i class="bi bi-flag"></i>
+          </button>
+          <button *ngIf="isAdmin" class="btn-icon-btn btn-danger-ghost" (click)="deleteGroup()" aria-label="Delete group" tooltip="Delete group">
+            <i class="bi bi-trash3"></i>
+          </button>
         </div>
 
       </div>
       <h4>{{groupDetail?.numPost}} {{'GROUP.POSTS'|translate}} - {{(totalMember + totalAdmin)||0}}
         {{'GROUP.MEMBERS'|translate}}</h4>
     </div>
-    <ul class="menu-control-group-detail">
-      <li class="col-2 text-center" [ngClass]="{'li-active': isPostActive}" (click)="onPost()">
+    <ul class="menu-control-group-detail" role="tablist">
+      <li class="col-2 text-center" [ngClass]="{'li-active': isPostActive}" (click)="onPost()" role="tab" [attr.aria-selected]="isPostActive" tabindex="0">
         {{'GROUP.POSTS2'|translate}}</li>
-      <li class="col-2 text-center" [ngClass]="{'li-active': !isPostActive}" (click)="onMember()">
+      <li class="col-2 text-center" [ngClass]="{'li-active': !isPostActive}" (click)="onMember()" role="tab" [attr.aria-selected]="!isPostActive" tabindex="0">
         {{'GROUP.MEMBERS2'|translate}}</li>
     </ul>
   </div>
-  <div *ngIf="isPostActive" class="gr-de">
+  <div *ngIf="isPostActive" class="gr-de" role="tabpanel" aria-labelledby="posts-tab">
     <div class="gr-de__create-post-container text-start d-flex">
       <div class="card-content d-flex">
         <img class="u-margin-auto col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2 image-avatar" [src]="myAvatar"
-          alt="">
+          alt="Your avatar">
         <div class="col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-10 col-10 d-inline-block h-100-pc text-center">
           <input class="card-content__btn-input " type="text" placeholder="{{'BUTTON.CREATE_POST'|translate}}"
-            (click)="createPost()">
+            (click)="createPost()" readonly aria-label="Create new post">
         </div>
       </div>
     </div>
     <div class="gr-de__list-post text-center">
-      <div class="card-content mb-5" *ngFor="let post of listPost; let i = index">
+      <div class="card-content mb-5" *ngFor="let post of listPost; let i = index" role="article" [attr.aria-label]="'Post by ' + post.fullname">
         <div class="card-content__post-title d-flex">
           <div class="col-1 ">
-            <img class="image-avatar" [src]="post.avatar" alt="">
+            <img class="image-avatar" [src]="post.avatar" [alt]="post.fullname + ' avatar'">
           </div>
           <div class="ps-3 col-xxl-9 col-xl-9 col-lg-9 col-md-8 col-sm-7 col-7 d-inline-block h-100-pc text-start">
             <h4>{{post.fullname}} {{'GROUP.CREATED_POST'|translate}}</h4>
             <h6>{{post.createdDate | date:'HH:mm dd/MM/YYYY'}}</h6>
           </div>
-          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-4 text-end">
-            <button [ngClass]=" isAdmin || post.author==userId?'opacity-100 visible':'opacity-0 invisible'"
-              class="btn-report me-3" (click)="deletePost(post._id, i)">
-              <i class="bi bi-trash3"></i></button>
-            <button [ngClass]="post.author == userId?'opacity-100 visible':'opacity-0 invisible'"
-              class="btn-report ms-3 me-3" (click)="updatePost(post, i)">
-              <i class="bi bi-pencil-square"></i></button>
-            <button class="btn-report ms-3 me-3" (click)="report('post', post._id)">
-              <i class="bi bi-flag"></i></button>
+          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-4 text-end post-actions" role="group" aria-label="Post actions">
+            <button [ngClass]=" isAdmin || post.author==userId?'post-actions__btn':'post-actions__btn post-actions__btn--hidden'"
+              class="post-actions__btn post-actions__btn--danger" (click)="deletePost(post._id, i)" aria-label="Delete post" tooltip="Delete post">
+              <i class="bi bi-trash3"></i>
+            </button>
+            <button [ngClass]="post.author == userId?'post-actions__btn':'post-actions__btn post-actions__btn--hidden'"
+              class="post-actions__btn post-actions__btn--edit" (click)="updatePost(post, i)" aria-label="Edit post" tooltip="Edit post">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="post-actions__btn post-actions__btn--report" (click)="report('post', post._id)" aria-label="Report post" tooltip="Report post">
+              <i class="bi bi-flag"></i>
+            </button>
           </div>
         </div>
         <hr class="mt-3 mb-2">
@@ -82,27 +89,29 @@
       <button *ngIf="page!=maxPage" class="btn-load-more" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}</button>
     </div>
   </div>
-  <div *ngIf="!isPostActive" class="gr-mem">
+  <div *ngIf="!isPostActive" class="gr-mem" role="tabpanel" aria-labelledby="members-tab">
 
     <div class="card-content text-start">
       <h3 class="mb-3" style="display:inline-block; width: 90%;">{{'TITLE.ABOUT'|translate}}</h3>
-      <div class="d-inline" *ngIf="isAdmin">
-        <i *ngIf="!isUpdateDescription" class="bi bi-pencil fs-3" style="cursor: pointer;"
-          (click)="onDescription()"></i>
-        <i *ngIf="isUpdateDescription" class="bi bi-check-lg" style="cursor: pointer; color: green; font-size: 2.5rem;"
-          (click)="updateDescription()"></i>
+      <div class="d-inline description-edit-actions" *ngIf="isAdmin" role="group" aria-label="Description editing">
+        <button *ngIf="!isUpdateDescription" class="btn-icon-btn btn-ghost" (click)="onDescription()" aria-label="Edit description" tooltip="Edit description">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button *ngIf="isUpdateDescription" class="btn-icon-btn btn-success" (click)="updateDescription()" aria-label="Save description" tooltip="Save description">
+          <i class="bi bi-check-lg"></i>
+        </button>
       </div>
       <h5 *ngIf="!isUpdateDescription" [innerText]="description"></h5>
-      <textarea *ngIf="isUpdateDescription" type="text" rows="7" [(ngModel)]="description"
-        placeholder="Input description here..."></textarea>
+      <textarea *ngIf="isUpdateDescription" rows="7" [(ngModel)]="description"
+        placeholder="Input description here..." aria-label="Group description"></textarea>
     </div>
 
     <div class=" card-content">
       <div class="control d-flex">
         <form class="search__form text-center position-relative col-9" (ngSubmit)="search()">
           <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString"
-            type="text" name="search" placeholder="{{'SEARCH.SEARCH_MEMBER'|translate}}">
-          <button class="search__form--button-search position-absolute" type="submit"><i
+            type="text" name="search" placeholder="{{'SEARCH.SEARCH_MEMBER'|translate}}" aria-label="Search members">
+          <button class="search__form--button-search position-absolute" type="submit" aria-label="Search"><i
               class="bi bi-search"></i></button>
         </form>
         <div class="col-3">
@@ -115,15 +124,15 @@
         <h4>{{'GROUP.ADMIN'|translate}} - {{totalAdmin}}</h4>
         <div class="card-user d-flex  mt-2 mb-2" *ngFor="let admin of listAdmin;let i = index">
           <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-            <img class="image-avatar" [src]="admin.avatar" alt="">
+            <img class="image-avatar" [src]="admin.avatar" [alt]="admin.fullname + ' avatar'">
           </div>
           <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 text-start">
             <h4>{{admin.fullname}}</h4>
             <h5>{{admin.address}}</h5>
           </div>
-          <div *ngIf="isAdmin" class="btn-group col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-            <button class="btn btn-outline-danger w-50 fs-5 d-inline-block" (click)="removeAdmin(admin,i)">
-              <i class="bi bi-person-x"></i>
+          <div *ngIf="isAdmin" class="member-admin-actions col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" role="group" [attr.aria-label]="'Admin actions for ' + admin.fullname">
+            <button class="member-admin-actions__btn member-admin-actions__btn--danger" (click)="removeAdmin(admin,i)" [attr.aria-label]="'Remove ' + admin.fullname + ' as admin'" tooltip="Remove as admin">
+              <i class="bi bi-person-dash"></i>
             </button>
           </div>
         </div>
@@ -136,17 +145,17 @@
         <h4>{{'GROUP.MEMBERS2'| translate}} - {{totalMember}}</h4>
         <div class="card-user d-flex mt-2 mb-2" *ngFor="let member of listMember; let i = index">
           <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
-            <img class="image-avatar" [src]="member.avatar" alt="">
+            <img class="image-avatar" [src]="member.avatar" [alt]="member.fullname + ' avatar'">
           </div>
           <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-8 col-8 text-start">
             <h4>{{member.fullname}}</h4>
             <h5>{{member.address}}</h5>
           </div>
-          <div *ngIf="isAdmin" class="btn-group col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-            <button class="btn btn-outline-danger w-50 fs-5 d-inline-block" (click)="removeUser(member.userId,i)">
+          <div *ngIf="isAdmin" class="member-admin-actions col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" role="group" [attr.aria-label]="'Member actions for ' + member.fullname">
+            <button class="member-admin-actions__btn member-admin-actions__btn--danger" (click)="removeUser(member.userId,i)" [attr.aria-label]="'Remove ' + member.fullname" tooltip="Remove member">
               <i class="bi bi-person-dash"></i>
             </button>
-            <button class="btn btn-outline-success w-50 fs-5 d-inline-block" (click)="addAdmin(member,i)">
+            <button class="member-admin-actions__btn member-admin-actions__btn--success" (click)="addAdmin(member,i)" [attr.aria-label]="'Make ' + member.fullname + ' admin'" tooltip="Promote to admin">
               <i class="bi bi-person-check"></i>
             </button>
           </div>

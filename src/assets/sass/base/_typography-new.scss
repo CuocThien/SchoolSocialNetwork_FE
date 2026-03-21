@@ -1,0 +1,98 @@
+// ========================================
+// MODERN SCHOLAR - TYPOGRAPHY BASE
+// ========================================
+
+// Google Fonts Import
+// Add to index.html <head>:
+// <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+// Typography Base
+html {
+  font-size: 62.5%; // 1rem = 10px
+
+  @media only screen and (max-width: 420px) {
+    font-size: 50%;
+  }
+
+  @media only screen and (min-width: 420px) and (max-width: 720px) {
+    font-size: 56.25%;
+  }
+
+  @media only screen and (min-width: 1920px) {
+    font-size: 68.75%;
+  }
+}
+
+body {
+  font-family: $font-body;
+  font-size: $font-base;
+  font-weight: $font-normal;
+  line-height: $leading-normal;
+  color: $color-text-primary;
+  background-color: $color-bg-warm;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+h1 { font-size: $font-4xl; }      // 48px
+h2 { font-size: $font-3xl; }      // 32px
+h3 { font-size: $font-2xl; }      // 24px
+h4 { font-size: $font-xl; }       // 18px
+h5 { font-size: $font-lg; }       // 16px
+h6 { font-size: $font-base; }     // 14px
+
+// Paragraphs
+p {
+  font-size: $font-base;
+  line-height: $leading-normal;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+// Links
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: darken($color-primary, 10%);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: $focus-width solid $focus-color;
+    outline-offset: $focus-offset;
+  }
+}
+
+// Text Utilities
+.text-heading {
+  font-family: $font-heading;
+  font-weight: $font-semibold;
+}
+
+.text-body {
+  font-family: $font-body;
+}
+
+.text-muted {
+  color: $color-text-muted;
+}
+
+.text-small {
+  font-size: $font-sm;
+}
+
+.text-large {
+  font-size: $font-lg;
+}

@@ -9,7 +9,7 @@ import { LIST_ROLE } from 'src/app/utils/constant';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['../../../assets/sass/main.scss']
+  styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
 
@@ -35,6 +35,16 @@ export class AccountComponent implements OnInit {
   isAdmin = false;
   isDean = false;
   private modalRef: NgbModalRef;
+
+  // Iteration 2: New properties
+  isLoading = false;
+  activeQuickFilter = 'all';
+  stats = {
+    total: 0,
+    active: 0,
+    deleted: 0,
+    students: 0
+  };
   ngOnInit(): void {
     this.isLangEn = localStorage.getItem('lang') === 'en'
     const role = localStorage.getItem('role');
@@ -207,5 +217,65 @@ export class AccountComponent implements OnInit {
       },
       error: () => this.spinner.hide()
     })
+  }
+
+  // Iteration 2: New methods for enhanced UX
+  get hasActiveFilters(): boolean {
+    return !!(this.groupId || this.roleId !== 4 || this.isDeleted);
+  }
+
+  applyQuickFilter(filter: string): void {
+    this.activeQuickFilter = filter;
+
+    switch(filter) {
+      case 'all':
+        this.isDeleted = false;
+        this.roleId = 4; // Default to student role
+        break;
+      case 'students':
+        this.isDeleted = false;
+        this.roleId = 4; // Student role
+        break;
+      case 'teachers':
+        this.isDeleted = false;
+        this.roleId = 3; // Teacher role
+        break;
+      case 'deleted':
+        this.isDeleted = true;
+        break;
+    }
+
+    this._getListAccount();
+  }
+
+  clearAllFilters(): void {
+    this.activeQuickFilter = 'all';
+    this.groupId = this.listFaculty[0]?._id || null;
+    this.isDeleted = false;
+    this.roleId = 4;
+    this._getListAccount();
+  }
+
+  getFacultyName(id: string): string {
+    const faculty = this.listFaculty.find(f => f._id === id);
+    if (!faculty) return '';
+    return this.isLangEn ? faculty.nameEn : faculty.nameVi;
+  }
+
+  getRoleName(id: number): string {
+    const role = this.listRole.find(r => r.roleId === id);
+    if (!role) return '';
+    return this.isLangEn ? role.nameEn : role.nameVi;
+  }
+
+  getRoleIcon(role: string): string {
+    const icons: Record<string, string> = {
+      admin: 'bi-shield-fill-check',
+      teacher: 'bi-person-video2',
+      student: 'bi-mortarboard-fill',
+      dean: 'bi-building',
+      manager: 'bi-person-badge'
+    };
+    return icons[role] || 'bi-person-fill';
   }
 }

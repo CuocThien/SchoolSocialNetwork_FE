@@ -3,6 +3,8 @@
 # compiled output
 /tmp
 /out-tsc
+/dist
+/dist/**/*
 # Only exists if Bazel was run
 /bazel-out
 
@@ -42,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/docs
+
+# UI/UX Improvement Workspace
+.claude/

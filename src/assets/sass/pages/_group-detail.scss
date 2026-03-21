@@ -1,118 +1,1039 @@
-.group-detail-container{
+// ========================================
+// MODERN SCHOLAR - GROUP DETAIL PAGE
+// ========================================
+
+.group-detail-container {
     width: 100%;
-    height: 100%;
-    background-color: #F0F2F5;
+    min-height: 100vh;
+    background-color: $color-bg-warm;
     text-align: center;
+    padding: $spacing-xl;
 }
 
-.gr-intro{
+// ========================================
+// GROUP HEADER SECTION
+// ========================================
+
+.gr-intro {
     width: 100%;
-    background-color: $color-white;
-    &__img{
-        max-height: 320px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: $color-bg-pure;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    overflow: hidden;
+
+    &__img {
+        max-height: 400px;
         position: relative;
-        img{
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba($color-primary, 0.05) 0%, rgba($color-secondary, 0.05) 100%);
+
+        img {
             border-radius: 0;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            max-width: 80%;
+            border-bottom-left-radius: $radius-md;
+            border-bottom-right-radius: $radius-md;
+            max-width: 100%;
             max-height: inherit;
             height: auto;
-            width: 80%;
+            width: 100%;
+            object-fit: cover;
+            display: block;
         }
-        .btn-group{
+
+        .btn-group {
             position: absolute;
-            bottom: 20px;
-            right: 12%;
-            button{
-            font-size: 1.5rem;
-            border-radius: 5px;
-            padding: 5px 15px;
-            border: none;
-            margin-left: 15px;
+            bottom: $spacing-lg;
+            right: $spacing-lg;
+            display: flex;
+            gap: $spacing-md;
+            align-items: center;
+
+            button {
+                font-size: $font-base;
+                font-weight: $font-semibold;
+                border-radius: $radius-sm;
+                padding: $spacing-sm $spacing-md;
+                border: none;
+                margin: 0;
+                min-height: 44px;
+                min-width: 44px;
+                cursor: pointer;
+                transition: all 200ms ease;
+                box-shadow: $shadow-md;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: $shadow-lg;
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+
+                &:focus-visible {
+                    outline: none;
+                    box-shadow: 0 0 0 $focus-width $focus-color;
+                }
+
+                // Primary action button
+                &:first-child:not(.btn-icon) {
+                    background: linear-gradient(135deg, $color-primary 0%, darken($color-primary, 10%) 100%);
+                    color: $color-bg-pure;
+
+                    &:hover {
+                        background: linear-gradient(135deg, darken($color-primary, 5%) 0%, darken($color-primary, 15%) 100%);
+                    }
+                }
+
+                // Icon-only buttons
+                &.btn-icon {
+                    background: rgba($color-bg-pure, 0.95);
+                    backdrop-filter: blur(8px);
+                    color: $color-text-primary;
+                    padding: $spacing-sm;
+
+                    &:hover {
+                        background: $color-bg-pure;
+                    }
+                }
+            }
         }
     }
-    }
-    &__info{
+
+    &__info {
         display: inline-block;
-        width: 80%;
+        width: 100%;
+        max-width: 100%;
+        padding: $spacing-xl $spacing-2xl;
         text-align: start;
-        h4{
-            color: #65676B;
+
+        h1 {
+            font-family: $font-heading;
+            font-size: $font-3xl;
+            font-weight: $font-bold;
+            color: $color-text-primary;
+            line-height: $leading-tight;
+            margin: 0;
+        }
+
+        h4 {
+            font-family: $font-body;
+            font-size: $font-lg;
+            font-weight: $font-medium;
+            color: $color-text-secondary;
+            margin: $spacing-sm 0 0 0;
         }
     }
 }
-.menu-control-group-detail{
+
+// ========================================
+// TAB NAVIGATION
+// ========================================
+
+.menu-control-group-detail {
     list-style: none;
     padding: 0;
-    width: 80%;
-    display: inline-block;
-    font-size: 1.4rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: $spacing-xl auto 0;
+    display: flex;
+    gap: $spacing-lg;
+    font-size: $font-lg;
     text-align: start;
-    margin-top: 15px;
-    margin-bottom: 0;
-    li{
-        border-bottom: 2px solid transparent;
-        font-weight: bold;
-        color: #65676B;
+    border-bottom: 2px solid $color-border-light;
+
+    li {
+        font-weight: $font-semibold;
+        color: $color-text-secondary;
         cursor: pointer;
         display: inline-block;
-        padding: 10px 15px;
-        transition: all .3s;
+        padding: $spacing-md $spacing-lg;
+        transition: all 200ms ease;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        position: relative;
+
+        &:hover {
+            color: $color-primary;
+            background-color: rgba($color-primary, 0.05);
+            border-radius: $radius-sm $radius-sm 0 0;
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: inset 0 -2px 0 $focus-color;
+        }
+
+        &:active {
+            background-color: rgba($color-primary, 0.08);
+        }
+    }
+
+    .li-active {
+        color: $color-primary !important;
+        border-bottom-color: $color-primary !important;
     }
 }
-.li-active{
-    color: $color-blue-link!important;
-    border-bottom: 2px solid $color-blue-link!important;
-}
-.gr-de, .gr-mem{
-    width: 90%;
+
+// ========================================
+// CONTENT SECTIONS
+// ========================================
+
+.gr-de,
+.gr-mem {
+    width: 100%;
+    max-width: 1200px;
     display: inline-block;
+    margin-top: $spacing-xl;
 }
-.card-content{
+
+// ========================================
+// CARD COMPONENT
+// ========================================
+
+.card-content {
     width: 100%;
     height: auto;
-    margin: 10px 0;
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-  box-shadow: 0 .1rem .2rem rgba(0, 0, 0, 0.2);
-  &__btn-input{
-      width: 95%;
-      margin: auto;
-      height: 100%;
-      font-size: 1.5rem;
-      border-radius: 500px;
-      cursor: pointer;
-      border: none;
-      padding: 0 15px;
-      background-color: #F0F2F5;
-  }
-  &__post-title{
-    width: 100%;
-    font-size: 1.5rem;
-    padding: 0;
-    padding-left: 15px;
+    margin: $spacing-md 0;
+    padding: $spacing-xl;
+    background-color: $color-bg-pure;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    border: 1px solid $color-border;
+    transition: all 200ms ease;
 
-  }
-  &__post-content{
-    width: 100%;
-    font-size: 1.5rem;
-    padding: 0;
-    padding: 10px 0;
-    overflow: hidden;
-    &>div>p>img{
-        max-width: 100%;
+    &:hover {
+        box-shadow: $shadow-md;
+        border-color: $color-border-light;
     }
-  }
+
+    // Create post input
+    &__btn-input {
+        width: 100%;
+        margin: auto;
+        height: 48px;
+        min-height: 44px;
+        font-size: $font-base;
+        font-family: $font-body;
+        border-radius: $radius-pill;
+        cursor: pointer;
+        border: 1px solid $color-border;
+        padding: 0 $spacing-lg;
+        background-color: $color-bg-warm;
+        color: $color-text-secondary;
+        transition: all 200ms ease;
+
+        &:hover {
+            background-color: darken($color-bg-warm, 5%);
+            border-color: $color-primary;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 0 $focus-width $focus-color;
+        }
+
+        &::placeholder {
+            color: $color-text-muted;
+        }
+    }
+
+    // Post title section
+    &__post-title {
+        width: 100%;
+        font-size: $font-base;
+        padding: 0;
+
+        h4 {
+            font-family: $font-heading;
+            font-size: $font-lg;
+            font-weight: $font-semibold;
+            color: $color-text-primary;
+            margin: 0;
+        }
+
+        h6 {
+            font-family: $font-body;
+            font-size: $font-sm;
+            font-weight: $font-normal;
+            color: $color-text-muted;
+            margin: $spacing-xs 0 0 0;
+        }
+    }
+
+    // Post content
+    &__post-content {
+        width: 100%;
+        font-size: $font-base;
+        font-family: $font-body;
+        line-height: $leading-normal;
+        color: $color-text-primary;
+        padding: $spacing-md 0;
+        overflow: hidden;
+
+        & > div > p > img {
+            max-width: 100%;
+            height: auto;
+            border-radius: $radius-sm;
+            margin: $spacing-md 0;
+        }
+    }
 }
-.change-name-group{
+
+// ========================================
+// INPUT FIELDS
+// ========================================
+
+.change-name-group {
     border: none;
-    padding: 0;
-    height: 35px;
-    border-bottom: 1px solid #65676B;
-    font-size: 2.5rem;
-    &:focus{
+    padding: $spacing-sm 0;
+    height: auto;
+    min-height: 44px;
+    border-bottom: 2px solid $color-border;
+    font-family: $font-heading;
+    font-size: $font-3xl;
+    font-weight: $font-bold;
+    color: $color-text-primary;
+    background: transparent;
+    transition: all 200ms ease;
+
+    &:focus {
         outline: none;
+        border-bottom-color: $color-primary;
+        box-shadow: 0 1px 0 $focus-color;
     }
+
+    &::placeholder {
+        color: $color-text-muted;
+    }
+}
+
+// ========================================
+// BUTTONS
+// ========================================
+
+.btn-report {
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    cursor: pointer;
+    padding: $spacing-sm;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-sm;
+    transition: all 200ms ease;
+
+    &:hover {
+        background-color: rgba($color-text-muted, 0.1);
+        color: $color-primary;
+    }
+
+    &:active {
+        background-color: rgba($color-text-muted, 0.15);
+        transform: scale(0.95);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+
+    i {
+        font-size: $font-lg;
+    }
+
+    &__check {
+        color: $color-success;
+
+        &:hover {
+            background-color: rgba($color-success, 0.1);
+            color: darken($color-success, 10%);
+        }
+    }
+}
+
+.btn-icon-only {
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    cursor: pointer;
+    padding: $spacing-sm;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-sm;
+    transition: all 200ms ease;
+
+    &:hover {
+        background-color: rgba($color-text-muted, 0.1);
+        color: $color-primary;
+    }
+
+    &:active {
+        background-color: rgba($color-text-muted, 0.15);
+        transform: scale(0.95);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+
+    i {
+        font-size: inherit;
+    }
+}
+
+// ========================================
+// LOAD MORE BUTTON
+// ========================================
+
+.btn-load-more {
+    width: 100%;
+    margin-top: $spacing-xl;
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-base;
+    font-weight: $font-semibold;
+    font-family: $font-body;
+    border-radius: $radius-md;
+    background: linear-gradient(135deg, $color-primary 0%, darken($color-primary, 10%) 100%);
+    border: none;
+    color: $color-bg-pure;
+    box-shadow: $shadow-md;
+    transition: all 200ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    min-height: 48px;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+        background: linear-gradient(135deg, darken($color-primary, 5%) 0%, darken($color-primary, 15%) 100%);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 $focus-width $focus-color, $shadow-md;
+    }
+}
+
+.btn-text {
+    background: transparent;
+    border: none;
+    color: $color-primary;
+    font-size: $font-base;
+    font-weight: $font-semibold;
+    cursor: pointer;
+    padding: $spacing-md;
+    transition: all 200ms ease;
+
+    &:hover {
+        text-decoration: underline;
+        color: darken($color-primary, 10%);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 $focus-width $focus-color;
+        border-radius: $radius-sm;
+    }
+}
+
+// ========================================
+// MEMBER/ADMIN CARDS
+// ========================================
+
+.card-user {
+    padding: $spacing-lg;
+    background-color: $color-bg-pure;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    transition: all 200ms ease;
+
+    &:hover {
+        box-shadow: $shadow-sm;
+        border-color: $color-border-light;
+    }
+
+    h4 {
+        font-family: $font-heading;
+        font-size: $font-lg;
+        font-weight: $font-semibold;
+        color: $color-text-primary;
+        margin: 0;
+    }
+
+    h5 {
+        font-family: $font-body;
+        font-size: $font-sm;
+        font-weight: $font-normal;
+        color: $color-text-secondary;
+        margin: $spacing-xs 0 0 0;
+    }
+}
+
+// ========================================
+// AVATAR IMAGES
+// ========================================
+
+.image-avatar {
+    border-radius: $radius-pill;
+    object-fit: cover;
+    width: 48px;
+    height: 48px;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+// ========================================
+// MODERN BUTTON COMPONENTS
+// ========================================
+
+// Base icon button class - used across all button groups
+.btn-icon-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: $spacing-sm;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-md;
+    transition: all 200ms ease;
+    font-family: $font-body;
+
+    i {
+        font-size: $font-lg;
+        transition: transform 150ms ease;
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 $focus-width $focus-color;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    // Ghost variant - neutral, subtle
+    &.btn-ghost {
+        color: $color-text-secondary;
+        background: transparent;
+
+        &:hover {
+            background: rgba($color-text-muted, 0.08);
+            color: $color-primary;
+
+            i {
+                transform: scale(1.1);
+            }
+        }
+
+        &:active {
+            background: rgba($color-text-muted, 0.12);
+        }
+    }
+
+    // Danger ghost variant - for destructive actions
+    &.btn-danger-ghost {
+        color: $color-danger;
+
+        &:hover {
+            background: rgba($color-danger, 0.1);
+            color: darken($color-danger, 10%);
+
+            i {
+                transform: scale(1.1);
+            }
+        }
+
+        &:active {
+            background: rgba($color-danger, 0.15);
+        }
+    }
+
+    // Success variant - for positive actions
+    &.btn-success {
+        background: rgba($color-success, 0.1);
+        color: $color-success;
+
+        &:hover {
+            background: rgba($color-success, 0.15);
+            color: darken($color-success, 10%);
+
+            i {
+                transform: scale(1.1);
+            }
+        }
+
+        &:active {
+            background: rgba($color-success, 0.2);
+        }
+    }
+}
+
+// Tooltip styling (CSS-only using data-tooltip attr)
+button[tooltip] {
+    position: relative;
+
+    &::before {
+        content: attr(tooltip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        background: $color-text-primary;
+        color: $color-bg-pure;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $radius-sm;
+        font-size: $font-xs;
+        font-weight: $font-medium;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 200ms ease;
+        z-index: 100;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: calc(100% + 2px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        border: 4px solid transparent;
+        border-top-color: $color-text-primary;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 200ms ease;
+        z-index: 100;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &:hover::before,
+    &:hover::after,
+    &:focus-visible::before,
+    &:focus-visible::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+// ========================================
+// GROUP MANAGEMENT BUTTONS
+// ========================================
+
+.group-management-buttons {
+    display: flex;
+    gap: $spacing-xs;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+// ========================================
+// POST ACTIONS BUTTONS
+// ========================================
+
+.post-actions {
+    display: flex;
+    gap: $spacing-xs;
+    align-items: center;
+    justify-content: flex-end;
+
+    &__btn {
+        position: relative;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: $spacing-sm;
+        min-height: 40px;
+        min-width: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-md;
+        transition: all 200ms ease;
+
+        i {
+            font-size: $font-base;
+            transition: transform 150ms ease;
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 $focus-width $focus-color;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        // Hidden state for conditional buttons
+        &--hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        // Edit button - neutral
+        &--edit {
+            color: $color-text-secondary;
+            background: transparent;
+
+            &:hover {
+                background: rgba($color-primary, 0.1);
+                color: $color-primary;
+
+                i {
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        // Delete button - danger
+        &--danger {
+            color: $color-danger;
+
+            &:hover {
+                background: rgba($color-danger, 0.1);
+                color: darken($color-danger, 10%);
+
+                i {
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        // Report button - warning
+        &--report {
+            color: $color-warning;
+
+            &:hover {
+                background: rgba($color-warning, 0.1);
+                color: darken($color-warning, 10%);
+
+                i {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+// ========================================
+// MEMBER ADMIN ACTIONS
+// ========================================
+
+.member-admin-actions {
+    display: flex;
+    gap: $spacing-xs;
+    align-items: center;
+    justify-content: flex-end;
+
+    &__btn {
+        position: relative;
+        background: transparent;
+        border: 1px solid;
+        cursor: pointer;
+        padding: $spacing-sm;
+        min-height: 40px;
+        min-width: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $radius-sm;
+        transition: all 200ms ease;
+        font-size: $font-sm;
+
+        i {
+            font-size: $font-base;
+            transition: transform 150ms ease;
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 $focus-width $focus-color;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        // Danger variant - remove actions
+        &--danger {
+            border-color: rgba($color-danger, 0.3);
+            color: $color-danger;
+            background: transparent;
+
+            &:hover {
+                background: rgba($color-danger, 0.1);
+                border-color: $color-danger;
+                color: darken($color-danger, 10%);
+
+                i {
+                    transform: scale(1.1);
+                }
+            }
+
+            &:active {
+                background: rgba($color-danger, 0.15);
+            }
+        }
+
+        // Success variant - promote/add actions
+        &--success {
+            border-color: rgba($color-success, 0.3);
+            color: $color-success;
+            background: transparent;
+
+            &:hover {
+                background: rgba($color-success, 0.1);
+                border-color: $color-success;
+                color: darken($color-success, 10%);
+
+                i {
+                    transform: scale(1.1);
+                }
+            }
+
+            &:active {
+                background: rgba($color-success, 0.15);
+            }
+        }
+    }
+}
+
+// ========================================
+// DESCRIPTION EDIT ACTIONS
+// ========================================
+
+.description-edit-actions {
+    display: inline-flex;
+    gap: $spacing-xs;
+    align-items: center;
+}
+
+// ========================================
+// RESPONSIVE DESIGN
+// ========================================
+
+@media (max-width: 1023px) {
+    .group-detail-container {
+        padding: $spacing-lg;
+    }
+
+    .gr-intro {
+        border-radius: $radius-sm;
+
+        &__img {
+            max-height: 300px;
+
+            .btn-group {
+                bottom: $spacing-md;
+                right: $spacing-md;
+                flex-wrap: wrap;
+
+                button {
+                    font-size: $font-sm;
+                    padding: $spacing-xs $spacing-sm;
+                }
+            }
+        }
+
+        &__info {
+            padding: $spacing-lg $spacing-xl;
+
+            h1 {
+                font-size: $font-2xl;
+            }
+
+            h4 {
+                font-size: $font-base;
+            }
+        }
+    }
+
+    .menu-control-group-detail {
+        font-size: $font-base;
+        gap: $spacing-md;
+
+        li {
+            padding: $spacing-sm $spacing-md;
+        }
+    }
+
+    .gr-de,
+    .gr-mem {
+        margin-top: $spacing-lg;
+    }
+
+    .card-content {
+        padding: $spacing-lg;
+
+        &__btn-input {
+            height: 44px;
+            font-size: $font-sm;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .group-detail-container {
+        padding: $spacing-md;
+    }
+
+    .gr-intro {
+        &__img {
+            max-height: 240px;
+
+            img {
+                border-bottom-left-radius: $radius-sm;
+                border-bottom-right-radius: $radius-sm;
+            }
+
+            .btn-group {
+                bottom: $spacing-sm;
+                right: $spacing-sm;
+                gap: $spacing-xs;
+
+                button {
+                    min-height: 40px;
+                    min-width: 40px;
+                    padding: $spacing-xs;
+
+                    &:not(.btn-icon) {
+                        span {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__info {
+            padding: $spacing-md;
+
+            h1 {
+                font-size: $font-xl;
+            }
+
+            h4 {
+                font-size: $font-sm;
+            }
+        }
+    }
+
+    .menu-control-group-detail {
+        flex-wrap: wrap;
+        font-size: $font-sm;
+        gap: $spacing-sm;
+
+        li {
+            padding: $spacing-xs $spacing-sm;
+            flex: 1;
+            text-align: center;
+            min-width: 120px;
+        }
+    }
+
+    .card-content {
+        padding: $spacing-md;
+
+        &__post-title {
+            h4 {
+                font-size: $font-base;
+            }
+
+            h6 {
+                font-size: $font-xs;
+            }
+        }
+
+        &__post-content {
+            font-size: $font-sm;
+        }
+    }
+
+    .card-user {
+        padding: $spacing-md;
+
+        h4 {
+            font-size: $font-base;
+        }
+
+        h5 {
+            font-size: $font-xs;
+        }
+    }
+
+    .image-avatar {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+@media (prefers-reduced-motion: reduce) {
+    .gr-intro__img .btn-group button,
+    .menu-control-group-detail li,
+    .card-content,
+    .card-content__btn-input,
+    .btn-report,
+    .btn-icon-only,
+    .btn-load-more,
+    .btn-text,
+    .change-name-group,
+    .card-user,
+    .btn-icon-btn,
+    .post-actions__btn,
+    .member-admin-actions__btn {
+        transition: none;
+
+        &:hover {
+            transform: none;
+        }
+
+        &:active {
+            transform: none;
+        }
+
+        i {
+            transition: none;
+        }
+    }
+}
+
+// Focus visible for better keyboard navigation
+*:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+    outline-offset: $focus-offset;
 }

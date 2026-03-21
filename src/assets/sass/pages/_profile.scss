@@ -1,0 +1,373 @@
+// ========================================
+// MODERN SCHOLAR - PROFILE PAGE
+// ========================================
+
+.profile-page {
+  min-height: 100vh;
+  background-color: $color-bg-warm;
+  padding: $spacing-2xl $spacing-xl;
+  display: flex;
+  justify-content: center;
+}
+
+// ========================================
+// PROFILE CONTAINER
+// ========================================
+
+.profile-page__container {
+  width: 100%;
+  max-width: 800px;
+}
+
+// ========================================
+// PROFILE HEADER
+// ========================================
+
+.profile-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-2xl;
+  padding-bottom: $spacing-lg;
+  border-bottom: 2px solid $color-border-light;
+  position: relative;
+}
+
+.profile-page__title {
+  font-family: $font-heading;
+  font-size: $font-3xl;
+  font-weight: $font-bold;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.profile-page__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  border-radius: $radius-md;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  &:hover {
+    background-color: $color-bg-pure;
+    color: $color-text-primary;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  i {
+    font-size: $font-xl;
+  }
+}
+
+// ========================================
+// PROFILE FORM
+// ========================================
+
+.profile-page__form {
+  background-color: $color-bg-pure;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  padding: $spacing-2xl;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $spacing-2xl;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    padding: $spacing-xl;
+  }
+}
+
+// ========================================
+// AVATAR SECTION
+// ========================================
+
+.profile-page__avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+.profile-page__avatar-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.profile-page__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid $color-bg-pure;
+  box-shadow: $shadow-md;
+}
+
+.profile-page__avatar-upload {
+  position: absolute;
+  bottom: $spacing-sm;
+  right: $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: $color-primary;
+  color: $color-text-inverse;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  i {
+    font-size: $font-base;
+  }
+}
+
+.profile-page__avatar-input {
+  display: none;
+}
+
+// ========================================
+// FORM FIELDS
+// ========================================
+
+.profile-page__fields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.form-label {
+  font-family: $font-body;
+  font-size: $font-sm;
+  font-weight: $font-semibold;
+  color: $color-text-primary;
+}
+
+.form-control {
+  width: 100%;
+  height: 48px;
+  padding: 0 $spacing-lg;
+  font-family: $font-body;
+  font-size: $font-base;
+  color: $color-text-primary;
+  background-color: $color-bg-pure;
+  border: 2px solid $color-border;
+  border-radius: $radius-md;
+  transition: all 150ms ease-out;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  &:disabled {
+    background-color: $color-bg-warm;
+    color: $color-text-muted;
+    cursor: not-allowed;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: $color-danger;
+
+    &:focus {
+      box-shadow: 0 0 0 $focus-width rgba($color-danger, 0.3);
+    }
+  }
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 120px;
+  padding: $spacing-md $spacing-lg;
+  resize: vertical;
+}
+
+.form-text {
+  font-family: $font-body;
+  font-size: $font-xs;
+  color: $color-text-muted;
+  margin-top: $spacing-xs;
+}
+
+// ========================================
+// INPUT GROUP (with action button)
+// ========================================
+
+.profile-page__input-group {
+  display: flex;
+  gap: $spacing-md;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.profile-page__input-with-action {
+  flex: 1;
+}
+
+.profile-page__action-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  height: 48px;
+  padding: 0 $spacing-lg;
+  font-size: $font-sm;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+// ========================================
+// OTP SECTION
+// ========================================
+
+.profile-page__otp-section {
+  margin-top: $spacing-sm;
+  padding: $spacing-md;
+  background-color: rgba($color-primary, 0.05);
+  border-radius: $radius-md;
+  border-left: 4px solid $color-primary;
+}
+
+// ========================================
+// FORM ACTIONS
+// ========================================
+
+.profile-page__actions {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+.profile-page__submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  min-width: 160px;
+  height: 52px;
+  padding: 0 $spacing-2xl;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 1023px) {
+  .profile-page {
+    padding: $spacing-xl $spacing-lg;
+  }
+
+  .profile-page__form {
+    padding: $spacing-xl;
+  }
+
+  .profile-page__avatar-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 767px) {
+  .profile-page {
+    padding: $spacing-lg;
+  }
+
+  .profile-page__header {
+    margin-bottom: $spacing-xl;
+  }
+
+  .profile-page__title {
+    font-size: $font-2xl;
+  }
+
+  .profile-page__form {
+    gap: $spacing-xl;
+  }
+
+  .profile-page__avatar-section {
+    align-items: center;
+  }
+}
+
+// ========================================
+// LEGACY OVERRIDES (for compatibility)
+// ========================================
+
+.profile-container {
+  @extend .profile-page;
+}
+
+.form-profile {
+  @extend .profile-page__form;
+}
+
+.form-profile__avatar {
+  @extend .profile-page__avatar;
+}
+
+.btn-update {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .profile-page__submit-btn;
+}
+
+.btn-cancel {
+  @extend .profile-page__close;
+}
+
+.button-text {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+.button-text-resend {
+  @extend .profile-page__action-btn;
+}

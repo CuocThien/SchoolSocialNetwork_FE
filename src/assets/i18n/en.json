@@ -122,6 +122,8 @@
         "FULLNAME": "Full name",
         "DOB": "DoB",
         "PHONE": "Phone",
+        "USER": "User",
+        "ROLE": "Role",
         "YEAR":"Year",
         "COUNT_POST": "Count posts",
         "COUNT_COMMENT": "Count comments",
@@ -131,6 +133,19 @@
         "ABBREVIATION": "Abbreviation",
         "DESCRIPTION": "Description",
         "COMPANY_NAME": "Company name"
+    },
+    "USERS_MANAGEMENT":{
+        "SUBTITLE": "Manage user accounts and permissions",
+        "SELECT_FACULTY": "Select faculty",
+        "TRANSFER_FACULTY": "Transfer",
+        "NO_USERS_TITLE": "No users found",
+        "NO_USERS_DESC": "Try adjusting your search or filters"
+    },
+    "USERS":{
+        "MANAGE_DESCRIPTION": "Manage user accounts across your faculty",
+        "FILTER_FACULTY": "Faculty",
+        "FILTER_ROLE": "Role",
+        "DELETE_SELECTED": "Delete Selected"
     },
     "POPUP":{
         "CREATE_FACULTY":"Create faculty",
@@ -208,5 +223,36 @@
         "EMPTY_USERNAME": "Please input username to requets OTP",
         "INVALID_OTP": "Invalid OTP code",
         "CHOOSE_CATE_RP": "Please choose category of report"
+    },
+    "CHAT": {
+        "NO_CONVERSATIONS": "No conversations yet",
+        "START_SEARCHING": "Start chatting by searching for users above",
+        "START_CONVERSATION": "Start the conversation",
+        "SEND_MESSAGE_TO": "Send a message to",
+        "TYPE_MESSAGE": "Type a message..."
+    },
+    "QUICK_FILTERS": {
+        "ALL": "All Users",
+        "STUDENTS": "Students",
+        "TEACHERS": "Teachers",
+        "DELETED": "Deleted"
+    },
+    "FILTERS": {
+        "ACTIVE": "Active Filters",
+        "CLEAR_ALL": "Clear All",
+        "FACULTY": "Faculty",
+        "ROLE": "Role",
+        "DELETED_ONLY": "Deleted Only"
+    },
+    "EMPTY_STATE": {
+        "NO_USERS_TITLE": "No users found",
+        "NO_USERS_DESC": "Try adjusting your filters or search criteria",
+        "CLEAR_FILTERS": "Clear Filters"
+    },
+    "STATS": {
+        "TOTAL_USERS": "Total Users",
+        "ACTIVE_USERS": "Active Users",
+        "DELETED_USERS": "Deleted Users",
+        "STUDENTS": "Students"
     }
 }

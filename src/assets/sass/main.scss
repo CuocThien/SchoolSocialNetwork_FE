@@ -5,12 +5,25 @@
 //base
 @import 'base/base';
 @import 'base/utilities';
-@import 'base/typography';
+@import 'base/typography-new'; // Import new typography
 
 
 //components
 @import 'components/form';
 @import 'components/button';
+@import 'components/card';
+@import 'components/dropdown';
+@import 'components/tabs';
+@import 'components/badge';
+@import 'components/avatar';
+@import 'components/modal';
+@import 'components/tooltip';
+@import 'components/pagination';
+@import 'components/spinner';
+@import 'components/toast';
+@import 'components/checkbox';
+@import 'components/radio';
+@import 'components/chip';
 @import 'components/popup';
 
 //layout
@@ -30,6 +43,7 @@
 @import "pages/login";
 @import "pages/pageNotFound";
 @import "pages/post-detail";
+@import "pages/profile";
 @import "pages/recruitment-news-detail";
 @import "pages/sign-up";
 @import "pages/video-chat";

@@ -1,0 +1,405 @@
+// ========================================
+// MODERN SCHOLAR - MODAL COMPONENT
+// ========================================
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+
+  // Animation
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+
+  &[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// ========================================
+// MODAL BACKDROP
+// ========================================
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+// ========================================
+// MODAL DIALOG
+// ========================================
+
+.modal__dialog {
+  position: relative;
+  background-color: $color-bg-pure;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-xl;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  // Animation
+  transform: scale(0.95) translateY(-20px);
+  transition: transform 150ms ease-out;
+
+  .modal[aria-hidden="false"] & {
+    transform: scale(1) translateY(0);
+  }
+}
+
+// ========================================
+// MODAL HEADER
+// ========================================
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  padding: $spacing-xl;
+  border-bottom: 1px solid $color-border-light;
+}
+
+.modal__title {
+  font-family: $font-heading;
+  font-size: $font-xl;
+  font-weight: $font-bold;
+  color: $color-text-primary;
+  line-height: $leading-tight;
+  margin: 0;
+}
+
+.modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  border-radius: $radius-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: $color-bg-warm;
+    color: $color-text-primary;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-width $focus-color;
+  }
+
+  i {
+    font-size: $font-lg;
+  }
+}
+
+// ========================================
+// MODAL BODY
+// ========================================
+
+.modal__body {
+  padding: $spacing-xl;
+  overflow-y: auto;
+  flex: 1;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border;
+    border-radius: $radius-pill;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+// ========================================
+// MODAL FOOTER
+// ========================================
+
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  border-top: 1px solid $color-border-light;
+
+  // Left alignment variant
+  &.modal__footer--left {
+    justify-content: flex-start;
+  }
+
+  // Center alignment variant
+  &.modal__footer--center {
+    justify-content: center;
+  }
+
+  // Stretch buttons variant
+  &.modal__footer--stretch {
+    .btn {
+      flex: 1;
+    }
+  }
+}
+
+// ========================================
+// MODAL SIZES
+// ========================================
+
+.modal--small .modal__dialog {
+  max-width: 400px;
+}
+
+.modal--large .modal__dialog {
+  max-width: 700px;
+}
+
+.modal--xl .modal__dialog {
+  max-width: 900px;
+}
+
+.modal--full .modal__dialog {
+  max-width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+// ========================================
+// MODAL VARIANTS
+// ========================================
+
+// Modal without header
+.modal--no-header {
+  .modal__close {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    z-index: 1;
+  }
+}
+
+// Modal without footer
+.modal--no-footer {
+  .modal__body {
+    padding-bottom: $spacing-2xl;
+  }
+}
+
+// Confirmation modal (centered actions)
+.modal--confirm {
+  .modal__dialog {
+    max-width: 450px;
+  }
+
+  .modal__body {
+    text-align: center;
+    padding: $spacing-2xl;
+  }
+
+  .modal__footer {
+    justify-content: center;
+    flex-direction: column-reverse;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// Alert modal
+.modal--alert {
+  .modal__dialog {
+    max-width: 450px;
+  }
+
+  .modal__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto $spacing-lg;
+    border-radius: 50%;
+    font-size: $font-3xl;
+
+    &.icon--success {
+      background-color: $color-success-bg;
+      color: $color-success;
+    }
+
+    &.icon--warning {
+      background-color: $color-warning-bg;
+      color: $color-warning;
+    }
+
+    &.icon--danger {
+      background-color: $color-danger-bg;
+      color: $color-danger;
+    }
+
+    &.icon--info {
+      background-color: $color-info-bg;
+      color: $color-info;
+    }
+  }
+}
+
+// ========================================
+// MODAL WITH TABS
+// ========================================
+
+.modal--with-tabs {
+  .modal__header {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .tabs__list {
+    border-bottom: 1px solid $color-border-light;
+    padding: 0 $spacing-xl;
+  }
+
+  .modal__title {
+    padding: $spacing-xl $spacing-xl 0;
+  }
+}
+
+// ========================================
+// MODAL ANIMATIONS
+// ========================================
+
+.modal--slide-up .modal__dialog {
+  transform: translateY(100%);
+
+  .modal[aria-hidden="false"] & {
+    transform: translateY(0);
+  }
+}
+
+.modal--zoom .modal__dialog {
+  transform: scale(0.8);
+
+  .modal[aria-hidden="false"] & {
+    transform: scale(1);
+  }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .modal {
+    padding: $spacing-md;
+    align-items: flex-end;
+  }
+
+  .modal__dialog {
+    max-height: 95vh;
+    border-radius: $radius-lg $radius-lg 0 0;
+    transform: translateY(100%);
+
+    .modal[aria-hidden="false"] & {
+      transform: translateY(0);
+    }
+  }
+
+  .modal--full .modal__dialog {
+    border-radius: 0;
+  }
+
+  .modal__header,
+  .modal__body,
+  .modal__footer {
+    padding: $spacing-lg;
+  }
+
+  .modal__footer {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .modal--confirm .modal__footer {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .modal__dialog {
+    max-width: 90%;
+  }
+
+  .modal--large .modal__dialog,
+  .modal--xl .modal__dialog {
+    max-width: 95%;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Focus trap
+.modal[aria-hidden="true"] {
+  .modal__dialog {
+    visibility: hidden;
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal__dialog {
+    transition: none;
+  }
+
+  .modal__dialog {
+    transform: none;
+  }
+
+  .modal--slide-up .modal__dialog,
+  .modal--zoom .modal__dialog {
+    transform: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .modal__dialog {
+    border: 2px solid $color-text-primary;
+  }
+
+  .modal__header,
+  .modal__footer {
+    border-width: 2px;
+  }
+}

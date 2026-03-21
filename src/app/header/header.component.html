@@ -1,83 +1,151 @@
-<div class="container-fluid header h-header">
-  <div class="d-flex page-control">
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-5 col-5">
-      <div class="d-flex justify-content-start h-header">
-        <form class="search__form u-margin-vertical-auto w-100-pc position-relative" (ngSubmit)="onSubmit()">
-          <input class="search__form--input-search" type="text" name="search" [(ngModel)]="searchString"
-            placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}">
-          <button class="search__form--button-search position-absolute" type="submit"><i
-              class="bi bi-search"></i></button>
-        </form>
-      </div>
+<header class="app-header">
+  <div class="app-header__container">
+    <!-- Left Section - Search -->
+    <div class="app-header__left">
+      <form class="app-header__search" (ngSubmit)="onSubmit()">
+        <div class="app-header__search-wrapper">
+          <i class="bi bi-search app-header__search-icon"></i>
+          <input
+            class="app-header__search-input"
+            type="text"
+            name="search"
+            [(ngModel)]="searchString"
+            placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}"
+          >
+        </div>
+        <button class="app-header__search-btn" type="submit" aria-label="Search">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
     </div>
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-7 col-7 h-header d-flex justify-content-end">
-      <div class="dropdown u-margin-vertical-auto ">
-        <a class="btn btn-lang fs-5 mt-3 dropdown-toggle" href="#" role="button" id="dropdownLanguages"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          {{lang|translate}}
-        </a>
 
-        <ul class="dropdown-menu" aria-labelledby="dropdownLanguages">
-          <li><a class="dropdown-item fs-5" (click)="selectLang('en')">{{'HEADER.ENGLISH' | translate}}</a></li>
-          <li><a class="dropdown-item fs-5" (click)="selectLang('vi')">{{'HEADER.VIETNAMESE'|translate}}</a></li>
+    <!-- Right Section - Actions -->
+    <div class="app-header__right">
+      <!-- Language Selector -->
+      <div class="app-header__lang">
+        <div class="dropdown">
+          <button
+            class="app-header__lang-btn dropdown-toggle"
+            type="button"
+            id="dropdownLanguages"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{lang|translate}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguages">
+            <li>
+              <button class="dropdown-item" (click)="selectLang('en')">
+                {{'HEADER.ENGLISH' | translate}}
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="selectLang('vi')">
+                {{'HEADER.VIETNAMESE'|translate}}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chat -->
+      <div class="app-header__action">
+        <a
+          class="app-header__action-btn"
+          [routerLink]="['chat']"
+          (click)="readChat()"
+          aria-label="Chat"
+        >
+          <i class="bi bi-chat-dots"></i>
+          <span *ngIf="isRecievedMessage" class="app-header__badge"></span>
+        </a>
+      </div>
+
+      <!-- Notifications -->
+      <div class="app-header__action">
+        <input
+          class="app-header__notif-cb"
+          type="checkbox"
+          [checked]="isCheck"
+          id="btn_notification"
+        >
+        <label for="btn_notification" class="app-header__action-btn" aria-label="Notifications">
+          <i class="bi bi-bell-fill"></i>
+          <span *ngIf="listNotification[0]?.countRead" class="app-header__badge">
+            {{listNotification[0]?.countRead}}
+          </span>
+        </label>
+
+        <!-- Notification Dropdown -->
+        <ul
+          class="app-header__notif-dropdown"
+          #chatBoxContent
+          infiniteScroll
+          [infiniteScrollDistance]="scrollDistance"
+          [infiniteScrollUpDistance]="scrollUpDistance"
+          [infiniteScrollThrottle]="throttle"
+          [scrollWindow]="false"
+          (scrolled)="onEnd($event)"
+        >
+          <li class="app-header__notif-header">
+            <h3>{{'TITLE.NOTIFICATION'|translate}}</h3>
+            <button class="app-header__notif-read-all" (click)="readAllNotification()">
+              {{'TITLE.READ_ALL'|translate}}
+            </button>
+          </li>
+          <li
+            *ngFor="let notification of listNotification; let i = index"
+            class="app-header__notif-item"
+            [class.app-header__notif-item--unread]="!notification.isRead"
+            (click)="readNotification(notification.notifyId, i);openNoti($event)"
+          >
+            <div class="app-header__notif-avatar">
+              <img [src]="notification.avatar" alt="">
+            </div>
+            <div
+              class="app-header__notif-content"
+              [innerText]="isLangEn ? notification.contentEn : notification.contentVi"
+            ></div>
+          </li>
         </ul>
       </div>
-      <ul class="u-margin-vertical-auto main-dropdown">
-        <li>
-          <div class="img-avatar d-block d-sm-block d-md-none u-margin-auto u-center-text">
-            <img class="u-margin-vertical-auto" [src]="profile?.avatar" alt="">
-          </div>
-          <button class="animated-border-button d-sm-none d-none d-md-block">{{profile?.fullname}}</button>
-          <ul class="dropdown">
-            <li><a [routerLink]="['profile']">{{'HEADER.PROFILE' | translate}}</a></li>
-            <li><a [routerLink]="['change-password']">{{'HEADER.CHANGE_PASSWORD' | translate}}</a></li>
-            <li><a (click)="logout()">{{'HEADER.LOG_OUT'|translate}}</a></li>
+
+      <!-- User Menu -->
+      <div class="app-header__user">
+        <div class="dropdown">
+          <button
+            class="app-header__user-btn dropdown-toggle"
+            type="button"
+            id="userDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img class="app-header__user-avatar" [src]="profile?.avatar" alt="">
+            <span class="app-header__user-name d-none d-md-block">{{profile?.fullname}}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['profile']">
+                <i class="bi bi-person"></i>
+                {{'HEADER.PROFILE' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['change-password']">
+                <i class="bi bi-key"></i>
+                {{'HEADER.CHANGE_PASSWORD' | translate}}
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <button class="dropdown-item" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                {{'HEADER.LOG_OUT'|translate}}
+              </button>
+            </li>
           </ul>
-        </li>
-      </ul>
-      <div class="position-relative dropdown u-margin-vertical-auto">
-        <i (click)="readChat()" class="bi bi-chat-dots ps-4 pe-3 fs-1" style="cursor: pointer;"
-          [routerLink]="['chat']"></i>
-        <span *ngIf="isRecievedMessage" class="position-absolute have-notification"
-          style="top: 1px; right: 6px; height: 1.5rem; width: 1.5rem;"></span>
+        </div>
       </div>
-      <ul class="u-margin-vertical-auto sub-dropdown">
-        <li class="position-relative me-5">
-          <input class="cb-notification" type="checkbox" [checked]="isCheck" name="" id="btn_notification">
-          <label for="btn_notification" class="btn-notification"><i class="bi bi-bell-fill"></i>
-          </label>
-          <span *ngIf="listNotification[0]?.countRead"
-            class="position-absolute have-notification">{{listNotification[0]?.countRead}}</span>
-          <!-- <a class="btn-notification"></a> -->
-          <ul class="notification-dropdown" #chatBoxContent infiniteScroll [infiniteScrollDistance]="scrollDistance"
-            [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
-            (scrolled)="onEnd($event)">
-            <li class="d-flex">
-              <h3 class="col-5 d-inline-block">{{'TITLE.NOTIFICATION'|translate}}</h3>
-              <h4 class="col-7 d-inline-block u-margin-auto text-end" style="cursor: pointer;"
-                (click)="readAllNotification()">
-                {{'TITLE.READ_ALL'|translate}}</h4>
-            </li>
-            <li *ngFor="let notification of listNotification; let i = index" style="cursor: pointer;"
-              (click)="readNotification(notification.notifyId, i);openNoti($event)">
-              <div class="col-2 u-margin-vertical-auto img-avatar">
-                <img [src]="notification.avatar" alt="">
-              </div>
-              <div class="col-10 ps-3 content" [ngClass]="!notification.isRead ? 'color-black' : 'color-grey'"
-                [innerText]="isLangEn ? notification.contentEn : notification.contentVi">
-              </div>
-            </li>
-            <!-- <li>
-              <div style="height: 60px;width: 100%;">
-                <img class="full-image" style="height: 60px; width: 100%;" src="../../assets/img/id-loading-5.gif"
-                  alt="">
-              </div>
-
-            </li> -->
-
-          </ul>
-        </li>
-      </ul>
     </div>
   </div>
-</div>
+</header>

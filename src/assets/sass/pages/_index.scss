@@ -1,121 +1,1249 @@
+// ========================================
+// MODERN SCHOLAR - HOME INDEX PAGE
+// Professional Academic Portal Design
+// ========================================
+
 .index-container {
-  // background-color: #FFF;
-  background-color: #F0F2F5;
-  padding-bottom: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+  padding: $spacing-md;
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+  padding-bottom: $spacing-3xl;
+  position: relative;
+  z-index: 1;
+  max-width: 100vw;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+
+  // Fix for breadcrumb and other overflow issues
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  // Add subtle texture overlay
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0, 191, 165, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(48, 63, 159, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
+
+// ========================================
+// MAIN GROUP CARD
+// ========================================
 
 .main-group {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 3rem 0;
-  padding-top: 1rem;
-  margin: 2rem;
-  border-radius: 1.5rem;
-  background-color: #FFF;
+  background: $color-bg-pure;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-sm;
+  border: 1px solid rgba($color-border, 0.8);
+  padding: $spacing-lg;
+  margin: $spacing-lg 0;
+  transition: all 300ms ease-out;
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  overflow-x: hidden;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  // Add decorative top accent
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $color-accent 0%, $color-primary 100%);
+    border-radius: $radius-xl $radius-xl 0 0;
+  }
+
+  h2 {
+    font-family: $font-heading;
+    font-size: $font-3xl;
+    font-weight: $font-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-xl;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    &::before {
+      content: '';
+      width: 5px;
+      height: 36px;
+      background: linear-gradient(180deg, $color-accent 0%, darken($color-accent, 12%) 100%);
+      border-radius: $radius-pill;
+    }
+  }
+
+  h3 {
+    font-family: $font-heading;
+    font-size: $font-2xl;
+    font-weight: $font-bold;
+    color: $color-text-primary;
+    margin: $spacing-2xl 0 $spacing-lg 0;
+    padding-left: $spacing-lg;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 28px;
+      background: linear-gradient(180deg, $color-primary 0%, darken($color-primary, 12%) 100%);
+      border-radius: $radius-pill;
+    }
+  }
+
+  h4 {
+    font-family: $font-heading;
+    font-size: $font-xl;
+    font-weight: $font-bold;
+    color: $color-primary;
+    margin-bottom: $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
 }
+
+// ========================================
+// CATEGORY GRID LAYOUT
+// ========================================
+
+.student-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-xl;
+  margin-top: $spacing-xl;
+
+  // Force single column on tablet and mobile for better UX
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+.category-column {
+  background: $color-bg-pure;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border-light;
+  overflow: hidden;
+  transition: all 300ms ease-out;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    border-color: rgba($color-accent, 0.3);
+    box-shadow: $shadow-sm;
+  }
+
+  &__header {
+    background: linear-gradient(135deg, rgba($color-accent, 0.08) 0%, rgba($color-primary, 0.05) 100%);
+    padding: $spacing-xl;
+    border-bottom: 2px solid rgba($color-accent, 0.2);
+
+    h4 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-size: $font-xl;
+      font-weight: $font-bold;
+
+      i {
+        color: $color-accent;
+        font-size: $font-xl;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba($color-accent, 0.15) 0%, rgba($color-primary, 0.1) 100%);
+        border-radius: $radius-md;
+      }
+    }
+  }
+
+  &__content {
+    padding: $spacing-md;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__pagination {
+    padding: $spacing-lg;
+    border-top: 2px solid rgba($color-accent, 0.15);
+    background: linear-gradient(135deg, rgba($color-accent, 0.03) 0%, rgba($color-primary, 0.02) 100%);
+
+    // All pagination in category columns uses unified .pagination styling
+    .pagination {
+      margin: 0; // Remove default margin since it's in a container
+
+      // Smaller scale for category columns
+      ::ng-deep .page-link {
+        min-width: 42px;
+        height: 42px;
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-sm;
+      }
+
+      ::ng-deep .page-item.active .page-link {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+// ========================================
+// POST CARD REDESIGN
+// ========================================
 
 .post {
-  height: auto;
-  border-bottom: 1px solid rgba(grey, .3);
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: $color-bg-pure;
+  border: 1px solid $color-border-light;
+  border-radius: $radius-lg;
   cursor: pointer;
+  transition: all 250ms ease-out;
+  position: relative;
+  overflow: hidden;
+  min-height: 88px; // Ensure consistent height for vertical centering
+
+  // Add subtle accent on hover
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, $color-accent 0%, darken($color-accent, 12%) 100%);
+    opacity: 0;
+    transition: opacity 250ms ease-out;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, rgba($color-accent, 0.02) 0%, rgba($color-primary, 0.01) 100%);
+    border-color: rgba($color-accent, 0.3);
+    transform: translateX(4px);
+    box-shadow: $shadow-sm;
+
+    &::before {
+      opacity: 1;
+    }
+
+    .post__info-title h4 {
+      color: $color-accent;
+    }
+  }
+
+  &:active {
+    transform: translateX(2px);
+  }
+
+  // Unread state indicator
+  &--unread {
+    border-left: 3px solid $color-accent;
+  }
+
+  // Read state
+  &--read {
+    opacity: 0.7;
+
+    .post__info-title h4 {
+      color: $color-text-secondary;
+    }
+  }
 
   &__auth {
-    height: fit-content;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
 
-    &-avatar {
-      img {
-        max-width: 5rem;
-        max-height: 5rem;
-        width: auto;
-        height: auto;
-        border-radius: 50%;
-      }
+  &__auth-avatar {
+    position: relative;
+
+    img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid $color-bg-pure;
+      box-shadow: $shadow-sm;
+      transition: transform 250ms ease-out;
     }
 
-    &-info {
-      font-size: 1.4rem;
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
 
-      &__fullname {
-        color: $color-blue;
+  &__auth-info {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
+    &__id {
+      font-family: $font-body;
+      font-size: $font-xs;
+      font-weight: $font-semibold;
+      color: $color-text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    &__fullname {
+      font-family: $font-heading;
+      font-size: $font-base;
+      font-weight: $font-semibold;
+      color: $color-text-primary;
+    }
+
+    h6 {
+      font-family: $font-body;
+      font-size: $font-xs;
+      color: $color-text-muted;
+      margin: 0;
+      font-weight: $font-normal;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center; // Center content vertically
+    justify-content: center;
+  }
+
+  &__info-title {
+    width: 100%;
+    text-align: center; // Center title text
+
+    h4 {
+      font-family: $font-heading;
+      font-size: $font-base;
+      font-weight: $font-semibold;
+      color: $color-text-primary;
+      line-height: $leading-normal;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 250ms ease-out;
+      text-align: center;
+    }
+  }
+
+  // Mobile specific styles
+  @media (max-width: 767px) {
+    padding: $spacing-md;
+    gap: $spacing-sm;
+    min-height: 76px;
+
+    &__auth-avatar img {
+      width: 48px;
+      height: 48px;
+    }
+
+    &__info-title h4 {
+      font-size: $font-sm;
+    }
+
+    // Hide author info on mobile to reduce clutter
+    &__auth-info {
+      display: none !important;
+    }
+
+    // Center the title vertically and align left for better readability
+    &__info {
+      justify-content: center;
+    }
+
+    &__info-title {
+      text-align: left;
+
+      h4 {
+        text-align: left;
       }
     }
   }
 }
+
+// ========================================
+// EMPTY STATE
+// ========================================
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-4xl $spacing-xl;
+  text-align: center;
+  background: linear-gradient(135deg, rgba($color-accent, 0.03) 0%, rgba($color-primary, 0.02) 100%);
+  border-radius: $radius-lg;
+  border: 2px dashed rgba($color-accent, 0.2);
+  min-height: 200px;
+
+  h2 {
+    font-family: $font-heading;
+    font-size: $font-lg;
+    font-weight: $font-semibold;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+
+  i {
+    font-size: $font-4xl;
+    color: $color-accent;
+    margin-bottom: $spacing-md;
+    opacity: 0.5;
+  }
+}
+
+// ========================================
+// UNIFIED PAGINATION COMPONENT
+// ========================================
+// This styling is applied consistently across ALL pagination components:
+// - Teacher Section
+// - Faculty Teacher Section
+// - Faculty Student Section
+// - Common Category
+// - Study Category
+// - Union Category
+// - English Category
+// - Tuition Category
+// - Scholarship Category
+// ========================================
 
 .pagination {
-  width: 100%;
-  text-align: center;
-  display: block;
-  margin-top: 1rem;
-  font-size: 1.5rem;
+  // Container styling
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-lg $spacing-xl;
+  background: linear-gradient(135deg,
+    rgba($color-accent, 0.04) 0%,
+    rgba($color-primary, 0.02) 100%);
+  border-radius: $radius-lg;
+  margin: $spacing-md 0;
+  position: relative;
+
+  // Pagination list
+  ::ng-deep ul {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ::ng-deep li {
+    display: flex;
+  }
+
+  // Base button styling - ALL pagination buttons
+  ::ng-deep .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    padding: $spacing-md $spacing-lg;
+    border: 2px solid $color-border;
+    border-radius: $radius-lg;
+    background: $color-bg-pure;
+    color: $color-text-primary;
+    font-family: $font-body;
+    font-size: $font-base;
+    font-weight: $font-semibold;
+    letter-spacing: 0.3px;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+
+    // Decorative gradient overlay on hover
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba($color-accent, 0.15) 0%,
+        rgba($color-primary, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+    }
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba($color-accent, 0.25);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba($color-accent, 0.2), 0 8px 20px rgba($color-accent, 0.25);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba($color-accent, 0.2);
+    }
+  }
+
+  // Active page - Prominent styling
+  ::ng-deep .page-item.active .page-link {
+    background: linear-gradient(135deg,
+      $color-accent 0%,
+      darken($color-accent, 10%) 100%);
+    border-color: $color-accent;
+    color: $color-text-inverse;
+    box-shadow: 0 8px 24px rgba($color-accent, 0.4);
+    transform: scale(1.08);
+    font-weight: $font-bold;
+    letter-spacing: 0.5px;
+    z-index: 2;
+
+    &::after {
+      display: none;
+    }
+
+    // Subtle pulse animation for active page
+    animation: pulse-accent 2s ease-in-out infinite;
+  }
+
+  // Disabled state
+  ::ng-deep .page-item.disabled .page-link {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+    border-color: $color-border-light;
+    background: $color-bg-warm;
+  }
+
+  // Arrow buttons styling
+  ::ng-deep .page-link[aria-label*="previous"],
+  ::ng-deep .page-link[aria-label*="next"] {
+    background: linear-gradient(135deg,
+      rgba($color-primary, 0.05) 0%,
+      rgba($color-accent, 0.03) 100%);
+
+    &:hover {
+      background: linear-gradient(135deg,
+        rgba($color-accent, 0.15) 0%,
+        rgba($color-primary, 0.1) 100%);
+    }
+  }
+
+  // First/Last buttons special styling
+  ::ng-deep .page-link[aria-label*="first"],
+  ::ng-deep .page-link[aria-label*="last"] {
+    background: linear-gradient(135deg,
+      rgba($color-primary, 0.08) 0%,
+      rgba($color-accent, 0.05) 100%);
+    border-color: rgba($color-primary, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg,
+        $color-primary 0%,
+        darken($color-primary, 8%) 100%);
+      border-color: $color-primary;
+      color: $color-text-inverse;
+    }
+  }
 }
 
-ngb-pagination {
-  display: inline-block;
+// Pulse animation for active page
+@keyframes pulse-accent {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba($color-accent, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba($color-accent, 0.6);
+  }
 }
-.recruiment-news-container{
-  background-color: #FFF;
-  padding: 1rem 2rem;
+
+// ========================================
+// RESPONSIVE PAGINATION
+// ========================================
+
+@media (max-width: 767px) {
+  .pagination {
+    padding: $spacing-md $spacing-lg;
+    gap: $spacing-xs;
+
+    ::ng-deep .page-link {
+      min-width: 44px; // WCAG minimum touch target
+      height: 44px;    // WCAG minimum touch target
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-sm;
+    }
+
+    ::ng-deep .page-item.active .page-link {
+      transform: scale(1.05);
+    }
+  }
 }
-.dropdown-container{
-  position: absolute;
-  right: 1rem;
-  top: 5px;
+
+// ========================================
+// ACCESSIBILITY - PAGINATION
+// ========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .pagination {
+    ::ng-deep .page-link {
+      transition: none;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    ::ng-deep .page-item.active .page-link {
+      animation: none;
+    }
+  }
 }
-.card-recruitment-news{
-  position: relative;
-  width: 100%;
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .pagination {
+    ::ng-deep .page-link {
+      border-width: 3px;
+    }
+
+    ::ng-deep .page-item.active .page-link {
+      border-width: 3px;
+    }
+  }
+}
+
+// ========================================
+// FACULTY SELECT
+// ========================================
+
+.faculty-select {
+  ::ng-deep .ng-select-container {
+    border: 2px solid $color-border;
+    border-radius: $radius-lg;
+    background: $color-bg-pure;
+    box-shadow: $shadow-xs;
+    transition: all 200ms ease-out;
+    max-width: 100%;
+
+    &:hover {
+      border-color: rgba($color-accent, 0.3);
+    }
+
+    &:focus-within {
+      border-color: $color-accent;
+      box-shadow: 0 0 0 4px rgba($color-accent, 0.1);
+    }
+  }
+
+  // Mobile responsive width
+  @media (max-width: 767px) {
+    max-width: 200px !important;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 150px !important;
+  }
+
+  ::ng-deep .ng-value-container {
+    font-family: $font-body;
+    font-size: $font-base;
+    color: $color-text-primary;
+  }
+
+  ::ng-deep .ng-placeholder {
+    color: $color-text-muted;
+  }
+}
+
+// ========================================
+// CREATE POST BUTTON
+// ========================================
+
+.btn-create-post {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xl;
+  background: linear-gradient(135deg, $color-accent 0%, darken($color-accent, 8%) 100%);
+  border: none;
+  border-radius: $radius-lg;
+  color: $color-text-inverse;
+  font-family: $font-body;
+  font-size: $font-base;
+  font-weight: $font-semibold;
+  cursor: pointer;
+  transition: all 250ms ease-out;
+  box-shadow: 0 4px 12px rgba($color-accent, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba($color-accent, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  i {
+    font-size: $font-lg;
+  }
+
+  // Mobile icon-only variant
+  &--icon-only {
+    padding: $spacing-md;
+    width: 44px;
+    height: 44px;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+// ========================================
+// RECRUITMENT NEWS CARDS
+// ========================================
+
+.recruiment-news-container {
+  background: $color-bg-pure;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-sm;
+  padding: $spacing-2xl;
+  margin: $spacing-2xl 0;
+}
+
+.card-recruitment-news {
   display: flex;
-  height: 20rem;
-  padding-right: 2rem;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+  background: $color-bg-pure;
+  border: 1px solid $color-border-light;
+  border-radius: $radius-lg;
+  transition: all 300ms ease-out;
+  position: relative;
   overflow: hidden;
-  &__button-control{
-   position: relative;
-    border:  none;
-    background-color: transparent;
-    font-size: 2rem;
-    height: 2rem;
-    color: #5F6778;
-    &::after{
-      content: none;
+  height: auto;
+  min-height: 180px;
+
+  &:hover {
+    border-color: rgba($color-accent, 0.3);
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+
+  &__button-control {
+    border: none;
+    background: transparent;
+    color: $color-text-secondary;
+    font-size: $font-xl;
+    cursor: pointer;
+    padding: $spacing-sm;
+    border-radius: $radius-md;
+    transition: all 200ms ease-out;
+
+    &:hover {
+      background: rgba($color-accent, 0.08);
+      color: $color-accent;
     }
   }
-  &__poster{
+
+  &__poster {
+    flex-shrink: 0;
+    width: 200px;
+    height: 160px;
+    border-radius: $radius-md;
     overflow: hidden;
-    height: 100%;
-    position: relative;
-    
-    &-img{
-      position: absolute;
-      max-height: 100%;
-      max-width: 100%;
-      width: auto;
-      height: auto;
-      border: 1px solid #e5e5e5;
-      margin: auto;
-      border-radius: 5px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    background: $color-bg-warm;
+    border: 1px solid $color-border-light;
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 767px) {
+      width: 120px;
+      height: 100px;
     }
   }
-  &__info{
-    padding-left: 1rem;
-    padding-top: 2rem;
-    &-title{
-      font-weight: 700;
-      max-height: 4.2rem;
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: 0;
+
+    &-title {
+      font-family: $font-heading;
+      font-size: $font-xl;
+      font-weight: $font-semibold;
+      color: $color-text-primary;
+      line-height: $leading-tight;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
+      margin: 0;
     }
-    &-company, &-location, &-position{
-      color: #5F6778;
+
+    &-company,
+    &-location,
+    &-position {
+      font-family: $font-body;
+      font-size: $font-sm;
+      color: $color-text-secondary;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      i {
+        color: $color-accent;
+        font-size: $font-xs;
+      }
     }
-    &-salary{
-      color:  green;
+
+    &-salary {
+      font-family: $font-body;
+      font-size: $font-sm;
+      font-weight: $font-semibold;
+      color: $color-success;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      i {
+        font-size: $font-xs;
+      }
     }
-    &-experience{
-      color: red;
+
+    &-experience {
+      font-family: $font-body;
+      font-size: $font-sm;
+      color: $color-danger;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      i {
+        font-size: $font-xs;
+      }
     }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    height: auto;
+
+    &__info {
+      width: 100%;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE ADJUSTMENTS
+// ========================================
+
+@media (max-width: 767px) {
+  .index-container {
+    padding: $spacing-md;
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+    padding-bottom: $spacing-2xl;
+  }
+
+  .main-group {
+    padding: $spacing-md;
+    margin: $spacing-md 0;
+    border-radius: $radius-lg;
+    max-width: 100%;
+
+    // Fix faculty select width on mobile
+    .d-flex {
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+
+    h2 {
+      font-size: $font-2xl;
+      flex-wrap: wrap;
+
+      &::before {
+        height: 24px;
+        width: 4px;
+      }
+    }
+
+    h3 {
+      font-size: $font-lg;
+    }
+
+    h3 {
+      font-size: $font-xl;
+      padding-left: $spacing-md;
+      flex-wrap: wrap;
+
+      &::before {
+        height: 20px;
+        width: 3px;
+      }
+    }
+
+    h4 {
+      font-size: $font-lg;
+    }
+  }
+
+  .post {
+    padding: $spacing-md;
+
+    &__auth-avatar img {
+      width: 44px;
+      height: 44px;
+    }
+
+    &__info-title h4 {
+      font-size: $font-sm;
+    }
+  }
+
+  .category-column {
+    min-height: 400px;
+
+    &__header h4 {
+      font-size: $font-base;
+    }
+  }
+
+  .recruiment-news-container {
+    padding: $spacing-lg;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .post,
+  .card-recruitment-news,
+  .btn-create-post {
+    transition: none;
+  }
+}
+
+// Focus visible for keyboard navigation
+.post:focus-visible,
+.btn-create-post:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+}
+
+// ========================================
+// COLLAPSIBLE FACULTY SECTION
+// ========================================
+
+.collapse-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $color-bg-pure;
+  border: 2px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 250ms ease-out;
+  flex-shrink: 0;
+
+  &:hover {
+    background: $color-accent;
+    border-color: $color-accent;
+    color: $color-text-inverse;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+  }
+
+  @media (max-width: 767px) {
+    width: 44px;
+    height: 44px;
+  }
+
+  i {
+    font-size: $font-lg;
+    transition: transform 300ms ease-out;
+  }
+}
+
+.collapsed {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Animate the chevron icon when collapsed
+.collapse-toggle i.bi-chevron-down {
+  transform: rotate(0deg);
+}
+
+.collapse-toggle i.bi-chevron-up {
+  transform: rotate(180deg);
+}
+
+// ========================================
+// MOBILE TAB NAVIGATION
+// ========================================
+
+.mobile-category-tabs {
+  display: none; // Hidden on desktop/tablet
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+// Hide desktop grid on mobile
+@media (max-width: 767px) {
+  .student-categories-grid {
+    display: none;
+  }
+}
+
+// Tab Navigation Bar
+.tabs-nav {
+  display: flex;
+  gap: $spacing-xs;
+  padding: $spacing-md;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, $color-bg-pure 0%, rgba($color-accent, 0.02) 100%);
+  z-index: 10;
+  border-bottom: 1px solid $color-border-light;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Smooth scroll
+  scroll-behavior: smooth;
+}
+
+.tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all 250ms ease-out;
+  min-width: 70px;
+  position: relative;
+
+  &.active {
+    background: linear-gradient(135deg, rgba($color-accent, 0.1) 0%, rgba($color-primary, 0.05) 100%);
+
+    .tab-icon {
+      color: $color-accent;
+      transform: scale(1.1);
+    }
+
+    .tab-label {
+      color: $color-accent;
+      font-weight: $font-semibold;
+    }
+  }
+
+  &:hover:not(.active) {
+    background: rgba($color-accent, 0.05);
+
+    .tab-icon {
+      color: darken($color-accent, 10%);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+  }
+}
+
+.tab-icon {
+  font-size: $font-xl;
+  color: $color-text-secondary;
+  transition: all 250ms ease-out;
+}
+
+.tab-label {
+  font-family: $font-body;
+  font-size: 10px;
+  font-weight: $font-medium;
+  color: $color-text-secondary;
+  text-align: center;
+  line-height: $leading-tight;
+  transition: all 250ms ease-out;
+  white-space: nowrap;
+}
+
+.tab-badge {
+  position: absolute;
+  top: $spacing-xs;
+  right: $spacing-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 $spacing-xs;
+  background: linear-gradient(135deg, $color-accent 0%, darken($color-accent, 10%) 100%);
+  color: $color-text-inverse;
+  font-family: $font-body;
+  font-size: 10px;
+  font-weight: $font-bold;
+  border-radius: $radius-pill;
+  box-shadow: 0 2px 6px rgba($color-accent, 0.4);
+}
+
+// Tab Content Container
+.tabs-content {
+  position: relative;
+  min-height: 300px;
+}
+
+.tab-panel {
+  display: none;
+
+  &.active {
+    display: block;
+    animation: fadeIn 300ms ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Mobile Post List
+.mobile-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-md 0;
+}
+
+// Mobile Pagination
+.mobile-pagination {
+  padding: $spacing-lg;
+  padding-bottom: $spacing-2xl; // Extra padding for FAB
+
+  .pagination {
+    margin: 0;
+  }
+}
+
+// ========================================
+// RESPONSIVE ADJUSTMENTS FOR TABS
+// ========================================
+
+@media (max-width: 480px) {
+  .tabs-nav {
+    padding: $spacing-sm;
+  }
+
+  .tab-btn {
+    min-width: 60px;
+    padding: $spacing-sm;
+  }
+
+  .tab-label {
+    font-size: 9px;
+  }
+
+  .tab-icon {
+    font-size: $font-lg;
   }
 }

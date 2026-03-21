@@ -1,6 +1,6 @@
-const SERVER_HOST = 'https://schoolsocialnetwork.herokuapp.com'
+const SERVER_HOST = 'https://dev.social-network-be.cuocthien.io.vn'
 const LOCAL_HOST = 'http://54.169.230.175:3000'
-const HOST = LOCAL_HOST
+const HOST = SERVER_HOST
 
 const LIST_ROLE = [
     {

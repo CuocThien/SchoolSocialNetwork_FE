@@ -1,49 +1,46 @@
-<div class="pt-1 ms-3 me-3 index-container">
+<div class="index-container">
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
   <div *ngIf="!isCompany">
-    <div *ngIf=" !isAlumni" class="main-group">
-      <h2 class="ps-3">{{'HOME.MAIN_NOTIFICATION'|translate}}</h2>
-      <hr>
+    <!-- Main Group Notifications -->
+    <section class="main-group" *ngIf="!isAlumni">
+      <h2>{{'HOME.MAIN_NOTIFICATION'|translate}}</h2>
+      <!-- Teacher Section -->
       <div *ngIf="isAdmin">
-        <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
-          {{'HOME.TEACHER'|translate}}</h3>
-        <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-          <button class="btn btn-outline-primary me-5 d-none d-lg-block" (click)="createPost('grgv',true,false)">
-            {{'BUTTON.CREATE_POST'|translate}}
-          </button>
-          <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost('grgv',true,false)">
-            <i class="bi bi-pencil-square fs-lg"></i>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>{{'HOME.TEACHER'|translate}}</h3>
+          <button class="btn-create-post" (click)="createPost('grgv',true,false)">
+            <i class="bi bi-pencil-square"></i>
+            <span>{{'BUTTON.CREATE_POST'|translate}}</span>
           </button>
         </div>
-        <hr>
       </div>
-      <div class="main-teacher" *ngIf="isAdmin || isDean || isTeacher">
-        <div class="post d-flex pt-3 pb-3" *ngFor="let post of listMainTeacherPost"
-          (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-          <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
-            <div class="post__auth-avatar ps-3 pe-3">
-              <img [src]="post?.avatar" alt="">
+      <div class="posts-list" *ngIf="isAdmin || isDean || isTeacher">
+        <article class="post" *ngFor="let post of listMainTeacherPost"
+          [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+          (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+          tabindex="0">
+          <div class="post__auth">
+            <div class="post__auth-avatar">
+              <img [src]="post?.avatar" [alt]="post?.fullname">
             </div>
-            <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
-              <span class="post__auth-info__id">{{post?.author}} - </span>
+            <div class="post__auth-info">
+              <span class="post__auth-info__id">{{post?.author}}</span>
               <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-              <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+              <h6>{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
             </div>
           </div>
-          <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
-            <div class="post__auth-info d-sm-block d-md-none">
-              <span class="post__auth-info__id">{{post?.author}} - </span>
-              <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-            </div>
+          <div class="post__info">
             <div class="post__info-title">
-              <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              <h4>{{post?.title}}</h4>
             </div>
           </div>
+        </article>
+
+        <div class="empty-state" *ngIf="!listMainTeacherPost?.length">
+          <i class="bi bi-inbox"></i>
+          <h2>{{'TITLE.NO_DATA'|translate}}</h2>
         </div>
-        <h2 *ngIf="!listMainTeacherPost?.length" class="text-center">
-          {{'TITLE.NO_DATA'|translate}}
-        </h2>
         <div class="pagination">
           <ngb-pagination [collectionSize]="totalMainTeacher" [maxSize]="5" [pageSize]="1" [rotate]="true"
             (pageChange)="goToPage('mainTeacher',$event)" [(page)]="pageMainTeacher">
@@ -51,284 +48,574 @@
         </div>
       </div>
 
+      <!-- Student Categories Section -->
       <div *ngIf="isAdmin">
-        <hr>
-        <h3 class="ps-5 mt-3  d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
-          {{'HOME.STUDENT'|translate}}</h3>
-        <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-          <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost('grsv',true,true)">
-            {{'BUTTON.CREATE_POST'|translate}}
-          </button>
-          <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost('grsv',true,true)">
-            <i class="bi bi-pencil-square fs-lg"></i>
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+          <h3>{{'HOME.STUDENT'|translate}}</h3>
+          <button class="btn-create-post" (click)="createPost('grsv',true,true)">
+            <i class="bi bi-pencil-square"></i>
+            <span>{{'BUTTON.CREATE_POST'|translate}}</span>
           </button>
         </div>
-        <hr>
       </div>
-      <div class="main-student" *ngIf="isAdmin || isStudent">
 
-        <!-- list post common -->
-        <div
-          class="common d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group position-relative" style="min-height: 44rem;">
-            <h4 class="ps-3">{{isLangEn?listCategory[3].nameEn:listCategory[3].nameVi}}</h4>
-            <hr>
-            <div class="post d-flex" *ngFor="let post of listPostCommon"
-              (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-              <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
-                <div class="post__auth-avatar ps-3 pe-3">
-                  <img [src]="post?.avatar" alt="">
+      <div *ngIf="isAdmin || isStudent">
+        <!-- Desktop/Tablet: Grid Layout -->
+        <div class="student-categories-grid">
+
+          <!-- Common Category -->
+          <div class="category-column">
+            <div class="category-column__header">
+              <h4><i class="bi bi-chat-left-quote"></i> {{isLangEn ? listCategory[3].nameEn : listCategory[3].nameVi}}</h4>
+            </div>
+            <div class="category-column__content">
+              <article class="post" *ngFor="let post of listPostCommon"
+                [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                tabindex="0">
+                <div class="post__auth">
+                  <div class="post__auth-avatar">
+                    <img [src]="post?.avatar" [alt]="post?.fullname">
+                  </div>
                 </div>
-              </div>
-              <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
-                <div class="post__auth-info">
-                  <span class="post__auth-info__id">{{post?.author}} - </span>
-                  <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                <div class="post__info">
+                  <div class="post__auth-info">
+                    <span class="post__auth-info__id">{{post?.author}}</span>
+                    <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                  </div>
+                  <div class="post__info-title">
+                    <h4>{{post?.title}}</h4>
+                  </div>
                 </div>
-                <div class="post__info-title">
-                  <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
-                </div>
+              </article>
+
+              <div class="empty-state" *ngIf="!listPostCommon?.length">
+                <i class="bi bi-inbox"></i>
+                <h2>{{'TITLE.NO_DATA'|translate}}</h2>
               </div>
             </div>
+            <div class="category-column__pagination" *ngIf="listPostCommon?.length">
+              <div class="pagination">
+                <ngb-pagination [collectionSize]="maxPagePostCommon" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                  (pageChange)="goToPageInPostCategory($event,'62711cb8442b05ae533b8e60')" [(page)]="pagePostCommon">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
 
-            <h2 *ngIf="!listPostCommon?.length" class="text-center">
-              {{'TITLE.NO_DATA'|translate}}
-            </h2>
-            <div class="pagination position-absolute" style="bottom: 1rem">
-              <ngb-pagination [collectionSize]="maxPagePostCommon" [maxSize]="5" [pageSize]="1" [rotate]="true"
-                (pageChange)="goToPageInPostCategory($event,'62711cb8442b05ae533b8e60')" [(page)]="pagePostCommon">
-              </ngb-pagination>
+          <!-- Study Category -->
+          <div class="category-column">
+            <div class="category-column__header">
+              <h4><i class="bi bi-book"></i> {{isLangEn ? listCategory[0].nameEn : listCategory[0].nameVi}}</h4>
+            </div>
+            <div class="category-column__content">
+              <article class="post" *ngFor="let post of listPostStudy"
+                [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                tabindex="0">
+                <div class="post__auth">
+                  <div class="post__auth-avatar">
+                    <img [src]="post?.avatar" [alt]="post?.fullname">
+                  </div>
+                </div>
+                <div class="post__info">
+                  <div class="post__auth-info">
+                    <span class="post__auth-info__id">{{post?.author}}</span>
+                    <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                  </div>
+                  <div class="post__info-title">
+                    <h4>{{post?.title}}</h4>
+                  </div>
+                </div>
+              </article>
+
+              <div class="empty-state" *ngIf="!listPostStudy?.length">
+                <i class="bi bi-inbox"></i>
+                <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+              </div>
+            </div>
+            <div class="category-column__pagination" *ngIf="listPostStudy?.length">
+              <div class="pagination">
+                <ngb-pagination [collectionSize]="maxPagePostStudy" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                  (pageChange)="goToPageInPostCategory($event, '62711c4f442b05ae533b8b7a')" [(page)]="pagePostStudy">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+
+          <!-- Union Category -->
+          <div class="category-column">
+            <div class="category-column__header">
+              <h4><i class="bi bi-people"></i> {{isLangEn ? listCategory[1].nameEn : listCategory[1].nameVi}}</h4>
+            </div>
+            <div class="category-column__content">
+              <article class="post" *ngFor="let post of listPostUnion"
+                [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                tabindex="0">
+                <div class="post__auth">
+                  <div class="post__auth-avatar">
+                    <img [src]="post?.avatar" [alt]="post?.fullname">
+                  </div>
+                </div>
+                <div class="post__info">
+                  <div class="post__auth-info">
+                    <span class="post__auth-info__id">{{post?.author}}</span>
+                    <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                  </div>
+                  <div class="post__info-title">
+                    <h4>{{post?.title}}</h4>
+                  </div>
+                </div>
+              </article>
+
+              <div class="empty-state" *ngIf="!listPostUnion?.length">
+                <i class="bi bi-inbox"></i>
+                <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+              </div>
+            </div>
+            <div class="category-column__pagination" *ngIf="listPostUnion?.length">
+              <div class="pagination">
+                <ngb-pagination [collectionSize]="maxPagePostUnion" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                  (pageChange)="goToPageInPostCategory($event, '62711c71442b05ae533b8c6d')" [(page)]="pagePostUnion">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+
+          <!-- English Category -->
+          <div class="category-column">
+            <div class="category-column__header">
+              <h4><i class="bi bi-translate"></i> {{isLangEn ? listCategory[2].nameEn : listCategory[2].nameVi}}</h4>
+            </div>
+            <div class="category-column__content">
+              <article class="post" *ngFor="let post of listPostEnglish"
+                [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                tabindex="0">
+                <div class="post__auth">
+                  <div class="post__auth-avatar">
+                    <img [src]="post?.avatar" [alt]="post?.fullname">
+                  </div>
+                </div>
+                <div class="post__info">
+                  <div class="post__auth-info">
+                    <span class="post__auth-info__id">{{post?.author}}</span>
+                    <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                  </div>
+                  <div class="post__info-title">
+                    <h4>{{post?.title}}</h4>
+                  </div>
+                </div>
+              </article>
+
+              <div class="empty-state" *ngIf="!listPostEnglish?.length">
+                <i class="bi bi-inbox"></i>
+                <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+              </div>
+            </div>
+            <div class="category-column__pagination" *ngIf="listPostEnglish?.length">
+              <div class="pagination">
+                <ngb-pagination [collectionSize]="maxPagePostEnglish" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                  (pageChange)="goToPageInPostCategory($event, '62711c84442b05ae533b8cf1')" [(page)]="pagePostEnglish">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tuition Category -->
+          <div class="category-column">
+            <div class="category-column__header">
+              <h4><i class="bi bi-cash-coin"></i> {{isLangEn ? listCategory[4].nameEn : listCategory[4].nameVi}}</h4>
+            </div>
+            <div class="category-column__content">
+              <article class="post" *ngFor="let post of listPostTuition"
+                [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                tabindex="0">
+                <div class="post__auth">
+                  <div class="post__auth-avatar">
+                    <img [src]="post?.avatar" [alt]="post?.fullname">
+                  </div>
+                </div>
+                <div class="post__info">
+                  <div class="post__auth-info">
+                    <span class="post__auth-info__id">{{post?.author}}</span>
+                    <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                  </div>
+                  <div class="post__info-title">
+                    <h4>{{post?.title}}</h4>
+                  </div>
+                </div>
+              </article>
+
+              <div class="empty-state" *ngIf="!listPostTuition?.length">
+                <i class="bi bi-inbox"></i>
+                <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+              </div>
+            </div>
+            <div class="category-column__pagination" *ngIf="listPostTuition?.length">
+              <div class="pagination">
+                <ngb-pagination [collectionSize]="maxPagePostTuition" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                  (pageChange)="goToPageInPostCategory($event, '62711d2f442b05ae533b919d')" [(page)]="pagePostTuition">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scholarship Category -->
+          <div class="category-column">
+            <div class="category-column__header">
+              <h4><i class="bi bi-award"></i> {{isLangEn ? listCategory[5].nameEn : listCategory[5].nameVi}}</h4>
+            </div>
+            <div class="category-column__content">
+              <article class="post" *ngFor="let post of listPostScholarship"
+                [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                tabindex="0">
+                <div class="post__auth">
+                  <div class="post__auth-avatar">
+                    <img [src]="post?.avatar" [alt]="post?.fullname">
+                  </div>
+                </div>
+                <div class="post__info">
+                  <div class="post__auth-info">
+                    <span class="post__auth-info__id">{{post?.author}}</span>
+                    <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                  </div>
+                  <div class="post__info-title">
+                    <h4>{{post?.title}}</h4>
+                  </div>
+                </div>
+              </article>
+
+              <div class="empty-state" *ngIf="!listPostScholarship?.length">
+                <i class="bi bi-inbox"></i>
+                <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+              </div>
+            </div>
+            <div class="category-column__pagination" *ngIf="listPostScholarship?.length">
+              <div class="pagination">
+                <ngb-pagination [collectionSize]="maxPagePostScholarship" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                  (pageChange)="goToPageInPostCategory($event,'62712024442b05ae533ba622')" [(page)]="pagePostScholarship">
+                </ngb-pagination>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- list post study -->
-        <div
-          class="study d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class="main-group position-relative" style="min-height: 44rem;">
-            <h4 class="ps-3">{{isLangEn?listCategory[0].nameEn:listCategory[0].nameVi}}</h4>
-            <hr>
-            <div class="post d-flex" *ngFor="let post of listPostStudy"
-              (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-              <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
-                <div class="post__auth-avatar ps-3 pe-3">
-                  <img [src]="post?.avatar" alt="">
-                </div>
-              </div>
-              <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
-                <div class="post__auth-info">
-                  <span class="post__auth-info__id">{{post?.author}} - </span>
-                  <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-                </div>
-                <div class="post__info-title">
-                  <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
-                </div>
-              </div>
-            </div>
-            <h2 *ngIf="!listPostStudy?.length" class="text-center">
-              {{'TITLE.NO_DATA'|translate}}
-            </h2>
-            <div class="pagination position-absolute" style="bottom: 1rem">
-              <ngb-pagination [collectionSize]="maxPagePostStudy" [maxSize]="5" [pageSize]="1" [rotate]="true"
-                (pageChange)="goToPageInPostCategory($event, '62711c4f442b05ae533b8b7a')" [(page)]="pagePostStudy">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-
-        <!-- list post union -->
-        <div
-          class="union d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group position-relative" style="min-height: 44rem;">
-            <h4 class="ps-3">{{isLangEn?listCategory[1].nameEn:listCategory[1].nameVi}}</h4>
-            <hr>
-            <div class="post d-flex" *ngFor="let post of listPostUnion"
-              (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-              <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
-                <div class="post__auth-avatar ps-3 pe-3">
-                  <img [src]="post?.avatar" alt="">
-                </div>
-              </div>
-              <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
-                <div class="post__auth-info">
-                  <span class="post__auth-info__id">{{post?.author}} - </span>
-                  <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-                </div>
-                <div class="post__info-title">
-                  <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
-                </div>
-              </div>
-            </div>
-
-            <h2 *ngIf="!listPostUnion?.length" class="text-center">
-              {{'TITLE.NO_DATA'|translate}}
-            </h2>
-            <div class="pagination position-absolute" style="bottom: 1rem">
-              <ngb-pagination [collectionSize]="maxPagePostUnion" [maxSize]="5" [pageSize]="1" [rotate]="true"
-                (pageChange)="goToPageInPostCategory($event, '62711c71442b05ae533b8c6d')" [(page)]="pagePostUnion">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-
-        <!-- list post english -->
-        <div
-          class="english d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group position-relative" style="min-height: 44rem;">
-            <h4 class="ps-3">{{isLangEn?listCategory[2].nameEn:listCategory[2].nameVi}}</h4>
-            <hr>
-            <div class="post d-flex" *ngFor="let post of listPostEnglish"
-              (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-              <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
-                <div class="post__auth-avatar ps-3 pe-3">
-                  <img [src]="post?.avatar" alt="">
-                </div>
-              </div>
-              <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
-                <div class="post__auth-info">
-                  <span class="post__auth-info__id">{{post?.author}} - </span>
-                  <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-                </div>
-                <div class="post__info-title">
-                  <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
-                </div>
-              </div>
-            </div>
-
-            <h2 *ngIf="!listPostEnglish?.length" class="text-center">
-              {{'TITLE.NO_DATA'|translate}}
-            </h2>
-            <div class="pagination position-absolute" style="bottom: 1rem">
-              <ngb-pagination [collectionSize]="maxPagePostEnglish" [maxSize]="5" [pageSize]="1" [rotate]="true"
-                (pageChange)="goToPageInPostCategory($event, '62711c84442b05ae533b8cf1')" [(page)]="pagePostEnglish">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-
-        <!-- list post tuition -->
-        <div
-          class="tuition d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group position-relative" style="min-height: 44rem;">
-            <h4 class="ps-3">{{isLangEn?listCategory[4].nameEn:listCategory[4].nameVi}}</h4>
-            <hr>
-            <div class="post d-flex" *ngFor="let post of listPostTuition"
-              (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-              <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
-                <div class="post__auth-avatar ps-3 pe-3">
-                  <img [src]="post?.avatar" alt="">
-                </div>
-              </div>
-              <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
-                <div class="post__auth-info">
-                  <span class="post__auth-info__id">{{post?.author}} - </span>
-                  <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-                </div>
-                <div class="post__info-title">
-                  <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
-                </div>
-              </div>
-            </div>
-
-            <h2 *ngIf="!listPostTuition?.length" class="text-center">
-              {{'TITLE.NO_DATA'|translate}}
-            </h2>
-            <div class="pagination position-absolute" style="bottom: 1rem">
-              <ngb-pagination [collectionSize]="maxPagePostTuition" [maxSize]="5" [pageSize]="1" [rotate]="true"
-                (pageChange)="goToPageInPostCategory($event, '62711d2f442b05ae533b919d')" [(page)]="pagePostTuition">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-
-        <!-- list post scholarship -->
-        <div
-          class="scholarship d-inline-flex flex-column col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-3 pb-3 m-0">
-          <div class=" main-group position-relative" style="min-height: 44rem;">
-            <h4 class="ps-3">{{isLangEn?listCategory[5].nameEn:listCategory[5].nameVi}}</h4>
-            <hr>
-            <div class="post d-flex" *ngFor="let post of listPostScholarship"
-              (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-              <div class="post__auth d-flex col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
-                <div class="post__auth-avatar ps-3 pe-3">
-                  <img [src]="post?.avatar" alt="">
-                </div>
-              </div>
-              <div class="post__info u-margin-vertical-auto col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9">
-                <div class="post__auth-info">
-                  <span class="post__auth-info__id">{{post?.author}} - </span>
-                  <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-                </div>
-                <div class="post__info-title">
-                  <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
-                </div>
-              </div>
-            </div>
-
-            <h2 *ngIf="!listPostScholarship?.length" class="text-center">
-              {{'TITLE.NO_DATA'|translate}}
-            </h2>
-            <div class="pagination position-absolute" style="bottom: 1rem">
-              <ngb-pagination [collectionSize]="maxPagePostScholarship" [maxSize]="5" [pageSize]="1" [rotate]="true"
-                (pageChange)="goToPageInPostCategory($event,'62712024442b05ae533ba622')" [(page)]="pagePostScholarship">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </div>
 
-    <div class="main-group mt-5">
+      <!-- Mobile: Tab Navigation -->
+      <div class="mobile-category-tabs">
+          <!-- Tab Navigation Bar -->
+          <div class="tabs-nav">
+            <button
+              *ngFor="let category of mobileCategories; let i = index"
+              class="tab-btn"
+              [class.active]="activeMobileTab === i"
+              (click)="activeMobileTab = i"
+              [attr.aria-label]="category.nameEn"
+              [attr.aria-selected]="activeMobileTab === i">
+              <i class="tab-icon" [class]="category.icon"></i>
+              <span class="tab-label">{{isLangEn ? category.nameEn : category.nameVi}}</span>
+              <span class="tab-badge" *ngIf="getCategoryCount(category.id) > 0">{{getCategoryCount(category.id)}}</span>
+            </button>
+          </div>
 
-      <h2 class="ps-3 d-inline-block col-xxl-9 col-xl-9 col-lg-7 col-md-6 col-sm-6 col-6">
-        {{"HOME.FACULTY_NOTIFICATION"|translate}}</h2>
-      <ng-select class="d-inline-block col-xxl-3 col-xl-3 col-lg-5 col-md-6 col-sm-6 col-6" [searchable]="true"
-        [(ngModel)]="faculty" [clearable]="false" (change)="filterFaculty()" *ngIf="isAdmin">
-        <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">{{isLangEn?faculty.nameEn:faculty.nameVi}}
-        </ng-option>
-      </ng-select>
-      <hr>
+          <!-- Tab Content -->
+          <div class="tabs-content">
+            <!-- Common Tab -->
+            <div class="tab-panel" [class.active]="activeMobileTab === 0">
+              <ng-container *ngIf="activeMobileTab === 0">
+                <div class="mobile-post-list">
+                  <article class="post" *ngFor="let post of listPostCommon"
+                    [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                    (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                    tabindex="0">
+                    <div class="post__auth">
+                      <div class="post__auth-avatar">
+                        <img [src]="post?.avatar" [alt]="post?.fullname">
+                      </div>
+                    </div>
+                    <div class="post__info">
+                      <div class="post__auth-info">
+                        <span class="post__auth-info__id">{{post?.author}}</span>
+                        <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                      </div>
+                      <div class="post__info-title">
+                        <h4>{{post?.title}}</h4>
+                      </div>
+                    </div>
+                  </article>
 
+                  <div class="empty-state" *ngIf="!listPostCommon?.length">
+                    <i class="bi bi-inbox"></i>
+                    <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+                  </div>
+                </div>
+                <div class="mobile-pagination" *ngIf="listPostCommon?.length">
+                  <div class="pagination">
+                    <ngb-pagination [collectionSize]="maxPagePostCommon" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                      (pageChange)="goToPageInPostCategory($event,'62711cb8442b05ae533b8e60')" [(page)]="pagePostCommon">
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- Study Tab -->
+            <div class="tab-panel" [class.active]="activeMobileTab === 1">
+              <ng-container *ngIf="activeMobileTab === 1">
+                <div class="mobile-post-list">
+                  <article class="post" *ngFor="let post of listPostStudy"
+                    [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                    (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                    tabindex="0">
+                    <div class="post__auth">
+                      <div class="post__auth-avatar">
+                        <img [src]="post?.avatar" [alt]="post?.fullname">
+                      </div>
+                    </div>
+                    <div class="post__info">
+                      <div class="post__auth-info">
+                        <span class="post__auth-info__id">{{post?.author}}</span>
+                        <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                      </div>
+                      <div class="post__info-title">
+                        <h4>{{post?.title}}</h4>
+                      </div>
+                    </div>
+                  </article>
+
+                  <div class="empty-state" *ngIf="!listPostStudy?.length">
+                    <i class="bi bi-inbox"></i>
+                    <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+                  </div>
+                </div>
+                <div class="mobile-pagination" *ngIf="listPostStudy?.length">
+                  <div class="pagination">
+                    <ngb-pagination [collectionSize]="maxPagePostStudy" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                      (pageChange)="goToPageInPostCategory($event, '62711c4f442b05ae533b8b7a')" [(page)]="pagePostStudy">
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- Union Tab -->
+            <div class="tab-panel" [class.active]="activeMobileTab === 2">
+              <ng-container *ngIf="activeMobileTab === 2">
+                <div class="mobile-post-list">
+                  <article class="post" *ngFor="let post of listPostUnion"
+                    [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                    (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                    tabindex="0">
+                    <div class="post__auth">
+                      <div class="post__auth-avatar">
+                        <img [src]="post?.avatar" [alt]="post?.fullname">
+                      </div>
+                    </div>
+                    <div class="post__info">
+                      <div class="post__auth-info">
+                        <span class="post__auth-info__id">{{post?.author}}</span>
+                        <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                      </div>
+                      <div class="post__info-title">
+                        <h4>{{post?.title}}</h4>
+                      </div>
+                    </div>
+                  </article>
+
+                  <div class="empty-state" *ngIf="!listPostUnion?.length">
+                    <i class="bi bi-inbox"></i>
+                    <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+                  </div>
+                </div>
+                <div class="mobile-pagination" *ngIf="listPostUnion?.length">
+                  <div class="pagination">
+                    <ngb-pagination [collectionSize]="maxPagePostUnion" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                      (pageChange)="goToPageInPostCategory($event, '62711c71442b05ae533b8c6d')" [(page)]="pagePostUnion">
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- English Tab -->
+            <div class="tab-panel" [class.active]="activeMobileTab === 3">
+              <ng-container *ngIf="activeMobileTab === 3">
+                <div class="mobile-post-list">
+                  <article class="post" *ngFor="let post of listPostEnglish"
+                    [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                    (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                    tabindex="0">
+                    <div class="post__auth">
+                      <div class="post__auth-avatar">
+                        <img [src]="post?.avatar" [alt]="post?.fullname">
+                      </div>
+                    </div>
+                    <div class="post__info">
+                      <div class="post__auth-info">
+                        <span class="post__auth-info__id">{{post?.author}}</span>
+                        <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                      </div>
+                      <div class="post__info-title">
+                        <h4>{{post?.title}}</h4>
+                      </div>
+                    </div>
+                  </article>
+
+                  <div class="empty-state" *ngIf="!listPostEnglish?.length">
+                    <i class="bi bi-inbox"></i>
+                    <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+                  </div>
+                </div>
+                <div class="mobile-pagination" *ngIf="listPostEnglish?.length">
+                  <div class="pagination">
+                    <ngb-pagination [collectionSize]="maxPagePostEnglish" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                      (pageChange)="goToPageInPostCategory($event, '62711c84442b05ae533b8cf1')" [(page)]="pagePostEnglish">
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- Tuition Tab -->
+            <div class="tab-panel" [class.active]="activeMobileTab === 4">
+              <ng-container *ngIf="activeMobileTab === 4">
+                <div class="mobile-post-list">
+                  <article class="post" *ngFor="let post of listPostTuition"
+                    [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                    (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                    tabindex="0">
+                    <div class="post__auth">
+                      <div class="post__auth-avatar">
+                        <img [src]="post?.avatar" [alt]="post?.fullname">
+                      </div>
+                    </div>
+                    <div class="post__info">
+                      <div class="post__auth-info">
+                        <span class="post__auth-info__id">{{post?.author}}</span>
+                        <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                      </div>
+                      <div class="post__info-title">
+                        <h4>{{post?.title}}</h4>
+                      </div>
+                    </div>
+                  </article>
+
+                  <div class="empty-state" *ngIf="!listPostTuition?.length">
+                    <i class="bi bi-inbox"></i>
+                    <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+                  </div>
+                </div>
+                <div class="mobile-pagination" *ngIf="listPostTuition?.length">
+                  <div class="pagination">
+                    <ngb-pagination [collectionSize]="maxPagePostTuition" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                      (pageChange)="goToPageInPostCategory($event, '62711d2f442b05ae533b919d')" [(page)]="pagePostTuition">
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- Scholarship Tab -->
+            <div class="tab-panel" [class.active]="activeMobileTab === 5">
+              <ng-container *ngIf="activeMobileTab === 5">
+                <div class="mobile-post-list">
+                  <article class="post" *ngFor="let post of listPostScholarship"
+                    [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+                    (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+                    tabindex="0">
+                    <div class="post__auth">
+                      <div class="post__auth-avatar">
+                        <img [src]="post?.avatar" [alt]="post?.fullname">
+                      </div>
+                    </div>
+                    <div class="post__info">
+                      <div class="post__auth-info">
+                        <span class="post__auth-info__id">{{post?.author}}</span>
+                        <span class="post__auth-info__fullname">{{post?.fullname}}</span>
+                      </div>
+                      <div class="post__info-title">
+                        <h4>{{post?.title}}</h4>
+                      </div>
+                    </div>
+                  </article>
+
+                  <div class="empty-state" *ngIf="!listPostScholarship?.length">
+                    <i class="bi bi-inbox"></i>
+                    <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+                  </div>
+                </div>
+                <div class="mobile-pagination" *ngIf="listPostScholarship?.length">
+                  <div class="pagination">
+                    <ngb-pagination [collectionSize]="maxPagePostScholarship" [maxSize]="5" [pageSize]="1" [rotate]="true"
+                      (pageChange)="goToPageInPostCategory($event,'62712024442b05ae533ba622')" [(page)]="pagePostScholarship">
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+      <!-- Faculty Group Notifications -->
+      <section class="main-group mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{{"HOME.FACULTY_NOTIFICATION"|translate}}</h2>
+          <div class="d-flex align-items-center gap-3">
+            <ng-select class="faculty-select" [searchable]="true"
+              [(ngModel)]="faculty" [clearable]="false" (change)="filterFaculty()" *ngIf="isAdmin"
+              style="max-width: 300px;">
+              <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">{{isLangEn?faculty.nameEn:faculty.nameVi}}
+              </ng-option>
+            </ng-select>
+            <button class="collapse-toggle" (click)="isFacultyCollapsed = !isFacultyCollapsed" aria-label="Toggle faculty section">
+              <i class="bi" [ngClass]="isFacultyCollapsed ? 'bi-chevron-down' : 'bi-chevron-up'"></i>
+            </button>
+          </div>
+        </div>
+
+        <div [class.collapsed]="isFacultyCollapsed">
+
+      <!-- Faculty Teacher Section -->
       <div *ngIf="(isAdmin || isDean)&&faculty!='alumni'">
-        <h3 class="ps-5 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
-          {{'HOME.TEACHER'|translate}}</h3>
-        <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-          <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, false)">
-            {{'BUTTON.CREATE_POST'|translate}}
-          </button>
-          <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost(faculty, true, false)">
-            <i class="bi bi-pencil-square fs-lg"></i>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>{{'HOME.TEACHER'|translate}}</h3>
+          <button class="btn-create-post" (click)="createPost(faculty, true, false)">
+            <i class="bi bi-pencil-square"></i>
+            <span>{{'BUTTON.CREATE_POST'|translate}}</span>
           </button>
         </div>
-        <hr>
       </div>
-      <div class="faculty-teacher" *ngIf="(isAdmin || isDean || isTeacher)&&faculty!='alumni'">
-        <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyTeacherPost"
-          (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-          <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
-            <div class="post__auth-avatar ps-3 pe-3">
-              <img [src]="post?.avatar" alt="">
+
+      <div class="posts-list" *ngIf="(isAdmin || isDean || isTeacher)&&faculty!='alumni'">
+        <article class="post" *ngFor="let post of listFacultyTeacherPost"
+          [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+          (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+          tabindex="0">
+          <div class="post__auth">
+            <div class="post__auth-avatar">
+              <img [src]="post?.avatar" [alt]="post?.fullname">
             </div>
-            <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
-              <span class="post__auth-info__id">{{post?.author}} - </span>
+            <div class="post__auth-info">
+              <span class="post__auth-info__id">{{post?.author}}</span>
               <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-              <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+              <h6>{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
             </div>
           </div>
-          <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
-            <div class="post__auth-info d-sm-block d-md-none">
-              <span class="post__auth-info__id">{{post?.author}} - </span>
-              <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-            </div>
+          <div class="post__info">
             <div class="post__info-title">
-              <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              <h4>{{post?.title}}</h4>
             </div>
           </div>
+        </article>
+
+        <div class="empty-state" *ngIf="!listFacultyTeacherPost?.length">
+          <i class="bi bi-inbox"></i>
+          <h2>{{'TITLE.NO_DATA'|translate}}</h2>
         </div>
-        <h2 *ngIf="!listFacultyTeacherPost?.length" class="text-center">
-          {{'TITLE.NO_DATA'|translate}}
-        </h2>
         <div class="pagination">
           <ngb-pagination [collectionSize]="totalFacultyTeacher" [maxSize]="5" [pageSize]="1" [rotate]="true"
             (pageChange)="goToPage('facultyTeacher',$event)" [(page)]="pageFacultyTeacher">
@@ -336,46 +623,43 @@
         </div>
       </div>
 
+      <!-- Faculty Student Section -->
       <div *ngIf="isAdmin || isDean">
-        <hr *ngIf="faculty!='alumni'">
-        <h3 class="ps-5 mt-3 d-inline-block col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-9 col-9">
-          {{'HOME.STUDENT'|translate}}</h3>
-        <div class="btn-create-group d-inline-block col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-          <button class="btn btn-outline-primary me-4 d-none d-lg-block" (click)="createPost(faculty, true, true)">
-            {{'BUTTON.CREATE_POST'|translate}}
-          </button>
-          <button class="btn btn-outline-primary me-4 d-block d-lg-none" (click)="createPost(faculty, true, true)">
-            <i class="bi bi-pencil-square fs-lg"></i>
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+          <h3>{{'HOME.STUDENT'|translate}}</h3>
+          <button class="btn-create-post" (click)="createPost(faculty, true, true)">
+            <i class="bi bi-pencil-square"></i>
+            <span>{{'BUTTON.CREATE_POST'|translate}}</span>
           </button>
         </div>
-        <hr>
       </div>
-      <div class="faculty-student" *ngIf="isAdmin || isDean || isStudent">
-        <div class="post d-flex pt-3 pb-3" *ngFor="let post of listFacultyStudentPost"
-          (click)="goToDetailPost(post?._id); readPost(post.notifyId)">
-          <div class="post__auth d-flex col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-2 col-3">
-            <div class="post__auth-avatar ps-3 pe-3">
-              <img [src]="post?.avatar" alt="">
+
+      <div class="posts-list" *ngIf="isAdmin || isDean || isStudent">
+        <article class="post" *ngFor="let post of listFacultyStudentPost"
+          [ngClass]="post.isRead ? 'post--read' : 'post--unread'"
+          (click)="goToDetailPost(post?._id); readPost(post.notifyId)"
+          tabindex="0">
+          <div class="post__auth">
+            <div class="post__auth-avatar">
+              <img [src]="post?.avatar" [alt]="post?.fullname">
             </div>
-            <div class="post__auth-info u-margin-vertical-auto d-md-block d-sm-none d-none">
-              <span class="post__auth-info__id">{{post?.author}} - </span>
+            <div class="post__auth-info">
+              <span class="post__auth-info__id">{{post?.author}}</span>
               <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-              <h6 class="mt-2">{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
+              <h6>{{post?.createdDate | date: 'HH:mm'}} - {{post?.createdDate | date: 'dd/MM'}}</h6>
             </div>
           </div>
-          <div class="post__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-10 col-9">
-            <div class="post__auth-info d-sm-block d-md-none">
-              <span class="post__auth-info__id">{{post?.author}} - </span>
-              <span class="post__auth-info__fullname">{{post?.fullname}}</span>
-            </div>
+          <div class="post__info">
             <div class="post__info-title">
-              <h4 [ngClass]="post.isRead ? 'color-grey' : 'color-black'">{{post?.title}}</h4>
+              <h4>{{post?.title}}</h4>
             </div>
           </div>
+        </article>
+
+        <div class="empty-state" *ngIf="!listFacultyStudentPost?.length">
+          <i class="bi bi-inbox"></i>
+          <h2>{{'TITLE.NO_DATA'|translate}}</h2>
         </div>
-        <h2 *ngIf="!listFacultyStudentPost?.length" class="text-center">
-          {{'TITLE.NO_DATA'|translate}}
-        </h2>
         <div class="pagination">
           <ngb-pagination [collectionSize]="totalFacultyStudent" [maxSize]="5" [pageSize]="10" [rotate]="true"
             (pageChange)="goToPage('facultyStudent',$event)" [(page)]="pageFacultyStudent">
@@ -383,15 +667,15 @@
         </div>
       </div>
     </div>
-  </div>
+    </section><!-- End collapsible section -->
 
   <div *ngIf="isCompany" class="recruiment-news-container">
-    <div class="d-flex">
-      <h2 class="col-xxl-9 col-xl-9 col-lg-8 col-md-8 col-sm-7 col-6">{{'TITLE.RECRUITMENT_NEWS'|translate}}</h2>
-      <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-5 col-6 text-end">
-        <button class="btn btn-outline-primary fs-3 text-end"
-          (click)="createNews()">{{'BUTTON.CREATE_NEWS'|translate}}</button>
-      </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>{{'TITLE.RECRUITMENT_NEWS'|translate}}</h2>
+      <button class="btn-create-post" (click)="createNews()">
+        <i class="bi bi-plus-circle"></i>
+        <span>{{'BUTTON.CREATE_NEWS'|translate}}</span>
+      </button>
     </div>
     <div class="w-100-pc ps-3">
       <ul class=" menu-control-group-detail">
@@ -440,9 +724,10 @@
           </div>
         </div>
       </div>
-      <h2 *ngIf="!listRecruitmentNews?.length" class="text-center">
-        {{'TITLE.NO_DATA'|translate}}
-      </h2>
+      <div class="empty-state" *ngIf="!listRecruitmentNews?.length">
+        <i class="bi bi-inbox"></i>
+        <h2>{{'TITLE.NO_DATA'|translate}}</h2>
+      </div>
       <div class="pagination">
         <ngb-pagination [collectionSize]="maxPageRecruitmentNews" [maxSize]="5" [pageSize]="10" [rotate]="true"
           (pageChange)="goToPage('recruitmentNews',$event)" [(page)]="pageRecruitmentNews">
@@ -451,4 +736,3 @@
     </div>
 
   </div>
-</div>

@@ -1,135 +1,326 @@
-<!-- Upload -->
-<div class="group-container" #allGroup infiniteScroll [infiniteScrollDistance]="scrollDistance"
+<div class="group-page" #allGroup infiniteScroll [infiniteScrollDistance]="scrollDistance"
   [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" [scrollWindow]="false"
   (scrolled)="onEnd($event)">
+
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <div class="d-flex flex-column flex-lg-row mt-4 h-auto">
-    <div class="search-group col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-      <form class="search__form position-relative" (ngSubmit)="searchGroup()">
-        <input class="search__form--input-search search__form--input-search-sub" [(ngModel)]="searchString" type="text"
-          name="search" placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}">
-        <button class="search__form--button-search position-absolute" type="submit"><i
-            class="bi bi-search"></i></button>
-      </form>
-    </div>
-    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex mt-3 mt-lg-0">
-      <input class="change-type-signup" [checked]="isAllGroup" type="checkbox" name="" id="cb-sidebar">
-      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-5 col-5 ps-3 pe-3">
-        <button class="switch-button switch-button__single-signup w-100-pc " (click)="createGroup()">
-          {{'BUTTON.CREATE_GROUP'|translate}}
-        </button>
-      </div>
-      <div class="button-signup-group m-0 p-0 col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-sm-7 col-7">
-        <button class="switch-button w-100-pc switch-button__single-signup"
-          (click)="changeButton($event)">{{contentButton|translate}}</button>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="!isAllGroup" class="d-block d-md-flex groups">
-    <div class="groups__joined col-xxl-8 col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12">
-      <div class="groups__joined--container">
-        <h1>{{'GROUP.GROUPS_JOINED'|translate}}</h1>
-        <div class="group d-flex d-md-block d-sm-flex d-lg-flex" *ngFor="let group of listGroup"
-          (click)="redirectGroupDetail(group)">
-          <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
-            <img [src]="group.image" alt="">
-          </div>
-          <div
-            class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
-            <h3>{{group.nameEn}}</h3>
-            <i class="bi bi-eye fs-4 me-3"></i>
-            <h5 class="d-inline-block">{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
-            </h5> -
-            <h5 class="d-inline-block">{{group.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
-            <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}</h5>
-            <i class=""></i>
-            <br>
-            <fa-icon *ngIf="group.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
-            <h5 *ngIf="group.desciption" class="d-inline">{{group.description}}</h5>
+
+  <!-- Page Header -->
+  <div class="group-page__header">
+    <div class="group-page__search">
+      <form class="search-form" [class.search-form--active]="isSearch" (ngSubmit)="searchGroup()">
+        <div class="input-with-icon">
+          <i class="bi bi-search input-with-icon__icon"></i>
+          <input
+            class="input-with-icon__input"
+            [(ngModel)]="searchString"
+            (input)="onSearchInput()"
+            type="text"
+            name="search"
+            placeholder="{{'SEARCH.SEARCH_GROUP'|translate}}"
+            autocomplete="off">
+
+          <!-- Search suggestions dropdown -->
+          <div class="search-suggestions" *ngIf="showSuggestions && (searchSuggestions.length || recentSearches.length)">
+            <div class="search-suggestions__header" *ngIf="recentSearches.length">
+              <span>Recent Searches</span>
+              <button type="button" (click)="clearRecentSearches()">Clear</button>
+            </div>
+            <ul class="search-suggestions__list" *ngIf="recentSearches.length">
+              <li *ngFor="let suggestion of recentSearches" (click)="applySuggestion(suggestion)">
+                <i class="bi bi-clock-history"></i>
+                <span>{{suggestion}}</span>
+              </li>
+            </ul>
+            <div class="search-suggestions__divider" *ngIf="recentSearches.length && searchSuggestions.length"></div>
+            <ul class="search-suggestions__list" *ngIf="searchSuggestions.length">
+              <li *ngFor="let suggestion of searchSuggestions" (click)="applySuggestion(suggestion)">
+                <i class="bi bi-search"></i>
+                <span>{{suggestion}}</span>
+              </li>
+            </ul>
           </div>
         </div>
-        <h2 *ngIf="!listGroup?.length" class="text-center">
-          {{'TITLE.NO_DATA'|translate}}
-        </h2>
-        <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">
-          {{'BUTTON.LOAD_MORE'|translate}}
-        </h5>
+        <div class="search-actions">
+          <button class="btn btn-medium btn-primary btn-icon-only" type="submit" [attr.aria-label]="'BUTTON.SEARCH'|translate">
+            <i class="bi bi-search"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-medium btn-icon btn-clear"
+            [class.btn-clear--visible]="searchString"
+            (click)="clearSearch()"
+            [attr.aria-label]="'Clear search'">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </form>
 
+      <!-- Filter chips -->
+      <div class="filter-chips" *ngIf="isSearch || showFilters">
+        <button
+          class="btn btn-small filter-chip"
+          [class.btn-primary]="activeFilter === 'all'"
+          [class.btn-outline]="activeFilter !== 'all'"
+          (click)="setFilter('all')">
+          All Groups
+        </button>
+        <button
+          class="btn btn-small filter-chip"
+          [class.btn-primary]="activeFilter === 'joined'"
+          [class.btn-outline]="activeFilter !== 'joined'"
+          (click)="setFilter('joined')">
+          Joined
+        </button>
+        <button
+          class="btn btn-small filter-chip"
+          [class.btn-primary]="activeFilter === 'suggested'"
+          [class.btn-outline]="activeFilter !== 'suggested'"
+          (click)="setFilter('suggested')">
+          Suggested
+        </button>
       </div>
     </div>
+    <div class="group-page__actions">
+      <button class="btn btn-medium btn-primary" (click)="createGroup()">
+        <i class="bi bi-plus-lg"></i>
+        <span>{{'BUTTON.CREATE_GROUP'|translate}}</span>
+      </button>
+      <button class="btn btn-medium btn-outline view-toggle" [class.view-toggle--active]="isAllGroup" (click)="changeButton($event)">
+        <i class="bi bi-grid-3x3-gap-fill" *ngIf="!isAllGroup"></i>
+        <i class="bi bi-list-stars" *ngIf="isAllGroup"></i>
+        <span>{{contentButton|translate}}</span>
+      </button>
+    </div>
+  </div>
 
-    <div class="groups__suggestion col-xxl-4 col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
-      <div class="groups__suggestion--container">
-        <h1>{{'GROUP.GROUPS_SUGGEST'|translate}}</h1>
-        <div class="group d-sm-flex d-flex d-md-block mb-3 pb-3"
-          style="border: 1px solid rgb(219, 219, 219); border-radius: 3px"
-          *ngFor="let groupR of listGroupRelative; let i = index">
-          <div (click)="redirectGroupDetail(groupR)">
-            <div class="group__image u-margin-auto col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-5 col-5">
-              <img [src]="groupR.image" alt="">
+  <!-- Mobile FAB for quick group creation -->
+  <button class="fab fab--create" (click)="createGroup()" *ngIf="!isAllGroup">
+    <i class="bi bi-plus-lg"></i>
+  </button>
+
+  <!-- My Groups View -->
+  <div *ngIf="!isAllGroup" class="group-page__content group-page__content--split">
+    <main class="group-page__main">
+      <div class="card card-group">
+        <div class="card-header">
+          <div class="card-header__title">
+            <i class="bi bi-people-fill"></i>
+            <h2 class="card-title">{{'GROUP.GROUPS_JOINED'|translate}}</h2>
+          </div>
+          <span class="card-header__badge" *ngIf="listGroup?.length">{{listGroup.length}}</span>
+        </div>
+        <div class="card-body">
+          <!-- Skeleton loading state -->
+          <div class="group-list" *ngIf="isLoading">
+            <article class="group-card group-card--skeleton" *ngFor="let i of [1,2,3]">
+              <div class="group-card__image"></div>
+              <div class="group-card__content">
+                <div class="group-card__title"></div>
+                <div class="group-card__meta">
+                  <div class="group-card__meta-item"></div>
+                  <div class="group-card__meta-item"></div>
+                </div>
+                <div class="group-card__description"></div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Actual content -->
+          <div class="group-list" *ngIf="!isLoading && listGroup?.length">
+            <article class="group-card" *ngFor="let group of listGroup" (click)="redirectGroupDetail(group)">
+              <div class="group-card__image">
+                <img [src]="group.image" [alt]="group.nameEn">
+                <div class="group-card__badge" *ngIf="group.numMember">
+                  <i class="bi bi-people-fill"></i>
+                  <span>{{formatNumber(group.numMember)}}</span>
+                </div>
+              </div>
+              <div class="group-card__content">
+                <h3 class="group-card__title">{{group.nameEn}}</h3>
+
+                <!-- Quick stats row -->
+                <div class="group-card__quick-stats">
+                  <span class="stat" *ngIf="group.postPerWeek">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>{{group.postPerWeek}}/{{'GROUP.WEEK'|translate}}</span>
+                  </span>
+                  <span class="stat" *ngIf="group.numMember">
+                    <i class="bi bi-people"></i>
+                    <span>{{formatNumber(group.numMember)}}</span>
+                  </span>
+                  <span class="stat">
+                    <i class="bi bi-clock"></i>
+                    <span>{{getLastActiveTime(group.createdDate)}}</span>
+                  </span>
+                </div>
+
+                <div class="group-card__meta">
+                  <span class="group-card__meta-item">
+                    <i class="bi bi-calendar3"></i>
+                    {{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}
+                  </span>
+                </div>
+                <p *ngIf="group.description" class="group-card__description">
+                  <i class="bi bi-card-text"></i>
+                  {{group.description}}
+                </p>
+              </div>
+            </article>
+          </div>
+          <div class="empty-state" *ngIf="!listGroup?.length && !isLoading">
+            <div class="empty-state__icon">
+              <i class="bi bi-people"></i>
             </div>
-            <div
-              class="group__info u-padding-left-2rem col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-7 col-7 text-md-center text-lg-start">
-              <h3>{{groupR.nameEn}}</h3>
-              <i class="bi bi-eye fs-4 me-3"></i>
-              <h5 class="d-inline-block">{{groupR.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
-              </h5> -
-              <h5 class="d-inline-block">{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</h5> -
-              <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{groupR.createdDate | date:'MM, YYYY'}}</h5>
-              <i class=""></i>
-              <br>
-              <fa-icon *ngIf="groupR.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
-              <h5 *ngIf="groupR.desciption" class="d-inline">{{groupR.description}}</h5>
+            <h3 class="empty-state__title">{{'GROUP.NO_GROUPS_TITLE'|translate}}</h3>
+            <p class="empty-state__description">{{'GROUP.NO_GROUPS_DESC'|translate}}</p>
+            <div class="empty-state__tips">
+              <div class="tip">
+                <i class="bi bi-lightbulb"></i>
+                <p>Join groups related to your courses to connect with classmates</p>
+              </div>
+              <div class="tip">
+                <i class="bi bi-people"></i>
+                <p>Create your own group and invite others to join</p>
+              </div>
+            </div>
+            <div class="empty-state__actions">
+              <button class="btn btn-medium btn-primary" (click)="createGroup()">
+                <i class="bi bi-plus-lg"></i>
+                {{'BUTTON.CREATE_GROUP'|translate}}
+              </button>
+              <button class="btn btn-medium btn-outline" (click)="switchToAllGroups()">
+                <i class="bi bi-compass"></i>
+                {{'BUTTON.BROWSE_GROUPS'|translate}}
+              </button>
             </div>
           </div>
-          <div class="w-100-pc d-flex">
-            <button class="btn btn-outline-primary u-margin-auto" (click)="joinNow(groupR, i)">
-              {{'BUTTON.JOIN_NOW'|translate}}
+          <button *ngIf="page!=maxPage" class="btn btn-load-more" [class.is-loading]="isLoading" [disabled]="isLoading" (click)="goToPage()">
+            <i class="bi bi-chevron-down btn-load-more__icon"></i>
+            <span class="btn-load-more__text">{{'BUTTON.LOAD_MORE'|translate}}</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <aside class="group-page__sidebar">
+      <div class="card card-group">
+        <div class="card-header">
+          <div class="card-header__title">
+            <i class="bi bi-lightbulb-fill"></i>
+            <h2 class="card-title">{{'GROUP.GROUPS_SUGGEST'|translate}}</h2>
+          </div>
+          <span class="card-header__badge" *ngIf="listGroupRelative?.length">{{listGroupRelative.length}}</span>
+        </div>
+        <div class="card-body">
+          <div class="group-list group-list--compact" *ngIf="listGroupRelative?.length">
+            <article class="group-card group-card--compact" *ngFor="let groupR of listGroupRelative; let i = index">
+              <div class="group-card__image" (click)="redirectGroupDetail(groupR)">
+                <img [src]="groupR.image" [alt]="groupR.nameEn">
+                <div class="group-card__badge" *ngIf="groupR.numMember">
+                  <i class="bi bi-people-fill"></i>
+                  <span>{{groupR.numMember}}</span>
+                </div>
+              </div>
+              <div class="group-card__content" (click)="redirectGroupDetail(groupR)">
+                <h3 class="group-card__title">{{groupR.nameEn}}</h3>
+                <div class="group-card__meta">
+                  <span class="group-card__meta-item">{{groupR.numMember}} {{'GROUP.MEMBERS'|translate}}</span>
+                </div>
+              </div>
+              <button class="btn btn-small btn-primary" (click)="joinNow(groupR, i)">
+                {{'BUTTON.JOIN_NOW'|translate}}
+              </button>
+            </article>
+          </div>
+          <div class="empty-state empty-state--small" *ngIf="!listGroupRelative?.length">
+            <p>{{'TITLE.NO_DATA'|translate}}</p>
+          </div>
+          <button *ngIf="pageRelative!=maxPageRelative" class="btn btn-load-more" [class.is-loading]="isLoadingRelative" [disabled]="isLoadingRelative" (click)="goToPageRelative()">
+            <i class="bi bi-chevron-down btn-load-more__icon"></i>
+            <span class="btn-load-more__text">{{'BUTTON.LOAD_MORE'|translate}}</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- All Groups View -->
+  <div *ngIf="isAllGroup" class="group-page__content group-page__content--grid">
+    <div class="card card-group">
+      <div class="card-header">
+        <div class="card-header__title">
+          <i class="bi bi-grid-3x3-gap-fill"></i>
+          <h2 class="card-title">{{'GROUP.ALL_GROUP'|translate}}</h2>
+        </div>
+        <span class="card-header__badge" *ngIf="listAllGroup?.length">{{formatNumber(listAllGroup.length)}} groups</span>
+      </div>
+      <div class="card-body">
+        <!-- Skeleton loading state for grid -->
+        <div class="group-grid" *ngIf="isLoading">
+          <article class="group-card group-card--skeleton group-card--grid" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+            <div class="group-card__image"></div>
+            <div class="group-card__content">
+              <div class="group-card__title"></div>
+              <div class="group-card__meta">
+                <div class="group-card__meta-item"></div>
+                <div class="group-card__meta-item"></div>
+              </div>
+              <div class="group-card__description"></div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Actual content -->
+        <div class="group-grid" *ngIf="!isLoading">
+          <article class="group-card group-card--grid" *ngFor="let group of listAllGroup" (click)="redirectGroupDetail(group)">
+            <div class="group-card__image">
+              <img [src]="group.image" [alt]="group.nameEn">
+              <div class="group-card__badge" *ngIf="group.numMember">
+                <i class="bi bi-people-fill"></i>
+                <span>{{formatNumber(group.numMember)}}</span>
+              </div>
+            </div>
+            <div class="group-card__content">
+              <h3 class="group-card__title">{{group.nameEn}}</h3>
+
+              <!-- Quick stats for grid cards -->
+              <div class="group-card__quick-stats">
+                <span class="stat" *ngIf="group.postPerWeek">
+                  <i class="bi bi-chat-dots"></i>
+                  <span>{{group.postPerWeek}}/{{'GROUP.WEEK'|translate}}</span>
+                </span>
+                <span class="stat" *ngIf="group.numMember">
+                  <i class="bi bi-people"></i>
+                  <span>{{formatNumber(group.numMember)}}</span>
+                </span>
+                <span class="stat">
+                  <i class="bi bi-clock"></i>
+                  <span>{{getLastActiveTime(group.createdDate)}}</span>
+                </span>
+              </div>
+
+              <p *ngIf="group.description" class="group-card__description">{{group.description}}</p>
+            </div>
+          </article>
+        </div>
+        <div class="empty-state" *ngIf="!listAllGroup?.length && !isLoading">
+          <div class="empty-state__icon">
+            <i class="bi bi-search"></i>
+          </div>
+          <h3 class="empty-state__title">{{'GROUP.NO_GROUPS_FOUND_TITLE'|translate}}</h3>
+          <p class="empty-state__description">{{'GROUP.NO_GROUPS_FOUND_DESC'|translate}}</p>
+          <div class="empty-state__actions">
+            <button class="btn btn-outline-secondary" (click)="clearSearch()">
+              <i class="bi bi-x-circle"></i>
+              {{'BUTTON.CLEAR_SEARCH'|translate}}
             </button>
           </div>
         </div>
-        <h2 *ngIf="!listGroupRelative?.length" class="text-center">
-          {{'TITLE.NO_DATA'|translate}}
-        </h2>
-        <h5 *ngIf="pageRelative!=maxPageRelative" class="button-text text-start" (click)="goToPageRelative()">
+        <button *ngIf="page!=maxPage" class="btn btn-outline-primary btn-block" (click)="goToPage()">
           {{'BUTTON.LOAD_MORE'|translate}}
-        </h5>
+        </button>
       </div>
-    </div>
-  </div>
-
-  <div *ngIf="isAllGroup" class="d-block groups p-2">
-    <div class="groups__joined--container">
-      <h1>{{'GROUP.ALL_GROUP'|translate}}</h1>
-      <div class="text-center justify-content-around">
-        <div class=" d-md-inline-flex d-lg-inline-flex p-2 col-xxl-6 col-xl-6 col-md-6 col-sm-12 col-12"
-          style="vertical-align: top;" *ngFor="let group of listAllGroup">
-          <div class="group group__border d-flex d-md-block m-1 d-sm-flex d-lg-inline-flex w-100-pc"
-            (click)="redirectGroupDetail(group)">
-            <div class="group__image u-margin-auto col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-sm-5 col-5">
-              <img [src]="group.image" alt="">
-            </div>
-            <div (click)="redirectGroupDetail(group)"
-              class="group__info u-margin-vertical-auto col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-7 col-7 text-sm-start text-md-center text-lg-start">
-              <h3>{{group.nameEn}}</h3>
-              <i class="bi bi-eye fs-4 me-3"></i>
-              <h5 class="d-inline-block">{{group.postPerWeek}} {{'GROUP.POSTS'|translate}} / {{'GROUP.WEEK'|translate}}
-              </h5> -
-              <h5 class="d-inline-block">{{'GROUP.SINCE'|translate}} {{group.createdDate | date:'MM, YYYY'}}</h5>
-              <i class=""></i>
-              <br>
-              <fa-icon *ngIf="group.desciption" class="fs-4 me-3" [icon]="faBook"></fa-icon>
-              <h5 *ngIf="group.desciption" class="d-inline">{{group.description}}</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h2 *ngIf="!listGroup?.length && !isAllGroup" class="text-center">
-        {{'TITLE.NO_DATA'|translate}}
-      </h2>
-      <h5 *ngIf="page!=maxPage" class="button-text text-start" (click)="goToPage()">{{'BUTTON.LOAD_MORE'|translate}}
-      </h5>
     </div>
   </div>
 

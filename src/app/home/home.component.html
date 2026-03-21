@@ -11,14 +11,35 @@
   <div class="home-container col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-9 col-9">
     <app-header class="position-fixed"></app-header>
     <div class="u-margin-top-big min-h-sub">
-      <div class="sub-navigation">
-        <div class="sub-navigation__background" *ngFor="let item of listRouteNav; let i = index"
-          [style.z-index]="listRouteNav.length - i" (click)="redirectTo(item.route, i)">
-          <div class="sub-navigation__item">
-            {{isLangEn ? item.nameEn : item.nameVi}}
+      <!-- Enhanced Breadcrumb Navigation -->
+      <nav class="breadcrumb-nav" *ngIf="listRouteNav.length > 0" aria-label="Breadcrumb navigation">
+        <div class="breadcrumb-nav__icon">
+          <i class="bi bi-compass"></i>
+        </div>
+        <div class="breadcrumb-nav__trail">
+          <!-- Home breadcrumb item (always first) -->
+          <div class="breadcrumb-item breadcrumb-item--home" (click)="redirectTo('/home/new-feed', -1)">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Home</span>
+          </div>
+          <!-- Dynamic breadcrumb items with separators -->
+          <ng-container *ngFor="let item of listRouteNav; let i = index">
+            <span class="breadcrumb-separator">/</span>
+            <div class="breadcrumb-item" [class.breadcrumb-item--current]="i === listRouteNav.length - 1" (click)="redirectTo(item.route, i)">
+              <i class="bi bi-folder"></i>
+              <span>{{isLangEn ? item.nameEn : item.nameVi}}</span>
+            </div>
+          </ng-container>
+        </div>
+        <!-- Current location indicator -->
+        <div class="breadcrumb-current">
+          <i class="bi bi-geo-alt-fill"></i>
+          <div class="breadcrumb-current__text">
+            <span class="current-label">You're here:</span>
+            <span class="current-page">{{isLangEn ? listRouteNav[listRouteNav.length - 1]?.nameEn : listRouteNav[listRouteNav.length - 1]?.nameVi}}</span>
           </div>
         </div>
-      </div>
+      </nav>
       <router-outlet></router-outlet>
     </div>
     <app-footer></app-footer>

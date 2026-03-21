@@ -1,0 +1,288 @@
+// ========================================
+// MODERN SCHOLAR - DROPDOWN COMPONENT
+// ========================================
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+// ========================================
+// DROPDOWN TRIGGER
+// ========================================
+
+.dropdown__trigger {
+  width: 100%;
+  height: 48px;
+  background-color: $color-bg-pure;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: 0 $spacing-lg;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: $font-body;
+  font-size: $font-base;
+  color: $color-text-primary;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  &::after {
+    content: '▼';
+    font-size: $font-xs;
+    color: $color-text-muted;
+    margin-left: $spacing-sm;
+  }
+
+  &:hover {
+    border-color: darken($color-border, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    border-width: 2px;
+    padding: 0 calc(#{$spacing-lg} - 1px);
+  }
+
+  &[aria-expanded="true"] {
+    &::after {
+      content: '▲';
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ========================================
+// DROPDOWN MENU
+// ========================================
+
+.dropdown__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 256px;
+  overflow-y: auto;
+  background-color: $color-bg-pure;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+  z-index: 1000;
+
+  // Animation
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: all 150ms ease-out;
+
+  &[aria-hidden="false"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 0 $spacing-lg;
+  font-family: $font-body;
+  font-size: $font-base;
+  color: $color-text-primary;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+
+  &:hover,
+  &[aria-selected="true"]:not(.dropdown__item--disabled) {
+    background-color: $color-bg-warm;
+  }
+
+  &[aria-selected="true"] {
+    color: $color-accent;
+    font-weight: $font-semibold;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Icon in menu items
+  .dropdown__item-icon {
+    margin-right: $spacing-sm;
+    color: $color-text-secondary;
+  }
+
+  // Keyboard focus
+  &:focus {
+    outline: none;
+    background-color: $color-bg-warm;
+  }
+}
+
+// Selected state with checkmark
+.dropdown__item--selected {
+  .dropdown__item-check {
+    margin-left: auto;
+    color: $color-accent;
+    font-size: $font-sm;
+  }
+}
+
+// ========================================
+// DROPDOWN STATES
+// ========================================
+
+// Error state
+.dropdown--error {
+  .dropdown__trigger {
+    border-color: $color-danger;
+
+    &:focus {
+      border-width: 2px;
+      padding: 0 calc(#{$spacing-lg} - 1px);
+    }
+  }
+}
+
+// Disabled state
+.dropdown--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+
+  .dropdown__trigger {
+    cursor: not-allowed;
+  }
+}
+
+// ========================================
+// DROPDOWN SIZES
+// ========================================
+
+.dropdown--small {
+  .dropdown__trigger {
+    height: 40px;
+    font-size: $font-sm;
+    padding: 0 $spacing-md;
+  }
+
+  .dropdown__menu {
+    max-height: 200px;
+  }
+
+  .dropdown__item {
+    height: 36px;
+    padding: 0 $spacing-md;
+    font-size: $font-sm;
+  }
+}
+
+.dropdown--large {
+  .dropdown__trigger {
+    height: 56px;
+    font-size: $font-lg;
+    padding: 0 $spacing-xl;
+  }
+
+  .dropdown__menu {
+    max-height: 320px;
+  }
+
+  .dropdown__item {
+    height: 48px;
+    padding: 0 $spacing-xl;
+    font-size: $font-lg;
+  }
+}
+
+// ========================================
+// DROPDOWN WITH ICON
+// ========================================
+
+.dropdown--with-icon {
+  .dropdown__trigger {
+    padding-left: 48px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: left 16px center;
+    background-size: 20px;
+  }
+
+  .dropdown__icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-text-muted;
+    pointer-events: none;
+  }
+}
+
+// ========================================
+// DROPDOWN GROUP (multi-select)
+// ========================================
+
+.dropdown-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+
+  .dropdown {
+    flex: 1 1 200px;
+  }
+}
+
+// ========================================
+// ACCESSIBILITY
+// ========================================
+
+// Keyboard navigation visible focus
+.dropdown__item:focus-visible {
+  background-color: $color-bg-warm;
+  outline: 2px solid $focus-color;
+  outline-offset: -2px;
+}
+
+// Screen reader only text
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 767px) {
+  .dropdown-group {
+    flex-direction: column;
+
+    .dropdown {
+      width: 100%;
+      flex: none;
+    }
+  }
+
+  .dropdown__menu {
+    max-height: 200px;
+  }
+}

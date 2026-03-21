@@ -122,6 +122,8 @@
         "FULLNAME": "Họ và tên",
         "DOB": "Ngày sinh",
         "PHONE": "Số điện thoại",
+        "USER": "Người dùng",
+        "ROLE": "Vai trò",
         "YEAR":"Niên khoá",
         "COUNT_POST": "Số lượng bài viết",
         "COUNT_COMMENT": "Số lượng bình luận",
@@ -131,6 +133,19 @@
         "ABBREVIATION": "Tên viết tắt",
         "DESCRIPTION": "Mô tả",
         "COMPANY_NAME": "Tên công ty"
+    },
+    "USERS_MANAGEMENT":{
+        "SUBTITLE": "Quản lý tài khoản và quyền người dùng",
+        "SELECT_FACULTY": "Chọn khoa",
+        "TRANSFER_FACULTY": "Chuyển khoa",
+        "NO_USERS_TITLE": "Không tìm thấy người dùng",
+        "NO_USERS_DESC": "Thử điều chỉnh tìm kiếm hoặc bộ lọc"
+    },
+    "USERS":{
+        "MANAGE_DESCRIPTION": "Quản lý tài khoản người dùng trong khoa",
+        "FILTER_FACULTY": "Khoa",
+        "FILTER_ROLE": "Vai trò",
+        "DELETE_SELECTED": "Xoá đã chọn"
     },
     "POPUP":{
         "CREATE_FACULTY":"Thêm khoa mới",
@@ -208,5 +223,36 @@
         "EMPTY_USERNAME": "Vui lòng nhập username để yêu cầu OTP",
         "INVALID_OTP": "OTP không hợp lệ",
         "CHOOSE_CATE_RP": "Vui lòng chọn vấn đề cần báo cáo"
+    },
+    "CHAT": {
+        "NO_CONVERSATIONS": "Chưa có cuộc trò chuyện nào",
+        "START_SEARCHING": "Bắt đầu trò chuyện bằng cách tìm kiếm người dùng ở trên",
+        "START_CONVERSATION": "Bắt đầu cuộc trò chuyện",
+        "SEND_MESSAGE_TO": "Gửi tin nhắn đến",
+        "TYPE_MESSAGE": "Nhập tin nhắn..."
+    },
+    "QUICK_FILTERS": {
+        "ALL": "Tất cả",
+        "STUDENTS": "Sinh viên",
+        "TEACHERS": "Giảng viên",
+        "DELETED": "Đã xoá"
+    },
+    "FILTERS": {
+        "ACTIVE": "Bộ lọc đang active",
+        "CLEAR_ALL": "Xoá tất cả",
+        "FACULTY": "Khoa",
+        "ROLE": "Vai trò",
+        "DELETED_ONLY": "Chỉ đã xoá"
+    },
+    "EMPTY_STATE": {
+        "NO_USERS_TITLE": "Không tìm thấy người dùng",
+        "NO_USERS_DESC": "Thử điều chỉnh bộ lọc hoặc tiêu chí tìm kiếm",
+        "CLEAR_FILTERS": "Xoá bộ lọc"
+    },
+    "STATS": {
+        "TOTAL_USERS": "Tổng người dùng",
+        "ACTIVE_USERS": "Đang active",
+        "DELETED_USERS": "Đã xoá",
+        "STUDENTS": "Sinh viên"
     }
 }

@@ -1,84 +1,275 @@
-<div class="pt-3 ms-3 me-4 faculty-container min-h-sub">
-  <ngx-spinner bdColor=" rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+<div class="account-management">
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
   </ngx-spinner>
-  <div class="d-flex control">
-    <h1 class="ps-5 d-inline-block text-uppercase col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
-      {{'SIDEBAR.INFORMATION'|translate}}
-    </h1>
-    <div class="d-flex col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-sm-9 col-19">
-      <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-10 col-sm-10 col-10 u-margin-auto ">
-        <form class="search__form u-margin-vertical-auto position-relative">
-          <input class="search__form--input-search" type="text" name="search"
-            placeholder="{{'SEARCH.SEARCH_INFOR'|translate}}" (keyup.enter)="searchUser()" [(ngModel)]="keyword">
-          <button class="search__form--button-search position-absolute" type="submit"><i class="bi bi-search"
-              (click)="searchUser()"></i></button>
-        </form>
+
+  <!-- Page Header -->
+  <div class="account-management__header">
+    <div class="page-header">
+      <h1 class="page-header__title">{{'SIDEBAR.INFORMATION'|translate}}</h1>
+      <p class="page-header__subtitle">{{'USERS.MANAGE_DESCRIPTION'|translate}}</p>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-cards">
+    <div class="stats-card stats-card--primary">
+      <div class="stats-card__icon">
+        <i class="bi bi-people-fill"></i>
       </div>
-      <div
-        class="btn-create-group ps-3 pe-3 d-inline-block u-margin-auto col-xxl-3 col-xl-3 col-lg-3 col-md-2 col-sm-2 col-2">
-        <button class="btn btn-outline-danger d-block d-lg-block d-sm-block d-xl-none"
-          (click)="deleteMultipleAccount()"><i class="bi bi-trash3 fs-3"></i></button>
-        <button class="btn btn-outline-danger d-xl-block fs-3 d-none text-center w-100-pc"
-          (click)="deleteMultipleAccount()">
-          <i class="bi bi-trash3 fs-3 ps-3 pe-3"></i>{{'POPUP.DELETE_ACCOUNT'|translate}}</button>
+      <div class="stats-card__content">
+        <p class="stats-card__label">{{'STATS.TOTAL_USERS'|translate}}</p>
+        <p class="stats-card__value">{{stats.total}}</p>
+      </div>
+    </div>
+
+    <div class="stats-card stats-card--success">
+      <div class="stats-card__icon">
+        <i class="bi bi-person-check-fill"></i>
+      </div>
+      <div class="stats-card__content">
+        <p class="stats-card__label">{{'STATS.ACTIVE_USERS'|translate}}</p>
+        <p class="stats-card__value">{{stats.active}}</p>
+      </div>
+    </div>
+
+    <div class="stats-card stats-card--warning">
+      <div class="stats-card__icon">
+        <i class="bi bi-person-x-fill"></i>
+      </div>
+      <div class="stats-card__content">
+        <p class="stats-card__label">{{'STATS.DELETED_USERS'|translate}}</p>
+        <p class="stats-card__value">{{stats.deleted}}</p>
+      </div>
+    </div>
+
+    <div class="stats-card stats-card--info">
+      <div class="stats-card__icon">
+        <i class="bi bi-mortarboard-fill"></i>
+      </div>
+      <div class="stats-card__content">
+        <p class="stats-card__label">{{'STATS.STUDENTS'|translate}}</p>
+        <p class="stats-card__value">{{stats.students}}</p>
       </div>
     </div>
   </div>
-  <div class="w-100-pc d-flex h-auto mt-3 mb-3 flex-row-reverse">
-    <ng-select
-      class="u-margin-vertical-auto d-inline-block ps-3 text-start col-xxl-3 col-xl-3 col-lg-4 col-md-5 col-sm-6 col-5"
-      [searchable]="true" [clearable]="false" [(ngModel)]="groupId" (change)="filterFaculty()">
-      <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
-        {{isLangEn ? faculty.nameEn : faculty.nameVi}}
-      </ng-option>
-    </ng-select>
-    <ng-select
-      class="u-margin-vertical-auto d-inline-block pe-3 text-start col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-3 col-3"
-      [searchable]="false" [clearable]="false" [(ngModel)]="roleId" (change)="filterRole()">
-      <ng-option *ngFor="let role of listRole" [value]="role.roleId">
-        {{isLangEn ? role.nameEn : role.nameVi}}
-      </ng-option>
-    </ng-select>
-    <div
-      class="form-check form-switch  ms-3 u-margin-vertical-auto col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-3 col-4">
-      <input class="form-check-input fs-2 u-margin-auto" type="checkbox" role="switch" id="deleted"
-        (click)="filterDeleted()">
-      <label class="form-check-label fs-4 ms-3" for="deleted">{{'TITLE.DELETED'|translate}}</label>
+
+  <!-- Controls Section: Search and Delete Button -->
+  <div class="account-management__controls">
+    <div class="account-management__search">
+      <form class="search-form" (ngSubmit)="searchUser()">
+        <i class="bi bi-search search-form__icon"></i>
+        <input
+          type="text"
+          class="search-form__input"
+          [placeholder]="'SEARCH.SEARCH_INFOR'|translate"
+          (keyup.enter)="searchUser()"
+          [(ngModel)]="keyword"
+          name="search"
+        >
+        <button type="button" class="search-form__clear" (click)="keyword = ''" *ngIf="keyword">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </form>
+    </div>
+
+    <button class="btn-delete-multiple" (click)="deleteMultipleAccount()">
+      <i class="bi bi-trash3"></i>
+      <span class="btn-delete-multiple__text">{{'POPUP.DELETE_ACCOUNT'|translate}}</span>
+    </button>
+  </div>
+
+  <!-- Quick Filter Chips -->
+  <div class="quick-filters">
+    <button
+      class="quick-filter-chip"
+      [class.active]="activeQuickFilter === 'all'"
+      (click)="applyQuickFilter('all')">
+      <i class="bi bi-grid"></i>
+      {{'QUICK_FILTERS.ALL'|translate}}
+    </button>
+
+    <button
+      class="quick-filter-chip"
+      [class.active]="activeQuickFilter === 'students'"
+      (click)="applyQuickFilter('students')">
+      <i class="bi bi-mortarboard"></i>
+      {{'QUICK_FILTERS.STUDENTS'|translate}}
+    </button>
+
+    <button
+      class="quick-filter-chip"
+      [class.active]="activeQuickFilter === 'teachers'"
+      (click)="applyQuickFilter('teachers')">
+      <i class="bi bi-person-video2"></i>
+      {{'QUICK_FILTERS.TEACHERS'|translate}}
+    </button>
+
+    <button
+      class="quick-filter-chip"
+      [class.active]="activeQuickFilter === 'deleted'"
+      (click)="applyQuickFilter('deleted')">
+      <i class="bi bi-trash"></i>
+      {{'QUICK_FILTERS.DELETED'|translate}}
+    </button>
+  </div>
+
+  <!-- Active Filters Bar -->
+  <div class="active-filters-bar" *ngIf="hasActiveFilters">
+    <div class="active-filters-bar__label">
+      <i class="bi bi-funnel-fill"></i>
+      {{'FILTERS.ACTIVE'|translate}}
+    </div>
+
+    <div class="active-filters-list">
+      <div class="active-filter-chip" *ngIf="groupId && activeQuickFilter !== 'all'">
+        {{'FILTERS.FACULTY'|translate}}: {{getFacultyName(groupId)}}
+        <button class="filter-chip__remove" (click)="groupId = listFaculty[0]?._id; filterFaculty()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+
+      <div class="active-filter-chip" *ngIf="roleId !== 4">
+        {{'FILTERS.ROLE'|translate}}: {{getRoleName(roleId)}}
+        <button class="filter-chip__remove" (click)="roleId = 4; filterRole()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+
+      <div class="active-filter-chip" *ngIf="isDeleted">
+        {{'FILTERS.DELETED_ONLY'|translate}}
+        <button class="filter-chip__remove" (click)="isDeleted = false; filterDeleted()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+    </div>
+
+    <button class="clear-all-filters" (click)="clearAllFilters()">
+      {{'FILTERS.CLEAR_ALL'|translate}}
+    </button>
+  </div>
+
+  <!-- Filters -->
+  <div class="account-filters">
+    <div class="account-filters__filter">
+      <label class="filter-label">{{'USERS.FILTER_FACULTY'|translate}}</label>
+      <ng-select [searchable]="true" [clearable]="false" [(ngModel)]="groupId" (change)="filterFaculty()">
+        <ng-option *ngFor="let faculty of listFaculty" [value]="faculty._id">
+          {{isLangEn ? faculty.nameEn : faculty.nameVi}}
+        </ng-option>
+      </ng-select>
+    </div>
+
+    <div class="account-filters__filter">
+      <label class="filter-label">{{'USERS.FILTER_ROLE'|translate}}</label>
+      <ng-select [searchable]="false" [clearable]="false" [(ngModel)]="roleId" (change)="filterRole()">
+        <ng-option *ngFor="let role of listRole" [value]="role.roleId">
+          {{isLangEn ? role.nameEn : role.nameVi}}
+        </ng-option>
+      </ng-select>
+    </div>
+
+    <div class="account-filters__toggle">
+      <label class="toggle-switch">
+        <input type="checkbox" [(ngModel)]="isDeleted" (change)="filterDeleted()">
+        <span class="toggle-switch__slider"></span>
+        <span class="toggle-switch__label">{{'TITLE.DELETED'|translate}}</span>
+      </label>
     </div>
   </div>
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered table-nowrap dt-responsive nowrap no-footer dtr-inline"
-      style="width:100%">
-      <thead>
-        <tr class="text-center text-overflow font-size-15">
-          <th>ID</th>
-          <th>{{'TABLE.FULLNAME'|translate}}</th>
-          <th>{{'TABLE.DOB'|translate}}</th>
-          <th>{{'TABLE.PHONE'|translate}}</th>
-          <th class="text-center">{{'TABLE.ACTION'|translate}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of listUsers; let i = index">
-          <td class="text-center">{{user._id}}</td>
-          <td class="text-center">{{user.fullname}}</td>
-          <td class="text-center">{{user.dob|date:'dd-MM-yyyy'}}</td>
-          <td class="text-center">{{user.phone}}</td>
-          <td class="text-center">
-            <i *ngIf="!isDeleted" class="bi bi-pencil-square btn-delete me-3" (click)="updateAccount(user)"></i>
-            <i *ngIf="!isDeleted" class="bi bi-trash3 btn-delete" (click)="deleteAccount(user)"></i>
-            <i *ngIf="isDeleted" class="bi bi-bootstrap-reboot btn-delete" (click)="recoveryAccount(user)"></i>
-          </td>
-        </tr>
-        <tr *ngIf="!listUsers?.length" class="text-center">
-          <td colspan="5" class="fs-2">{{'TITLE.NO_DATA'|translate}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Users Table -->
+  <div class="users-table">
+    <div class="users-table__wrapper">
+      <!-- Loading Skeleton -->
+      <div class="users-table__skeleton" *ngIf="isLoading">
+        <div class="skeleton-row" *ngFor="let i of [1,2,3,4,5]">
+          <div class="skeleton-cell skeleton-cell--id"></div>
+          <div class="skeleton-cell skeleton-cell--name"></div>
+          <div class="skeleton-cell skeleton-cell--dob"></div>
+          <div class="skeleton-cell skeleton-cell--phone"></div>
+          <div class="skeleton-cell skeleton-cell--actions"></div>
+        </div>
+      </div>
+
+      <!-- Table Content -->
+      <table class="users-table__table" *ngIf="!isLoading">
+        <thead>
+          <tr>
+            <th width="12%">{{'TABLE.ID'|translate}}</th>
+            <th width="28%">{{'TABLE.FULLNAME'|translate}}</th>
+            <th width="18%">{{'TABLE.DOB'|translate}}</th>
+            <th width="17%">{{'TABLE.PHONE'|translate}}</th>
+            <th width="15%">{{'TITLE.ROLE'|translate}}</th>
+            <th width="10%">{{'TABLE.ACTION'|translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of listUsers">
+            <td class="users-table__cell users-table__cell--id">{{user._id}}</td>
+            <td class="users-table__cell">{{user.fullname}}</td>
+            <td class="users-table__cell">{{user.dob|date:'dd-MM-yyyy'}}</td>
+            <td class="users-table__cell">{{user.phone}}</td>
+            <td class="users-table__cell">
+              <span class="role-badge" [ngClass]="'role-badge--' + (user.role || 'student')">
+                <i class="bi" [ngClass]="getRoleIcon(user.role || 'student')"></i>
+                {{user.role || 'Student' | translate}}
+              </span>
+            </td>
+            <td class="users-table__cell">
+              <div class="action-buttons">
+                <button class="action-buttons__btn action-buttons__btn--edit"
+                  (click)="updateAccount(user)"
+                  [attr.aria-label]="'Edit user'">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <ng-container *ngIf="!isDeleted">
+                  <button class="action-buttons__btn action-buttons__btn--delete"
+                    (click)="deleteAccount(user)"
+                    [attr.aria-label]="'Delete user'">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="isDeleted">
+                  <button class="action-buttons__btn action-buttons__btn--restore"
+                    (click)="recoveryAccount(user)"
+                    [attr.aria-label]="'Restore user'">
+                    <i class="bi bi-bootstrap-reboot"></i>
+                  </button>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Improved Empty State -->
+      <div *ngIf="!listUsers?.length && !isLoading" class="users-table__empty">
+        <div class="empty-state">
+          <div class="empty-state__illustration">
+            <i class="bi bi-inbox"></i>
+          </div>
+          <h3 class="empty-state__title">{{'EMPTY_STATE.NO_USERS_TITLE'|translate}}</h3>
+          <p class="empty-state__description">
+            {{'EMPTY_STATE.NO_USERS_DESC'|translate}}
+          </p>
+          <div class="empty-state__actions" *ngIf="hasActiveFilters">
+            <button class="btn-secondary" (click)="clearAllFilters()">
+              <i class="bi bi-x-circle"></i>
+              {{'EMPTY_STATE.CLEAR_FILTERS'|translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="pagination">
-    <ngb-pagination [collectionSize]="maxPage" [maxSize]="5" [pageSize]="1" [rotate]="true"
-      (pageChange)="goToPage($event)" [(page)]="page">
+  <!-- Pagination -->
+  <div class="pagination-wrapper">
+    <ngb-pagination
+      [collectionSize]="maxPage"
+      [maxSize]="5"
+      [pageSize]="1"
+      [rotate]="true"
+      (pageChange)="goToPage($event)"
+      [(page)]="page">
     </ngb-pagination>
   </div>
 </div>
